@@ -1,0 +1,8 @@
+Acme\UserBundle\Entity\User:
+    type:  entity
+    table: acme_user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
