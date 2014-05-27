@@ -66,7 +66,7 @@ class UserController extends Controller
     */
     private function createCreateForm(User $entity)
     {
-        $form = $this->createForm(new UserType(), $entity, array(
+        $form = $this->createForm(new UserType($this->getRoles()), $entity, array(
             'action' => $this->generateUrl('user_create'),
             'method' => 'POST',
         ));
@@ -223,5 +223,21 @@ class UserController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    protected function getRoles() {
+        $roles = array();
+
+        foreach ($this->container->getParameter('security.role_hierarchy.roles') as $name => $rolesHierarchy) {
+            $roles[$name] = $name;
+
+            foreach ($rolesHierarchy as $role) {
+                if (!isset($roles[$role])) {
+                    $roles[$role] = $role;
+                }
+            }
+        }
+
+        return $roles;
     }
 }

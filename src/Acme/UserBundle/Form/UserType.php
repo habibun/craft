@@ -8,6 +8,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
+    protected $rolesChoices;
+
+    public function __construct($rolesChoices)
+    {
+        $this->rolesChoices = $rolesChoices;
+    }
+
         /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -19,7 +26,7 @@ class UserType extends AbstractType
             ->add('email')
             ->add('password')
             ->add('enabled')
-            ->add('roles')
+            ->add('roles', 'choice', array('choices' => $this->rolesChoices, 'multiple' => true))
         ;
     }
     
