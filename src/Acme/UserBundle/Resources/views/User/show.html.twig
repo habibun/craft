@@ -6,6 +6,10 @@
     <table class="record_properties">
         <tbody>
             <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
                 <th>Username</th>
                 <td>{{ entity.username }}</td>
             </tr>
@@ -14,26 +18,27 @@
                 <td>{{ entity.email }}</td>
             </tr>
             <tr>
-                <th>Enabled</th>
-                <td>{{ entity.enabled }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ entity.password }}</td>
+                <th>Status</th>
+                <td>{% if entity.enabled == true %}
+                        <span class="label label-success">Enabled</span>
+                    {% else %}
+                        <span class="label label-warning">disabled</span>
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Lastlogin</th>
                 <td>{{ entity.lastLogin|date('Y-m-d H:i:s') }}</td>
             </tr>
-
-            {#<tr>
-                <th>Roles</th>
-                <td>{{ entity.roles }}</td>
-            </tr>#}
-
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <th>Roles</th>
+                <td>
+                    <ul>
+                        {% for role in app.user.roles %}
+                            <li>{{ role }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>
