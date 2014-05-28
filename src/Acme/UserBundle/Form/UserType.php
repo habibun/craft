@@ -27,6 +27,12 @@ class UserType extends AbstractType
             ->add('password')
             ->add('enabled')
             ->add('roles', 'choice', array('choices' => $this->rolesChoices, 'multiple' => true))
+            /*->add('roles', 'collection',array(
+                'label' => 'Roles',
+                'type' => 'choice',
+                'options' =>array( 'choices' => array(
+                    'ROLE_USER' => 'user', 'ROLE_ADMIN' => 'admin')
+                )))*/
         ;
     }
     

@@ -4,7 +4,7 @@ acme_user_homepage:
 
 _acme_fos:
     resource: "@AcmeUserBundle/Resources/config/routing/fos.yml"
-    prefix: /
+    prefix: /fos
 
 AcmeUserBundle_user:
     resource: "@AcmeUserBundle/Resources/config/routing/user.yml"
