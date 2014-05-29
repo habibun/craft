@@ -1,3 +1,7 @@
+acme_dash:
+    resource: "@AcmeDashBundle/Resources/config/routing.yml"
+    prefix:   /
+
 acme_user:
     resource: "@AcmeUserBundle/Resources/config/routing.yml"
     prefix:   /
