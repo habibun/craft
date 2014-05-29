@@ -1,0 +1,30 @@
+depot:
+    pattern:  /
+    defaults: { _controller: "AcmeSetupBundle:Depot:index" }
+
+depot_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AcmeSetupBundle:Depot:show" }
+
+depot_new:
+    pattern:  /new
+    defaults: { _controller: "AcmeSetupBundle:Depot:new" }
+
+depot_create:
+    pattern:  /create
+    defaults: { _controller: "AcmeSetupBundle:Depot:create" }
+    requirements: { _method: post }
+
+depot_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AcmeSetupBundle:Depot:edit" }
+
+depot_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AcmeSetupBundle:Depot:update" }
+    requirements: { _method: post|put }
+
+depot_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AcmeSetupBundle:Depot:delete" }
+    requirements: { _method: post|delete }
