@@ -1,0 +1,7 @@
+parameters:
+#    acme_setup.example.class: Acme\SetupBundle\Example
+
+services:
+#    acme_setup.example:
+#        class: %acme_setup.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
