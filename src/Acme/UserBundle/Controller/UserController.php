@@ -71,7 +71,7 @@ class UserController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Save'));
 
         return $form;
     }
@@ -150,7 +150,7 @@ class UserController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Save'));
 
         return $form;
     }
@@ -175,6 +175,7 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'User was successfully Updated. Thank you!');
             return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
         }
 

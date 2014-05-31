@@ -25,7 +25,7 @@ class UserType extends AbstractType
             ->add('username')
             ->add('email')
             ->add('password')
-            ->add('enabled')
+            ->add('enabled','checkbox')
             ->add('roles', 'choice', array('choices' => $this->rolesChoices, 'multiple' => true))
             /*->add('roles', 'choice', array(
                 'choices' => $this->rolesChoices,
