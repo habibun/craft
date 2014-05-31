@@ -3,7 +3,8 @@
 {% block body -%}
     <h1>User creation</h1>
 
-    {{ form_start(form, {attr: {class: 'form-horizontal'}}) }}
+    {{ form(form, { 'style': 'horizontal' }) }}
+    {{ form_start(form, { 'style': 'horizontal' }) }}
     {{ form_row(form.username) }}
     {{ form_row(form.email) }}
     {{ form_row(form.password) }}
