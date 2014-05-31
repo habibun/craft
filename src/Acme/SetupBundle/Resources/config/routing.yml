@@ -13,3 +13,7 @@ AcmeSetupBundle_depot:
 AcmeSetupBundle_item:
     resource: "@AcmeSetupBundle/Resources/config/routing/item.yml"
     prefix:   /item
+
+AcmeSetupBundle_company:
+    resource: "@AcmeSetupBundle/Resources/config/routing/company.yml"
+    prefix:   /company

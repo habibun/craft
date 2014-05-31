@@ -188,24 +188,27 @@ class UserController extends Controller
      * Deletes a User entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AcmeUserBundle:User')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AcmeUserBundle:User')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find User entity.');
-            }
-
+        try
+        {
             $em->remove($entity);
             $em->flush();
         }
-
-        return $this->redirect($this->generateUrl('user'));
+        catch(\Exception $e)
+        {
+            $this->get('session')->getFlashBag()->set('error', 'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.');
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }
+        $this->get('session')->getFlashBag()->add('success', 'User was successfully Deleted. Thank you!');
+        return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
     }
 
     /**
