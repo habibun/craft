@@ -86,3 +86,6 @@ fos_user:
 # Braincrafted Configuration
 braincrafted_bootstrap:
     less_filter: less
+    auto_configure:
+        assetic: true
+        knp_paginator: true

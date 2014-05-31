@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <link rel="shortcut icon" href="/img/favicon.png">
-
     <title>Eon | {% block title %}Dashboard{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
@@ -45,7 +44,7 @@
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <img alt="" src="/img/avatar1_jony.jpg">
-                <span class="username">Jhon Doue</span>
+                <span class="username">{{ app.user.username }}</span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
@@ -53,7 +52,7 @@
                 <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
                 <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                 <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
-                <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-key"></i> Log Out</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -82,7 +81,6 @@
                 <p>{{ flashMessage }}</p>
             </div>
         {% endfor %}
-
         {% for flashMessage in app.session.flashbag.get('oh_snap') %}
             <div class="alert alert-block alert-danger fade in">
                 <button data-dismiss="alert" class="close close-sm" type="button">
@@ -91,7 +89,6 @@
                 <strong>Oh snap!</strong> Change a few things up and try submitting again.
             </div>
         {% endfor %}
-
         {% for flashMessage in app.session.flashbag.get('well_done') %}
             <div class="alert alert-success fade in">
                 <button data-dismiss="alert" class="close close-sm" type="button">
@@ -100,7 +97,6 @@
                 <strong>Well done!</strong> You successfully read this important alert message.
             </div>
         {% endfor %}
-
         {% for flashMessage in app.session.flashbag.get('heads_up') %}
             <div class="alert alert-info fade in">
                 <button data-dismiss="alert" class="close close-sm" type="button">
@@ -109,7 +105,6 @@
                 <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
             </div>
         {% endfor %}
-
         {% for flashMessage in app.session.flashbag.get('warning') %}
             <div class="alert alert-warning fade in">
                 <button data-dismiss="alert" class="close close-sm" type="button">
