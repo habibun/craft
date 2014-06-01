@@ -25,6 +25,13 @@ class UserController extends Controller
 
         $entities = $userManager->findUsers();
 
+        $paginator  = $this->get('knp_paginator');
+        $entities = $paginator->paginate(
+            $entities,
+            $this->get('request')->query->get('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
         return $this->render('AcmeUserBundle:User:index.html.twig', array(
             'entities' => $entities,
         ));
