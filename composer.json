@@ -33,10 +33,10 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "braincrafted/bootstrap-bundle": "~2.0",
+        "braincrafted/bootstrap-bundle": "dev-master",
         "twbs/bootstrap": "3.0.*",
         "jquery/jquery":  "1.10.*",
-        "knplabs/knp-paginator-bundle": "~2.4"
+        "knplabs/knp-paginator-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

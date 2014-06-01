@@ -32,6 +32,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - "::form_div_layout.html.twig"
 
 # Assetic Configuration
 assetic:
@@ -89,3 +92,6 @@ braincrafted_bootstrap:
     auto_configure:
         assetic: true
         knp_paginator: true
+
+# KnpPaginator Configuration
+

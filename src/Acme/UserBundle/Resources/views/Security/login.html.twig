@@ -25,7 +25,6 @@
 
 <body class="login-body">
 
-
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info" >
@@ -49,9 +48,9 @@
                     </div>
 
                     <div class="input-group">
-                        <div class="checkbox">
-                            <label>
-                                <input id="remember_me" type="checkbox" name="_remember_me" value="1"> Remember me
+                        <div class="checkboxes">
+                            <label class="label_check" for="checkbox-01">
+                                <input name="_remember_me" type="checkbox" value="" id="checkbox-01" data-toggle="checkbox"> Remember me
                             </label>
                         </div>
                     </div>
@@ -71,19 +70,16 @@
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-
-
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-
+<script src="{{ asset('js/form-component.js') }}"></script>
 
 </body>
 </html>
