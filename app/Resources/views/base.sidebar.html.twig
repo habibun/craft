@@ -2,39 +2,22 @@
     <!-- sidebar menu start-->
     <ul class="sidebar-menu" id="nav-accordion">
         <li>
-            <a href="index.html">
+            <a href="{{ path(app.request.attributes.get('_route')) }}">
                 <i class="icon-dashboard"></i>
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
+        <li>
+            <a href="#">
                 <i class="icon-archive"></i>
                 <span>Received</span>
             </a>
-            <ul class="sub">
-                <li><a  href="general.html">General</a></li>
-                <li><a  href="buttons.html">Buttons</a></li>
-                <li><a  href="widget.html">Widget</a></li>
-                <li><a  href="slider.html">Slider</a></li>
-                <li><a  href="nestable.html">Nestable</a></li>
-                <li><a  href="font_awesome.html">Font Awesome</a></li>
-            </ul>
         </li>
-        <li class="sub-menu">
-            <a href="javascript:;" >
+        <li>
+            <a href="#" >
                 <i class="icon-move"></i>
                 <span>Issued</span>
             </a>
-            <ul class="sub">
-                <li><a  href="form_component.html">Form Components</a></li>
-                <li><a  href="advanced_form_components.html">Advanced Components</a></li>
-                <li><a  href="form_wizard.html">Form Wizard</a></li>
-                <li><a  href="form_validation.html">Form Validation</a></li>
-                <li><a  href="dropzone.html">Dropzone File Upload</a></li>
-                <li><a  href="inline_editor.html">Inline Editor</a></li>
-                <li><a  href="image_cropping.html">Image Cropping</a></li>
-            </ul>
         </li>
         <li class="sub-menu">
             <a href="javascript:;">
@@ -42,11 +25,10 @@
                 <span>Setup</span>
             </a>
             <ul class="sub">
-                <li><a  href="basic_table.html">Basic Table</a></li>
-                <li><a  href="responsive_table.html">Responsive Table</a></li>
-                <li><a  href="dynamic_table.html">Dynamic Table</a></li>
-                <li><a  href="advanced_table.html">Advanced Table</a></li>
-                <li><a  href="editable_table.html">Editable Table</a></li>
+                <li><a  href="{{ path('company') }}">Company Setup</a></li>
+                <li><a  href="{{ path('category') }}">Category Setup</a></li>
+                <li><a  href="{{ path('depot') }}">Depot Setup</a></li>
+                <li><a  href="{{ path('item') }}">Item Setup</a></li>
             </ul>
         </li>
         <li class="sub-menu">
@@ -55,7 +37,7 @@
                 <span>Admin Area</span>
             </a>
             <ul class="sub">
-                <li><a  href="basic_table.html">Manage User</a></li>
+                <li><a href="{{ path('user') }}"><i class="icon-user"></i>Manage User</a></li>
             </ul>
         </li>
     </ul>
