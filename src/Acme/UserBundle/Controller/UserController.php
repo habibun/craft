@@ -180,9 +180,13 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($entity);
+            $password = $encoder->encodePassword($entity->getUsername(), $entity->getSalt());
+            $entity->setPassword($password);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'User was successfully Updated. Thank you!');
+            $this->get('session')->getFlashBag()->add('success', "User's information was successfully Updated. Thank you!");
             return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
         }
 
