@@ -46,12 +46,12 @@
     </div>
 </div>
         <div>
-            <a href="{{ path('user') }}" class="btn btn-primary">
-                Back
+            <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-primary">
+                Edit
             </a>
             <span class="pull-right">
-                <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-primary">
-                    Edit
+                <a href="{{ path('user') }}" class="btn btn-primary">
+                    Back
                 </a>
             </span>
             {#<span>{{ form(delete_form) }}</span>#}
