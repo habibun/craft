@@ -1,6 +1,6 @@
 Acme\UserBundle\Entity\User:
     type:  entity
-    table: acme_user
+    table: users
     id:
         id:
             type: integer
