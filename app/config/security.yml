@@ -4,9 +4,11 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_USER:        ROLE_USER
+        ROLE_USER:
+        ROLE_ENTRY:       ROLE_ENTRY
+        ROLE_SETUP:       ROLE_SETUP
         ROLE_ADMIN:       ROLE_ADMIN
-        ROLE_SUPER_ADMIN: [ROLE_SUPER_ADMIN]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN]
 
     providers:
         fos_userbundle:
@@ -54,4 +56,5 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/admin, role: ROLE_ADMIN }
+        - { path: ^/setup, role: ROLE_SETUP }

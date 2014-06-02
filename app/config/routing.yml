@@ -1,6 +1,6 @@
 acme_setup:
     resource: "@AcmeSetupBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /setup
 
 acme_dash:
     resource: "@AcmeDashBundle/Resources/config/routing.yml"

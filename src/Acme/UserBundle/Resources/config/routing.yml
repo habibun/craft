@@ -8,6 +8,6 @@ _acme_fos:
 
 AcmeUserBundle_user:
     resource: "@AcmeUserBundle/Resources/config/routing/user.yml"
-    prefix:   /user
+    prefix:   /admin/user
 
 
