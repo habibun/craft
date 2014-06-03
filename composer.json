@@ -36,7 +36,7 @@
         "braincrafted/bootstrap-bundle": "dev-master",
         "twbs/bootstrap": "3.0.*",
         "jquery/jquery":  "1.10.*",
-        "knplabs/knp-paginator-bundle": "~2.4",
+        "knplabs/knp-paginator-bundle": "dev-master",
         "vincet/bootstrap-form-bundle": "dev-master"
     },
     "scripts": {
