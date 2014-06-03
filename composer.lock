@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fa4986af5a5ec812dbe192638bc07bd8",
+    "hash": "7447abd94ceeb8d76857f0305762e5a7",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -1870,6 +1870,44 @@
                 "templating"
             ],
             "time": "2014-02-13 10:19:29"
+        },
+        {
+            "name": "vincet/bootstrap-form-bundle",
+            "version": "dev-master",
+            "target-dir": "VinceT/BootstrapFormBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vincenttouzet/BootstrapFormBundle.git",
+                "reference": "af7e73e45b7b796a5c27e53100d05df6193a751d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vincenttouzet/BootstrapFormBundle/zipball/af7e73e45b7b796a5c27e53100d05df6193a751d",
+                "reference": "af7e73e45b7b796a5c27e53100d05df6193a751d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "VinceT\\BootstrapFormBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Touzet",
+                    "email": "vincent.touzet@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony VinceTBootstrapFormBundle",
+            "time": "2014-01-11 21:38:01"
         }
     ],
     "packages-dev": [
@@ -1881,7 +1919,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
-        "braincrafted/bootstrap-bundle": 20
+        "braincrafted/bootstrap-bundle": 20,
+        "vincet/bootstrap-form-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"
