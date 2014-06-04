@@ -1,7 +1,9 @@
 {% extends '::base.html.twig' %}
-{% block title %}User{% endblock %}
-{% block stylesheets %}
 
+{% block title %}User{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('chosen/chosen.min.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body -%}
@@ -31,5 +33,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/form-component.js') }}"></script>
+    <script src="{{ asset('chosen/chosen.jquery.min.js') }}"></script>
+    <script src="{{ asset('manual/manual.js') }}"></script>
 {% endblock %}
