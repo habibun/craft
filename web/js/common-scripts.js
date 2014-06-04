@@ -114,3 +114,8 @@ var Script = function () {
 
 
 }();
+
+//my_edited
+$(function() {
+    $(".chosen-select").chosen();
+});
