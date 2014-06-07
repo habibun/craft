@@ -1,7 +1,3 @@
-acme_entry:
-    resource: "@AcmeEntryBundle/Resources/config/routing.yml"
-    prefix:   /
-
 acme_setup:
     resource: "@AcmeSetupBundle/Resources/config/routing.yml"
     prefix:   /setup
