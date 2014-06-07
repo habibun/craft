@@ -47,7 +47,7 @@
                         <td>
                             <a href="{{ path('user_show', { 'id': entity.id }) }}" class="btn btn-success btn-xs"><i class="icon-ok"></i>show</a>
                             <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-xs"><i class="icon-pencil"></i>edit</a>
-                            <a href="{{ path('user_delete', { 'id': entity.id }) }}" class="btn btn-danger btn-xs"><i class="icon-trash"></i>delete</a>
+                            <a href="{{ path('user_delete', { 'id': entity.id }) }}" class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i>delete</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -59,4 +59,8 @@
         </section>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('jquery/jquery-1.11.1.js') }}" type="text/javascript"></script>
 {% endblock %}

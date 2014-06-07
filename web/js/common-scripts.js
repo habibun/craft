@@ -116,6 +116,19 @@ var Script = function () {
 }();
 
 //my_edited
+
+//mulitiple choice selection
 $(function() {
     $(".chosen-select").chosen();
 });
+
+//delete confirm box
+$('.delete-confirm').click(function (){
+    var answer = confirm("You really like to delete this Item?");
+    if (answer) {
+        return true;
+    }else{
+        return false;
+    }
+});
+
