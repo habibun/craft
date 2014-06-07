@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new VinceT\BootstrapFormBundle\VinceTBootstrapFormBundle(),
+            new Acme\PurchaseBundle\AcmePurchaseBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,3 +1,7 @@
+acme_purchase:
+    resource: "@AcmePurchaseBundle/Resources/config/routing.yml"
+    prefix:   /
+
 acme_setup:
     resource: "@AcmeSetupBundle/Resources/config/routing.yml"
     prefix:   /setup
