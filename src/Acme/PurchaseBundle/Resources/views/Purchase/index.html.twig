@@ -1,0 +1,108 @@
+
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <div class="row">
+
+        <div class="col-md-12">
+            <div>
+                <a class="btn btn-sm btn-noty btn-success" href="{{ path('purchase_new') }}">
+                    Add
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <br />
+            <div class="panel panel-archon">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Purchase List
+                        <span class="pull-right">
+                            <a class="panel-minimize" href="tables.html#"><i class="fa fa-chevron-up"></i></a>
+                        </span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table id="purchaseDataTable" class="table table-bordered table-hover table-striped display">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Supplier</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            var purchaseTable = $('#purchaseDataTable').dataTable( {
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": '{{ path('purchase_results') }}',
+                "aoColumns": [
+                    {
+                        "mData": "purchaseDate",
+                        "mDataProp": "purchaseDate",
+                        "sName": "purchaseDate"
+                    },
+                    {
+                        "mData": "location.locationName",
+                        "mDataProp": "location.locationName",
+                        "sName": "location.locationName"
+                    },
+                    {
+                        "mData": "supplier.supplierName",
+                        "mDataProp": "supplier.supplierName",
+                        "sName": "supplier.supplierName"
+                    },
+                    {
+                        "mData": "status",
+                        "mDataProp": "status",
+                        "sName": "status",
+                        "fnRender": function (oObj)
+                        {
+                            if(oObj.aData['status'] == 3)
+                            {
+                                return '<span class="label label-success">Finalized</span>'
+                            }
+
+                            return '<span class="label label-default">Draft</span>';
+                        }
+                    },
+                    {
+                        "mData":  "id",
+                        "mDataProp":  "id",
+                        "sName":  "id",
+                        "bSearchable": false,
+                        "bSortable": false,
+                        "fnRender": function (oObj)
+                        {
+                            var showURL = '{{ path('purchase_show', {'id': 'repPID'}) }}';
+                            var editURL = '{{ path('purchase_edit', {'id': 'repPID'}) }}';
+                            var deleteURL = '{{ path('purchase_delete', {'id': 'repPID'}) }}';
+
+                            return '<a href="'+ showURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i></a> <a href="'+editURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a> <a href="'+deleteURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>';
+                        }
+                    }
+                ]
+            } );
+
+            $('.dataTables_filter input')
+                    .unbind('keypress keyup')
+                    .bind('keypress', function(e){
+                        if (e.keyCode != 13) return;
+                        purchaseTable.fnFilter($(this).val());
+                    });
+        } );
+    </script>
+{% endblock %}

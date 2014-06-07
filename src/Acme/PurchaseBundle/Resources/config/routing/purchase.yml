@@ -1,0 +1,45 @@
+purchase:
+    pattern:  /
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:index" }
+
+purchase_results:
+    pattern:  /index-result
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:indexResults" }
+
+purchase_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:show" }
+
+purchase_new:
+    pattern:  /new
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:new" }
+
+purchase_create:
+    pattern:  /create
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:create" }
+    requirements: { _method: post }
+
+purchase_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:edit" }
+
+purchase_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:update" }
+    requirements: { _method: post|put }
+
+purchase_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:delete" }
+
+purchase_line_delete:
+    pattern: /{id}/ajax_line_delete
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:ajaxDeleteLine" }
+
+finalize_purchase:
+    pattern: /{id}/finalize
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:finalize" }
+
+de_finalize_purchase:
+    pattern: /{id}/definalize
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:deFinalize" }

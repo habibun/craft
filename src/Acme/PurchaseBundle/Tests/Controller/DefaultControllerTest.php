@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\PurchaseBundle\Tests\Controller;
+namespace Ra\Bundle\PurchaseBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

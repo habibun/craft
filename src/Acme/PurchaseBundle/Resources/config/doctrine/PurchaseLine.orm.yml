@@ -1,0 +1,22 @@
+Acme\PurchaseBundle\Entity\PurchaseLine:
+    type: entity
+    table: purchase_line
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        product:
+            type: string
+            length: 255
+        amount:
+            type: decimal
+            scale: 2
+            nullable: false
+        price:
+            type: decimal
+            scale: 2
+            nullable: false
+    lifecycleCallbacks:
+        prePersist: [  ]
+

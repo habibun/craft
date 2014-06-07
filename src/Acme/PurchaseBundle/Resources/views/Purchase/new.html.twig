@@ -1,0 +1,154 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <div class="row">
+        <div class="col-md-8">
+            <section class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        New Purchase
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form, {'attr' :  { 'class': 'form-horizontal', 'id': 'masterForm', 'onSubmit': 'return masterOnSubmit();' } }) }}
+                    {{ form_row(form.purchaseDate) }}
+                    {{ form_row(form.supplier) }}
+                    {{ form_row(form.location) }}
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </div>
+        <div class="col-md-4">
+            <section class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Add Purchase Line
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {{ form_start(line_form, {'attr' :  { 'class': 'form-horizontal', 'id': 'lineForm' } }) }}
+
+                    {{ form_row(line_form.product) }}
+                    {{ form_row(line_form.amount) }}
+                    {{ form_row(line_form.price) }}
+                    <span class="pull-right">
+                    <input type="button" class="btn btn-primary" id="lineAdd" value="Add Line" onclick="addLine();"  />
+                        </span>
+                    {{ form_end(line_form) }}
+                    </div>
+            </section>
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-md-12">
+            <div class="panel panel-archon">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Purchase Lines
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table id="lineViewer" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Amount</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-md-12">
+            <input type="button" class="btn btn-primary" id="submitForm" value="Save" onclick="submitBoth();"  />
+            <span class="pull-right">
+            <a class="btn btn-primary" href="{{ path('purchase') }}">Back
+             </a>
+            </span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+        var addedLines = [];
+
+        function clearLinetable()
+        {
+            $('table#lineViewer tbody').html('');
+        }
+
+        function addLine()
+        {
+            if(addedLines.hasOwnProperty($('#purchase_line_product').val()))
+            {
+                noty({force: true, text: 'You already added this product please add another. Or delete existing and try again.', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+
+            if(!$('#purchase_line_product').val() || !$('#purchase_line_amount').val() || !$('#purchase_line_price').val())
+            {
+                noty({force: true, text: 'Please fill the form correctly', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+
+            var html = '<tr class="'+ $('#purchase_line_product').val() +'">';
+//            html += '<td>'+ $('#purchase_line_product option:selected').text() +'<input type="hidden" value="'+ $('#purchase_line_product').val() +'" name="'+ $('#purchase_line_product').attr('name') + '[]" /></td>';
+            html += '<td>'+ $('#purchase_line_product').val() +'<input type="hidden" value="'+ $('#purchase_line_product').val() +'" name="'+ $('#purchase_line_product').attr('name') + '[]" /></td>';
+            html += '<td>'+ $('#purchase_line_amount').val() +'<input type="hidden" value="'+ $('#purchase_line_amount').val() +'" name="'+ $('#purchase_line_amount').attr('name') + '[]" /></td>';
+            html += '<td>'+ $('#purchase_line_price').val() +'<input type="hidden" value="'+ $('#purchase_line_price').val() +'" name="'+ $('#purchase_line_price').attr('name') + '[]" /></td>';
+            html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';
+            html += '</tr>';
+            $('table#lineViewer tbody').append(html);
+
+            addedLines[$('#purchase_line_product').val()] = 1;
+            document.getElementById('lineForm').reset();
+        }
+
+
+        function masterOnSubmit()
+        {
+            $('table#lineViewer tbody :input').not(':submit').clone().hide().appendTo('#masterForm');
+
+            return true;
+        }
+
+        function submitBoth()
+        {
+            if(!$('#ra_bundle_purchasebundle_purchase_supplier').val())
+            {
+                noty({force: true, text: 'Please select supplier.', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+            if($('table#lineViewer tbody').children().length <= 0)
+            {
+                noty({force: true, text: 'Please add product line', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+            $('#masterForm').submit();
+        }
+
+        $(document).ready(function(){
+            $('.line-delete').live('click', function(){
+                if(!confirmDelete())
+                    return false;
+
+                var parentTr = $(this).closest('tr');
+                var id = $(parentTr).attr('class');
+                $(parentTr).remove();
+                delete addedLines[id];
+            });
+        });
+    </script>
+{% endblock %}

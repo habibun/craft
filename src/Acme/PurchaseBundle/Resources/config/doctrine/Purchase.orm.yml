@@ -1,0 +1,19 @@
+Acme\PurchaseBundle\Entity\Purchase:
+    type: entity
+    table: purchase
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        purchaseDate:
+            column: purchase_date
+            type: datetime
+        location:
+            type: string
+            length: 255
+        supplier:
+            type: string
+            length: 255
+    lifecycleCallbacks:
+        prePersist: [  ]

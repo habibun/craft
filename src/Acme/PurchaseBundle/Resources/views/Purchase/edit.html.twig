@@ -1,0 +1,214 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-sm btn-noty btn-warning" href="{{ path('purchase') }}">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-archon">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        New Purchase
+					<span class="pull-right">
+                        <a  href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
+					</span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+
+                    {{ form_start(form, {'attr' :  { 'class': 'form-horizontal', 'id': 'masterForm', 'onSubmit': 'return masterOnSubmit();' } }) }}
+
+                    {{ form_row(form.purchaseDate) }}
+                    {{ form_row(form.supplier) }}
+                    {{ form_row(form.location) }}
+                    <div class="modal-footer">
+
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-archon">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Add Purchase Line
+					<span class="pull-right">
+                        <a  href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
+					</span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_start(line_form, {'attr' :  { 'class': 'form-horizontal', 'id': 'lineForm' } }) }}
+
+                    {{ form_row(line_form.product) }}
+                    {{ form_row(line_form.amount) }}
+                    {{ form_row(line_form.price) }}
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-primary" id="lineAdd" value="Add Line" onclick="addLine();"  />
+                    </div>
+                    {{ form_end(line_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-md-12">
+            <div class="panel panel-archon">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Purchase Lines
+					<span class="pull-right">
+                        <a  href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
+					</span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table id="lineViewer" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Amount</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for line in lines %}
+                            <tr class="{{ line.product.getId() }}">
+                                <td>{{ line.product }}</td>
+                                <td>{{ line.amount }}</td>
+                                <td>{{ line.price }}</td>
+                                <td><a href="{{ path('purchase_line_delete', {'id' : line.getId() }) }}" class="btn btn-danger btn-xs existing-line-delete"><i class="fa fa-trash-o"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-md-12">
+            <input type="button" class="btn btn-primary" id="submitForm" value="Save" onclick="submitBoth();"  />
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+        var addedLines = {
+            {% for line in lines %}
+                "{{ line.product.getId() }}" : "1",
+            {% endfor %}
+        };
+
+        function clearLinetable()
+        {
+            $('table#lineViewer tbody').html('');
+        }
+
+        function addLine()
+        {
+            if(addedLines.hasOwnProperty($('#purchase_line_product').val()))
+            {
+                noty({force: true, text: 'You already added this product please add another. Or delete existing and try again.', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+
+            if(!$('#purchase_line_product').val() || !$('#purchase_line_amount').val() || !$('#purchase_line_price').val())
+            {
+                noty({force: true, text: 'Please fill the form correctly', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+
+            var html = '<tr class="'+ $('#purchase_line_product').val() +'">';
+            html += '<td>'+ $('#purchase_line_product option:selected').text() +'<input type="hidden" value="'+ $('#purchase_line_product').val() +'" name="'+ $('#purchase_line_product').attr('name') + '[]" /></td>';
+            html += '<td>'+ $('#purchase_line_amount').val() +'<input type="hidden" value="'+ $('#purchase_line_amount').val() +'" name="'+ $('#purchase_line_amount').attr('name') + '[]" /></td>';
+            html += '<td>'+ $('#purchase_line_price').val() +'<input type="hidden" value="'+ $('#purchase_line_price').val() +'" name="'+ $('#purchase_line_price').attr('name') + '[]" /></td>';
+            html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="fa fa-trash-o"></i></a></td>';
+            html += '</tr>';
+            $('table#lineViewer tbody').append(html);
+
+            addedLines[$('#purchase_line_product').val()] = 1;
+            document.getElementById('lineForm').reset();
+        }
+
+
+        function masterOnSubmit()
+        {
+            $('table#lineViewer tbody :input').not(':submit').clone().hide().appendTo('#masterForm');
+
+            return true;
+        }
+
+        function submitBoth()
+        {
+            if(!$('#ra_bundle_purchasebundle_purchase_supplier').val())
+            {
+                noty({force: true, text: 'Please select supplier.', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+            if($('table#lineViewer tbody').children().length <= 0)
+            {
+                noty({force: true, text: 'Please add product line', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+            $('#masterForm').submit();
+        }
+
+        $(document).ready(function(){
+            $('.line-delete').live('click', function(){
+                if(!confirmDelete())
+                    return false;
+
+                var parentTr = $(this).closest('tr');
+                var id = $(parentTr).attr('class');
+                $(parentTr).remove();
+                delete addedLines[id];
+            });
+
+            $('.existing-line-delete').live('click', function(e){
+                e.preventDefault();
+                if(!confirmDelete())
+                    return false;
+
+                var obj = $(this);
+                var url = $(this).attr('href');
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    statusCode: {
+                        200: function(data) {
+                            noty({force: true, text: data, type: 'success', layout: 'topCenter', timeout: 3000});
+                            var parentTr = $(obj).closest('tr');
+                            var id = $(parentTr).attr('class');
+                            $(parentTr).remove();
+                            delete addedLines[id];
+                        },
+                        403:function(){
+                            noty({force: true, text: 'Access denied', type: 'error', layout: 'topCenter', timeout: 3000});
+                        },
+                        404:function(data)
+                        {
+                            noty({force: true, text: 'Line not found', type: 'error', layout: 'topCenter', timeout: 3000});
+                        }
+                    },
+                    dataType: "html"
+                });
+            });
+        });
+    </script>
+{% endblock %}
