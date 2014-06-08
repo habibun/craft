@@ -119,15 +119,15 @@ class PurchaseController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $this->viewData['purchase'] = $em->getRepository('RaPurchaseBundle:Purchase')->find($id);
+        $this->viewData['purchase'] = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
         if (!$this->viewData['purchase']) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
         }
 
-        $this->viewData['purchaseLines'] = $em->getRepository('RaPurchaseBundle:PurchaseLine')->findBy(array('purchase' => $this->viewData['purchase']));
+        $this->viewData['purchaseLines'] = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $this->viewData['purchase']));
 
-        return $this->render('RaPurchaseBundle:Purchase:show.html.twig', $this->viewData);
+        return $this->render('AcmePurchaseBundle:Purchase:show.html.twig', $this->viewData);
     }
 
     /**
@@ -141,7 +141,7 @@ class PurchaseController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $purchase = $em->getRepository('RaPurchaseBundle:Purchase')->find($id);
+        $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
         if (!$purchase) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
@@ -159,9 +159,9 @@ class PurchaseController extends Controller
             'method' => 'POST',
         ));
 
-        $purchaseLines = $em->getRepository('RaPurchaseBundle:PurchaseLine')->findBy(array('purchase' => $id));
+        $purchaseLines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $id));
 
-        return $this->render('RaPurchaseBundle:Purchase:edit.html.twig', array(
+        return $this->render('AcmePurchaseBundle:Purchase:edit.html.twig', array(
             'purchase'      => $purchase,
             'form'   => $editForm->createView(),
             'line_form' => $lineForm->createView(),
@@ -195,7 +195,7 @@ class PurchaseController extends Controller
         $this->needBranch();
 
         $em = $this->getDoctrine()->getManager();
-        $purchase = $em->getRepository('RaPurchaseBundle:Purchase')->find($id);
+        $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
         if (!$purchase) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
@@ -224,7 +224,7 @@ class PurchaseController extends Controller
                 $line = new PurchaseLine();
                 $line->setPurchase($purchase);
                 $line->setBatch($batch->createBatch());
-                $line->setProduct($em->getRepository('RaProductBundle:Product')->findOneById($product));
+                $line->setProduct($em->getRepository('AcmeProductBundle:Product')->findOneById($product));
                 $line->setAmount($data['amount'][$key]);
                 $line->setPrice($data['price'][$key]);
                 $em->persist($line);
@@ -234,9 +234,9 @@ class PurchaseController extends Controller
             return $this->redirect($this->generateUrl('purchase_edit', array('id' => $id)));
         }
 
-        $purchaseLines = $em->getRepository('RaPurchaseBundle:PurchaseLine')->findBy(array('purchase' => $id));
+        $purchaseLines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $id));
 
-        return $this->render('RaPurchaseBundle:Purchase:edit.html.twig', array(
+        return $this->render('AcmePurchaseBundle:Purchase:edit.html.twig', array(
             'purchase'      => $purchase,
             'form'   => $editForm->createView(),
             'line_form' => $lineForm->createView(),
@@ -252,7 +252,7 @@ class PurchaseController extends Controller
         try
         {
             $em = $this->getDoctrine()->getManager();
-            $purchase = $em->getRepository('RaPurchaseBundle:Purchase')->find($id);
+            $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
             if (!$purchase) {
                 throw $this->createNotFoundException('Unable to find Purchase entity.');
@@ -263,7 +263,7 @@ class PurchaseController extends Controller
                 exit();
             }
 
-            $lines = $em->getRepository('RaPurchaseBundle:Purchase')->findBy(array('purchase' => $purchase->getId()));
+            $lines = $em->getRepository('AcmePurchaseBundle:Purchase')->findBy(array('purchase' => $purchase->getId()));
             if(!empty($lines))
                 foreach($lines as $line)
                     $em->remove($line);
@@ -303,7 +303,7 @@ class PurchaseController extends Controller
     public function ajaxDeleteLineAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $line = $em->getRepository('RaPurchaseBundle:PurchaseLine')->find($id);
+        $line = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->find($id);
 
         if(!$line)
         {
@@ -330,7 +330,7 @@ class PurchaseController extends Controller
     public function finalizeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $purchase = $em->getRepository('RaPurchaseBundle:Purchase')->find($id);
+        $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
         if (!$purchase) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
@@ -349,7 +349,7 @@ class PurchaseController extends Controller
     public function deFinalizeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $purchase = $em->getRepository('RaPurchaseBundle:Purchase')->find($id);
+        $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
         if (!$purchase) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
