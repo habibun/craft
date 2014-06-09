@@ -1,18 +1,17 @@
 <?php
 
 namespace Acme\PurchaseBundle\Controller;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Acme\PurchaseBundle\Form\PurchaseLineType;
-use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Acme\PurchaseBundle\Entity\Purchase;
 use Acme\PurchaseBundle\Entity\PurchaseLine;
 use Acme\PurchaseBundle\Form\PurchaseType;
-
+use Acme\PurchaseBundle\Form\PurchaseLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Acme\PurchaseBundle\BusinessModel\PurchaseStatus;
-use LanKit\DatatablesBundle\Datatables\Datatable;
+use Acme\SetupBundle\Entity\Product;
 
 /**
  * Purchase controller.
@@ -36,10 +35,7 @@ class PurchaseController extends Controller
      */
     public function createAction(Request $request)
     {
-        // User privilege check
-
         $em = $this->getDoctrine()->getManager();
-
         $entity = new Purchase();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -53,20 +49,20 @@ class PurchaseController extends Controller
             foreach($data['product'] as $key => $product)
             {
                 $line = new PurchaseLine();
-                $line->setProduct($data['product'][$key]);
-                $line->setAmount($data['amount'][$key]);
+                $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->findOneById($product));
+                $line->setQuantity($data['quantity'][$key]);
                 $line->setPrice($data['price'][$key]);
+                $em->persist($line);
             }
-
             $em->flush();
 
             return $this->redirect($this->generateUrl('purchase_show', array('id' => $entity->getId())));
         }
 
         return $this->render('AcmePurchaseBundle:Purchase:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            ));
     }
 
     /**

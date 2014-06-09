@@ -10,10 +10,10 @@ AcmeSetupBundle_depot:
     resource: "@AcmeSetupBundle/Resources/config/routing/depot.yml"
     prefix:   /depot
 
-AcmeSetupBundle_item:
-    resource: "@AcmeSetupBundle/Resources/config/routing/item.yml"
-    prefix:   /item
-
 AcmeSetupBundle_company:
     resource: "@AcmeSetupBundle/Resources/config/routing/company.yml"
     prefix:   /company
+
+AcmeSetupBundle_product:
+   resource: "@AcmeSetupBundle/Resources/config/routing/product.yml"
+   prefix:   /product

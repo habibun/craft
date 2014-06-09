@@ -1,6 +1,6 @@
-Acme\SetupBundle\Entity\Item:
+Acme\SetupBundle\Entity\Product:
     type: entity
-    table: null
+    table: product
     id:
         id:
             type: integer

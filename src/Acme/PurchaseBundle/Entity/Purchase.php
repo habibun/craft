@@ -2,7 +2,6 @@
 
 namespace Acme\PurchaseBundle\Entity;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 
 class Purchase
@@ -20,13 +19,12 @@ class Purchase
     /*
      * @var int
      * */
-    protected $location;
+    protected $company;
 
     /*
-     * @var int
-     * */
-    protected $supplier;
-
+    * @var int
+    * */
+    protected $depot;
 
     public function __construct()
     {
@@ -34,19 +32,19 @@ class Purchase
     }
 
     /**
-     * @param mixed $supplier
+     * @param mixed $company
      */
-    public function setSupplier($supplier)
+    public function setCompany($company)
     {
-        $this->supplier = $supplier;
+        $this->company = $company;
     }
 
     /**
      * @return mixed
      */
-    public function getSupplier()
+    public function getCompany()
     {
-        return $this->supplier;
+        return $this->company;
     }
 
     /**
@@ -82,18 +80,18 @@ class Purchase
     }
 
     /**
-     * @param mixed $location
+     * @param mixed $depot
      */
-    public function setLocation($location)
+    public function setDepot($depot)
     {
-        $this->location = $location;
+        $this->depot = $depot;
     }
 
     /**
      * @return mixed
      */
-    public function getLocation()
+    public function getDepot()
     {
-        return $this->location;
+        return $this->depot;
     }
 } 

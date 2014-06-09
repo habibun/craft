@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Item list</h1>
+    <h1>Product list</h1>
 
     <table class="records_list">
         <thead>
@@ -14,15 +14,15 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('item_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('product_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('item_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('product_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('item_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('product_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -33,7 +33,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('item_new') }}">
+            <a href="{{ path('product_new') }}">
                 Create a new entry
             </a>
         </li>

@@ -8,7 +8,7 @@ security:
         ROLE_ENTRY:       ROLE_ENTRY
         ROLE_SETUP:       ROLE_SETUP
         ROLE_ADMIN:       ROLE_ADMIN
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_SETUP, ROLE_ENTRY]
 
     providers:
         fos_userbundle:

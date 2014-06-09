@@ -5,9 +5,9 @@ namespace Acme\SetupBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Item
+ * Product
  */
-class Item
+class Product
 {
     /**
      * @var integer
@@ -34,7 +34,7 @@ class Item
      * Set name
      *
      * @param string $name
-     * @return Item
+     * @return Product
      */
     public function setName($name)
     {
@@ -51,5 +51,10 @@ class Item
     public function getName()
     {
         return $this->name;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

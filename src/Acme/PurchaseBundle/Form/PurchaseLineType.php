@@ -26,9 +26,7 @@ class PurchaseLineType extends AbstractType
         $user = $this->securityContext->getToken()->getUser();
         $builder
             ->add('product')
-            ->add('amount', 'text', array(
-                'label' => 'Quantity'
-            ))
+            ->add('quantity')
             ->add('price')
         ;
     }

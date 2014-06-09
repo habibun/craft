@@ -35,8 +35,8 @@ class PurchaseType extends AbstractType
                     'class' => 'datepicker',
                     'value' => $date->format('d-m-Y'),
                 )))
-            ->add('location')
-            ->add('supplier')
+            ->add('company')
+            ->add('depot')
         ;
     }
     

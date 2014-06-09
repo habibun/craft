@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ItemType extends AbstractType
+class ProductType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -25,7 +25,7 @@ class ItemType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Acme\SetupBundle\Entity\Item'
+            'data_class' => 'Acme\SetupBundle\Entity\Product'
         ));
     }
 
@@ -34,6 +34,6 @@ class ItemType extends AbstractType
      */
     public function getName()
     {
-        return 'acme_setupbundle_item';
+        return 'acme_setupbundle_product';
     }
 }

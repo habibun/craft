@@ -9,11 +9,12 @@ Acme\PurchaseBundle\Entity\Purchase:
         purchaseDate:
             column: purchase_date
             type: datetime
-        location:
-            type: string
-            length: 255
-        supplier:
-            type: string
-            length: 255
+    manyToOne:
+        company:
+            targetEntity: Acme\SetupBundle\Entity\Company
+            nullable: false
+        depot:
+            targetEntity: Acme\SetupBundle\Entity\Depot
+            nullable: false
     lifecycleCallbacks:
         prePersist: [  ]

@@ -18,28 +18,48 @@ class PurchaseLine
     /*
      * @var float
      * */
-    protected $amount;
+    protected $quantity;
 
     /*
      * @var float
      * */
     protected $price;
 
+    /*
+    * @var float
+    * */
+    protected $item;
 
     /**
-     * @param mixed $amount
+     * @param mixed $item
      */
-    public function setAmount($amount)
+    public function setItem($item)
     {
-        $this->amount = $amount;
+        $this->item = $item;
     }
 
     /**
      * @return mixed
      */
-    public function getAmount()
+    public function getItem()
     {
-        return $this->amount;
+        return $this->item;
+    }
+
+    /**
+     * @param mixed $quantity
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
     }
 
     /**
