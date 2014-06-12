@@ -22,7 +22,6 @@ class AppKernel extends Kernel
             new Acme\SetupBundle\AcmeSetupBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new VinceT\BootstrapFormBundle\VinceTBootstrapFormBundle(),
             new Acme\PurchaseBundle\AcmePurchaseBundle(),
         );
 
