@@ -17,7 +17,11 @@ class PurchaseLineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product')
+            ->add('product','entity', array(
+                    'class' => 'Acme\SetupBundle\Entity\Product',
+                    'empty_value' => 'Select Product',
+                    'attr' => array('class' => 'chosen-select')
+                ))
             ->add('quantity')
             ->add('price')
         ;
