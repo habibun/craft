@@ -115,25 +115,40 @@ var Script = function () {
 
 }();
 
-//my_edited
-
 //mulitiple choice selection
 $(function() {
     $(".chosen-select").chosen();
 });
 
-//delete confirm box
-$('.delete-confirm').click(function (){
+//it work's too for delete-confirm
+/*$('.delete-confirm').click(function (){
     var answer = confirm("You really like to delete this Item?");
     if (answer) {
         return true;
     }else{
         return false;
     }
-});
+});*/
 
-function confirmDelete()
+//delete confirm message
+function deleteConfirm()
 {
     return confirm('Are you sure you want to delete!!!');
 }
+
+//delete confirm function
+$(".delete-confirm").click(function(event){
+    event.stopPropagation();
+    if(deleteConfirm()) {
+        return true;
+    }
+    else
+    {
+        event.preventDefault();
+        return false;
+    }
+});
+
+
+
 
