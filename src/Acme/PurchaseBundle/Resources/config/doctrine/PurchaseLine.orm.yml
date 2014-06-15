@@ -18,6 +18,8 @@ Acme\PurchaseBundle\Entity\PurchaseLine:
         product:
             targetEntity: Acme\SetupBundle\Entity\Product
             nullable: false
+        purchase:
+            targetEntity: Acme\PurchaseBundle\Entity\Purchase
     lifecycleCallbacks:
         prePersist: [  ]
 

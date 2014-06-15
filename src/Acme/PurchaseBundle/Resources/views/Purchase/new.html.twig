@@ -2,20 +2,15 @@
 
 {% block title %}Purchase{% endblock %}
 
-{% block stylesheets %}
-
-{% endblock %}
-
 {% block body -%}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <section class="panel">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        New Purchase
-                    </div>
-                </div>
+                <header class="panel-heading">
+                    <strong>New Purchase</strong>
+                </header>
                 <div class="panel-body">
+                    {{ bootstrap_set_style('horizontal') }}
                     {{ form_start(form, {'attr' :  { 'class': 'form-horizontal', 'id': 'masterForm', 'onSubmit': 'return masterOnSubmit();' } }) }}
                     {{ form_row(form.purchaseDate) }}
                     {{ form_row(form.company) }}
@@ -24,20 +19,19 @@
                 </div>
             </section>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <section class="panel">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        Add Purchase Line
-                    </div>
-                </div>
+                <header class="panel-heading">
+                        <strong>Add Purchase Line</strong>
+                </header>
                 <div class="panel-body">
+                    {{ bootstrap_set_style('horizontal') }}
                     {{ form_start(line_form, {'attr' :  { 'class': 'form-horizontal', 'id': 'lineForm' } }) }}
                     {{ form_row(line_form.product) }}
                     {{ form_row(line_form.quantity) }}
                     {{ form_row(line_form.price) }}
                     <span class="pull-right">
-                    <input type="button" class="btn btn-primary" id="lineAdd" value="Add Line" onclick="addLine();"  />
+                    <input type="button" class="btn btn-info" id="lineAdd" value="Add Line" onclick="addLine();"  />
                         </span>
                     {{ form_end(line_form) }}
                 </div>
@@ -47,12 +41,10 @@
 
     <div  class="row">
         <div class="col-md-12">
-            <div class="panel panel-archon">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Purchase Lines
-                    </h3>
-                </div>
+            <section class="panel">
+                <header class="panel-heading">
+                        <strong>Purchase Lines</strong>
+                </header>
                 <div class="panel-body">
                     <table id="lineViewer" class="table table-striped">
                         <thead>
@@ -68,7 +60,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
 

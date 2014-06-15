@@ -12,20 +12,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PurchaseType extends AbstractType
 {
-    private $securityContext;
-
-    public function __construct(SecurityContext $securityContext)
-    {
-        $this->securityContext = $securityContext;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user = $this->securityContext->getToken()->getUser();
         $date = new \DateTime('now');
         $builder
             ->add('purchaseDate','date', array(

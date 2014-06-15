@@ -36,10 +36,3 @@ purchase_line_delete:
     pattern: /{id}/ajax_line_delete
     defaults: { _controller: "AcmePurchaseBundle:Purchase:ajaxDeleteLine" }
 
-finalize_purchase:
-    pattern: /{id}/finalize
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:finalize" }
-
-de_finalize_purchase:
-    pattern: /{id}/definalize
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:deFinalize" }

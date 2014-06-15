@@ -10,20 +10,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PurchaseLineType extends AbstractType
 {
-    private $securityContext;
-
-    public function __construct(SecurityContext $securityContext)
-    {
-        $this->securityContext = $securityContext;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user = $this->securityContext->getToken()->getUser();
         $builder
             ->add('product')
             ->add('quantity')

@@ -30,6 +30,24 @@ class PurchaseLine
     * */
     protected $item;
 
+    protected $purchase;
+
+    /**
+     * @param mixed $purchase
+     */
+    public function setPurchase($purchase)
+    {
+        $this->purchase = $purchase;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPurchase()
+    {
+        return $this->purchase;
+    }
+
     /**
      * @param mixed $item
      */
