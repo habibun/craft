@@ -24,7 +24,7 @@ class PurchaseType extends AbstractType
                 'widget' => 'single_text',
 	            'format' => 'dd-MM-yyyy',
                 'attr' => array(
-                    'class' => 'datepicker',
+                    'class' => 'default-date-picker',
                     'value' => $date->format('d-m-Y'),
                 )))
             ->add('company')
