@@ -1,11 +1,13 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}Purchase{% endblock %}
+
 {% block body -%}
     <div class="row">
         <div class="col-md-7">
             <section class="panel">
                 <header class="panel-heading">
-                    Purchase #{{ purchase.id }}
+                    <strong>Purchase #{{ purchase.id }}</strong>
                 </header>
                 <div class="panel-body">
                     <table class="table table-striped">
@@ -31,11 +33,10 @@
                 </div>
             </section>
         </div>
-
         <div class="col-md-5">
             <section class="panel">
                 <header class="panel-heading">
-                    Products
+                    <strong>Products</strong>
                 </header>
                 <div class="panel-body">
                     <table class="table table-striped">
@@ -60,17 +61,14 @@
             </section>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <a class="btn btn-primary" href="{{ path('purchase_edit', {'id' : purchase.id}) }}">
                 Edit
             </a>
             <span class="pull-right">
-            <a class="btn btn-primary" href="{{ path('purchase') }}">Back
-            </a>
+                <a class="btn btn-primary" href="{{ path('purchase') }}">Back</a>
             </span>
         </div>
     </div>
-
 {% endblock %}
