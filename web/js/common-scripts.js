@@ -149,6 +149,5 @@ $(".delete-confirm").click(function(event){
     }
 });
 
-//
-$('.default-date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
+
 

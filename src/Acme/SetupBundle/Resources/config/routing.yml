@@ -2,10 +2,6 @@ acme_setup_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: AcmeSetupBundle:Default:index }
 
-AcmeSetupBundle_category:
-    resource: "@AcmeSetupBundle/Resources/config/routing/category.yml"
-    prefix:   /category
-
 AcmeSetupBundle_depot:
     resource: "@AcmeSetupBundle/Resources/config/routing/depot.yml"
     prefix:   /depot
