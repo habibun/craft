@@ -5,7 +5,6 @@
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{asset('assets/bootstrap-datepicker/css/datepicker.css')}}" />
     <link href="{{ asset('chosen/chosen.min.css') }}" rel="stylesheet">
-
 {% endblock %}
 
 {% block body -%}
@@ -81,9 +80,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    {#if it hide then choosen works#}
-    <script src="{{ asset('jquery/jquery-1.8.3.min.js') }}"></script>
-
     <script type="text/javascript">
 
         var addedLines = [];

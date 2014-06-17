@@ -38,7 +38,9 @@ class PurchaseType extends AbstractType
             ->add('company','entity', array(
                     'class' => 'Acme\SetupBundle\Entity\Company'
                 ))
-            ->add('depot')
+            ->add('depot','entity', array(
+                    'class' => 'Acme\SetupBundle\Entity\Depot'
+                ))
         ;
     }
     
