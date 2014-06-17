@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Acme\PurchaseBundle\AcmePurchaseBundle(),
+            new LanKit\DatatablesBundle\LanKitDatatablesBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

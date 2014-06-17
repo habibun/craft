@@ -35,7 +35,9 @@ class PurchaseType extends AbstractType
                     'class' => 'default-date-picker',
                     'value' => $date->format('d-m-Y'),
                 )))
-            ->add('company')
+            ->add('company','entity', array(
+                    'class' => 'Acme\SetupBundle\Entity\Company'
+                ))
             ->add('depot')
         ;
     }

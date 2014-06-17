@@ -10,12 +10,15 @@ use Acme\PurchaseBundle\Form\PurchaseType;
 use Acme\PurchaseBundle\Form\PurchaseLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use LanKit\DatatablesBundle\Datatables\Datatable;
+
 /**
  * Purchase controller.
  *
  */
 class PurchaseController extends Controller
 {
+    protected $viewData;
 
     /**
      * Lists all Purchase entities.
@@ -29,11 +32,9 @@ class PurchaseController extends Controller
     public function indexResultsAction()
     {
         $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
-        $datatable->setDefaultJoinType(Datatable::JOIN_LEFT);
 
         return $datatable->getSearchResults();
     }
-
     /**
      * Creates a new Purchase entity.
      *
@@ -298,75 +299,5 @@ class PurchaseController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
             ;
-    }
-
-    /*
-     * Delete Line
-     * */
-    public function ajaxDeleteLineAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $line = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->find($id);
-
-        if(!$line)
-        {
-            return new HTTPResponse('Invalid purchase line', 404);
-            exit();
-        }
-
-        if($this->container->getParameter('statusFinalized') === $line->getPurchase()->getStatus())
-        {
-            return new HTTPResponse('This is a finalized record. You don\'t have access to modify this', 403);
-            exit();
-        }
-        $batch = $line->getBatch();
-        $em->remove($line);
-        $em->remove($batch);
-        $em->flush();
-
-        return new HTTPResponse("Successfully deleted.", 200);
-    }
-
-    /*
-     * Finalize Purchase
-     * */
-    public function finalizeAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
-
-        if (!$purchase) {
-            throw $this->createNotFoundException('Unable to find Purchase entity.');
-        }
-        if($this->container->getParameter('statusFinalized') === $purchase->getStatus())
-        {
-            throw new AccessDeniedException('This is a finalized record. You can\'t modify this');
-            exit();
-        }
-
-        $purchaseStatus = new PurchaseStatus($em, $this->container->get('security.context'));
-        $purchaseStatus->finalizePurchase($purchase);
-        return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
-    }
-
-    public function deFinalizeAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
-
-        if (!$purchase) {
-            throw $this->createNotFoundException('Unable to find Purchase entity.');
-        }
-        if($this->container->getParameter('statusFinalized') !== $purchase->getStatus())
-        {
-            throw new AccessDeniedException('This is not a finalized record.');
-            exit();
-        }
-
-        $purchaseStatus = new PurchaseStatus($em, $this->container->get('security.context'));
-        $res = $purchaseStatus->deFinalizePurchase($purchase);
-        if(!$res)
-            $this->get('session')->getFlashBag()->set('error', 'You can\'t definalize this record because stocks already used.');
-        return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 }

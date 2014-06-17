@@ -103,3 +103,10 @@ knp_paginator:
         distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+#JMSSerializerBundle Configuration
+jms_serializer:
+    handlers:
+        datetime:
+            default_format: "m-d-Y @ H:i:s"
+

@@ -149,5 +149,6 @@ $(".delete-confirm").click(function(event){
     }
 });
 
+//Initialisation data-table code
 
 
