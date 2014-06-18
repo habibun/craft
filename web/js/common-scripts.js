@@ -115,7 +115,7 @@ var Script = function () {
 
 }();
 
-//mulitiple choice selection
+//chosen selection
 $(function() {
     $(".chosen-select").chosen();
 });
@@ -149,7 +149,7 @@ $(".delete-confirm").click(function(event){
     }
 });
 
-//date picker enable function
+//datepicker function
 $(function() {
     $('.default-date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
 });
@@ -160,17 +160,6 @@ function confirmDelete()
     return confirm('Are you sure you want to delete!!!');
 }
 
-//line delete function
-$(document).ready(function(){
-    $(document).on("click", "a.line-delete", function () {
-        if(!confirmDelete())
-            return false;
 
-        var parentTr = $(this).closest('tr');
-        var id = $(parentTr).attr('class');
-        $(parentTr).remove();
-        delete addedLines[id];
-    });
-});
 
 

@@ -4,7 +4,6 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{asset('assets/bootstrap-datepicker/css/datepicker.css')}}" />
-    <link href="{{ asset('chosen/chosen.min.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body -%}
@@ -137,12 +136,22 @@
             }
             $('#masterForm').submit();
         }
+
+        $(document).ready(function(){
+            $(document).on("click", "a.line-delete", function () {
+                if(!confirmDelete())
+                    return false;
+
+                var parentTr = $(this).closest('tr');
+                var id = $(parentTr).attr('class');
+                $(parentTr).remove();
+                delete addedLines[id];
+            });
+        });
     </script>
 
     <script type="text/javascript" src="{{ asset('jquery/noty/jquery.noty.js') }}"></script>
     <script type="text/javascript" src="{{ asset('jquery/noty/topCenter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('jquery/noty/default.js') }}"></script>
     <script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
-    <script src="{{ asset('chosen/chosen.jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('jquery/purchase_new.js') }}"></script>
 {% endblock %}
