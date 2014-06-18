@@ -11,7 +11,11 @@
         <div class="col-md-7">
             <section class="panel">
                 <header class="panel-heading">
-                        <strong>New Purchase</strong>
+                      <strong>New Purchase</strong>
+                      <span class="tools pull-right">
+                          <a class="icon-chevron-down" href="javascript:;"></a>
+                          <a class="icon-remove" href="javascript:;"></a>
+                      </span>
                 </header>
                 <div class="panel-body">
                     {{ bootstrap_set_style('horizontal') }}
@@ -27,6 +31,10 @@
             <section class="panel">
                 <header class="panel-heading">
                         <strong>Add Purchase Line</strong>
+                        <span class="tools pull-right">
+                            <a class="icon-chevron-down" href="javascript:;"></a>
+                            <a class="icon-remove" href="javascript:;"></a>
+                        </span>
                 </header>
                 <div class="panel-body">
                     {{ bootstrap_set_style('horizontal') }}
@@ -48,6 +56,10 @@
             <section class="panel">
                 <header class="panel-heading">
                         <strong>Purchase Lines</strong>
+                        <span class="tools pull-right">
+                            <a class="icon-chevron-down" href="javascript:;"></a>
+                            <a class="icon-remove" href="javascript:;"></a>
+                        </span>
                 </header>
                 <div class="panel-body">
                     <table id="lineViewer" class="table table-striped">
@@ -71,8 +83,8 @@
         <div class="col-md-12">
             <input type="button" class="btn btn-primary" id="submitForm" value="Save" onclick="submitBoth();"  />
             <span class="pull-right">
-            <a class="btn btn-primary" href="{{ path('purchase') }}">Back
-            </a>
+                <a class="btn btn-primary" href="{{ path('purchase') }}">Back
+                </a>
             </span>
         </div>
     </div>
