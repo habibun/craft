@@ -53,6 +53,7 @@ class PurchaseController extends Controller
         if ($form->isValid()) {
             $user = $this->getUser();
             $em->persist($entity);
+            $entity->setStatus(3);
             foreach($data['product'] as $key => $product)
             {
                 $line = new PurchaseLine();

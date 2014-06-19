@@ -8,7 +8,11 @@ Acme\PurchaseBundle\Entity\Purchase:
     fields:
         purchaseDate:
             column: purchase_date
-            type: datetime
+            type: date
+        status:
+            type: smallint
+            nullable: false
+            default: 1
     manyToOne:
         company:
             targetEntity: Acme\SetupBundle\Entity\Company

@@ -108,5 +108,5 @@ knp_paginator:
 jms_serializer:
     handlers:
         datetime:
-            default_format: "m-d-Y @ H:i:s"
+            default_format: "d-M-Y"
 

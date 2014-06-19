@@ -150,9 +150,9 @@ $(".delete-confirm").click(function(event){
 });
 
 //datepicker function
-$(function() {
-    $('.default-date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
-});
+//$(function() {
+//    $('.default-date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
+//});
 
 //delete confirm message
 function confirmDelete()
@@ -160,6 +160,17 @@ function confirmDelete()
     return confirm('Are you sure you want to delete!!!');
 }
 
+/*$(window).load(function()
+{
+    $("#purchaseDataTable").DataTable();
+});*/
 
+//when enable datepicker in specific field only
+/*$(function() {
+    $( "#acme_purchasebundle_purchase_purchaseDate" ).datepicker();
+});*/
 
+//$(function() {
+//    $( ".date-picker" ).datepicker();
+//});
 

@@ -3,7 +3,8 @@
 {% block title %}Purchase{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/bootstrap-datepicker/css/datepicker.css')}}" />
+    {#<link rel="stylesheet" type="text/css" href="{{asset('assets/bootstrap-datepicker/css/datepicker.css')}}" />#}
+    <link rel="stylesheet" type="text/css" href="{{asset('jquery/jquery-ui-1.10.4.min.css')}}" />
 {% endblock %}
 
 {% block body -%}
@@ -165,5 +166,6 @@
     <script type="text/javascript" src="{{ asset('jquery/noty/jquery.noty.js') }}"></script>
     <script type="text/javascript" src="{{ asset('jquery/noty/topCenter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('jquery/noty/default.js') }}"></script>
-    <script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+    {#<script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>#}
+    <script type="text/javascript" src="{{ asset('jquery/jquery-ui-1.10.4.min.js') }}"></script>
 {% endblock %}

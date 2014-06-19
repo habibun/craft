@@ -26,6 +26,28 @@ class Purchase
     * */
     protected $depot;
 
+    /*
+    * @var int
+    * */
+    protected $status;
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+
     public function __construct()
     {
         $this->lines = new ArrayCollection();
