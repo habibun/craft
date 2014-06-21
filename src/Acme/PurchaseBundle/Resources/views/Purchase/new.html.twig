@@ -3,8 +3,7 @@
 {% block title %}Purchase{% endblock %}
 
 {% block stylesheets %}
-    {#<link rel="stylesheet" type="text/css" href="{{asset('assets/bootstrap-datepicker/css/datepicker.css')}}" />#}
-    <link rel="stylesheet" type="text/css" href="{{asset('jquery/jquery-ui-1.10.4.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/jquery-ui/jquery-ui-1.10.1.custom.min.css')}}" />
 {% endblock %}
 
 {% block body -%}
@@ -82,12 +81,13 @@
 
     <div  class="row">
         <div class="col-md-12">
-            <input type="button" class="btn btn-primary" id="submitForm" value="Save" onclick="submitBoth();"  />
             <span class="pull-right">
-                <a class="btn btn-primary" href="{{ path('purchase') }}">Back
-                </a>
+                <input type="button" class="btn btn-info" id="submitForm" value="Save" onclick="submitBoth();"  />
             </span>
+            <a class="btn btn-primary" href="{{ path('purchase') }}">Back
+            </a>
         </div>
+    </div>
     </div>
 {% endblock %}
 
@@ -163,9 +163,7 @@
         });
     </script>
 
-    <script type="text/javascript" src="{{ asset('jquery/noty/jquery.noty.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('jquery/noty/topCenter.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('jquery/noty/default.js') }}"></script>
-    {#<script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>#}
-    <script type="text/javascript" src="{{ asset('jquery/jquery-ui-1.10.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/noty/jquery.noty.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/noty/layouts/topCenter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/noty/themes/default.js') }}"></script>
 {% endblock %}

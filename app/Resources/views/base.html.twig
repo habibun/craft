@@ -12,9 +12,10 @@
     <!--external css-->
     <link href="{{ asset('assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="{{ asset('chosen/chosen.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-responsive.css') }}" rel="stylesheet" />
+    <!-- extra script -->
+    <link href="{{ asset('assets/chosen/chosen.min.css') }}" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -130,8 +131,10 @@
 <script src="{{ asset('js/jquery.scrollTo.min.js') }}"></script>
 <script src="{{ asset('js/jquery.nicescroll.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/respond.min.js') }}" ></script>
+<!-- extra script -->
+<script type="text/javascript" src="{{ asset('js/jquery-ui-1.9.2.custom.min.js') }}"></script>
+<script src="{{ asset('assets/chosen/chosen.jquery.min.js') }}"></script>
 <!--common script for all pages-->
-<script src="{{ asset('chosen/chosen.jquery.min.js') }}"></script>
 <script src="{{ asset('js/common-scripts.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>

@@ -112,7 +112,7 @@ a:hover {
 .form-control {
     border: 1px solid #e2e2e4;
     box-shadow: none;
-    /*my_edited*/
+    /* my_edited for form input problem */
     /*color: #c2c2c2;*/
 }
 

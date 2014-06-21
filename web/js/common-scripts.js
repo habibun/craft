@@ -149,17 +149,13 @@ $(".delete-confirm").click(function(event){
     }
 });
 
-//datepicker function
-//$(function() {
-//    $('.default-date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
-//});
-
 //delete confirm message
 function confirmDelete()
 {
     return confirm('Are you sure you want to delete!!!');
 }
 
+//load data-table
 /*$(window).load(function()
 {
     $("#purchaseDataTable").DataTable();
@@ -170,7 +166,8 @@ function confirmDelete()
     $( "#acme_purchasebundle_purchase_purchaseDate" ).datepicker();
 });*/
 
-//$(function() {
-//    $( ".date-picker" ).datepicker();
-//});
+//datepicker function
+$(function() {
+    $('.date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
+});
 

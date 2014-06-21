@@ -220,7 +220,8 @@ class UserController extends Controller
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
         $this->get('session')->getFlashBag()->add('success', 'User was successfully Deleted. Thank you!');
-        return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        return $this->redirect($this->generateUrl('user'));
     }
 
     /**
