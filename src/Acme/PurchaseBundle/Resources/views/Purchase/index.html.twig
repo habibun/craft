@@ -2,85 +2,101 @@
 
 {% block title %}Purchase{% endblock %}
 
+{% block stylesheets %}
+    <link href="{{ asset('assets/data-tables-edited/jquery.dataTables.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block body -%}
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    {#<strong>Purchase #{{ purchase.id }}</strong>#}
-                    <span class="tools pull-right">
-                        <a class="icon-chevron-down" href="javascript:;"></a>
-                        <a class="icon-remove" href="javascript:;"></a>
-                    </span>
+                    <strong>Purchase List</strong>
                 </header>
                 <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Purchase Id</th>
-                            <th>Purchase Date</th>
-                            <th>Company</th>
-                            <th>Depot</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for line in purchase %}
+                    <div class="adv-table">
+                        <table id="purchaseDataTable" class="display table table-bordered table-striped" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
                             <tr>
-                                <td>{{ line.id }}</td>
-                                <td>{{ line.purchaseDate|date('d-m-Y') }}</td>
-                                <td>{{ line.company }}</td>
-                                <td>{{ line.depot }}</td>
+                                <th>Purchase Id</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Action</th>
                             </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </div>
-        <div class="col-md-5">
-            <section class="panel">
-                <header class="panel-heading">
-                    <strong>Products</strong>
-                    <span class="tools pull-right">
-                        <a class="icon-chevron-down" href="javascript:;"></a>
-                        <a class="icon-remove" href="javascript:;"></a>
-                    </span>
-                </header>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Purchase Id</th>
-                            <th>Id</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for line in purchaseLines %}
-                            <tr>
-                                <td>{{ line.purchase }}</td>
-                                <td>{{ line.id }}</td>
-                                <td>{{ line.product }}</td>
-                                <td>{{ line.quantity }}</td>
-                                <td>{{ line.price }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-           {# <span class="pull-right">
-            <a class="btn btn-primary" href="{{ path('purchase_edit', {'id' : purchase.id}) }}">
-                Edit
-            </a>#}
-            </span>
-            <a class="btn btn-primary" href="{{ path('purchase') }}">Back</a>
-        </div>
-    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/data-tables-edited/jquery.dataTables.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var purchaseTable = $('#purchaseDataTable').dataTable( {
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": '{{ path('purchase_results') }}',
+                "aoColumns": [
+                    {
+                        "mData": "purchase.id",
+                        "mDataProp": "purchase.id",
+                        "sName": "purchase.id"
+                    },
+
+                    {
+                        "mData": "product.name",
+                        "mDataProp": "product.name",
+                        "sName": "product.name"
+                    },
+                    {
+                        "mData": "quantity",
+                        "mDataProp": "quantity",
+                        "sName": "quantity"
+                    },
+                    {
+                        "mData": "price",
+                        "mDataProp": "price",
+                        "sName": "price"
+                    },
+                    {
+                        "mData":  "id",
+                        "mDataProp":  "id",
+                        "sName":  "id",
+                        "bSearchable": false,
+                        "bSortable": false,
+                        "sDefaultContent": "",
+                        "fnRender": function (oObj)
+                        {
+                            var showURL = '{{ path('purchase_show', {'id': 'repPID'}) }}';
+                            var editURL = '{{ path('purchase_edit', {'id': 'repPID'}) }}';
+                            var deleteURL = '{{ path('purchase_delete', {'id': 'repPID'}) }}';
+
+                            return '<a href="'+ showURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a> <a href="'+editURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-info btn-xs"><i class="icon-pencil"></i></a> <a href="'+deleteURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-danger btn-xs btn-delete"><i class="icon-trash"></i></a>';
+                        }
+                    }
+                ],
+                "fnPreDrawCallback": function(oSettings, json) {
+                    $('.dataTables_filter input').addClass('form-control input-sm');
+                    $('.dataTables_filter input').css('width', '200px');
+                    $('.dataTables_length select').addClass('form-control input-sm');
+                    $('.dataTables_length select').css('width', '75px');
+                }
+            } );
+
+            $('.dataTables_filter input')
+                    .unbind('keypress keyup')
+                    .bind('keypress', function(e){
+                        if (e.keyCode != 13) return;
+                        purchaseTable.fnFilter($(this).val());
+                    });
+        } );
+    </script>
 {% endblock %}

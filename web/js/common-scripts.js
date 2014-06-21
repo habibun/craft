@@ -155,12 +155,6 @@ function confirmDelete()
     return confirm('Are you sure you want to delete!!!');
 }
 
-//load data-table
-/*$(window).load(function()
-{
-    $("#purchaseDataTable").DataTable();
-});*/
-
 //when enable datepicker in specific field only
 /*$(function() {
     $( "#acme_purchasebundle_purchase_purchaseDate" ).datepicker();
@@ -170,4 +164,7 @@ function confirmDelete()
 $(function() {
     $('.date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
 });
+
+
+
 
