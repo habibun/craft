@@ -19,7 +19,6 @@ class Product
      */
     private $name;
 
-
     /**
      * Get id
      *

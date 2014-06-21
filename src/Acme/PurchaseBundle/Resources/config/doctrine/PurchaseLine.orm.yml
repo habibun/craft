@@ -20,6 +20,7 @@ Acme\PurchaseBundle\Entity\PurchaseLine:
             nullable: false
         purchase:
             targetEntity: Acme\PurchaseBundle\Entity\Purchase
+            nullable: false
     lifecycleCallbacks:
         prePersist: [  ]
 

@@ -2,56 +2,13 @@
 
 namespace Acme\PurchaseBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 class Purchase
 {
-    /*
-     * @var int
-     * */
     protected $id;
-
-    /*
-    * @var datetime
-    * */
     protected $purchaseDate;
-
-    /*
-     * @var int
-     * */
     protected $company;
-
-    /*
-    * @var int
-    * */
     protected $depot;
-
-    /*
-    * @var int
-    * */
     protected $status;
-
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-
-    public function __construct()
-    {
-        $this->lines = new ArrayCollection();
-    }
 
     /**
      * @param mixed $company
@@ -67,6 +24,22 @@ class Purchase
     public function getCompany()
     {
         return $this->company;
+    }
+
+    /**
+     * @param mixed $depot
+     */
+    public function setDepot($depot)
+    {
+        $this->depot = $depot;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepot()
+    {
+        return $this->depot;
     }
 
     /**
@@ -102,18 +75,20 @@ class Purchase
     }
 
     /**
-     * @param mixed $depot
+     * @param mixed $status
      */
-    public function setDepot($depot)
+    public function setStatus($status)
     {
-        $this->depot = $depot;
+        $this->status = $status;
     }
 
     /**
      * @return mixed
      */
-    public function getDepot()
+    public function getStatus()
     {
-        return $this->depot;
+        return $this->status;
     }
+
+
 } 

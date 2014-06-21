@@ -10,9 +10,8 @@ Acme\PurchaseBundle\Entity\Purchase:
             column: purchase_date
             type: date
         status:
-            type: smallint
+            type: boolean
             nullable: false
-            default: 1
     manyToOne:
         company:
             targetEntity: Acme\SetupBundle\Entity\Company

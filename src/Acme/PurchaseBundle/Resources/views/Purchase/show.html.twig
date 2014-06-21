@@ -32,6 +32,16 @@
                             <th>Depot</th>
                             <td>{{ purchase.depot }}</td>
                         </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>
+                                {% if purchase.status == true %}
+                                    <span class="label label-inverse label-mini">Enabled</span>
+                                {% else %}
+                                    <span class="label label-warning label-mini">disabled</span>
+                                {% endif %}
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

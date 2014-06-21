@@ -26,7 +26,18 @@ class PurchaseController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AcmePurchaseBundle:Purchase:index.html.twig');
+        //return $this->render('AcmePurchaseBundle:Purchase:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $this->viewData['purchase'] = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();
+
+        if (!$this->viewData['purchase']) {
+            throw $this->createNotFoundException('Unable to find Purchase entity.');
+        }
+
+        $this->viewData['purchaseLines'] = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $this->viewData['purchase']));
+
+        return $this->render('AcmePurchaseBundle:Purchase:index.html.twig', $this->viewData);
     }
 
     public function indexResultsAction()
@@ -53,7 +64,7 @@ class PurchaseController extends Controller
         if ($form->isValid()) {
             $user = $this->getUser();
             $em->persist($entity);
-            $entity->setStatus(3);
+            $entity->setStatus('false');
             foreach($data['product'] as $key => $product)
             {
                 $line = new PurchaseLine();

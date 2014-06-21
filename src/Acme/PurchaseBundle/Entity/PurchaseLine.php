@@ -5,47 +5,27 @@ namespace Acme\PurchaseBundle\Entity;
 
 class PurchaseLine
 {
-    /*
-     * @var int
-     * */
     protected $id;
-
-    /*
-     * @var int
-     * */
     protected $product;
-
-    /*
-     * @var float
-     * */
     protected $quantity;
-
-    /*
-     * @var float
-     * */
     protected $price;
-
-    /*
-    * @var float
-    * */
     protected $item;
-
     protected $purchase;
 
     /**
-     * @param mixed $purchase
+     * @param mixed $id
      */
-    public function setPurchase($purchase)
+    public function setId($id)
     {
-        $this->purchase = $purchase;
+        $this->id = $id;
     }
 
     /**
      * @return mixed
      */
-    public function getPurchase()
+    public function getId()
     {
-        return $this->purchase;
+        return $this->id;
     }
 
     /**
@@ -62,38 +42,6 @@ class PurchaseLine
     public function getItem()
     {
         return $this->item;
-    }
-
-    /**
-     * @param mixed $quantity
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -127,4 +75,38 @@ class PurchaseLine
     {
         return $this->product;
     }
+
+    /**
+     * @param mixed $purchase
+     */
+    public function setPurchase($purchase)
+    {
+        $this->purchase = $purchase;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPurchase()
+    {
+        return $this->purchase;
+    }
+
+    /**
+     * @param mixed $quantity
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+
 }
