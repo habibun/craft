@@ -4192,7 +4192,8 @@ td.details table tr td, .dataTable tr:last-child {
 }
 
 .adv-table .dataTables_info, .dataTables_paginate {
-    padding: 15px;
+    /* my_edited for datatable pagination */
+    /*padding: 15px;*/
 }
 
 .adv-table .dataTables_length,.adv-table .dataTables_filter {

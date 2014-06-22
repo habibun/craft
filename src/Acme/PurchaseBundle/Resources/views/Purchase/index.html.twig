@@ -3,7 +3,7 @@
 {% block title %}Purchase{% endblock %}
 
 {% block stylesheets %}
-    <link href="{{ asset('assets/data-tables-edited/jquery.dataTables.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/data-tables-bootstrap3/css/datatables.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body -%}
@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/data-tables-edited/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
     <script>
         $(document).ready(function() {
             var purchaseTable = $('#purchaseDataTable').dataTable( {
