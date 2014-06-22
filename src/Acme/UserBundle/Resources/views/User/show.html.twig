@@ -42,9 +42,9 @@
                     <tr>
                         <th>Status</th>
                         <td>{% if entity.enabled == true %}
-                                <span class="label label-inverse label-mini">Enabled</span>
+                                <span class="label label-inverse">Enabled</span>
                             {% else %}
-                                <span class="label label-warning label-mini">disabled</span>
+                                <span class="label label-warning">disabled</span>
                             {% endif %}
                         </td>
                     </tr>
@@ -63,15 +63,14 @@
         </section>
     </div>
 </div>
-        <div>
+    <div class="row">
+        <div class="col-md-12">
             <span class="pull-right">
-                <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-primary">
-                    Edit
+                <a href="{{ path('user') }}" class="btn btn-primary">
+                    Back
                 </a>
             </span>
-            <a href="{{ path('user') }}" class="btn btn-primary">
-                Back
-            </a>
             {#<span>{{ form(delete_form) }}</span>#}
         </div>
+    </div>
 {% endblock %}
