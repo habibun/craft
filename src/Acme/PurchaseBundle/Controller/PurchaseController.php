@@ -26,10 +26,18 @@ class PurchaseController extends Controller
      */
     public function indexAction()
     {
+/*        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();*/
+
+        $em = $this->getDoctrine()->getManager();
+
+        $this->viewData['purchase'] = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();
+
         return $this->render('AcmePurchaseBundle:Purchase:index.html.twig');
     }
 
-    public function indexResultsAction()
+    public function getPurchaseLineAction()
     {
         $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:PurchaseLine');
 
@@ -63,7 +71,6 @@ class PurchaseController extends Controller
                 $line->setPrice($data['price'][$key]);
                 $em->persist($line);
             }
-
             $em->flush();
 
             return $this->redirect($this->generateUrl('purchase_show', array('id' => $entity->getId())));

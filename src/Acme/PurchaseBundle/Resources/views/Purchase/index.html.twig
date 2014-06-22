@@ -21,13 +21,14 @@
                 </header>
                 <div class="panel-body">
                     <div class="adv-table">
-                        <table id="purchaseDataTable" class="display table table-bordered table-striped" cellpadding="0" cellspacing="0" border="0">
+                        <table id="purchaseLineDataTable" class="display table table-bordered table-striped" cellpadding="0" cellspacing="0" border="0">
                             <thead>
                             <tr>
                                 <th>Purchase Id</th>
                                 <th>Product</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -46,17 +47,16 @@
     <script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
     <script>
         $(document).ready(function() {
-            var purchaseTable = $('#purchaseDataTable').dataTable( {
+            var purchaseTable = $('#purchaseLineDataTable').dataTable( {
                 "bProcessing": true,
                 "bServerSide": true,
-                "sAjaxSource": '{{ path('purchase_results') }}',
+                "sAjaxSource": '{{ path('purchase_line_result') }}',
                 "aoColumns": [
                     {
                         "mData": "purchase.id",
                         "mDataProp": "purchase.id",
                         "sName": "purchase.id"
                     },
-
                     {
                         "mData": "product.name",
                         "mDataProp": "product.name",
@@ -71,6 +71,20 @@
                         "mData": "price",
                         "mDataProp": "price",
                         "sName": "price"
+                    },
+                    {
+                        "mData": "purchase.status",
+                        "mDataProp": "purchase.status",
+                        "sName": "purchase.status",
+                        "fnRender": function (oObj)
+                        {
+                            if(oObj.aData['purchase.status'] == true)
+                            {
+                                return '<span class="label label-success">Finalized</span>'
+                            }
+
+                            return '<span class="label label-default">Draft</span>';
+                        }
                     },
                     {
                         "mData":  "id",
@@ -96,13 +110,6 @@
                     $('.dataTables_length select').css('width', '75px');
                 }
             } );
-
-            $('.dataTables_filter input')
-                    .unbind('keypress keyup')
-                    .bind('keypress', function(e){
-                        if (e.keyCode != 13) return;
-                        purchaseTable.fnFilter($(this).val());
-                    });
         } );
     </script>
 {% endblock %}

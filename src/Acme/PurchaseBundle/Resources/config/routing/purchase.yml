@@ -2,9 +2,9 @@ purchase:
     pattern:  /
     defaults: { _controller: "AcmePurchaseBundle:Purchase:index" }
 
-purchase_results:
-    pattern:  /index-result
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:indexResults" }
+purchase_line_result:
+    pattern:  /purchase-line-result
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:getPurchaseLine" }
 
 purchase_show:
     pattern:  /{id}/show
