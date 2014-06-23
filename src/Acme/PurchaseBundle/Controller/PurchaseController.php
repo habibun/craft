@@ -195,19 +195,11 @@ class PurchaseController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $this->needCompany();
-        $this->needBranch();
-
         $em = $this->getDoctrine()->getManager();
         $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
         if (!$purchase) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
-        }
-        if($this->container->getParameter('statusFinalized') === $purchase->getStatus())
-        {
-            throw new AccessDeniedException('This is a finalized record. You can\'t modify this');
-            exit();
         }
 
         $editForm = $this->createEditForm($purchase);
@@ -219,17 +211,14 @@ class PurchaseController extends Controller
         $editForm->handleRequest($request);
 
         $data = $this->get('request')->request->all();
-        $data = $data['purchase_line'];
-        $batch = new BatchBusinessModel($em);
 
         if ($editForm->isValid()) {
             foreach($data['product'] as $key => $product)
             {
                 $line = new PurchaseLine();
                 $line->setPurchase($purchase);
-                $line->setBatch($batch->createBatch());
-                $line->setProduct($em->getRepository('RaProductBundle:Product')->findOneById($product));
-                $line->setAmount($data['amount'][$key]);
+                $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->findOneById($product));
+                $line->setAmount($data['quantity'][$key]);
                 $line->setPrice($data['price'][$key]);
                 $em->persist($line);
             }

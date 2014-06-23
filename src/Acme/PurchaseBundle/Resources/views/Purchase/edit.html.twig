@@ -10,6 +10,10 @@
             <section class="panel">
                 <header class="panel-heading">
                     <strong>New Purchase</strong>
+                    <span class="tools pull-right">
+                       <a class="icon-chevron-down" href="javascript:;"></a>
+                       <a class="icon-remove" href="javascript:;"></a>
+                    </span>
                 </header>
                 <div class="panel-body">
                     {{ bootstrap_set_style('horizontal') }}
@@ -19,6 +23,7 @@
                     {{ form_row(form.depot) }}
                     {{ form_end(form) }}
                 </div>
+                <hr>
             </section>
         </div>
 
@@ -26,6 +31,10 @@
             <section class="panel">
                 <header class="panel-heading">
                     <strong>Add Purchase Line</strong>
+                    <span class="tools pull-right">
+                       <a class="icon-chevron-down" href="javascript:;"></a>
+                       <a class="icon-remove" href="javascript:;"></a>
+                    </span>
                 </header>
                 <div class="panel-body">
                     {{ bootstrap_set_style('horizontal') }}
@@ -33,9 +42,9 @@
                     {{ form_row(line_form.product) }}
                     {{ form_row(line_form.quantity) }}
                     {{ form_row(line_form.price) }}
-                    <div class="modal-footer">
+                    <span class="pull-right">
                         <input type="button" class="btn btn-primary" id="lineAdd" value="Add Line" onclick="addLine();"  />
-                    </div>
+                    </span>
                     {{ form_end(line_form) }}
                 </div>
             </section>
@@ -47,6 +56,10 @@
             <section class="panel">
                 <header class="panel-heading">
                     <strong>Purchase Lines</strong>
+                  <span class="tools pull-right">
+                      <a class="icon-chevron-down" href="javascript:;"></a>
+                      <a class="icon-remove" href="javascript:;"></a>
+                  </span>
                 </header>
                 <div class="panel-body">
                     <table id="lineViewer" class="table table-striped">
@@ -119,7 +132,7 @@
             html += '<td>'+ $('#purchase_line_product option:selected').text() +'<input type="hidden" value="'+ $('#purchase_line_product').val() +'" name="'+ $('#purchase_line_product').attr('name') + '[]" /></td>';
             html += '<td>'+ $('#purchase_line_quantity').val() +'<input type="hidden" value="'+ $('#purchase_line_quantity').val() +'" name="'+ $('#purchase_line_quantity').attr('name') + '[]" /></td>';
             html += '<td>'+ $('#purchase_line_price').val() +'<input type="hidden" value="'+ $('#purchase_line_price').val() +'" name="'+ $('#purchase_line_price').attr('name') + '[]" /></td>';
-            html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="fa fa-trash-o"></i></a></td>';
+            html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';
             html += '</tr>';
             $('table#lineViewer tbody').append(html);
 
@@ -137,7 +150,7 @@
 
         function submitBoth()
         {
-            if(!$('#acme_bundle_purchasebundle_purchase_company').val())
+            if(!$('#acme_purchasebundle_purchase_company').val())
             {
                 noty({force: true, text: 'Please select company.', type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
