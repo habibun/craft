@@ -1,77 +1,60 @@
 {% extends '::base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/jquery-ui/jquery-ui-1.10.1.custom.min.css')}}" />
+{% endblock %}
+
 {% block body -%}
     <div class="row">
-        <div class="col-md-8">
-            <div class="panel panel-archon">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Edit Issue
-					<span class="pull-right">
-                        <a  href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
-					</span>
-                    </h3>
-                </div>
+        <div class="col-lg-8">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>New Purchase</strong>
+                </header>
                 <div class="panel-body">
-
+                    {{ bootstrap_set_style('horizontal') }}
                     {{ form_start(form, {'attr' :  { 'class': 'form-horizontal', 'id': 'masterForm', 'onSubmit': 'return masterOnSubmit();' } }) }}
-
                     {{ form_row(form.purchaseDate) }}
                     {{ form_row(form.company) }}
                     {{ form_row(form.depot) }}
-
                     {{ form_end(form) }}
                 </div>
-            </div>
+            </section>
         </div>
 
-        <div class="col-md-4">
-            <div class="panel panel-archon">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Add Issue Line
-					<span class="pull-right">
-                        <a  href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
-					</span>
-                    </h3>
-                </div>
+        <div class="col-lg-4">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Add Purchase Line</strong>
+                </header>
                 <div class="panel-body">
+                    {{ bootstrap_set_style('horizontal') }}
                     {{ form_start(line_form, {'attr' :  { 'class': 'form-horizontal', 'id': 'lineForm' } }) }}
-
-                    {{ form_row(line_form.product, {'attr': {'class': 'chosen-select'}}) }}
-                    <div class="form-group">
-                        <label for="group" class="col-sm-3 control-label">Current</label>
-                        <div class="col-sm-8">
-                            <input id="current-stock-show" value="0" class="form-control" readonly="readonly" />
-                        </div>
-                    </div>
+                    {{ form_row(line_form.product) }}
                     {{ form_row(line_form.quantity) }}
+                    {{ form_row(line_form.price) }}
                     <div class="modal-footer">
-                        <input type="button" class="btn btn-primary" id="lineAdd" value="Add Line" onclick="addLineCheck();"  />
+                        <input type="button" class="btn btn-primary" id="lineAdd" value="Add Line" onclick="addLine();"  />
                     </div>
                     {{ form_end(line_form) }}
                 </div>
-            </div>
+            </section>
         </div>
     </div>
 
     <div  class="row">
         <div class="col-md-12">
-            <div class="panel panel-archon">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Issue Lines
-					<span class="pull-right">
-                        <a  href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
-					</span>
-                    </h3>
-                </div>
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Purchase Lines</strong>
+                </header>
                 <div class="panel-body">
                     <table id="lineViewer" class="table table-striped">
                         <thead>
                         <tr>
                             <th>Product</th>
-                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Price</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -80,19 +63,25 @@
                             <tr class="{{ line.product.getId() }}">
                                 <td>{{ line.product }}</td>
                                 <td>{{ line.quantity }}</td>
-                                <td><a href="{{ path('issue_line_delete', {'id' : line.getId() }) }}" class="btn btn-danger btn-xs existing-line-delete"><i class="fa fa-trash-o"></i></a></td>
+                                <td>{{ line.price }}</td>
+                                <td><a href="{{ path('purchase_line_delete', {'id' : line.getId() }) }}" class="btn btn-danger btn-xs existing-line-delete"><i class="icon-trash"></i></a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
 
     <div  class="row">
         <div class="col-md-12">
             <input type="button" class="btn btn-primary" id="submitForm" value="Save" onclick="submitBoth();"  />
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ path('purchase') }}">
+                    Back
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -112,35 +101,29 @@
             $('table#lineViewer tbody').html('');
         }
 
-        function addLineCheck()
+        function addLine()
         {
-            if(addedLines.hasOwnProperty($('#issue_line_product').val()))
+            if(addedLines.hasOwnProperty($('#purchase_line_product').val()))
             {
                 noty({force: true, text: 'You already added this product please add another. Or delete existing and try again.', type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
             }
 
-            if(!$('#issue_line_product').val() || !$('#issue_line_quantity').val())
+            if(!$('#purchase_line_product').val() || !$('#purchase_line_quantity').val() || !$('#purchase_line_price').val())
             {
                 noty({force: true, text: 'Please fill the form correctly', type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
             }
 
-
-        }
-
-        function addLine()
-        {
-
-
-            var html = '<tr class="'+ $('#issue_line_product').val() +'">';
-            html += '<td>'+ $('#issue_line_product option:selected').text() +'<input type="hidden" value="'+ $('#issue_line_product').val() +'" name="'+ $('#issue_line_product').attr('name') + '[]" /></td>';
-            html += '<td>'+ $('#issue_line_quantity').val() +'<input type="hidden" value="'+ $('#issue_line_quantity').val() +'" name="'+ $('#issue_line_quantity').attr('name') + '[]" /></td>';
+            var html = '<tr class="'+ $('#purchase_line_product').val() +'">';
+            html += '<td>'+ $('#purchase_line_product option:selected').text() +'<input type="hidden" value="'+ $('#purchase_line_product').val() +'" name="'+ $('#purchase_line_product').attr('name') + '[]" /></td>';
+            html += '<td>'+ $('#purchase_line_quantity').val() +'<input type="hidden" value="'+ $('#purchase_line_quantity').val() +'" name="'+ $('#purchase_line_quantity').attr('name') + '[]" /></td>';
+            html += '<td>'+ $('#purchase_line_price').val() +'<input type="hidden" value="'+ $('#purchase_line_price').val() +'" name="'+ $('#purchase_line_price').attr('name') + '[]" /></td>';
             html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="fa fa-trash-o"></i></a></td>';
             html += '</tr>';
             $('table#lineViewer tbody').append(html);
 
-            addedLines[$('#issue_line_product').val()] = 1;
+            addedLines[$('#purchase_line_product').val()] = 1;
             document.getElementById('lineForm').reset();
         }
 
@@ -154,14 +137,9 @@
 
         function submitBoth()
         {
-            if(!$('#ra_bundle_stockbundle_issue_fromLocation').val())
+            if(!$('#acme_bundle_purchasebundle_purchase_company').val())
             {
-                noty({force: true, text: 'Please select from location.', type: 'error', layout: 'topCenter', timeout: 3000});
-                return false;
-            }
-            if(!$('#ra_bundle_stockbundle_issue_branch').val())
-            {
-                noty({force: true, text: 'Please select to location.', type: 'error', layout: 'topCenter', timeout: 3000});
+                noty({force: true, text: 'Please select company.', type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
             }
             if($('table#lineViewer tbody').children().length <= 0)
@@ -173,7 +151,7 @@
         }
 
         $(document).ready(function(){
-            $('.line-delete').live('click', function(){
+            $(document).on("click", "a.line-delete", function () {
                 if(!confirmDelete())
                     return false;
 
@@ -183,23 +161,7 @@
                 delete addedLines[id];
             });
 
-            $('#issue_line_product').change(function(){
-                $.post(
-                        '{{ path('ajax_get_current_stock') }}',
-                        {
-                            'fromLocation': $('#ra_bundle_stockbundle_issue_fromLocation').val(),
-                            'product': $('#issue_line_product').val(),
-                            'quantity': $('#issue_line_quantity').val()
-                        },
-                        function(data)
-                        {
-                            $('#current-stock-show').val(data.currentStock);
-                        },
-                        'json'
-                );
-            });
-
-            $('.existing-line-delete').live('click', function(e){
+            $(document).on("click", "a.existing-line-delete", function (e) {
                 e.preventDefault();
                 if(!confirmDelete())
                     return false;
@@ -230,4 +192,8 @@
             });
         });
     </script>
+
+    <script type="text/javascript" src="{{ asset('assets/noty/jquery.noty.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/noty/layouts/topCenter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/noty/themes/default.js') }}"></script>
 {% endblock %}

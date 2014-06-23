@@ -1,10 +1,8 @@
-ra_purchase_homepage:
+Acme_purchase_homepage:
     pattern:  /hello/{name}
-    defaults: { _controller: RaPurchaseBundle:Default:index }
+    defaults: { _controller: AcmePurchaseBundle:Default:index }
 
 AcmePurchaseBundle_purchase:
     resource: "@AcmePurchaseBundle/Resources/config/routing/purchase.yml"
     prefix:   /purchase
-
-
 

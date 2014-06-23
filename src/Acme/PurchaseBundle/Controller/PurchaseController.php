@@ -148,20 +148,12 @@ class PurchaseController extends Controller
      */
     public function editAction($id)
     {
-        $this->needCompany();
-        $this->needBranch();
-
         $em = $this->getDoctrine()->getManager();
 
         $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
         if (!$purchase) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
-        }
-        if($this->container->getParameter('statusFinalized') === $purchase->getStatus())
-        {
-            throw new AccessDeniedException('This is a finalized record. You can\'t modify this');
-            exit();
         }
 
         $editForm = $this->createEditForm($purchase);
@@ -307,5 +299,23 @@ class PurchaseController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
             ;
+    }
+
+    /*
+     * Delete Line
+     * */
+    public function ajaxDeleteLineAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $line = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->find($id);
+
+        if(!$line)
+        {
+            return new HTTPResponse('Invalid purchase line', 404);
+            exit();
+        }
+        $em->remove($line);
+        $em->flush();
+        return new HTTPResponse("Successfully deleted.", 200);
     }
 }

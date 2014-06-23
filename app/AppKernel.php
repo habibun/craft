@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Acme\PurchaseBundle\AcmePurchaseBundle(),
             new LanKit\DatatablesBundle\LanKitDatatablesBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
