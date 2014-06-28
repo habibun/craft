@@ -26,12 +26,6 @@ class PurchaseController extends Controller
      */
     public function indexAction()
     {
-/*        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();
-
-        $em = $this->getDoctrine()->getManager();
-        $this->viewData['purchase'] = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();*/
-
         return $this->render('AcmePurchaseBundle:Purchase:index.html.twig');
     }
 
