@@ -246,14 +246,14 @@ class PurchaseController extends Controller
             $em = $this->getDoctrine()->getManager();
             $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
-            /*if (!$purchase) {
+            if (!$purchase) {
                 throw $this->createNotFoundException('Unable to find Purchase entity.');
             }
             if($this->container->getParameter('statusFinalized') === $purchase->getStatus())
             {
                 throw new AccessDeniedException('This is a finalized record. You can\'t modify this');
                 exit();
-            }*/
+            }
 
             $lines = $em->getRepository('AcmePurchaseBundle:Purchase')->findBy(array('purchase' => $purchase->getId()));
             if(!empty($lines))
