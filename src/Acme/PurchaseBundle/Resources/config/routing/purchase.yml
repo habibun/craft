@@ -6,10 +6,6 @@ purchase_line_result:
     pattern:  /purchase-line-result
     defaults: { _controller: "AcmePurchaseBundle:Purchase:getPurchaseLineResult" }
 
-purchase_result:
-    pattern:  /purchase-result
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:getPurchaseResult" }
-
 purchase_show:
     pattern:  /{id}/show
     defaults: { _controller: "AcmePurchaseBundle:Purchase:show" }

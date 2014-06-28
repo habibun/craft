@@ -36,12 +36,6 @@ class PurchaseController extends Controller
         return $datatable->getSearchResults();
     }
 
-    public function getPurchaseResultAction()
-    {
-        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
-
-        return $datatable->getSearchResults();
-    }
     /**
      * Creates a new Purchase entity.
      *
