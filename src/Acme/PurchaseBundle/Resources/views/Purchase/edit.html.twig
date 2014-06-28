@@ -1,12 +1,14 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}Purchase{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{asset('assets/jquery-ui/jquery-ui-1.10.1.custom.min.css')}}" />
 {% endblock %}
 
 {% block body -%}
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-7">
             <section class="panel">
                 <header class="panel-heading">
                     <strong>New Purchase</strong>
@@ -27,7 +29,7 @@
             </section>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <section class="panel">
                 <header class="panel-heading">
                     <strong>Add Purchase Line</strong>
@@ -52,7 +54,7 @@
     </div>
 
     <div  class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
                     <strong>Purchase Lines</strong>
@@ -88,7 +90,7 @@
     </div>
 
     <div  class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <input type="button" class="btn btn-primary" id="submitForm" value="Save" onclick="submitBoth();"  />
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ path('purchase') }}">
@@ -100,7 +102,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
     <script type="text/javascript">
 
         var addedLines = {

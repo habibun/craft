@@ -180,9 +180,6 @@ class IssueController extends Controller
             'action' => $this->generateUrl('issue_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
         return $form;
     }
     /**

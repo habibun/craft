@@ -131,7 +131,7 @@ $(function() {
 });*/
 
 //delete confirm message
-function deleteConfirm()
+function confirmDelete()
 {
     return confirm('Are you sure you want to delete!!!');
 }
@@ -139,7 +139,7 @@ function deleteConfirm()
 //delete confirm function
 $(".delete-confirm").click(function(event){
     event.stopPropagation();
-    if(deleteConfirm()) {
+    if(confirmDelete()) {
         return true;
     }
     else
@@ -158,6 +158,7 @@ $(".delete-confirm").click(function(event){
 $(function() {
     $('.date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
 });
+
 
 
 
