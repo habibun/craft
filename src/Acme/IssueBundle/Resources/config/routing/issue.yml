@@ -32,3 +32,7 @@ issue_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "AcmeIssueBundle:Issue:delete" }
     requirements: { _method: post|delete }
+
+issue_line_delete:
+    pattern:  /{id}/ajax-delete-line
+    defaults: { _controller: "AcmeIssueBundle:Issue:ajaxDeleteLine" }
