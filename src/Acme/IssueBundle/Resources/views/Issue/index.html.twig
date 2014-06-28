@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Purchase{% endblock %}
+{% block title %}Issue{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/data-tables-bootstrap3/css/datatables.css') }}" rel="stylesheet">
@@ -10,25 +10,29 @@
     <div class="row">
         <div class="col-lg-12">
             <div>
-                <a class="btn btn-sm btn-primary" href="{{ path('purchase_new') }}">
+                <a class="btn btn-sm btn-primary" href="{{ path('issue_new') }}">
                     Add <i class="icon-plus"></i>
                 </a>
             </div>
             <br />
             <section class="panel">
                 <header class="panel-heading">
-                    <strong>Purchase List</strong>
+                    <strong>Issue List</strong>
+                    <span class="tools pull-right">
+                        <a class="icon-chevron-down" href="javascript:;"></a>
+                        <a class="icon-remove" href="javascript:;"></a>
+                    </span>
                 </header>
                 <div class="panel-body">
                     <div class="adv-table">
-                        <table id="purchaseLineDataTable" class="display table table-bordered table-striped" cellpadding="0" cellspacing="0" border="0">
+                        <table id="issueLineDataTable" class="display table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0">
                             <thead>
                             <tr>
-                                <th>Purchase Id</th>
-                                <th>Purchase Date</th>
+                                <th>Issue Id</th>
+                                <th>Issue Date</th>
                                 <th>Product</th>
                                 <th>Quantity</th>
-                                <th>Price</th>
+                                <th>Comment</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -48,20 +52,20 @@
     <script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
     <script>
         $(document).ready(function() {
-            var purchaseLineTable = $('#purchaseLineDataTable').dataTable( {
+            var issueLineTable = $('#issueLineDataTable').dataTable( {
                 "bProcessing": true,
                 "bServerSide": true,
-                "sAjaxSource": '{{ path('purchase_line_result') }}',
+                "sAjaxSource": '{{ path('issue_line_result') }}',
                 "aoColumns": [
                     {
-                        "mData": "purchase.id",
-                        "mDataProp": "purchase.id",
-                        "sName": "purchase.id"
+                        "mData": "issue.id",
+                        "mDataProp": "issue.id",
+                        "sName": "issue.id"
                     },
                     {
-                        "mData": "purchase.purchaseDate",
-                        "mDataProp": "purchase.purchaseDate",
-                        "sName": "purchase.purchaseDate"
+                        "mData": "issue.issueDate",
+                        "mDataProp": "issue.issueDate",
+                        "sName": "issue.issueDate"
                     },
                     {
                         "mData": "product.name",
@@ -74,21 +78,20 @@
                         "sName": "quantity"
                     },
                     {
-                        "mData": "price",
-                        "mDataProp": "price",
-                        "sName": "price"
+                        "mData": "comment",
+                        "mDataProp": "comment",
+                        "sName": "comment"
                     },
                     {
-                        "mData": "purchase.status",
-                        "mDataProp": "purchase.status",
-                        "sName": "purchase.status",
+                        "mData": "issue.status",
+                        "mDataProp": "issue.status",
+                        "sName": "issue.status",
                         "fnRender": function (oObj)
                         {
-                            if(oObj.aData['purchase.status'])
+                            if(oObj.aData['issue.status'])
                             {
                                 return '<span class="label label-success">Finalized</span>'
                             }
-
                             return '<span class="label label-default">Draft</span>';
                         }
                     },
@@ -101,9 +104,9 @@
                         "sDefaultContent": "",
                         "fnRender": function (oObj)
                         {
-                            var showURL = '{{ path('purchase_show', {'id': 'repPID'}) }}';
-                            var editURL = '{{ path('purchase_edit', {'id': 'repPID'}) }}';
-                            var deleteURL = '{{ path('purchase_delete', {'id': 'repPID'}) }}';
+                            var showURL = '{{ path('issue_show', {'id': 'repPID'}) }}';
+                            var editURL = '{{ path('issue_edit', {'id': 'repPID'}) }}';
+                            var deleteURL = '{{ path('issue_delete', {'id': 'repPID'}) }}';
 
                             return '<a href="'+ showURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a> <a href="'+editURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-info btn-xs"><i class="icon-pencil"></i></a> <a href="'+deleteURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-danger btn-xs btn-delete"><i class="icon-trash"></i></a>';
                         }

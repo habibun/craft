@@ -1,0 +1,19 @@
+Acme\IssueBundle\Entity\IssueLine:
+    type: entity
+    table: issue_line
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        quantity:
+            type: decimal
+            scale: 4
+        comment:
+            type: text
+            nullable: true
+    manyToOne:
+        issue:
+            targetEntity: Acme\IssueBundle\Entity\Issue
+        product:
+            targetEntity: Acme\SetupBundle\Entity\Product

@@ -27,19 +27,24 @@ class PurchaseController extends Controller
     public function indexAction()
     {
 /*        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();*/
+        $entities = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();
 
         $em = $this->getDoctrine()->getManager();
-
-        $this->viewData['purchase'] = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();
+        $this->viewData['purchase'] = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();*/
 
         return $this->render('AcmePurchaseBundle:Purchase:index.html.twig');
     }
 
-    public function getPurchaseLineAction()
+    public function getPurchaseLineResultAction()
     {
         $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:PurchaseLine');
+
+        return $datatable->getSearchResults();
+    }
+
+    public function getPurchaseResultAction()
+    {
+        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
 
         return $datatable->getSearchResults();
     }

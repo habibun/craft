@@ -1,0 +1,7 @@
+acme_issue_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: AcmeIssueBundle:Default:index }
+
+AcmeIssueBundle_issue:
+    resource: "@AcmeIssueBundle/Resources/config/routing/issue.yml"
+    prefix:   /issue

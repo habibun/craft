@@ -1,0 +1,34 @@
+issue:
+    pattern:  /
+    defaults: { _controller: "AcmeIssueBundle:Issue:index" }
+
+issue_line_result:
+    pattern:  /issue-line-result
+    defaults: { _controller: "AcmeIssueBundle:Issue:getIssueLineResult" }
+
+issue_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AcmeIssueBundle:Issue:show" }
+
+issue_new:
+    pattern:  /new
+    defaults: { _controller: "AcmeIssueBundle:Issue:new" }
+
+issue_create:
+    pattern:  /create
+    defaults: { _controller: "AcmeIssueBundle:Issue:create" }
+    requirements: { _method: post }
+
+issue_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AcmeIssueBundle:Issue:edit" }
+
+issue_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AcmeIssueBundle:Issue:update" }
+    requirements: { _method: post|put }
+
+issue_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AcmeIssueBundle:Issue:delete" }
+    requirements: { _method: post|delete }

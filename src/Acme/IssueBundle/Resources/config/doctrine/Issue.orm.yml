@@ -1,0 +1,25 @@
+Acme\IssueBundle\Entity\Issue:
+    type: entity
+    table: issue
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        issueDate:
+            type: date
+            column: IssueDate
+        company:
+            type: string
+            length: 255
+            column: Company
+        depot:
+            type: string
+            length: 255
+            column: Depot
+        status:
+            type: boolean
+            nullable: false
+    lifecycleCallbacks: {  }

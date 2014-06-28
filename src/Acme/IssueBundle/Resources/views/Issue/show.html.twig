@@ -1,18 +1,18 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Purchase{% endblock %}
+{% block title %}Issue{% endblock %}
 
 {% block body -%}
     <div class="row">
         <div class="col-lg-12">
             <div>
-                <a class="btn btn-sm btn-shadow btn-success" href="{{ path('purchase_new') }}">
+                <a class="btn btn-sm btn-shadow btn-success" href="{{ path('issue_new') }}">
                     <i class="icon-plus"></i>
                 </a>
-                <a class="btn btn-sm btn-shadow btn-info" href="{{ path('purchase_edit', {'id' : purchase.id}) }}">
+                <a class="btn btn-sm btn-shadow btn-info" href="{{ path('issue_edit', {'id' : issue.id}) }}">
                     <i class="icon-pencil"></i>
                 </a>
-                <a class="btn btn-sm btn-shadow btn-danger btn-delete delete-confirm" href="{{ path('product_delete', {'id' : purchase.id}) }}">
+                <a class="btn btn-sm btn-shadow btn-danger btn-delete delete-confirm" href="{{ path('product_delete', {'id' : issue.id}) }}">
                     <i class="icon-trash"></i>
                 </a>
             </div>
@@ -23,7 +23,7 @@
         <div class="col-lg-7">
             <section class="panel">
                 <header class="panel-heading">
-                    <strong>Purchase - {{ purchase.id }}</strong>
+                    <strong>Issue - {{ issue.id }}</strong>
                     <span class="tools pull-right">
                         <a class="icon-chevron-down" href="javascript:;"></a>
                         <a class="icon-remove" href="javascript:;"></a>
@@ -34,24 +34,24 @@
                         <tbody>
                         <tr>
                             <th>Id</th>
-                            <td>{{ purchase.id }}</td>
+                            <td>{{ issue.id }}</td>
                         </tr>
                         <tr>
-                            <th>Purchase Date</th>
-                            <td>{{ purchase.purchaseDate|date('d-m-Y') }}</td>
+                            <th>Issue Date</th>
+                            <td>{{ issue.issueDate|date('d-m-Y') }}</td>
                         </tr>
                         <tr>
                             <th>Company</th>
-                            <td>{{ purchase.company }}</td>
+                            <td>{{ issue.company }}</td>
                         </tr>
                         <tr>
                             <th>Depot</th>
-                            <td>{{ purchase.depot }}</td>
+                            <td>{{ issue.depot }}</td>
                         </tr>
                         <tr>
                             <th>Status</th>
                             <td>
-                                {% if purchase.status %}
+                                {% if issue.status %}
                                     <span class="label label-inverse">Finalized</span>
                                 {% else %}
                                     <span class="label label-default">Not finalized</span>
@@ -78,15 +78,15 @@
                         <tr>
                             <th>Product</th>
                             <th>Quantity</th>
-                            <th>Price</th>
+                            <th>Comment</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for line in purchaseLines %}
+                        {% for line in lines %}
                             <tr>
                                 <td>{{ line.product }}</td>
                                 <td>{{ line.quantity }}</td>
-                                <td>{{ line.price }}</td>
+                                <td>{{ line.comment }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -98,7 +98,7 @@
     <div class="row">
         <div class="col-lg-12">
             <span class="pull-right">
-                <a class="btn btn-primary" href="{{ path('purchase') }}">
+                <a class="btn btn-primary" href="{{ path('issue') }}">
                     Back
                 </a>
             </span>
