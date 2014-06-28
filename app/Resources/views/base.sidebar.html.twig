@@ -3,40 +3,40 @@
     <ul class="sidebar-menu" id="nav-accordion">
         <li>
             <a href="{{ path('dashboard') }}">
-                <i class="icon-dashboard"></i>
+                <i class="icon-dashboard text-primary"></i>
                 <span>Dashboard</span>
             </a>
         </li>
         <li>
             <a href="{{ path('purchase') }}">
-                <i class="icon-archive"></i>
+                <i class=" icon-shopping-cart text-primary"></i>
                 <span>Purchase</span>
             </a>
         </li>
         <li>
-            <a href="#" >
-                <i class="icon-move"></i>
-                <span>Issued</span>
+            <a href="{{ path('issue') }}" >
+                <i class="icon-move text-primary"></i>
+                <span>Issue</span>
             </a>
         </li>
         <li class="sub-menu">
             <a href="javascript:;">
-                <i class="icon-wrench"></i>
+                <i class="icon-wrench text-primary"></i>
                 <span>Setup</span>
             </a>
             <ul class="sub">
-                <li><a  href="{{ path('company') }}"><i class="icon-suitcase"></i>Company Setup</a></li>
-                <li><a  href="{{ path('depot') }}"><i class="icon-truck"></i>Depot Setup</a></li>
-                <li><a  href="{{ path('product') }}"><i class="icon-asterisk"></i>Product Setup</a></li>
+                <li><a  href="{{ path('company') }}"><i class="icon-suitcase text-primary"></i>Company Setup</a></li>
+                <li><a  href="{{ path('depot') }}"><i class="icon-truck text-primary"></i>Depot Setup</a></li>
+                <li><a  href="{{ path('product') }}"><i class="icon-asterisk text-primary"></i>Product Setup</a></li>
             </ul>
         </li>
         <li class="sub-menu">
             <a href="javascript:;">
-                <i class="icon-user-md"></i>
+                <i class="icon-user text-primary"></i>
                 <span>Admin Area</span>
             </a>
             <ul class="sub">
-                <li><a href="{{ path('user') }}"><i class="icon-user"></i>Manage User</a></li>
+                <li><a href="{{ path('user') }}"><i class="icon-user text-primary"></i>Manage User</a></li>
             </ul>
         </li>
     </ul>
