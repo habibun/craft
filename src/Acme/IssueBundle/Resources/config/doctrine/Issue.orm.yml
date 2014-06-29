@@ -10,15 +10,13 @@ Acme\IssueBundle\Entity\Issue:
     fields:
         issueDate:
             type: date
-            column: IssueDate
+            column: issue_date
         company:
             type: string
             length: 255
-            column: Company
         depot:
             type: string
             length: 255
-            column: Depot
         status:
             type: boolean
             nullable: false

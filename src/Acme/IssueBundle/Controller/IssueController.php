@@ -2,14 +2,15 @@
 
 namespace Acme\IssueBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\IssueBundle\Entity\Issue;
 use Acme\IssueBundle\Form\IssueType;
 use Acme\IssueBundle\Entity\IssueLine;
 use Acme\IssueBundle\Form\IssueLineType;
-use LanKit\DatatablesBundle\Datatables\Datatable;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use LanKit\DatatablesBundle\Datatables\Datatable;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -143,27 +144,26 @@ class IssueController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
+        $issue = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
 
-        if (!$entity) {
+        if (!$issue) {
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
-        $lineForm = $this->createForm(new IssueLineType(), new IssueLine(), array(
-                'method' => 'post',
-                'action'=> '#'
+        $editForm = $this->createEditForm($issue);
+        $issueLine = new IssueLine();
+        $lineForm = $this->createForm(new IssueLineType($this->get('security.context')), $issueLine, array(
+                'action' => 'javascript:void(0);',
+                'method' => 'POST',
             ));
 
-        $lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(
-            array('issue' => $id)
-        );
+        $issueLines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $id));
 
         return $this->render('AcmeIssueBundle:Issue:edit.html.twig', array(
-                'entity'      => $entity,
+                'issue'      => $issue,
                 'form'   => $editForm->createView(),
                 'line_form' => $lineForm->createView(),
-                'lines' => $lines
+                'lines' => $issueLines
             ));
     }
 
@@ -263,15 +263,8 @@ class IssueController extends Controller
             return new HTTPResponse('Invalid issue line', 404);
             exit();
         }
-
-        if(2 === $line->getIssue()->getStatus())
-        {
-            return new HTTPResponse('This is a finalized record. You don\'t have access to modify this', 403);
-            exit();
-        }
         $em->remove($line);
         $em->flush();
-
         return new HTTPResponse("Successfully deleted.", 200);
     }
 }

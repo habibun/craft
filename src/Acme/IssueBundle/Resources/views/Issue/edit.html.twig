@@ -11,10 +11,10 @@
         <div class="col-lg-7">
             <section class="panel">
                 <header class="panel-heading">
-                    <strong>Edit Issue</strong>
-					<span class="tools pull-right">
-                          <a class="icon-chevron-down" href="javascript:;"></a>
-                          <a class="icon-remove" href="javascript:;"></a>
+                    <strong>New Issue</strong>
+                    <span class="tools pull-right">
+                       <a class="icon-chevron-down" href="javascript:;"></a>
+                       <a class="icon-remove" href="javascript:;"></a>
                     </span>
                 </header>
                 <div class="panel-body">
@@ -25,16 +25,17 @@
                     {{ form_row(form.depot) }}
                     {{ form_end(form) }}
                 </div>
+                <hr>
             </section>
         </div>
 
         <div class="col-lg-5">
             <section class="panel">
                 <header class="panel-heading">
-                        <strong>Add Issue Line</strong>
-					<span class="tools pull-right">
-                          <a class="icon-chevron-down" href="javascript:;"></a>
-                          <a class="icon-remove" href="javascript:;"></a>
+                    <strong>Add Issue Line</strong>
+                    <span class="tools pull-right">
+                       <a class="icon-chevron-down" href="javascript:;"></a>
+                       <a class="icon-remove" href="javascript:;"></a>
                     </span>
                 </header>
                 <div class="panel-body">
@@ -44,7 +45,7 @@
                     {{ form_row(line_form.quantity) }}
                     {{ form_row(line_form.comment) }}
                     <span class="pull-right">
-                        <input type="button" class="btn btn-info" id="lineAdd" value="Add Line" onclick="addLineCheck();"  />
+                        <input type="button" class="btn btn-info" id="lineAdd" value="Add Line" onclick="addLine();"  />
                     </span>
                     {{ form_end(line_form) }}
                 </div>
@@ -56,18 +57,18 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                        <strong>Issue Lines</strong>
-					<span class="tools pull-right">
-                          <a class="icon-chevron-down" href="javascript:;"></a>
-                          <a class="icon-remove" href="javascript:;"></a>
-                    </span>
+                    <strong>Issue Lines</strong>
+                  <span class="tools pull-right">
+                      <a class="icon-chevron-down" href="javascript:;"></a>
+                      <a class="icon-remove" href="javascript:;"></a>
+                  </span>
                 </header>
                 <div class="panel-body">
                     <table id="lineViewer" class="table table-striped">
                         <thead>
                         <tr>
                             <th>Product</th>
-                            <th>Quantity</th>
+                            <th>Amount</th>
                             <th>Comment</th>
                             <th>Action</th>
                         </tr>
@@ -91,11 +92,11 @@
     <div  class="row">
         <div class="col-lg-12">
             <input type="button" class="btn btn-info" id="submitForm" value="Save" onclick="submitBoth();"  />
-            <span class="pull-right">
+            <div class="pull-right">
                 <a class="btn btn-primary" href="{{ path('issue') }}">
                     Back
                 </a>
-            </span>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -205,4 +206,8 @@
             });
         });
     </script>
+
+    <script type="text/javascript" src="{{ asset('assets/noty/jquery.noty.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/noty/layouts/topCenter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/noty/themes/default.js') }}"></script>
 {% endblock %}

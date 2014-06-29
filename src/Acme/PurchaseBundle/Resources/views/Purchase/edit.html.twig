@@ -45,7 +45,7 @@
                     {{ form_row(line_form.quantity) }}
                     {{ form_row(line_form.price) }}
                     <span class="pull-right">
-                        <input type="button" class="btn btn-primary" id="lineAdd" value="Add Line" onclick="addLine();"  />
+                        <input type="button" class="btn btn-info" id="lineAdd" value="Add Line" onclick="addLine();"  />
                     </span>
                     {{ form_end(line_form) }}
                 </div>
@@ -91,7 +91,7 @@
 
     <div  class="row">
         <div class="col-lg-12">
-            <input type="button" class="btn btn-primary" id="submitForm" value="Save" onclick="submitBoth();"  />
+            <input type="button" class="btn btn-info" id="submitForm" value="Save" onclick="submitBoth();"  />
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ path('purchase') }}">
                     Back
