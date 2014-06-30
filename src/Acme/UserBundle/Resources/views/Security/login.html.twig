@@ -7,22 +7,21 @@
     <link href="{{ asset('assets/login/css/style.css') }}" rel="stylesheet" type="text/css" />
     <link href='{{ asset('assets/login/css/roid.css') }}' rel='stylesheet' type='text/css' />
 </head>
-
 {% block fos_user_content %}
-    {% if error %}
-        <div>{{ error|trans }}</div>
-    {% endif %}
 <body>
 <!-- Box Start-->
 <div id="box_bg">
     <div id="content">
         <center><h1 class="text-muted">Eon InfoSys Technology</h1></center>
+        {% if error %}
+            <center><h4 class="text-primary">{{ error|trans }}</h4></center>
+        {% endif %}
         <form action="{{ path("fos_user_security_check") }}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
             <!-- Login Fields -->
-            <div id="login">Sign in using your registered account:<br/>
-                <input type="text" id="username" name="_username" onblur="if(this.value=='')this.value='Username';" onfocus="if(this.value=='Username')this.value='';" value="Username" class="login user" placeholder="Username" required="required" />
-                <input type='password' id="password" name='_password' value='Password'  onfocus="if(this.value=='' || this.value == 'Password') {this.value='';this.type='password'}"  onblur="if(this.value == '') {this.type='text';this.value=this.defaultValue}" class="login password" placeholder="Password" required="required" />
+            <div id="login">{#Sign in using your registered account:<br/>#}
+                <input type="text" name="_username" onblur="if(this.value=='')this.value='Username';" onfocus="if(this.value=='Username')this.value='';" value="Username" class="login user" required="required" />
+                <input type='text' name='_password' value='Password'  onfocus="if(this.value=='' || this.value == 'Password') {this.value='';this.type='password'}"  onblur="if(this.value == '') {this.type='text';this.value=this.defaultValue}" class="login password" placeholder="Password" required="required" />
             </div>
             <!-- Green Button -->
             <input type="submit" id="_submit" name="_submit" value="Sign In" class="button submit btn btn-primary"/>
@@ -44,7 +43,6 @@
         </form>
     </div>
 </div>
-
 <!-- Text Under Box -->
 <div id="bottom_text">
     Remind <a href="#"><span class="text-muted">Password</span></a>
