@@ -54,7 +54,7 @@ class PurchaseController extends Controller
         if ($form->isValid()) {
             $user = $this->getUser();
             $em->persist($entity);
-            $entity->setStatus('false');
+            $entity->setStatus(0);
             foreach($data['product'] as $key => $product)
             {
                 $line = new PurchaseLine();
@@ -299,5 +299,35 @@ class PurchaseController extends Controller
         $em->remove($line);
         $em->flush();
         return new HTTPResponse("Successfully deleted.", 200);
+    }
+
+    public function finalizeAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Purchase entity.');
+        }
+            $entity->setStatus(1);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', "Finalized Successfully!");
+            return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
+    }
+
+    public function deFinalizeAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Purchase entity.');
+        }
+        $entity->setStatus(0);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('success', "Finalized Successfully!");
+        return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 }

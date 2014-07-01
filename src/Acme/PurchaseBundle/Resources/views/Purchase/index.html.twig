@@ -88,10 +88,11 @@
                         "sName": "purchase.status",
                         "fnRender": function (oObj)
                         {
-                            if(oObj.aData['purchase.status'])
+                            if(oObj.aData['purchase.status'] == 1)
                             {
                                 return '<span class="label label-success">Finalized</span>'
                             }
+
                             return '<span class="label label-default">Draft</span>';
                         }
                     },
