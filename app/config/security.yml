@@ -1,60 +1,19 @@
-security:
-    encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-        FOS\UserBundle\Model\UserInterface: sha512
+imports:
+    - { resource: "@AcmeUserBundle/Resources/config/security.yml" }
 
+security:
     role_hierarchy:
         ROLE_USER:
         ROLE_ENTRY:       ROLE_ENTRY
         ROLE_SETUP:       ROLE_SETUP
-        ROLE_ADMIN:       ROLE_ADMIN
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_SETUP, ROLE_ENTRY]
-
-    providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username
-
-    firewalls:
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
-            form_login:
-                check_path: _security_check
-                login_path: _demo_login
-            logout:
-                path:   _demo_logout
-                target: _demo
-        main:
-            pattern: ^/
-            form_login:
-                provider: fos_userbundle
-                csrf_provider: form.csrf_provider
-                login_path: fos_user_security_login
-                check_path: fos_user_security_check
-                remember_me: true
-            remember_me:
-                key: %secret%
-                lifetime: 31536000
-                path: ~
-                domain: ~
-                always_remember_me: true
-            logout:
-                path: fos_user_security_logout
-                target: /login
-            anonymous:    true
-            #http_basic:
-            #    realm: "Secured Demo Area"
+        ROLE_ADMIN:       [ROLE_USER, ROLE_SETUP, ROLE_ENTRY]
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/dashboard, role: ROLE_USER }
         - { path: ^/admin, role: ROLE_ADMIN }
+        - { path: ^/purchase, role: ROLE_ENTRY }
+        - { path: ^/issue, role: ROLE_ENTRY }
         - { path: ^/setup, role: ROLE_SETUP }

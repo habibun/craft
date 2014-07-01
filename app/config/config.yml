@@ -23,10 +23,6 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
-    session:
-        cookie_lifetime: 43200
-        cookie_path: '/'
-        save_path: ~
 
 # Twig Configuration
 twig:
