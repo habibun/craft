@@ -29,6 +29,13 @@ class PurchaseController extends Controller
         return $this->render('AcmePurchaseBundle:Purchase:index.html.twig');
     }
 
+    public function getPurchaseResultAction()
+    {
+        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
+
+        return $datatable->getSearchResults();
+    }
+
     public function getPurchaseLineResultAction()
     {
         $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:PurchaseLine');
@@ -312,7 +319,7 @@ class PurchaseController extends Controller
         }
             $entity->setStatus(1);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', "Finalized Successfully!");
+            $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
             return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 
@@ -327,7 +334,7 @@ class PurchaseController extends Controller
         }
         $entity->setStatus(0);
         $em->flush();
-        $this->get('session')->getFlashBag()->add('success', "Finalized Successfully!");
+        $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 }

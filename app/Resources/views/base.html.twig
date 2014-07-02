@@ -81,7 +81,7 @@
                 <button data-dismiss="alert" class="close close-sm" type="button">
                     <i class="icon-remove"></i>
                 </button>
-                <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                <p>{{ flashMessage }}</p>
             </div>
         {% endfor %}
         {% for flashMessage in app.session.flashbag.get('well_done') %}
@@ -89,7 +89,7 @@
                 <button data-dismiss="alert" class="close close-sm" type="button">
                     <i class="icon-remove"></i>
                 </button>
-                <strong>Well done!</strong> You successfully read this important alert message.
+                <p>{{ flashMessage }}</p>
             </div>
         {% endfor %}
         {% for flashMessage in app.session.flashbag.get('heads_up') %}
@@ -97,7 +97,7 @@
                 <button data-dismiss="alert" class="close close-sm" type="button">
                     <i class="icon-remove"></i>
                 </button>
-                <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                <p>{{ flashMessage }}</p>
             </div>
         {% endfor %}
         {% for flashMessage in app.session.flashbag.get('warning') %}
@@ -105,7 +105,7 @@
                 <button data-dismiss="alert" class="close close-sm" type="button">
                     <i class="icon-remove"></i>
                 </button>
-                <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                <p>{{ flashMessage }}</p>
             </div>
         {% endfor %}
         {% block body %}{% endblock %}
@@ -116,7 +116,7 @@
 <!--footer start-->
 <footer class="site-footer">
     <div class="text-center">
-        2014 &copy; Eon Infosys Technology.
+        2014 &copy; Eon InfoSys Technology.
         <a href="#" class="go-top">
             <i class="icon-angle-up"></i>
         </a>
