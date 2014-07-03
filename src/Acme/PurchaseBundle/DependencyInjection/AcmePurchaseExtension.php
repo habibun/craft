@@ -1,6 +1,6 @@
 <?php
 
-namespace Ra\Bundle\PurchaseBundle\DependencyInjection;
+namespace Acme\PurchaseBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class RaPurchaseExtension extends Extension
+class AcmePurchaseExtension extends Extension
 {
     /**
      * {@inheritDoc}

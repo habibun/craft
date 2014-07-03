@@ -244,19 +244,23 @@ class PurchaseController extends Controller
     {
         try
         {
+
             $em = $this->getDoctrine()->getManager();
             $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
             if (!$purchase) {
                 throw $this->createNotFoundException('Unable to find Purchase entity.');
             }
-            if($this->container->getParameter('statusFinalized') === $purchase->getStatus())
+            if($this->container->getParameter('purchase_status') == $purchase->getStatus())
             {
-                throw new AccessDeniedException('This is a finalized record. You can\'t modify this');
-                exit();
+                throw new AccessDeniedException();
+            }
+            else
+            {
+                $this->get('session')->getFlashBag()->add('well_done', 'Successfully Deleted');
             }
 
-            $lines = $em->getRepository('AcmePurchaseBundle:Purchase')->findBy(array('purchase' => $purchase->getId()));
+            $lines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $purchase->getId()));
             if(!empty($lines))
                 foreach($lines as $line)
                     $em->remove($line);
@@ -264,12 +268,12 @@ class PurchaseController extends Controller
             $em->remove($purchase);
             $em->flush();
         }
+
         catch(\Exception $e)
         {
-            $this->get('session')->getFlashBag()->set('error', 'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.');
+            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t delete this');
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-
         return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
     }
 

@@ -159,6 +159,16 @@ $(function() {
     $('.date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
 });
 
+//confirm delete function
+$(document).on("click", "a.confirm-delete", function (e) {
+    if(!confirmDelete())
+    {
+        e.stopPropagation();
+        return false;
+    }
+    return true;
+});
+
 
 
 

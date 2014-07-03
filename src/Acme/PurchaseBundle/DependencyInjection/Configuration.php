@@ -1,6 +1,6 @@
 <?php
 
-namespace Ra\Bundle\PurchaseBundle\DependencyInjection;
+namespace Acme\PurchaseBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('ra_purchase');
+        $rootNode = $treeBuilder->root('acme_purchase');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
