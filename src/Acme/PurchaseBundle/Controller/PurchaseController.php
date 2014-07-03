@@ -148,14 +148,18 @@ class PurchaseController extends Controller
      */
     public function editAction($id)
     {
+        /*try
+        {*/
         $em = $this->getDoctrine()->getManager();
-
         $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
         if (!$purchase) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
         }
-
+        if($this->container->getParameter('purchase_status') == $purchase->getStatus())
+        {
+            throw new AccessDeniedException();
+        }
         $editForm = $this->createEditForm($purchase);
         $purchaseLine = new PurchaseLine();
         $lineForm = $this->createForm(new PurchaseLineType($this->get('security.context')), $purchaseLine, array(
@@ -171,6 +175,13 @@ class PurchaseController extends Controller
                 'line_form' => $lineForm->createView(),
                 'lines' => $purchaseLines
             ));
+        /*}
+        catch(\Exception $e)
+        {
+            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t modify this');
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }*/
+
     }
 
     /**

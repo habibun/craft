@@ -187,8 +187,7 @@ class UserController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', "User's information was successfully Updated. Thank you!");
-            //return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
-            return $this->redirect($this->generateUrl('user'));
+            return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
         }
 
         return $this->render('AcmeUserBundle:User:edit.html.twig', array(
