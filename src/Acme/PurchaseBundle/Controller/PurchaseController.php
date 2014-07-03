@@ -244,7 +244,6 @@ class PurchaseController extends Controller
     {
         try
         {
-
             $em = $this->getDoctrine()->getManager();
             $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
