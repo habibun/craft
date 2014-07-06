@@ -274,4 +274,34 @@ class IssueController extends Controller
         $em->flush();
         return new HTTPResponse("Successfully deleted.", 200);
     }
+
+    public function finalizeAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Issue entity.');
+        }
+        $entity->setStatus(1);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
+        return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
+    }
+
+    public function deFinalizeAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Issue entity.');
+        }
+        $entity->setStatus(0);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
+        return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
+    }
 }

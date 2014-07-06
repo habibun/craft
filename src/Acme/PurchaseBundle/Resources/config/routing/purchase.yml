@@ -44,6 +44,6 @@ purchase_finalize:
     pattern: /{id}/finalize
     defaults: { _controller: "AcmePurchaseBundle:Purchase:finalize" }
 
-purchase_de_finalize:
-    pattern: /{id}/de-finalize
+purchase_definalize:
+    pattern: /{id}/definalize
     defaults: { _controller: "AcmePurchaseBundle:Purchase:deFinalize" }

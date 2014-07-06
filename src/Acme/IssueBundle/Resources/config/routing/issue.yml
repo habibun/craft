@@ -40,3 +40,11 @@ issue_delete:
 issue_line_delete:
     pattern:  /{id}/ajax-delete-line
     defaults: { _controller: "AcmeIssueBundle:Issue:ajaxDeleteLine" }
+
+issue_finalize:
+    pattern:  /{id}/finalize
+    defaults: { _controller: "AcmeIssueBundle:Issue:finalize" }
+
+issue_definalize:
+    pattern:  /{id}/definalize
+    defaults: { _controller: "AcmeIssueBundle:Issue:deFinalize" }

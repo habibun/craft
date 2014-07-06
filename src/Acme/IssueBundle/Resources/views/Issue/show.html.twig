@@ -95,6 +95,21 @@
             </section>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <div class="well-sm">
+                    {% if issue.status %}
+                        <a href="{{ path('issue_definalize', { 'id' : issue.id }) }}" class="btn btn-danger">De-Finalize this record</a>
+                    {% else %}
+                        <a href="{{ path('issue_finalize', { 'id' : issue.id }) }}" class="btn btn-success finalize">Finalize this record</a>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <span class="pull-right">

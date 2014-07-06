@@ -101,7 +101,7 @@
             <section class="panel">
                 <div class="well-sm">
                     {% if purchase.status %}
-                        <a href="{{ path('purchase_de_finalize', { 'id' : purchase.id }) }}" class="btn btn-danger">De-Finalize this record</a>
+                        <a href="{{ path('purchase_definalize', { 'id' : purchase.id }) }}" class="btn btn-danger">De-Finalize this record</a>
                     {% else %}
                         <a href="{{ path('purchase_finalize', { 'id' : purchase.id }) }}" class="btn btn-success finalize">Finalize this record</a>
                     {% endif %}
