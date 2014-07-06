@@ -304,4 +304,6 @@ class IssueController extends Controller
         $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
         return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
     }
+
+
 }
