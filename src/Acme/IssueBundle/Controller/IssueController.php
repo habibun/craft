@@ -29,6 +29,13 @@ class IssueController extends Controller
         return $this->render('AcmeIssueBundle:Issue:index.html.twig');
     }
 
+    public function getIssueResultAction()
+    {
+        $datatable = $this->get('lankit_datatables')->getDatatable('AcmeIssueBundle:Issue');
+
+        return $datatable->getSearchResults();
+    }
+
     public function getIssueLineResultAction()
     {
         $datatable = $this->get('lankit_datatables')->getDatatable('AcmeIssueBundle:IssueLine');

@@ -8,7 +8,7 @@
 
 {% block body -%}
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-7">
             <div>
                 <a class="btn btn-sm btn-primary" href="{{ path('issue_new') }}">
                     Add <i class="icon-plus"></i>
@@ -25,20 +25,46 @@
                 </header>
                 <div class="panel-body">
                     <div class="adv-table">
-                        <table id="issueLineDataTable" class="display table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0">
+                        <table id="issueDataTable" class="display table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0">
                             <thead>
                             <tr>
-                                <th>Issue Id</th>
                                 <th>Issue Date</th>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Comment</th>
+                                <th>Company</th>
+                                <th>Depot</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="" style="margin-top: 30px;">
+        </div>
+        <br />
+        <div class="col-lg-5">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Product Info</strong>
+                    <span class="tools pull-right">
+                        <a class="icon-chevron-down" href="javascript:;"></a>
+                        <a class="icon-remove" href="javascript:;"></a>
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table id="issueLineDataTable" class="display table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Comment</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             </tbody>
                         </table>
                     </div>
@@ -52,43 +78,33 @@
     <script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
     <script>
         $(document).ready(function() {
-            var issueLineTable = $('#issueLineDataTable').dataTable( {
+            var issueTable = $('#issueDataTable').dataTable( {
                 "bProcessing": true,
                 "bServerSide": true,
-                "sAjaxSource": '{{ path('issue_line_result') }}',
+                "sAjaxSource": '{{ path('issue_result') }}',
                 "aoColumns": [
                     {
-                        "mData": "issue.id",
-                        "mDataProp": "issue.id",
-                        "sName": "issue.id"
+                        "mData": "issueDate",
+                        "mDataProp": "issueDate",
+                        "sName": "issueDate"
                     },
                     {
-                        "mData": "issue.issueDate",
-                        "mDataProp": "issue.issueDate",
-                        "sName": "issue.issueDate"
+                        "mData": "company",
+                        "mDataProp": "company",
+                        "sName": "company"
                     },
                     {
-                        "mData": "product.name",
-                        "mDataProp": "product.name",
-                        "sName": "product.name"
+                        "mData": "depot",
+                        "mDataProp": "depot",
+                        "sName": "depot"
                     },
                     {
-                        "mData": "quantity",
-                        "mDataProp": "quantity",
-                        "sName": "quantity"
-                    },
-                    {
-                        "mData": "comment",
-                        "mDataProp": "comment",
-                        "sName": "comment"
-                    },
-                    {
-                        "mData": "issue.status",
-                        "mDataProp": "issue.status",
-                        "sName": "issue.status",
+                        "mData": "status",
+                        "mDataProp": "status",
+                        "sName": "status",
                         "fnRender": function (oObj)
                         {
-                            if(oObj.aData['issue.status'])
+                            if(oObj.aData['status'])
                             {
                                 return '<span class="label label-success">Finalized</span>'
                             }
@@ -108,8 +124,44 @@
                             var editURL = '{{ path('issue_edit', {'id': 'repPID'}) }}';
                             var deleteURL = '{{ path('issue_delete', {'id': 'repPID'}) }}';
 
-                            return '<a href="'+ showURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a> <a href="'+editURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-info btn-xs"><i class="icon-pencil"></i></a> <a href="'+deleteURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-danger btn-xs btn-delete"><i class="icon-trash"></i></a>';
+                            return '<a href="'+ showURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>' +
+                                    ' <a href="'+editURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>' +
+                                    ' <a href="'+deleteURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-danger btn-xs btn-delete"><i class="icon-trash"></i></a>';
                         }
+                    }
+                ],
+                "fnPreDrawCallback": function(oSettings, json) {
+                    $('.dataTables_filter input').addClass('form-control input-sm');
+                    $('.dataTables_filter input').css('width', '200px');
+                    $('.dataTables_length select').addClass('form-control input-sm');
+                    $('.dataTables_length select').css('width', '75px');
+                }
+            } );
+        } );
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            var issueLineTable = $('#issueLineDataTable').dataTable( {
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": '{{ path('issue_line_result') }}',
+                "aoColumns": [
+                    {
+                        "mData": "product.name",
+                        "mDataProp": "product.name",
+                        "sName": "product.name"
+                    },
+                    {
+                        "mData": "quantity",
+                        "mDataProp": "quantity",
+                        "sName": "quantity"
+                    },
+                    {
+                        "mData": "comment",
+                        "mDataProp": "comment",
+                        "sName": "comment"
                     }
                 ],
                 "fnPreDrawCallback": function(oSettings, json) {

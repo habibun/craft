@@ -2,6 +2,10 @@ issue:
     pattern:  /
     defaults: { _controller: "AcmeIssueBundle:Issue:index" }
 
+issue_result:
+    pattern:  /issue-result
+    defaults: { _controller: "AcmeIssueBundle:Issue:getIssueResult" }
+
 issue_line_result:
     pattern:  /issue-line-result
     defaults: { _controller: "AcmeIssueBundle:Issue:getIssueLineResult" }
