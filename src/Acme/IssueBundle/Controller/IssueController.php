@@ -225,21 +225,23 @@ class IssueController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Issue entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Issue entity.');
         }
+        if($entity->getStatus() == 1)
+            throw $this->createNotFoundException('Issue is already finalized');
 
+        $lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $entity));
+        if(!empty($lines))
+            foreach($lines as $line)
+                $em->remove($line);
+
+        $em->remove($entity);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('well_done', "Successfully Deleted");
         return $this->redirect($this->generateUrl('issue'));
     }
 
@@ -304,6 +306,5 @@ class IssueController extends Controller
         $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
         return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
     }
-
 
 }
