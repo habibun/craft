@@ -77,20 +77,20 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# Fos Configuration
+# FOSUserBundle Configuration
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Acme\UserBundle\Entity\User
 
-# Braincrafted Configuration
+# BraincraftedBootstrapBundle Configuration
 braincrafted_bootstrap:
     less_filter: less
     auto_configure:
         assetic: true
         knp_paginator: true
 
-# KnpPaginator Configuration
+# KnpPaginatorBundle Configuration
 knp_paginator:
     page_range: 5                      # default page range used in pagination control
     default_options:
@@ -101,9 +101,16 @@ knp_paginator:
     template:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
-#JMSSerializerBundle Configuration
+# JMSSerializerBundle Configuration
 jms_serializer:
     handlers:
         datetime:
             default_format: "d-M-Y"
+
+# KnpSnappyBundle Configuration
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltopdf
+        options:    []
 
