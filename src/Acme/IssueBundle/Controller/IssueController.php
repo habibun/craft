@@ -156,7 +156,8 @@ class IssueController extends Controller
         if (!$issue) {
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
-
+        if($issue->getStatus() ==  1)
+            throw $this->createNotFoundException('Issue is already finalized');
         $editForm = $this->createEditForm($issue);
         $issueLine = new IssueLine();
         $lineForm = $this->createForm(new IssueLineType($this->get('security.context')), $issueLine, array(
@@ -203,21 +204,44 @@ class IssueController extends Controller
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
+        $lineForm = $this->createForm(new IssueLineType(), new IssueLine(), array(
+                'method' => 'post',
+                'action'=> '#'
+            ));
+        $lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(
+            array('issue' => $id)
+        );
+
         $editForm->handleRequest($request);
+        $data = $this->get('request')->request->all();
+        $data = $data['issue_line'];
 
         if ($editForm->isValid()) {
-            $em->flush();
 
+            if(!empty($data))
+            {
+                foreach($data['product'] as $key => $product)
+                {
+                    $line = new IssueLine();
+                    $line->setIssue($entity);
+                    $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
+                    $line->setQuantity($data['quantity'][$key]);
+                    $em->persist($line);
+                }
+            }
+
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('well_done', "Your change was successfully Saved");
             return $this->redirect($this->generateUrl('issue_edit', array('id' => $id)));
         }
 
         return $this->render('AcmeIssueBundle:Issue:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                'line_form' => $lineForm->createView(),
+                'lines' => $lines
+            ));
     }
     /**
      * Deletes a Issue entity.
