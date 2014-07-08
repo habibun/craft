@@ -1,3 +1,7 @@
 acme_report_homepage:
     path:     /hello/{name}
     defaults: { _controller: AcmeReportBundle:Default:index }
+
+purchase_report:
+    pattern: /purchase/report/purchase
+    defaults: { _controller: AcmeReportBundle:Report:purchase }
