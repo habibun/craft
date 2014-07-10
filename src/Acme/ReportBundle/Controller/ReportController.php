@@ -9,6 +9,8 @@
 namespace Acme\ReportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class ReportController extends Controller {
 
@@ -26,8 +28,6 @@ class ReportController extends Controller {
                 $html = $this->renderView('AcmeReportBundle:Report:pdfPurchase.html.twig',
                     array(
                         'reportData' => $reportData,
-                        'company' => $this->getUser()->getCompany(),
-                        'location' => $em->getRepository('AcmeReportBundle:Location')->find($data['location']),
                         'params' => $data
                     )
                 );
@@ -58,24 +58,18 @@ class ReportController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         $dql = "
-            select p from RaPurchaseBundle:Purchase p
+            select p from AcmePurchaseBundle:Purchase p
             where p.status = 3
             and p.purchaseDate between :fromDate and :toDate
-            and p.location = :location
         ";
 
-        if($params['supplier'] != -1)
-            $dql .= " and p.supplier = :supplier";
 
-        $dql .= " order by p.supplier, p.purchaseDate asc";
+
+        $dql .= " order by p.purchaseDate asc";
 
         $query = $em->createQuery($dql)
             ->setParameter('fromDate', $fromDate->format('Y-m-d H:i:s'))
-            ->setParameter('toDate', $toDate->format('Y-m-d H:i:s'))
-            ->setParameter('location', $params['location']);
-
-        if($params['supplier'] != -1)
-            $query->setParameter('supplier', $params['supplier']);
+            ->setParameter('toDate', $toDate->format('Y-m-d H:i:s'));
 
         $results = $query->getResult();
         $reportData = array();

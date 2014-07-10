@@ -4,7 +4,9 @@ Acme\PurchaseBundle\Entity\Purchase:
     id:
         id:
             type: integer
-            generator: { strategy: AUTO }
+            id: true
+            generator:
+                strategy: AUTO
     fields:
         purchaseDate:
             column: purchase_date
@@ -20,4 +22,3 @@ Acme\PurchaseBundle\Entity\Purchase:
             targetEntity: Acme\SetupBundle\Entity\Depot
             nullable: false
     lifecycleCallbacks:
-        prePersist: [  ]

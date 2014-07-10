@@ -11,13 +11,14 @@ Acme\IssueBundle\Entity\Issue:
         issueDate:
             type: date
             column: issue_date
-        company:
-            type: string
-            length: 255
-        depot:
-            type: string
-            length: 255
         status:
             type: boolean
+            nullable: false
+    manyToOne:
+        company:
+            targetEntity: Acme\SetupBundle\Entity\Company
+            nullable: false
+        depot:
+            targetEntity: Acme\SetupBundle\Entity\Depot
             nullable: false
     lifecycleCallbacks: {  }

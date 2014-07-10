@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "78c2e2c7e73fde799e026869709ab38d",
+    "hash": "9ce15c05c9c7e4ec66c8876e580d638a",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -66,29 +66,6 @@
                 "bootstrap"
             ],
             "time": "2014-04-03 17:17:03"
-        },
-        {
-            "name": "datatables/datatables",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DataTables/DataTables.git",
-                "reference": "f907627fe4e3a6cf016ba7ea752144fd3bc65c96"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/f907627fe4e3a6cf016ba7ea752144fd3bc65c96",
-                "reference": "f907627fe4e3a6cf016ba7ea752144fd3bc65c96",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.",
-            "homepage": "http://www.datatables.net/",
-            "time": "2014-06-27 14:34:54"
         },
         {
             "name": "doctrine/annotations",
@@ -2396,7 +2373,6 @@
         "braincrafted/bootstrap-bundle": 20,
         "knplabs/knp-paginator-bundle": 20,
         "jms/serializer-bundle": 20,
-        "datatables/datatables": 20,
         "knplabs/knp-snappy-bundle": 20
     },
     "platform": {
