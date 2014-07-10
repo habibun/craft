@@ -4,16 +4,20 @@ Acme\PurchaseBundle\Entity\Purchase:
     id:
         id:
             type: integer
-            id: true
-            generator:
-                strategy: AUTO
+            generator: { strategy: AUTO }
     fields:
+        status:
+            type: smallint
+            nullable: false
+            default: 1
         purchaseDate:
             column: purchase_date
-            type: date
-        status:
-            type: boolean
+            type: datetime
             nullable: false
+    oneToMany:
+        lines:
+            targetEntity: Acme\PurchaseBundle\Entity\PurchaseLine
+            mappedBy: purchase
     manyToOne:
         company:
             targetEntity: Acme\SetupBundle\Entity\Company

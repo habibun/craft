@@ -9,6 +9,24 @@ class Purchase
     protected $company;
     protected $depot;
     protected $status;
+    protected $lines;
+
+    /**
+     * @param mixed $lines
+     */
+    public function setLines($lines)
+    {
+        $this->lines = $lines;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLines()
+    {
+        return $this->lines;
+    }
+
 
     /**
      * @param mixed $company
