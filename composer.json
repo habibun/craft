@@ -35,7 +35,6 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "braincrafted/bootstrap-bundle": "dev-master",
         "twbs/bootstrap": "3.0.*",
-        "jquery/jquery":  "1.10.*",
         "knplabs/knp-paginator-bundle": "dev-master",
         "lankit/datatables-bundle": "*",
         "jms/serializer-bundle": "dev-master",
