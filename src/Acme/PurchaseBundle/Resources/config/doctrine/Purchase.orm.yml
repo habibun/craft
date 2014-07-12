@@ -12,7 +12,7 @@ Acme\PurchaseBundle\Entity\Purchase:
             default: 1
         purchaseDate:
             column: purchase_date
-            type: datetime
+            type: date
             nullable: false
     oneToMany:
         lines:
