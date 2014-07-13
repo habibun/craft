@@ -35,6 +35,7 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "braincrafted/bootstrap-bundle": "dev-master",
         "twbs/bootstrap": "3.0.*",
+        "h4cc/wkhtmltopdf-amd64": "0.11.0-RC1",
         "knplabs/knp-paginator-bundle": "dev-master",
         "lankit/datatables-bundle": "*",
         "jms/serializer-bundle": "dev-master",
