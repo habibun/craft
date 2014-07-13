@@ -9,14 +9,14 @@
 {% block body -%}
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-archon">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Purchase Report
-                        <span class="pull-right">
-                            <a class="panel-minimize" href="tables.html#"><i class="fa fa-chevron-up"></i></a>
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Purchase Report</strong>
+                          <span class="tools pull-right">
+                            <a href="javascript:;" class="icon-chevron-down"></a>
+                            <a href="javascript:;" class="icon-remove"></a>
                         </span>
-                    </h3>
-                </div>
+                </header>
                 <div class="panel-body">
                     <form action="{{ path('purchase_report') }}" class="form-horizontal" method="post">
                         <div class="form-group">
@@ -48,7 +48,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Test</title>
+    <style type="text/css">
+        body { font-size: 12px; }
+        table {
+            display: table;
+            width: 100%;
+            page-break-inside: auto;
+        }
+
+        table thead {
+            display: table-header-group;
+        }
+
+        table tbody {
+            display: table-row-group;
+        }
+
+        table tfoot {
+            display: table-footer-group;
+        }
+
+        table tr {
+            display: table-row;
+            height: auto;
+            page-break-inside: avoid;
+            page-break-before: auto;
+            page-break-after: auto;
+        }
+
+        table.bordered{
+            border-collapse:collapse;
+            border:1px solid #000000;
+        }
+
+        table.bordered td, table.bordered th{
+            border:1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    {% block report %}
+
+    {% endblock report %}
+</body>
+</html>

@@ -63,8 +63,6 @@ class ReportController extends Controller {
             and p.purchaseDate between :fromDate and :toDate
         ";
 
-
-
         $dql .= " order by p.purchaseDate asc";
 
         $query = $em->createQuery($dql)
