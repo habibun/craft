@@ -2,6 +2,8 @@
 
 namespace Acme\PurchaseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class Purchase
 {
     protected $id;
@@ -11,6 +13,10 @@ class Purchase
     protected $status;
     protected $lines;
 
+    public function __construct()
+    {
+        $this->lines = new ArrayCollection();
+    }
     /**
      * @param mixed $lines
      */

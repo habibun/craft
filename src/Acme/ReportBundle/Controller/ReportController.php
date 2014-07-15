@@ -59,7 +59,7 @@ class ReportController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $dql = "
             select p from AcmePurchaseBundle:Purchase p
-            where p.status = 3
+            where p.status = 1
             and p.purchaseDate between :fromDate and :toDate
         ";
 
@@ -71,13 +71,13 @@ class ReportController extends Controller {
 
         $results = $query->getResult();
         $reportData = array();
-        if($results)
+/*        if($results)
         {
             foreach($results as $row)
             {
                 $reportData[$row->getSupplier()->getId()][] = $row;
             }
-        }
+        }*/
         return $reportData;
     }
 
