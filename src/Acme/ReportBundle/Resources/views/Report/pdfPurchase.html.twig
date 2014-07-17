@@ -11,43 +11,39 @@
         <tr>
             <th>Date</th>
             <th>Product</th>
-            <th>Rate</th>
+            <th>Price</th>
             <th>Qty</th>
             <th>Total</th>
         </tr>
         </thead>
         <tbody>
+        {% set total = 0 %}
             {% for row in reportData %}
                 {% set lines = row.lines %}
                 {% set lineTotal = 0 %}
-
                 <tr>
                 <td rowspan="{{ (lines|length) + 1 }}">{{ row.purchaseDate|date('d-m-Y') }}</td>
                 {% for line in lines %}
                     {% if loop.index != 0 %}
                         <tr>
                     {% endif %}
-                    <td>{{ line.product.productCode }} - {{ line.product.productName }}</td>
-                    <td>{{ line.product.unit.unitShortName }}</td>
-                    <td>{{ line.batch.id }}</td>
-                    <td>{{ (line.price/line.amount)|number_format(2) }}</td>
-                    <td>{{ line.amount|number_format(4) }}</td>
+                    <td>{{ line.product.name }}</td>
+                    <td>{{ (line.price/line.quantity)|number_format(2) }}</td>
+                    <td>{{ line.quantity }}</td>
                     <td>{{ line.price|number_format(2) }}</td>
-                    </tr>
                     {% set lineTotal = lineTotal + line.price  %}
                 {% endfor %}
                 </tr>
                 <tr>
-                    <td colspan="6">Total</td>
+                    <td colspan="4">Total</td>
                     <td><strong>{{ lineTotal|number_format(2) }}</strong></td>
                 </tr>
-                {% set sTotal = sTotal + lineTotal %}
                 {% set total = total + lineTotal %}
             {% endfor %}
-
-        <tr>
-            <th colspan="6">Sumary of Total</th>
-        </tr>
+            <tr>
+                <th colspan="4">Sumary of Total</th>
+                <th>{{ total|number_format(2) }}</th>
+            </tr>
         </tbody>
     </table>
 {% endblock %}

@@ -71,13 +71,13 @@ class ReportController extends Controller {
 
         $results = $query->getResult();
         $reportData = array();
-/*        if($results)
+        if($results)
         {
             foreach($results as $row)
             {
-                $reportData[$row->getSupplier()->getId()][] = $row;
+                $reportData[] = $row;
             }
-        }*/
+        }
         return $reportData;
     }
 
