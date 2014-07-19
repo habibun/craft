@@ -51,10 +51,14 @@ class IssueController extends Controller
     {
         $entity = new Issue();
         $form = $this->createCreateForm($entity);
-        $lineForm = $this->createForm(new IssueLineType(), new IssueLine(), array(
-            'method' => 'post',
-            'action'=> '#'
-        ));
+        $lineForm = $this->createForm(
+            new IssueLineType(),
+            new IssueLine(),
+            array(
+                'method' => 'post',
+                'action' => '#'
+            )
+        );
         $form->handleRequest($request);
         $data = $this->get('request')->request->all();
         $data = $data['issue_line'];
@@ -63,8 +67,7 @@ class IssueController extends Controller
             $em = $this->getDoctrine()->getManager();
             $entity->setStatus('false');
             $em->persist($entity);
-            foreach($data['product'] as $key => $product)
-            {
+            foreach ($data['product'] as $key => $product) {
                 $line = new IssueLine();
                 $line->setIssue($entity);
                 $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
@@ -77,26 +80,33 @@ class IssueController extends Controller
             return $this->redirect($this->generateUrl('issue_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('AcmeIssueBundle:Issue:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'line_form' => $lineForm->createView()
-        ));
+        return $this->render(
+            'AcmeIssueBundle:Issue:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+                'line_form' => $lineForm->createView()
+            )
+        );
     }
 
     /**
-    * Creates a form to create a Issue entity.
-    *
-    * @param Issue $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Issue entity.
+     *
+     * @param Issue $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Issue $entity)
     {
-        $form = $this->createForm(new IssueType(), $entity, array(
-            'action' => $this->generateUrl('issue_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new IssueType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('issue_create'),
+                'method' => 'POST',
+            )
+        );
 
         return $form;
     }
@@ -108,17 +118,24 @@ class IssueController extends Controller
     public function newAction()
     {
         $entity = new Issue();
-        $form   = $this->createCreateForm($entity);
-        $lineForm = $this->createForm(new IssueLineType(), new IssueLine(), array(
-            'method' => 'post',
-            'action'=> '#'
-        ));
+        $form = $this->createCreateForm($entity);
+        $lineForm = $this->createForm(
+            new IssueLineType(),
+            new IssueLine(),
+            array(
+                'method' => 'post',
+                'action' => '#'
+            )
+        );
 
-        return $this->render('AcmeIssueBundle:Issue:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'line_form' =>$lineForm->createView()
-        ));
+        return $this->render(
+            'AcmeIssueBundle:Issue:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+                'line_form' => $lineForm->createView()
+            )
+        );
     }
 
     /**
@@ -138,9 +155,13 @@ class IssueController extends Controller
             array('issue' => $id)
         );
 
-        return $this->render('AcmeIssueBundle:Issue:show.html.twig', array(
-            'issue'      => $entity,
-            'lines' => $lines,        ));
+        return $this->render(
+            'AcmeIssueBundle:Issue:show.html.twig',
+            array(
+                'issue' => $entity,
+                'lines' => $lines,
+            )
+        );
     }
 
     /**
@@ -156,40 +177,54 @@ class IssueController extends Controller
         if (!$issue) {
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
-        if($issue->getStatus() ==  1)
+        if ($issue->getStatus() == 1) {
             throw $this->createNotFoundException('Issue is already finalized');
+        }
         $editForm = $this->createEditForm($issue);
         $issueLine = new IssueLine();
-        $lineForm = $this->createForm(new IssueLineType($this->get('security.context')), $issueLine, array(
+        $lineForm = $this->createForm(
+            new IssueLineType($this->get('security.context')),
+            $issueLine,
+            array(
                 'action' => 'javascript:void(0);',
                 'method' => 'POST',
-            ));
+            )
+        );
 
         $issueLines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $id));
 
-        return $this->render('AcmeIssueBundle:Issue:edit.html.twig', array(
-                'issue'      => $issue,
-                'form'   => $editForm->createView(),
+        return $this->render(
+            'AcmeIssueBundle:Issue:edit.html.twig',
+            array(
+                'issue' => $issue,
+                'form' => $editForm->createView(),
                 'line_form' => $lineForm->createView(),
                 'lines' => $issueLines
-            ));
+            )
+        );
     }
 
     /**
-    * Creates a form to edit a Issue entity.
-    *
-    * @param Issue $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Issue entity.
+     *
+     * @param Issue $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Issue $entity)
     {
-        $form = $this->createForm(new IssueType(), $entity, array(
-            'action' => $this->generateUrl('issue_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new IssueType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('issue_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            )
+        );
+
         return $form;
     }
+
     /**
      * Edits an existing Issue entity.
      *
@@ -205,10 +240,14 @@ class IssueController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-        $lineForm = $this->createForm(new IssueLineType(), new IssueLine(), array(
+        $lineForm = $this->createForm(
+            new IssueLineType(),
+            new IssueLine(),
+            array(
                 'method' => 'post',
-                'action'=> '#'
-            ));
+                'action' => '#'
+            )
+        );
         $lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(
             array('issue' => $id)
         );
@@ -219,10 +258,8 @@ class IssueController extends Controller
 
         if ($editForm->isValid()) {
 
-            if(!empty($data))
-            {
-                foreach($data['product'] as $key => $product)
-                {
+            if (!empty($data)) {
+                foreach ($data['product'] as $key => $product) {
                     $line = new IssueLine();
                     $line->setIssue($entity);
                     $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
@@ -233,16 +270,21 @@ class IssueController extends Controller
 
             $em->flush();
             $this->get('session')->getFlashBag()->add('well_done', "Your change was successfully Saved");
+
             return $this->redirect($this->generateUrl('issue_edit', array('id' => $id)));
         }
 
-        return $this->render('AcmeIssueBundle:Issue:edit.html.twig', array(
-                'entity'      => $entity,
-                'edit_form'   => $editForm->createView(),
+        return $this->render(
+            'AcmeIssueBundle:Issue:edit.html.twig',
+            array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
                 'line_form' => $lineForm->createView(),
                 'lines' => $lines
-            ));
+            )
+        );
     }
+
     /**
      * Deletes a Issue entity.
      *
@@ -254,18 +296,19 @@ class IssueController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
-        if($entity->getStatus() == 1)
+        if ($entity->getStatus() == 1)
             throw $this->createNotFoundException('Issue is already finalized');
 
         $lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $entity));
-        if(!empty($lines))
-            foreach($lines as $line)
+        if (!empty($lines))
+            foreach ($lines as $line)
                 $em->remove($line);
 
         $em->remove($entity);
         $em->flush();
 
         $this->get('session')->getFlashBag()->add('well_done', "Successfully Deleted");
+
         return $this->redirect($this->generateUrl('issue'));
     }
 
@@ -282,8 +325,7 @@ class IssueController extends Controller
             ->setAction($this->generateUrl('issue_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     public function ajaxDeleteLineAction($id)
@@ -291,13 +333,13 @@ class IssueController extends Controller
         $em = $this->getDoctrine()->getManager();
         $line = $em->getRepository('AcmeIssueBundle:IssueLine')->find($id);
 
-        if(!$line)
-        {
+        if (!$line) {
             return new HTTPResponse('Invalid issue line', 404);
             exit();
         }
         $em->remove($line);
         $em->flush();
+
         return new HTTPResponse("Successfully deleted.", 200);
     }
 
@@ -313,6 +355,7 @@ class IssueController extends Controller
         $entity->setStatus(1);
         $em->flush();
         $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
+
         return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
     }
 
@@ -328,6 +371,7 @@ class IssueController extends Controller
         $entity->setStatus(0);
         $em->flush();
         $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
+
         return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
     }
 

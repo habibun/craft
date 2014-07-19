@@ -25,17 +25,22 @@ class UserController extends Controller
 
         $entities = $userManager->findUsers();
 
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $entities = $paginator->paginate(
             $entities,
-            $this->get('request')->query->get('page', 1)/*page number*/,
-            10/*limit per page*/
+            $this->get('request')->query->get('page', 1) /*page number*/,
+            10
+        /*limit per page*/
         );
 
-        return $this->render('AcmeUserBundle:User:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render(
+            'AcmeUserBundle:User:index.html.twig',
+            array(
+                'entities' => $entities,
+            )
+        );
     }
+
     /**
      * Creates a new User entity.
      *
@@ -58,25 +63,32 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('AcmeUserBundle:User:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AcmeUserBundle:User:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
-    * Creates a form to create a User entity.
-    *
-    * @param User $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a User entity.
+     *
+     * @param User $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(User $entity)
     {
-        $form = $this->createForm(new UserType($this->getRoles()), $entity, array(
-            'action' => $this->generateUrl('user_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new UserType($this->getRoles()),
+            $entity,
+            array(
+                'action' => $this->generateUrl('user_create'),
+                'method' => 'POST',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Save'));
 
@@ -90,12 +102,15 @@ class UserController extends Controller
     public function newAction()
     {
         $entity = new User();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
-        return $this->render('AcmeUserBundle:User:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AcmeUserBundle:User:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -114,9 +129,13 @@ class UserController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeUserBundle:User:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+        return $this->render(
+            'AcmeUserBundle:User:show.html.twig',
+            array(
+                'entity' => $entity,
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
@@ -136,31 +155,39 @@ class UserController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeUserBundle:User:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AcmeUserBundle:User:edit.html.twig',
+            array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
-    * Creates a form to edit a User entity.
-    *
-    * @param User $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a User entity.
+     *
+     * @param User $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(User $entity)
     {
-        $form = $this->createForm(new UserType($this->getRoles()), $entity, array(
-            'action' => $this->generateUrl('user_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new UserType($this->getRoles()),
+            $entity,
+            array(
+                'action' => $this->generateUrl('user_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Save'));
 
         return $form;
     }
+
     /**
      * Edits an existing User entity.
      *
@@ -186,16 +213,24 @@ class UserController extends Controller
             $entity->setPassword($password);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', "User's information was successfully Updated. Thank you!");
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                "User's information was successfully Updated. Thank you!"
+            );
+
             return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
         }
 
-        return $this->render('AcmeUserBundle:User:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AcmeUserBundle:User:edit.html.twig',
+            array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
+
     /**
      * Deletes a User entity.
      *
@@ -209,17 +244,19 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        try
-        {
+        try {
             $em->remove($entity);
             $em->flush();
-        }
-        catch(\Exception $e)
-        {
-            $this->get('session')->getFlashBag()->set('error', 'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.');
+        } catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set(
+                'error',
+                'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.'
+            );
+
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
         $this->get('session')->getFlashBag()->add('success', 'User was successfully Deleted. Thank you!');
+
         //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('user'));
     }
@@ -237,11 +274,11 @@ class UserController extends Controller
             ->setAction($this->generateUrl('user_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 
-    protected function getRoles() {
+    protected function getRoles()
+    {
         $roles = array();
 
         foreach ($this->container->getParameter('security.role_hierarchy.roles') as $name => $rolesHierarchy) {
@@ -253,6 +290,7 @@ class UserController extends Controller
                 }
             }
         }
+
         return $roles;
     }
 }

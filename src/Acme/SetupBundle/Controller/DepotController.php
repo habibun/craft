@@ -25,10 +25,14 @@ class DepotController extends Controller
 
         $entities = $em->getRepository('AcmeSetupBundle:Depot')->findAll();
 
-        return $this->render('AcmeSetupBundle:Depot:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Depot:index.html.twig',
+            array(
+                'entities' => $entities,
+            )
+        );
     }
+
     /**
      * Creates a new Depot entity.
      *
@@ -47,25 +51,32 @@ class DepotController extends Controller
             return $this->redirect($this->generateUrl('depot_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('AcmeSetupBundle:Depot:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Depot:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
-    * Creates a form to create a Depot entity.
-    *
-    * @param Depot $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Depot entity.
+     *
+     * @param Depot $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Depot $entity)
     {
-        $form = $this->createForm(new DepotType(), $entity, array(
-            'action' => $this->generateUrl('depot_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new DepotType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('depot_create'),
+                'method' => 'POST',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -79,12 +90,15 @@ class DepotController extends Controller
     public function newAction()
     {
         $entity = new Depot();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
-        return $this->render('AcmeSetupBundle:Depot:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Depot:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -103,9 +117,13 @@ class DepotController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeSetupBundle:Depot:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+        return $this->render(
+            'AcmeSetupBundle:Depot:show.html.twig',
+            array(
+                'entity' => $entity,
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
@@ -125,31 +143,39 @@ class DepotController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeSetupBundle:Depot:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Depot:edit.html.twig',
+            array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
-    * Creates a form to edit a Depot entity.
-    *
-    * @param Depot $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Depot entity.
+     *
+     * @param Depot $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Depot $entity)
     {
-        $form = $this->createForm(new DepotType(), $entity, array(
-            'action' => $this->generateUrl('depot_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new DepotType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('depot_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Depot entity.
      *
@@ -174,12 +200,16 @@ class DepotController extends Controller
             return $this->redirect($this->generateUrl('depot_edit', array('id' => $id)));
         }
 
-        return $this->render('AcmeSetupBundle:Depot:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Depot:edit.html.twig',
+            array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
+
     /**
      * Deletes a Depot entity.
      *
@@ -217,7 +247,6 @@ class DepotController extends Controller
             ->setAction($this->generateUrl('depot_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

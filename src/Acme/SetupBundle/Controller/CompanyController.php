@@ -25,10 +25,14 @@ class CompanyController extends Controller
 
         $entities = $em->getRepository('AcmeSetupBundle:Company')->findAll();
 
-        return $this->render('AcmeSetupBundle:Company:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Company:index.html.twig',
+            array(
+                'entities' => $entities,
+            )
+        );
     }
+
     /**
      * Creates a new Company entity.
      *
@@ -47,25 +51,32 @@ class CompanyController extends Controller
             return $this->redirect($this->generateUrl('company_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('AcmeSetupBundle:Company:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Company:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
-    * Creates a form to create a Company entity.
-    *
-    * @param Company $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Company entity.
+     *
+     * @param Company $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Company $entity)
     {
-        $form = $this->createForm(new CompanyType(), $entity, array(
-            'action' => $this->generateUrl('company_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new CompanyType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('company_create'),
+                'method' => 'POST',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -79,12 +90,15 @@ class CompanyController extends Controller
     public function newAction()
     {
         $entity = new Company();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
-        return $this->render('AcmeSetupBundle:Company:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Company:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -103,9 +117,13 @@ class CompanyController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeSetupBundle:Company:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+        return $this->render(
+            'AcmeSetupBundle:Company:show.html.twig',
+            array(
+                'entity' => $entity,
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
@@ -125,31 +143,39 @@ class CompanyController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeSetupBundle:Company:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Company:edit.html.twig',
+            array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
-    * Creates a form to edit a Company entity.
-    *
-    * @param Company $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Company entity.
+     *
+     * @param Company $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Company $entity)
     {
-        $form = $this->createForm(new CompanyType(), $entity, array(
-            'action' => $this->generateUrl('company_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new CompanyType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('company_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Company entity.
      *
@@ -174,12 +200,16 @@ class CompanyController extends Controller
             return $this->redirect($this->generateUrl('company_edit', array('id' => $id)));
         }
 
-        return $this->render('AcmeSetupBundle:Company:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AcmeSetupBundle:Company:edit.html.twig',
+            array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
+
     /**
      * Deletes a Company entity.
      *
@@ -217,7 +247,6 @@ class CompanyController extends Controller
             ->setAction($this->generateUrl('company_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

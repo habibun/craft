@@ -10,7 +10,8 @@ namespace Acme\DashBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class LastController extends Controller{
+class LastController extends Controller
+{
 
     public function indexAction($max = 5)
     {
@@ -24,8 +25,11 @@ class LastController extends Controller{
         $query = $qb->getQuery();
         $purchases = $query->getResult();
 
-        return $this->render('AcmeDashBundle:Last:index.html.twig', array(
+        return $this->render(
+            'AcmeDashBundle:Last:index.html.twig',
+            array(
                 'purchase' => $purchases,
-            ));
+            )
+        );
     }
 }

@@ -62,8 +62,7 @@ class PurchaseController extends Controller
             $user = $this->getUser();
             $em->persist($entity);
             $entity->setStatus('false');
-            foreach($data['product'] as $key => $product)
-            {
+            foreach ($data['product'] as $key => $product) {
                 $line = new PurchaseLine();
                 $line->setPurchase($entity);
                 $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->findOneById($product));
@@ -76,10 +75,13 @@ class PurchaseController extends Controller
             return $this->redirect($this->generateUrl('purchase_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('AcmePurchaseBundle:Purchase:new.html.twig', array(
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:new.html.twig',
+            array(
                 'entity' => $entity,
-                'form'   => $form->createView(),
-            ));
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -91,10 +93,14 @@ class PurchaseController extends Controller
      */
     private function createCreateForm(Purchase $entity)
     {
-        $form = $this->createForm(new PurchaseType($this->get('security.context')), $entity, array(
+        $form = $this->createForm(
+            new PurchaseType($this->get('security.context')),
+            $entity,
+            array(
                 'action' => $this->generateUrl('purchase_create'),
                 'method' => 'POST',
-            ));
+            )
+        );
 
         return $form;
     }
@@ -106,21 +112,28 @@ class PurchaseController extends Controller
     public function newAction()
     {
         $entity = new Purchase();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         $purchaseLine = new PurchaseLine();
-        $purchaseLineForm = $this->createForm(new PurchaseLineType($this->get('security.context')), $purchaseLine, array(
+        $purchaseLineForm = $this->createForm(
+            new PurchaseLineType($this->get('security.context')),
+            $purchaseLine,
+            array(
                 'action' => 'javascript:void(0);',
                 'method' => 'POST',
-            ));
+            )
+        );
         $this->viewData['form'] = $form->createView();
         $this->viewData['entities'] = $entity;
 
-        return $this->render('AcmePurchaseBundle:Purchase:new.html.twig', array(
-                'entity'        => $entity,
-                'form'          => $form->createView(),
-                'line_form'     => $purchaseLineForm->createView(),
-            ));
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+                'line_form' => $purchaseLineForm->createView(),
+            )
+        );
     }
 
     /**
@@ -137,7 +150,9 @@ class PurchaseController extends Controller
             throw $this->createNotFoundException('Unable to find Purchase entity.');
         }
 
-        $this->viewData['purchaseLines'] = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $this->viewData['purchase']));
+        $this->viewData['purchaseLines'] = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(
+            array('purchase' => $this->viewData['purchase'])
+        );
 
         return $this->render('AcmePurchaseBundle:Purchase:show.html.twig', $this->viewData);
     }
@@ -148,37 +163,41 @@ class PurchaseController extends Controller
      */
     public function editAction($id)
     {
-        try
-        {
-        $em = $this->getDoctrine()->getManager();
-        $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
+        try {
+            $em = $this->getDoctrine()->getManager();
+            $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
-        if (!$purchase) {
-            throw $this->createNotFoundException('Unable to find Purchase entity.');
-        }
-        if($this->container->getParameter('purchase_status') == $purchase->getStatus())
-        {
-            throw new AccessDeniedException();
-        }
-        $editForm = $this->createEditForm($purchase);
-        $purchaseLine = new PurchaseLine();
-        $lineForm = $this->createForm(new PurchaseLineType($this->get('security.context')), $purchaseLine, array(
-                'action' => 'javascript:void(0);',
-                'method' => 'POST',
-            ));
+            if (!$purchase) {
+                throw $this->createNotFoundException('Unable to find Purchase entity.');
+            }
+            if ($this->container->getParameter('purchase_status') == $purchase->getStatus()) {
+                throw new AccessDeniedException();
+            }
+            $editForm = $this->createEditForm($purchase);
+            $purchaseLine = new PurchaseLine();
+            $lineForm = $this->createForm(
+                new PurchaseLineType($this->get('security.context')),
+                $purchaseLine,
+                array(
+                    'action' => 'javascript:void(0);',
+                    'method' => 'POST',
+                )
+            );
 
-        $purchaseLines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $id));
+            $purchaseLines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $id));
 
-        return $this->render('AcmePurchaseBundle:Purchase:edit.html.twig', array(
-                'purchase'      => $purchase,
-                'form'          => $editForm->createView(),
-                'line_form'     => $lineForm->createView(),
-                'lines'         => $purchaseLines
-            ));
-        }
-        catch(\Exception $e)
-        {
+            return $this->render(
+                'AcmePurchaseBundle:Purchase:edit.html.twig',
+                array(
+                    'purchase' => $purchase,
+                    'form' => $editForm->createView(),
+                    'line_form' => $lineForm->createView(),
+                    'lines' => $purchaseLines
+                )
+            );
+        } catch (\Exception $e) {
             $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t modify this');
+
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
 
@@ -193,13 +212,18 @@ class PurchaseController extends Controller
      */
     private function createEditForm(Purchase $entity)
     {
-        $form = $this->createForm(new PurchaseType($this->get('security.context')), $entity, array(
+        $form = $this->createForm(
+            new PurchaseType($this->get('security.context')),
+            $entity,
+            array(
                 'action' => $this->generateUrl('purchase_update', array('id' => $entity->getId())),
                 'method' => 'PUT',
-            ));
+            )
+        );
 
         return $form;
     }
+
     /**
      * Edits an existing Purchase entity.
      *
@@ -212,26 +236,28 @@ class PurchaseController extends Controller
         if (!$purchase) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
         }
-        if($this->container->getParameter('purchase_status') === $purchase->getStatus())
-        {
+        if ($this->container->getParameter('purchase_status') === $purchase->getStatus()) {
             throw new AccessDeniedException('This is a finalized record. You can\'t modify this');
             exit();
         }
 
         $editForm = $this->createEditForm($purchase);
         $purchaseLine = new PurchaseLine();
-        $lineForm = $this->createForm(new PurchaseLineType($this->get('security.context')), $purchaseLine, array(
+        $lineForm = $this->createForm(
+            new PurchaseLineType($this->get('security.context')),
+            $purchaseLine,
+            array(
                 'action' => 'javascript:void(0);',
                 'method' => 'POST',
-            ));
+            )
+        );
         $editForm->handleRequest($request);
 
         $data = $this->get('request')->request->all();
         $data = $data['purchase_line'];
 
         if ($editForm->isValid()) {
-            foreach($data['product'] as $key => $product)
-            {
+            foreach ($data['product'] as $key => $product) {
                 $line = new PurchaseLine();
                 $line->setPurchase($purchase);
                 $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->findOneById($product));
@@ -241,55 +267,58 @@ class PurchaseController extends Controller
             }
             $em->flush();
             $this->get('session')->getFlashBag()->add('well_done', "Your change was successfully Saved");
+
             return $this->redirect($this->generateUrl('purchase_edit', array('id' => $id)));
         }
 
         $purchaseLines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $id));
 
-        return $this->render('AcmePurchaseBundle:Purchase:edit.html.twig', array(
-                'purchase'      => $purchase,
-                'form'          => $editForm->createView(),
-                'line_form'     => $lineForm->createView(),
-                'lines'         => $purchaseLines
-            ));
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:edit.html.twig',
+            array(
+                'purchase' => $purchase,
+                'form' => $editForm->createView(),
+                'line_form' => $lineForm->createView(),
+                'lines' => $purchaseLines
+            )
+        );
     }
+
     /**
      * Deletes a Purchase entity.
      *
      */
     public function deleteAction($id)
     {
-        try
-        {
+        try {
             $em = $this->getDoctrine()->getManager();
             $purchase = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
 
             if (!$purchase) {
                 throw $this->createNotFoundException('Unable to find Purchase entity.');
             }
-            if($this->container->getParameter('purchase_status') == $purchase->getStatus())
-            {
+            if ($this->container->getParameter('purchase_status') == $purchase->getStatus()) {
                 throw new AccessDeniedException();
-            }
-            else
-            {
+            } else {
                 $this->get('session')->getFlashBag()->add('well_done', 'Successfully Deleted');
             }
 
-            $lines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(array('purchase' => $purchase->getId()));
-            if(!empty($lines))
-                foreach($lines as $line)
+            $lines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(
+                array('purchase' => $purchase->getId())
+            );
+            if (!empty($lines))
+                foreach ($lines as $line) {
                     $em->remove($line);
+                }
 
             $em->remove($purchase);
             $em->flush();
-        }
-
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t delete this');
+
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
+
         return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
     }
 
@@ -306,8 +335,7 @@ class PurchaseController extends Controller
             ->setAction($this->generateUrl('purchase_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-            ;
+            ->getForm();
     }
 
     /*
@@ -318,13 +346,13 @@ class PurchaseController extends Controller
         $em = $this->getDoctrine()->getManager();
         $line = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->find($id);
 
-        if(!$line)
-        {
+        if (!$line) {
             return new HTTPResponse('Invalid purchase line', 404);
             exit();
         }
         $em->remove($line);
         $em->flush();
+
         return new HTTPResponse("Successfully deleted.", 200);
     }
 
@@ -337,10 +365,11 @@ class PurchaseController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
         }
-            $entity->setStatus(1);
-            $em->flush();
-            $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
-            return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
+        $entity->setStatus(1);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
+
+        return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 
     public function deFinalizeAction(Request $request, $id)
@@ -355,6 +384,7 @@ class PurchaseController extends Controller
         $entity->setStatus(0);
         $em->flush();
         $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
+
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 }
