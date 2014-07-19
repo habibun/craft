@@ -3,7 +3,8 @@
 {% block title %}Report{% endblock %}
 
 {% block stylesheets %}
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bootstrap-datepicker/css/datepicker.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bootstrap-datetimepicker/css/datetimepicker.css') }}" />
 {% endblock %}
 
 {% block body -%}
@@ -11,7 +12,7 @@
         <div class="col-md-6">
             <section class="panel">
                 <header class="panel-heading">
-                    <strong>Purchase Report</strong>
+                    Purchase Report
                           <span class="tools pull-right">
                             <a href="javascript:;" class="icon-chevron-down"></a>
                             <a href="javascript:;" class="icon-remove"></a>
@@ -19,26 +20,27 @@
                 </header>
                 <div class="panel-body">
                     <form action="{{ path('purchase_report') }}" class="form-horizontal" method="post">
+
                         <div class="form-group">
-                            <label for="datepicker" class="col-sm-2 control-label">From Date</label>
-                            <div class="col-sm-10">
-                                <div class='input-group datetimepicker date'>
-                                    <input class='form-control' data-format="yyyy-MM-dd" name="report[fromDate]" id="datepicker" />
-                                    <span class="input-group-addon add-on">
-                                        <i data-time-icon="fa fa-clock-o" data-date-icon="fa fa-calendar"></i>
-                                    </span>
+                            <label class="control-label col-md-3">From Date</label>
+                            <div class="col-lg-8 col-xs-11">
+                                <div data-date-format="yyyy-MM-dd" data-date=""  class="input-append date default-date-picker">
+                                    <input type="text"  size="16" class="form-control" name="report[fromDate]" id="datepicker" />
+                                      <span class="input-group-btn add-on">
+                                        <button class="btn btn-danger" type="button"><i class="icon-calendar"></i></button>
+                                      </span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="datepicker" class="col-sm-2 control-label">To Date</label>
-                            <div class="col-sm-10">
-                                <div class='input-group datetimepicker date'>
-                                    <input class='form-control' data-format="yyyy-MM-dd" name="report[toDate]" id="datepicker" />
-                                    <span class="input-group-addon add-on">
-                                        <i data-time-icon="fa fa-clock-o" data-date-icon="fa fa-calendar"></i>
-                                    </span>
+                            <label class="control-label col-md-3">To Date</label>
+                            <div class="col-lg-8 col-xs-11">
+                                <div data-date-format="yyyy-MM-dd" data-date=""  class="input-append date default-date-picker">
+                                    <input type="text"  size="16" class="form-control" name="report[toDate]" id="datepicker" />
+                                      <span class="input-group-btn add-on">
+                                        <button class="btn btn-danger" type="button"><i class="icon-calendar"></i></button>
+                                      </span>
                                 </div>
                             </div>
                         </div>
@@ -46,6 +48,7 @@
                         <div class="modal-footer">
                             <input class="btn btn-primary" type="submit" id="getReport" value="Get Report" />
                         </div>
+
                     </form>
                 </div>
             </section>
@@ -54,5 +57,12 @@
 {% endblock %}
 
 {% block javascripts %}
-
+    <script src="{{ asset('js/advanced-form-components.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
+    <script>
+        $('.default-date-picker').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+    </script>
 {% endblock %}
