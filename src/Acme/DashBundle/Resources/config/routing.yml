@@ -11,5 +11,5 @@ homepage:
     defaults: { _controller: AcmeDashBundle:Dashboard:index}
 
 last5:
-  pattern:  /purchase/last5
+  pattern:  /last5
   defaults: { _controller:  AcmeDashBundle:Last:index}
