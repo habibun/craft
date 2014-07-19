@@ -28,4 +28,4 @@ class LastController extends Controller{
                 'purchase' => $purchases,
             ));
     }
-} 
+}

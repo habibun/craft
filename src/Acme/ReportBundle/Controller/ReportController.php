@@ -12,46 +12,52 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class ReportController extends Controller {
+class ReportController extends Controller
+{
 
     public function purchaseAction()
     {
         $em = $this->getDoctrine()->getManager();
 
         $data = $this->getRequest()->request->all();
-        if(!empty($data))
-        {
+        if (!empty($data)) {
             $data = $data['report'];
-            if(!empty($data['fromDate']) && !empty($data['toDate']))
-            {
+            if (!empty($data['fromDate']) && !empty($data['toDate'])) {
                 $reportData = $this->_generatePurchaseReport($data);
-                $html = $this->renderView('AcmeReportBundle:Report:pdfPurchase.html.twig',
+                $html = $this->renderView(
+                    'AcmeReportBundle:Report:pdfPurchase.html.twig',
                     array(
                         'reportData' => $reportData,
                         'params' => $data
                     )
                 );
 
-                $fileName = 'purchase_report_'.time().'.pdf';
+                $fileName = 'purchase_report_' . time() . '.pdf';
+
                 return new Response(
-                    $this->get('knp_snappy.pdf')->getOutputFromHtml($html, array(
+                    $this->get('knp_snappy.pdf')->getOutputFromHtml(
+                        $html,
+                        array(
                             'page-size' => 'A4',
-                        )),
+                        )
+                    ),
                     200,
                     array(
-                        'Content-Type'          => 'application/pdf',
-                        'Content-Disposition'   => 'attachment; filename="'.$fileName.'"'
+                        'Content-Type' => 'application/pdf',
+                        'Content-Disposition' => 'attachment; filename="' . $fileName . '"'
                     )
                 );
             }
         }
+
         return $this->render('AcmeReportBundle:Report:purchase.html.twig');
     }
 
     private function _generatePurchaseReport($params)
     {
-        if(empty($params['fromDate']) || empty($params['toDate']))
+        if (empty($params['fromDate']) || empty($params['toDate'])) {
             return false;
+        }
 
         $fromDate = new \DateTime($params['fromDate']);
         $toDate = new \DateTime($params['toDate']);
@@ -71,13 +77,12 @@ class ReportController extends Controller {
 
         $results = $query->getResult();
         $reportData = array();
-        if($results)
-        {
-            foreach($results as $row)
-            {
+        if ($results) {
+            foreach ($results as $row) {
                 $reportData[] = $row;
             }
         }
+
         return $reportData;
     }
 
