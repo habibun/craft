@@ -9,3 +9,7 @@ dashboard:
 homepage:
     pattern:  /
     defaults: { _controller: AcmeDashBundle:Dashboard:index}
+
+last5:
+  pattern:  /purchase/last5
+  defaults: { _controller:  AcmeDashBundle:Last:index}

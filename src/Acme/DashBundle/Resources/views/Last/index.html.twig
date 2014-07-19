@@ -1,0 +1,43 @@
+{#{% extends '::base.html.twig' %}#}
+
+{#{% block title %}Last5{% endblock %}#}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block body -%}
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Last 5 Purchase</strong>
+                    <span class="tools pull-right">
+                        <a class="icon-chevron-down" href="javascript:;"></a>
+                        <a class="icon-remove" href="javascript:;"></a>
+                    </span>
+                </header>
+                <div class="panel-body">
+                        <table id="purchaseDataTable" class="display table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Company</th>
+                                <th>Depot</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% include 'AcmeDashBundle:Last:purchase_field.html.twig' with {'purchase' : purchase}  %}
+                            </tbody>
+                        </table>
+                    </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

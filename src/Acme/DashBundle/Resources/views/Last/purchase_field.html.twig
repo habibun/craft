@@ -1,0 +1,22 @@
+{% for p in purchase %}
+    <tr>
+
+        <td>{{ p.purchaseDate|date('d/m/Y') }}</td>
+        <td>{{ p.company }}</td>
+        <td>{{ p.depot }}</td>
+        <td>
+            {% if p.status %}
+                <span class="label label-inverse">Finalized</span>
+            {% else %}
+                <span class="label label-warning">Not finalized</span>
+            {% endif %}
+        </td>
+        <td>
+            <a href="#" class="btn btn-success btn-xs"><i class="icon-zoom-in"></i>Show</a>
+            <a href="#" class="btn btn-info btn-xs"><i class="icon-pencil"></i>Edit</a>
+            <a href="#" class="btn btn-danger btn-xs confirm-delete"><i class="icon-trash"></i>Delete</a>
+        </td>
+    </tr>
+{% else %}
+    <tr><td>Unable to find Purchase entity.</td></tr>
+{% endfor %}
