@@ -3,9 +3,9 @@
 {% block report %}
     <h3 style="text-align: center">Eon InfoSys Technology</h3>
     <h4 style="text-align: center">Purchase Report</h4>
-    <strong>Date Range: </strong> {{ params.fromDate|date('d-m-Y H:i:s') }} to {{ params.toDate|date('d-m-Y H:i:s') }}
-    <br />
-    <br />
+    <strong>Date Range: </strong> {{ params.fromDate|date('d-m-Y') }} to {{ params.toDate|date('d-m-Y') }}
+    <br/>
+    <br/>
     <table class="bordered" style="width: 100%;" cellpadding="5" cellspacing="0">
         <thead>
         <tr>
@@ -18,32 +18,32 @@
         </thead>
         <tbody>
         {% set total = 0 %}
-            {% for row in reportData %}
-                {% set lines = row.lines %}
-                {% set lineTotal = 0 %}
-                <tr>
-                <td rowspan="{{ (lines|length) + 1 }}">{{ row.purchaseDate|date('d-m-Y') }}</td>
-                {% for line in lines %}
-                    {% if loop.index != 0 %}
-                        <tr>
-                    {% endif %}
-                    <td>{{ line.product.name }}</td>
-                    <td>{{ (line.price/line.quantity)|number_format(2) }}</td>
-                    <td>{{ line.quantity }}</td>
-                    <td>{{ line.price|number_format(2) }}</td>
-                    {% set lineTotal = lineTotal + line.price  %}
-                {% endfor %}
-                </tr>
-                <tr>
-                    <td colspan="4">Total</td>
-                    <td><strong>{{ lineTotal|number_format(2) }}</strong></td>
-                </tr>
-                {% set total = total + lineTotal %}
-            {% endfor %}
+        {% for row in reportData %}
+            {% set lines = row.lines %}
+            {% set lineTotal = 0 %}
             <tr>
-                <th colspan="4">Sumary of Total</th>
-                <th>{{ total|number_format(2) }}</th>
+            <td rowspan="{{ (lines|length) + 1 }}">{{ row.purchaseDate|date('d-m-Y') }}</td>
+            {% for line in lines %}
+                {% if loop.index != 0 %}
+                    <tr>
+                {% endif %}
+                <td>{{ line.product.name }}</td>
+                <td>{{ (line.price/line.quantity)|number_format(2) }}</td>
+                <td>{{ line.quantity }}</td>
+                <td>{{ line.price|number_format(2) }}</td>
+                {% set lineTotal = lineTotal + line.price %}
+            {% endfor %}
             </tr>
+            <tr>
+                <td colspan="4">Total</td>
+                <td><strong>{{ lineTotal|number_format(2) }}</strong></td>
+            </tr>
+            {% set total = total + lineTotal %}
+        {% endfor %}
+        <tr>
+            <th colspan="4">Sumary of Total</th>
+            <th>{{ total|number_format(2) }}</th>
+        </tr>
         </tbody>
     </table>
 {% endblock %}

@@ -21,9 +21,11 @@
                     <form action="{{ path('purchase_report') }}" class="form-horizontal" method="post">
                         <div class="form-group">
                             <label for="datepicker" class="col-sm-2 control-label">From Date</label>
+
                             <div class="col-sm-10">
                                 <div class='input-group datetimepicker date'>
-                                    <input class='form-control' data-format="yyyy-MM-dd" name="report[fromDate]" id="datepicker" />
+                                    <input class='form-control' data-format="yyyy-MM-dd" name="report[fromDate]"
+                                           id="datepicker"/>
                                     <span class="input-group-addon add-on">
                                         <i data-time-icon="fa fa-clock-o" data-date-icon="fa fa-calendar"></i>
                                     </span>
@@ -33,9 +35,11 @@
 
                         <div class="form-group">
                             <label for="datepicker" class="col-sm-2 control-label">To Date</label>
+
                             <div class="col-sm-10">
                                 <div class='input-group datetimepicker date'>
-                                    <input class='form-control' data-format="yyyy-MM-dd" name="report[toDate]" id="datepicker" />
+                                    <input class='form-control' data-format="yyyy-MM-dd" name="report[toDate]"
+                                           id="datepicker"/>
                                     <span class="input-group-addon add-on">
                                         <i data-time-icon="fa fa-clock-o" data-date-icon="fa fa-calendar"></i>
                                     </span>
@@ -44,7 +48,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <input class="btn btn-primary" type="submit" id="getReport" value="Get Report" />
+                            <input class="btn btn-primary" type="submit" id="getReport" value="Get Report"/>
                         </div>
                     </form>
                 </div>
