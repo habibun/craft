@@ -16,14 +16,21 @@ class IssueLineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product','entity', array(
+            ->add(
+                'product',
+                'entity',
+                array(
                     'class' => 'Acme\SetupBundle\Entity\Product',
                     'empty_value' => 'Select Product',
+                    'query_builder' => function (EntityRepository $er) {
+                            return $er->createQueryBuilder('p')
+                            ->orderBy('p.name', 'ASC');
+                        },
                     'attr' => array('class' => 'chosen-select')
-                ))
+                )
+            )
             ->add('quantity')
-            ->add('comment','text')
-        ;
+            ->add('comment', 'text');
     }
 
     /**
@@ -31,9 +38,11 @@ class IssueLineType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Acme\IssueBundle\Entity\IssueLine'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Acme\IssueBundle\Entity\IssueLine'
+            )
+        );
     }
 
     /**
