@@ -24,7 +24,7 @@ class IssueLineType extends AbstractType
                     'empty_value' => 'Select Product',
                     'query_builder' => function (EntityRepository $er) {
                             return $er->createQueryBuilder('p')
-                            ->orderBy('p.name', 'ASC');
+                                ->orderBy('p.name', 'ASC');
                         },
                     'attr' => array('class' => 'chosen-select')
                 )

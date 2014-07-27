@@ -17,18 +17,21 @@ class PurchaseLineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product','entity', array(
+            ->add(
+                'product',
+                'entity',
+                array(
                     'class' => 'Acme\SetupBundle\Entity\Product',
                     'empty_value' => 'Select Product',
                     'query_builder' => function (EntityRepository $er) {
                             return $er->createQueryBuilder('p')
-                            ->orderBy('p.name', 'ASC');
+                                ->orderBy('p.name', 'ASC');
                         },
                     'attr' => array('class' => 'chosen-select')
-                ))
+                )
+            )
             ->add('quantity')
-            ->add('price')
-        ;
+            ->add('price');
     }
 
     /**
@@ -36,9 +39,11 @@ class PurchaseLineType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Acme\PurchaseBundle\Entity\PurchaseLine'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Acme\PurchaseBundle\Entity\PurchaseLine'
+            )
+        );
     }
 
     /**
