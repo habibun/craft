@@ -14,7 +14,32 @@ class Issue
     private $issueDate;
     private $company;
     private $depot;
-    protected $status;
+    private $status;
+    private $created;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->setCreated(new \DateTime());
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
 
     /**
      * Get id
