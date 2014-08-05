@@ -20,7 +20,8 @@ class Issue
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->setCreated(new \DateTime());
     }
 

@@ -12,11 +12,33 @@ class Purchase
     protected $depot;
     protected $status;
     protected $lines;
+    protected $created;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->lines = new ArrayCollection();
+        $this->SetCreated(new \DateTime());
     }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
     /**
      * @param mixed $lines
      */
@@ -32,7 +54,6 @@ class Purchase
     {
         return $this->lines;
     }
-
 
     /**
      * @param mixed $company
