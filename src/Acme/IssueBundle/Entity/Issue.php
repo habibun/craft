@@ -62,7 +62,7 @@ class Issue
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -85,7 +85,7 @@ class Issue
     /**
      * Get issueDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getIssueDate()
     {
@@ -108,7 +108,7 @@ class Issue
     /**
      * Get company
      *
-     * @return string 
+     * @return string
      */
     public function getCompany()
     {
@@ -131,12 +131,13 @@ class Issue
     /**
      * Get depot
      *
-     * @return string 
+     * @return string
      */
     public function getDepot()
     {
         return $this->depot;
     }
+
     /**
      * Set status
      *
@@ -153,7 +154,7 @@ class Issue
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
