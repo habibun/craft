@@ -17,6 +17,9 @@ Acme\PurchaseBundle\Entity\Purchase:
         createdAt:
             type: datetime
             column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
     oneToMany:
         lines:
             targetEntity: Acme\PurchaseBundle\Entity\PurchaseLine
@@ -32,4 +35,8 @@ Acme\PurchaseBundle\Entity\Purchase:
             targetEntity: Acme\UserBundle\Entity\User
             joinColumn:
                 name: created_by
+        updatedBy:
+            targetEntity: Acme\UserBundle\Entity\User
+            joinColumn:
+                name: updated_by
     lifecycleCallbacks:

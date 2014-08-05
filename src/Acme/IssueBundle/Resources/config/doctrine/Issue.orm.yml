@@ -17,6 +17,9 @@ Acme\IssueBundle\Entity\Issue:
         createdAt:
             type: datetime
             column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
     manyToOne:
         company:
             targetEntity: Acme\SetupBundle\Entity\Company
@@ -28,4 +31,8 @@ Acme\IssueBundle\Entity\Issue:
             targetEntity: Acme\UserBundle\Entity\User
             joinColumn:
                 name: created_by
+        updatedBy:
+            targetEntity: Acme\UserBundle\Entity\User
+            joinColumn:
+                name: updated_by
     lifecycleCallbacks: {  }

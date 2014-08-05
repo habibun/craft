@@ -16,6 +16,8 @@ class Issue
     private $status;
     private $createdAt;
     private $createdBy;
+    private $updatedAt;
+    private $updatedBy;
 
     /**
      * Constructor
@@ -23,6 +25,39 @@ class Issue
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
+        $this->SetUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedBy
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
     }
 
     /**

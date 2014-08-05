@@ -14,6 +14,8 @@ class Purchase
     protected $lines;
     protected $createdAt;
     protected $createdBy;
+    protected $updatedAt;
+    protected $updatedBy;
 
     /**
      * Constructor
@@ -22,6 +24,39 @@ class Purchase
     {
         $this->lines = new ArrayCollection();
         $this->SetCreatedAt(new \DateTime());
+        $this->SetUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedBy
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
     }
 
     /**
