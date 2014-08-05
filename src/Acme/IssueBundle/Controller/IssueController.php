@@ -66,6 +66,7 @@ class IssueController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setStatus('false');
+            $entity->setCreatedBy($this->getUser());
             $em->persist($entity);
             foreach ($data['product'] as $key => $product) {
                 $line = new IssueLine();

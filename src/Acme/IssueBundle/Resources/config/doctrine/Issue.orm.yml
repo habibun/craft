@@ -23,4 +23,8 @@ Acme\IssueBundle\Entity\Issue:
         depot:
             targetEntity: Acme\SetupBundle\Entity\Depot
             nullable: false
+        createdBy:
+            targetEntity: Acme\UserBundle\Entity\User
+            joinColumn:
+                name: created_by
     lifecycleCallbacks: {  }

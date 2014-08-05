@@ -13,6 +13,7 @@ class Purchase
     protected $status;
     protected $lines;
     protected $created;
+    protected $createdBy;
 
     /**
      * Constructor
@@ -21,6 +22,22 @@ class Purchase
     {
         $this->lines = new ArrayCollection();
         $this->SetCreated(new \DateTime());
+    }
+
+    /**
+     * @param mixed $createdBy
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 
     /**

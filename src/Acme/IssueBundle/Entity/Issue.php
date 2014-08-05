@@ -16,6 +16,7 @@ class Issue
     private $depot;
     private $status;
     private $created;
+    private $createdBy;
 
     /**
      * Constructor
@@ -23,6 +24,22 @@ class Issue
     public function __construct()
     {
         $this->setCreated(new \DateTime());
+    }
+
+    /**
+     * @param mixed $createdBy
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 
     /**
