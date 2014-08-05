@@ -14,7 +14,7 @@ class Issue
     private $company;
     private $depot;
     private $status;
-    private $created;
+    private $createdAt;
     private $createdBy;
 
     /**
@@ -22,7 +22,7 @@ class Issue
      */
     public function __construct()
     {
-        $this->setCreated(new \DateTime());
+        $this->setCreatedAt(new \DateTime());
     }
 
     /**
@@ -42,21 +42,20 @@ class Issue
     }
 
     /**
-     * @param mixed $created
+     * @param mixed $createdAt
      */
-    public function setCreated($created)
+    public function setCreatedAt($createdAt)
     {
-        $this->created = $created;
+        $this->createdAt = $createdAt;
     }
 
     /**
      * @return mixed
      */
-    public function getCreated()
+    public function getCreatedAt()
     {
-        return $this->created;
+        return $this->createdAt;
     }
-
 
     /**
      * Get id

@@ -14,8 +14,9 @@ Acme\PurchaseBundle\Entity\Purchase:
             column: purchase_date
             type: date
             nullable: false
-        created:
+        createdAt:
             type: datetime
+            column: created_at
     oneToMany:
         lines:
             targetEntity: Acme\PurchaseBundle\Entity\PurchaseLine

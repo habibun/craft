@@ -12,7 +12,7 @@ class Purchase
     protected $depot;
     protected $status;
     protected $lines;
-    protected $created;
+    protected $createdAt;
     protected $createdBy;
 
     /**
@@ -21,7 +21,7 @@ class Purchase
     public function __construct()
     {
         $this->lines = new ArrayCollection();
-        $this->SetCreated(new \DateTime());
+        $this->SetCreatedAt(new \DateTime());
     }
 
     /**
@@ -41,19 +41,19 @@ class Purchase
     }
 
     /**
-     * @param mixed $created
+     * @param mixed $createdAt
      */
-    public function setCreated($created)
+    public function setCreatedAt($createdAt)
     {
-        $this->created = $created;
+        $this->createdAt = $createdAt;
     }
 
     /**
      * @return mixed
      */
-    public function getCreated()
+    public function getCreatedAt()
     {
-        return $this->created;
+        return $this->createdAt;
     }
 
     /**

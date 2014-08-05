@@ -14,8 +14,9 @@ Acme\IssueBundle\Entity\Issue:
         status:
             type: boolean
             nullable: false
-        created:
+        createdAt:
             type: datetime
+            column: created_at
     manyToOne:
         company:
             targetEntity: Acme\SetupBundle\Entity\Company
