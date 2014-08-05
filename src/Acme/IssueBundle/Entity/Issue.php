@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Issue
 {
-
     private $id;
     private $issueDate;
     private $company;
