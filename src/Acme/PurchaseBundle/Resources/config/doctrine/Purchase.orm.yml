@@ -42,10 +42,12 @@ Acme\PurchaseBundle\Entity\Purchase:
                 name: created_by
         updatedBy:
             targetEntity: Acme\UserBundle\Entity\User
+            nullable: true
             joinColumn:
                 name: updated_by
         finalizedBy:
             targetEntity: Acme\UserBundle\Entity\User
+            nullable: true
             joinColumn:
                 name: finalized_by
 
