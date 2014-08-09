@@ -258,7 +258,8 @@ class IssueController extends Controller
         $data = $data['issue_line'];
 
         if ($editForm->isValid()) {
-
+            $entity->setUpdatedAt(new \DateTime('now'));
+            $entity->setUpdatedBy($this->getUser());
             if (!empty($data)) {
                 foreach ($data['product'] as $key => $product) {
                     $line = new IssueLine();
@@ -344,7 +345,7 @@ class IssueController extends Controller
         return new HTTPResponse("Successfully deleted.", 200);
     }
 
-    public function finalizeAction(Request $request, $id)
+    public function finalizeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -354,13 +355,15 @@ class IssueController extends Controller
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
         $entity->setStatus(1);
+        $entity->setFinalizedBy($this->getUser());
+        $entity->setfinalizeDate(new \DateTime('now'));
         $em->flush();
         $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
 
         return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
     }
 
-    public function deFinalizeAction(Request $request, $id)
+    public function deFinalizeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -370,6 +373,7 @@ class IssueController extends Controller
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
         $entity->setStatus(0);
+        $entity->setfinalizeDate(null);
         $em->flush();
         $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
 

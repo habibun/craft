@@ -18,8 +18,13 @@ Acme\IssueBundle\Entity\Issue:
             type: datetime
             column: created_at
         updatedAt:
-            type: datetime
             column: updated_at
+            type: datetime
+            nullable: true
+        finalizeDate:
+            column: finalize_date
+            type: datetime
+            nullable: true
     manyToOne:
         company:
             targetEntity: Acme\SetupBundle\Entity\Company
@@ -33,6 +38,12 @@ Acme\IssueBundle\Entity\Issue:
                 name: created_by
         updatedBy:
             targetEntity: Acme\UserBundle\Entity\User
+            nullable: true
             joinColumn:
                 name: updated_by
+        finalizedBy:
+            targetEntity: Acme\UserBundle\Entity\User
+            nullable: true
+            joinColumn:
+                name: finalized_by
     lifecycleCallbacks: {  }

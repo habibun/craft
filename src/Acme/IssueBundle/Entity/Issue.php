@@ -18,14 +18,46 @@ class Issue
     private $createdBy;
     private $updatedAt;
     private $updatedBy;
-
+    private $finalizeDate;
+    private $finalizedBy;
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
-        $this->SetUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @param mixed $finalizeDate
+     */
+    public function setFinalizeDate($finalizeDate)
+    {
+        $this->finalizeDate = $finalizeDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFinalizeDate()
+    {
+        return $this->finalizeDate;
+    }
+
+    /**
+     * @param mixed $finalizedBy
+     */
+    public function setFinalizedBy($finalizedBy)
+    {
+        $this->finalizedBy = $finalizedBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFinalizedBy()
+    {
+        return $this->finalizedBy;
     }
 
     /**

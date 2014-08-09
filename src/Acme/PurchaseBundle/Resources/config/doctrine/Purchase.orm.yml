@@ -50,5 +50,4 @@ Acme\PurchaseBundle\Entity\Purchase:
             nullable: true
             joinColumn:
                 name: finalized_by
-
     lifecycleCallbacks:
