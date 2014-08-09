@@ -18,8 +18,13 @@ Acme\PurchaseBundle\Entity\Purchase:
             type: datetime
             column: created_at
         updatedAt:
-            type: datetime
             column: updated_at
+            type: datetime
+            nullable: true
+        finalizeDate:
+            column: finalize_date
+            type: datetime
+            nullable: true
     oneToMany:
         lines:
             targetEntity: Acme\PurchaseBundle\Entity\PurchaseLine

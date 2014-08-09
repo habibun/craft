@@ -258,6 +258,7 @@ class PurchaseController extends Controller
 
         if ($editForm->isValid()) {
             $purchase->setUpdatedBy($this->getUser());
+            $purchase->setUpdatedAt(new \DateTime('now'));
             foreach ($data['product'] as $key => $product) {
                 $line = new PurchaseLine();
                 $line->setPurchase($purchase);
@@ -368,6 +369,7 @@ class PurchaseController extends Controller
         }
         $entity->setStatus(1);
         $entity->setFinalizedBy($this->getUser());
+        $entity->setfinalizeDate(new \DateTime('now'));
         $em->flush();
         $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
 
@@ -384,6 +386,7 @@ class PurchaseController extends Controller
             throw $this->createNotFoundException('Unable to find Purchase entity.');
         }
         $entity->setStatus(0);
+        $entity->setfinalizeDate(null);
         $em->flush();
         $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
 

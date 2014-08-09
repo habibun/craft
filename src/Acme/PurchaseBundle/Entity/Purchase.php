@@ -17,6 +17,7 @@ class Purchase
     protected $updatedAt;
     protected $updatedBy;
     protected $finalizedBy;
+    protected $finalizeDate;
 
     /**
      * Constructor
@@ -25,7 +26,22 @@ class Purchase
     {
         $this->lines = new ArrayCollection();
         $this->SetCreatedAt(new \DateTime());
-        $this->SetUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @param mixed $finalizeDate
+     */
+    public function setFinalizeDate($finalizeDate)
+    {
+        $this->finalizeDate = $finalizeDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFinalizeDate()
+    {
+        return $this->finalizeDate;
     }
 
     /**
