@@ -257,6 +257,7 @@ class PurchaseController extends Controller
         $data = $data['purchase_line'];
 
         if ($editForm->isValid()) {
+            $purchase->setUpdatedBy($this->getUser());
             foreach ($data['product'] as $key => $product) {
                 $line = new PurchaseLine();
                 $line->setPurchase($purchase);
@@ -356,7 +357,7 @@ class PurchaseController extends Controller
         return new HTTPResponse("Successfully deleted.", 200);
     }
 
-    public function finalizeAction(Request $request, $id)
+    public function finalizeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -366,13 +367,14 @@ class PurchaseController extends Controller
             throw $this->createNotFoundException('Unable to find Purchase entity.');
         }
         $entity->setStatus(1);
+        $entity->setFinalizedBy($this->getUser());
         $em->flush();
         $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
 
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 
-    public function deFinalizeAction(Request $request, $id)
+    public function deFinalizeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 

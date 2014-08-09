@@ -39,4 +39,9 @@ Acme\PurchaseBundle\Entity\Purchase:
             targetEntity: Acme\UserBundle\Entity\User
             joinColumn:
                 name: updated_by
+        finalizedBy:
+            targetEntity: Acme\UserBundle\Entity\User
+            joinColumn:
+                name: finalized_by
+
     lifecycleCallbacks:
