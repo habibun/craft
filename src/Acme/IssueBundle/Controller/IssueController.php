@@ -9,7 +9,6 @@ use Acme\IssueBundle\Entity\IssueLine;
 use Acme\IssueBundle\Form\IssueLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use LanKit\DatatablesBundle\Datatables\Datatable;
 use Symfony\Component\HttpFoundation\Request;
 
 

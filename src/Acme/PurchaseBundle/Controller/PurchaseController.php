@@ -10,7 +10,6 @@ use Acme\PurchaseBundle\Form\PurchaseType;
 use Acme\PurchaseBundle\Form\PurchaseLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use LanKit\DatatablesBundle\Datatables\Datatable;
 
 /**
  * Purchase controller.
