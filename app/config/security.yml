@@ -7,8 +7,8 @@ security:
         ROLE_PURCHASE:    ROLE_PURCHASE
         ROLE_ISSUE:       ROLE_ISSUE
         ROLE_SETUP:       ROLE_SETUP
-        ROLR_REPORT:      ROLR_REPORT
-        ROLE_ADMIN:       [ROLE_PURCHASE, ROLE_ISSUE, ROLE_SETUP,ROLR_REPORT,ROLE_ADMIN]
+        ROLE_REPORT:      ROLE_REPORT
+        ROLE_ADMIN:       [ROLE_PURCHASE, ROLE_ISSUE, ROLE_SETUP,ROLE_REPORT,ROLE_ADMIN]
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     access_control:
@@ -18,5 +18,6 @@ security:
         - { path: ^/purchase, role: ROLE_PURCHASE }
         - { path: ^/issue, role: ROLE_ISSUE }
         - { path: ^/setup, role: ROLE_SETUP }
+        - { path: ^/report, role: ROLE_REPORT }
         - { path: ^/admin, role: ROLE_ADMIN }
 

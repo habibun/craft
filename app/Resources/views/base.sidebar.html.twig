@@ -7,18 +7,26 @@
                 <span>Dashboard</span>
             </a>
         </li>
+
+        {% if is_granted('ROLE_PURCHASE') %}
         <li>
             <a href="{{ path('purchase') }}">
                 <i class=" icon-shopping-cart text-primary"></i>
                 <span>Purchase</span>
             </a>
         </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_ISSUE') %}
         <li>
             <a href="{{ path('issue') }}" >
                 <i class="icon-move text-primary"></i>
                 <span>Issue</span>
             </a>
         </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_SETUP') %}
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="icon-wrench text-primary"></i>
@@ -30,6 +38,9 @@
                 <li><a  href="{{ path('product') }}"><i class="icon-asterisk"></i>Product Setup</a></li>
             </ul>
         </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_REPORT') %}
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="icon-book text-primary"></i>
@@ -40,6 +51,9 @@
                 {#<li><a  href="#"><i class="icon-th-list"></i>Issue Report</a></li>#}
             </ul>
         </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="icon-user text-primary"></i>
@@ -49,6 +63,8 @@
                 <li><a href="{{ path('user') }}"><i class="icon-user text-primary"></i>Manage User</a></li>
             </ul>
         </li>
+        {% endif %}
+
     </ul>
     <!-- sidebar menu end-->
 </div>
