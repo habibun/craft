@@ -4,16 +4,19 @@ imports:
 security:
     role_hierarchy:
         ROLE_USER:
-        ROLE_ENTRY:       ROLE_ENTRY
+        ROLE_PURCHASE:    ROLE_PURCHASE
+        ROLE_ISSUE:       ROLE_ISSUE
         ROLE_SETUP:       ROLE_SETUP
-        ROLE_ADMIN:       [ROLE_USER, ROLE_SETUP, ROLE_ENTRY]
+        ROLR_REPORT:      ROLR_REPORT
+        ROLE_ADMIN:       [ROLE_PURCHASE, ROLE_ISSUE, ROLE_SETUP,ROLR_REPORT,ROLE_ADMIN]
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dashboard, role: ROLE_USER }
-        - { path: ^/admin, role: ROLE_ADMIN }
-        - { path: ^/purchase, role: ROLE_ENTRY }
-        - { path: ^/issue, role: ROLE_ENTRY }
+        - { path: ^/purchase, role: ROLE_PURCHASE }
+        - { path: ^/issue, role: ROLE_ISSUE }
         - { path: ^/setup, role: ROLE_SETUP }
+        - { path: ^/admin, role: ROLE_ADMIN }
+
