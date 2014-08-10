@@ -215,7 +215,7 @@ class UserController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'success',
-                "User's information was successfully Updated. Thank you!"
+                "User's information was successfully Updated."
             );
 
             return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
