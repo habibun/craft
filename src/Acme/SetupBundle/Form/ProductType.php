@@ -8,17 +8,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProductType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-        ;
+            ->add('name');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -15,26 +15,25 @@ class UserType extends AbstractType
         $this->rolesChoices = $rolesChoices;
     }
 
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username','text')
-            ->add('email','email')
+            ->add('username', 'text')
+            ->add('email', 'email')
             ->add('password')
-            ->add('enabled','checkbox')
+            ->add('enabled', 'checkbox')
             ->add('roles', 'choice', array(
-                    'choices' => $this->_flattenArray($this->rolesChoices),
-                    'multiple' => true,
-                    'empty_value' => false,
-                    'expanded' => false,
-                    'required'  => true,
-                    'attr' => array('class' => 'chosen-select')
-                ))
-            /*->add('roles', 'collection',array(
+                'choices' => $this->_flattenArray($this->rolesChoices),
+                'multiple' => true,
+                'empty_value' => false,
+                'expanded' => false,
+                'required' => true,
+                'attr' => array('class' => 'chosen-select')
+            ))/*->add('roles', 'collection',array(
                 'label' => 'Roles',
                 'type' => 'choice',
                 'options' =>array( 'choices' => array(
@@ -42,7 +41,7 @@ class UserType extends AbstractType
                 )))*/
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
@@ -65,8 +64,7 @@ class UserType extends AbstractType
     {
         $returnData = array();
 
-        foreach($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             $tempValue = str_replace("ROLE_", '', $key);
             $tempValue = ucwords(strtolower(str_replace("_", ' ', $tempValue)));
             $returnData[$key] = $tempValue;
