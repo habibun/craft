@@ -11,7 +11,7 @@ Acme\IssueBundle\Entity\IssueLine:
             scale: 4
         comment:
             type: text
-            nullable: true
+            nullable: false
     manyToOne:
         issue:
             targetEntity: Acme\IssueBundle\Entity\Issue
