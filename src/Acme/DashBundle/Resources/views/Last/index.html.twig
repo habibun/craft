@@ -18,20 +18,20 @@
                     </span>
                 </header>
                 <div class="panel-body">
-                        <table id="purchaseDataTable" class="display table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Company</th>
-                                <th>Depot</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% include 'AcmeDashBundle:Last:purchase_field.html.twig' with {'purchase' : purchase}  %}
-                            </tbody>
-                        </table>
-                    </div>
+                    <table id="purchaseDataTable" class="display table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Company</th>
+                            <th>Depot</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% include 'AcmeDashBundle:Last:purchase_field.html.twig' with {'purchase' : purchase} %}
+                        </tbody>
+                    </table>
+                </div>
             </section>
         </div>
     </div>
