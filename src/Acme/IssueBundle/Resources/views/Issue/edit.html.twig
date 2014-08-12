@@ -3,7 +3,7 @@
 {% block title %}Issue{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/jquery-ui/jquery-ui-1.10.1.custom.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/jquery-ui/jquery-ui-1.10.1.custom.min.css') }}"/>
 {% endblock %}
 
 {% block body -%}
@@ -45,7 +45,7 @@
                     {{ form_row(line_form.quantity) }}
                     {{ form_row(line_form.comment) }}
                     <span class="pull-right">
-                        <input type="button" class="btn btn-info" id="lineAdd" value="Add Line" onclick="addLine();"  />
+                        <input type="button" class="btn btn-info" id="lineAdd" value="Add Line" onclick="addLine();"/>
                     </span>
                     {{ form_end(line_form) }}
                 </div>
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <div  class="row">
+    <div class="row">
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
@@ -79,7 +79,9 @@
                                 <td>{{ line.product }}</td>
                                 <td>{{ line.quantity }}</td>
                                 <td>{{ line.comment }}</td>
-                                <td><a href="{{ path('issue_line_delete', {'id' : line.getId() }) }}" class="btn btn-danger btn-xs existing-line-delete"><i class="icon-trash"></i></a></td>
+                                <td><a href="{{ path('issue_line_delete', {'id' : line.getId() }) }}"
+                                       class="btn btn-danger btn-xs existing-line-delete"><i class="icon-trash"></i></a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -89,9 +91,10 @@
         </div>
     </div>
 
-    <div  class="row">
+    <div class="row">
         <div class="col-lg-12">
-            <input type="button" class="btn btn-info" id="submitForm" value="Save" onclick="submitBoth();"  />
+            <input type="button" class="btn btn-info" id="submitForm" value="Save" onclick="submitBoth();"/>
+
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ path('issue') }}">
                     Back
@@ -106,33 +109,29 @@
 
         var addedLines = {
             {% for line in lines %}
-            "{{ line.product.getId() }}" : "1",
+            "{{ line.product.getId() }}": "1",
             {% endfor %}
         };
 
-        function clearLinetable()
-        {
+        function clearLinetable() {
             $('table#lineViewer tbody').html('');
         }
 
-        function addLine()
-        {
-            if(addedLines.hasOwnProperty($('#issue_line_product').val()))
-            {
+        function addLine() {
+            if (addedLines.hasOwnProperty($('#issue_line_product').val())) {
                 noty({force: true, text: 'You already added this product please add another. Or delete existing and try again.', type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
             }
 
-            if(!$('#issue_line_product').val() || !$('#issue_line_quantity').val() || !$('#issue_line_comment').val())
-            {
+            if (!$('#issue_line_product').val() || !$('#issue_line_quantity').val() || !$('#issue_line_comment').val()) {
                 noty({force: true, text: 'Please fill the form correctly', type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
             }
 
-            var html = '<tr class="'+ $('#issue_line_product').val() +'">';
-            html += '<td>'+ $('#issue_line_product option:selected').text() +'<input type="hidden" value="'+ $('#issue_line_product').val() +'" name="'+ $('#issue_line_product').attr('name') + '[]" /></td>';
-            html += '<td>'+ $('#issue_line_quantity').val() +'<input type="hidden" value="'+ $('#issue_line_quantity').val() +'" name="'+ $('#issue_line_quantity').attr('name') + '[]" /></td>';
-            html += '<td>'+ $('#issue_line_comment').val() +'<input type="hidden" value="'+ $('#issue_line_comment').val() +'" name="'+ $('#issue_line_comment').attr('name') + '[]" /></td>';
+            var html = '<tr class="' + $('#issue_line_product').val() + '">';
+            html += '<td>' + $('#issue_line_product option:selected').text() + '<input type="hidden" value="' + $('#issue_line_product').val() + '" name="' + $('#issue_line_product').attr('name') + '[]" /></td>';
+            html += '<td>' + $('#issue_line_quantity').val() + '<input type="hidden" value="' + $('#issue_line_quantity').val() + '" name="' + $('#issue_line_quantity').attr('name') + '[]" /></td>';
+            html += '<td>' + $('#issue_line_comment').val() + '<input type="hidden" value="' + $('#issue_line_comment').val() + '" name="' + $('#issue_line_comment').attr('name') + '[]" /></td>';
             html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';
             html += '</tr>';
             $('table#lineViewer tbody').append(html);
@@ -142,31 +141,27 @@
         }
 
 
-        function masterOnSubmit()
-        {
+        function masterOnSubmit() {
             $('table#lineViewer tbody :input').not(':submit').clone().hide().appendTo('#masterForm');
 
             return true;
         }
 
-        function submitBoth()
-        {
-            if(!$('#acme_issuebundle_issue_company').val())
-            {
+        function submitBoth() {
+            if (!$('#acme_issuebundle_issue_company').val()) {
                 noty({force: true, text: 'Please select company.', type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
             }
-            if($('table#lineViewer tbody').children().length <= 0)
-            {
+            if ($('table#lineViewer tbody').children().length <= 0) {
                 noty({force: true, text: 'Please add product line', type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
             }
             $('#masterForm').submit();
         }
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             $(document).on("click", "a.line-delete", function () {
-                if(!confirmDelete())
+                if (!confirmDelete())
                     return false;
 
                 var parentTr = $(this).closest('tr');
@@ -177,7 +172,7 @@
 
             $(document).on("click", "a.existing-line-delete", function (e) {
                 e.preventDefault();
-                if(!confirmDelete())
+                if (!confirmDelete())
                     return false;
 
                 var obj = $(this);
@@ -186,18 +181,17 @@
                     type: "GET",
                     url: url,
                     statusCode: {
-                        200: function(data) {
+                        200: function (data) {
                             noty({force: true, text: data, type: 'success', layout: 'topCenter', timeout: 3000});
                             var parentTr = $(obj).closest('tr');
                             var id = $(parentTr).attr('class');
                             $(parentTr).remove();
                             delete addedLines[id];
                         },
-                        403:function(){
+                        403: function () {
                             noty({force: true, text: 'Access denied', type: 'error', layout: 'topCenter', timeout: 3000});
                         },
-                        404:function(data)
-                        {
+                        404: function (data) {
                             noty({force: true, text: 'Line not found', type: 'error', layout: 'topCenter', timeout: 3000});
                         }
                     },

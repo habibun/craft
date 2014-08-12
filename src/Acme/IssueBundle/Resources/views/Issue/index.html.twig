@@ -14,7 +14,7 @@
                     Add <i class="icon-plus"></i>
                 </a>
             </div>
-            <br />
+            <br/>
             <section class="panel">
                 <header class="panel-heading">
                     <strong>Issue List</strong>
@@ -25,7 +25,8 @@
                 </header>
                 <div class="panel-body">
                     <div class="adv-table">
-                        <table id="issueDataTable" class="display table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0">
+                        <table id="issueDataTable" class="display table table-bordered table-hover" cellpadding="0"
+                               cellspacing="0" border="0">
                             <thead>
                             <tr>
                                 <th>Issue Date</th>
@@ -44,7 +45,8 @@
         </div>
         <div class="" style="margin-top: 30px;">
         </div>
-        <br />
+        <br/>
+
         <div class="col-lg-5">
             <section class="panel">
                 <header class="panel-heading">
@@ -56,7 +58,8 @@
                 </header>
                 <div class="panel-body">
                     <div class="adv-table">
-                        <table id="issueLineDataTable" class="display table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0">
+                        <table id="issueLineDataTable" class="display table table-bordered table-hover" cellpadding="0"
+                               cellspacing="0" border="0">
                             <thead>
                             <tr>
                                 <th>Product</th>
@@ -77,8 +80,8 @@
 {% block javascripts %}
     <script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            var issueTable = $('#issueDataTable').dataTable( {
+        $(document).ready(function () {
+            var issueTable = $('#issueDataTable').dataTable({
                 "bProcessing": true,
                 "bServerSide": true,
                 "sAjaxSource": '{{ path('issue_result') }}',
@@ -102,42 +105,39 @@
                         "mData": "status",
                         "mDataProp": "status",
                         "sName": "status",
-                        "fnRender": function (oObj)
-                        {
-                            if(oObj.aData['status'])
-                            {
+                        "fnRender": function (oObj) {
+                            if (oObj.aData['status']) {
                                 return '<span class="label label-inverse">Finalized</span>'
                             }
                             return '<span class="label label-warning">Draft</span>';
                         }
                     },
                     {
-                        "mData":  "id",
-                        "mDataProp":  "id",
-                        "sName":  "id",
+                        "mData": "id",
+                        "mDataProp": "id",
+                        "sName": "id",
                         "bSearchable": false,
                         "bSortable": false,
                         "sDefaultContent": "",
-                        "fnRender": function (oObj)
-                        {
+                        "fnRender": function (oObj) {
                             var showURL = '{{ path('issue_show', {'id': 'repPID'}) }}';
                             var editURL = '{{ path('issue_edit', {'id': 'repPID'}) }}';
                             var deleteURL = '{{ path('issue_delete', {'id': 'repPID'}) }}';
 
-                            return '<a href="'+ showURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>' +
-                                    ' <a href="'+editURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>' +
-                                    ' <a href="'+deleteURL.replace('repPID', oObj.aData['id'])+'" class="btn btn-danger btn-xs confirm-delete"><i class="icon-trash"></i></a>';
+                            return '<a href="' + showURL.replace('repPID', oObj.aData['id']) + '" class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>' +
+                                    ' <a href="' + editURL.replace('repPID', oObj.aData['id']) + '" class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>' +
+                                    ' <a href="' + deleteURL.replace('repPID', oObj.aData['id']) + '" class="btn btn-danger btn-xs confirm-delete"><i class="icon-trash"></i></a>';
                         }
                     }
                 ]
-            } );
-        } );
+            });
+        });
     </script>
 
 
     <script>
-        $(document).ready(function() {
-            var issueLineTable = $('#issueLineDataTable').dataTable( {
+        $(document).ready(function () {
+            var issueLineTable = $('#issueLineDataTable').dataTable({
                 "bProcessing": true,
                 "bServerSide": true,
                 "sAjaxSource": '{{ path('issue_line_result') }}',
@@ -158,13 +158,13 @@
                         "sName": "comment"
                     }
                 ],
-                "fnPreDrawCallback": function(oSettings, json) {
+                "fnPreDrawCallback": function (oSettings, json) {
                     $('.dataTables_filter input').addClass('form-control input-sm');
                     $('.dataTables_filter input').css('width', '200px');
                     $('.dataTables_length select').addClass('form-control input-sm');
                     $('.dataTables_length select').css('width', '75px');
                 }
-            } );
-        } );
+            });
+        });
     </script>
 {% endblock %}

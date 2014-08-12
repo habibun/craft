@@ -5,31 +5,31 @@
 {#{% form_theme form 'AcmeUserBundle:Form:fields.html.twig' %}#}
 
 {% block body -%}
-<div class="row">
-    <div class="col-lg-12">
-        <section class="panel">
-            <header class="panel-heading">
-                <strong>Create New User</strong>
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Create New User</strong>
                 <span class="tools pull-right">
                     <a class="icon-chevron-down" href="javascript:;"></a>
                     <a class="icon-remove" href="javascript:;"></a>
                 </span>
-            </header>
-            <div class="panel-body">
-            {{ form_start(form) }}
-            {{ form_row(form.username) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.password) }}
-            {{ form_row(form.enabled) }}
-            {{ form_row(form.roles) }}
-            <hr>
+                </header>
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.password) }}
+                    {{ form_row(form.enabled) }}
+                    {{ form_row(form.roles) }}
+                    <hr>
             <span class="pull-right">
                 <a href="{{ path('user') }}" class="btn btn-primary">Back</a>
             </span>
-            {{ form_widget(form.submit) }}
-            {{ form_end(form) }}
-            </div>
-        </section>
+                    {{ form_widget(form.submit) }}
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </div>
     </div>
-</div>
 {% endblock %}

@@ -3,31 +3,31 @@
 {% block title %}User{% endblock %}
 
 {% block body -%}
-<div class="row">
-    <div class="col-lg-12">
-        <section class="panel">
-            <header class="panel-heading">
-                <strong>Edit User</strong>
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Edit User</strong>
                 <span class="tools pull-right">
                     <a class="icon-chevron-down" href="javascript:;"></a>
                     <a class="icon-remove" href="javascript:;"></a>
                 </span>
-            </header>
-            <div class="panel-body">
-            {{ form_start(edit_form) }}
-            {{ form_row(edit_form.username) }}
-            {{ form_row(edit_form.email) }}
-            {{ form_row(edit_form.password) }}
-            {{ form_row(edit_form.enabled) }}
-            {{ form_row(edit_form.roles) }}
-            <hr>
+                </header>
+                <div class="panel-body">
+                    {{ form_start(edit_form) }}
+                    {{ form_row(edit_form.username) }}
+                    {{ form_row(edit_form.email) }}
+                    {{ form_row(edit_form.password) }}
+                    {{ form_row(edit_form.enabled) }}
+                    {{ form_row(edit_form.roles) }}
+                    <hr>
             <span class="pull-right">
                 <a href="{{ path('user') }}" class="btn btn-primary">Back</a>
             </span>
-            {{ form_widget(edit_form.submit) }}
-            {{ form_end(edit_form) }}
-            </div>
-        </section>
+                    {{ form_widget(edit_form.submit) }}
+                    {{ form_end(edit_form) }}
+                </div>
+            </section>
+        </div>
     </div>
-</div>
 {% endblock %}

@@ -20,6 +20,7 @@ class Issue
     private $updatedBy;
     private $finalizeDate;
     private $finalizedBy;
+
     /**
      * Constructor
      */

@@ -12,11 +12,12 @@
                 <a class="btn btn-sm btn-info" href="{{ path('issue_edit', {'id' : issue.id}) }}">
                     <i class="icon-pencil"></i>
                 </a>
-                <a class="btn btn-sm btn-danger btn-delete delete-confirm" href="{{ path('product_delete', {'id' : issue.id}) }}">
+                <a class="btn btn-sm btn-danger btn-delete delete-confirm"
+                   href="{{ path('product_delete', {'id' : issue.id}) }}">
                     <i class="icon-trash"></i>
                 </a>
             </div>
-            <br />
+            <br/>
         </div>
     </div>
     <div class="row">
@@ -101,9 +102,11 @@
             <section class="panel">
                 <div class="well-sm">
                     {% if issue.status %}
-                        <a href="{{ path('issue_definalize', { 'id' : issue.id }) }}" class="btn btn-danger">De-Finalize this record</a>
+                        <a href="{{ path('issue_definalize', { 'id' : issue.id }) }}" class="btn btn-danger">De-Finalize
+                            this record</a>
                     {% else %}
-                        <a href="{{ path('issue_finalize', { 'id' : issue.id }) }}" class="btn btn-success">Finalize this record</a>
+                        <a href="{{ path('issue_finalize', { 'id' : issue.id }) }}" class="btn btn-success">Finalize
+                            this record</a>
                     {% endif %}
                 </div>
             </section>
