@@ -1,12 +1,29 @@
-/web/bundles/
-/app/bootstrap.php.cache
+# Created by .gitignore support plugin (hsz.mobi)
+### Symfony2 template
+# Cache and logs
 /app/cache/*
-/app/config/parameters.yml
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
-/build/
-/vendor/
+
+# Parameters
+/app/config/parameters.yml
+/app/config/parameters.ini
+
+# Managed by Composer
+/app/bootstrap.php.cache
 /bin/
+/vendor/
+
+# Assets and user uploads
+/web/bundles/
+/web/uploads/
+
+# PHPUnit
+/app/phpunit.xml
+
+# Composer PHAR
 /composer.phar
+
+# Ide
 .idea
