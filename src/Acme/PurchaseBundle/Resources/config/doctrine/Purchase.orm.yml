@@ -15,8 +15,8 @@ Acme\PurchaseBundle\Entity\Purchase:
             type: date
             nullable: false
         createdAt:
-            type: datetime
             column: created_at
+            type: datetime
         updatedAt:
             column: updated_at
             type: datetime

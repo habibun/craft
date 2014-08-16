@@ -1,0 +1,30 @@
+supplier:
+    path:     /
+    defaults: { _controller: "AcmeSetupBundle:Supplier:index" }
+
+supplier_show:
+    path:     /{id}/show
+    defaults: { _controller: "AcmeSetupBundle:Supplier:show" }
+
+supplier_new:
+    path:     /new
+    defaults: { _controller: "AcmeSetupBundle:Supplier:new" }
+
+supplier_create:
+    path:     /create
+    defaults: { _controller: "AcmeSetupBundle:Supplier:create" }
+    requirements: { _method: post }
+
+supplier_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AcmeSetupBundle:Supplier:edit" }
+
+supplier_update:
+    path:     /{id}/update
+    defaults: { _controller: "AcmeSetupBundle:Supplier:update" }
+    requirements: { _method: post|put }
+
+supplier_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AcmeSetupBundle:Supplier:delete" }
+    requirements: { _method: post|delete }

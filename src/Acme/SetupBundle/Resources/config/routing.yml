@@ -13,3 +13,7 @@ AcmeSetupBundle_company:
 AcmeSetupBundle_product:
    resource: "@AcmeSetupBundle/Resources/config/routing/product.yml"
    prefix:   /product
+
+AcmeSetupBundle_supplier:
+    resource: "@AcmeSetupBundle/Resources/config/routing/supplier.yml"
+    prefix:   /supplier
