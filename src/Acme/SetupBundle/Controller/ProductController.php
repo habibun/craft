@@ -25,6 +25,14 @@ class ProductController extends Controller
 
         $entities = $em->getRepository('AcmeSetupBundle:Product')->findAll();
 
+        $paginator = $this->get('knp_paginator');
+        $entities = $paginator->paginate(
+            $entities,
+            $this->get('request')->query->get('page', 1) /*page number*/,
+            10
+        /*limit per page*/
+        );
+
         return $this->render(
             'AcmeSetupBundle:Product:index.html.twig',
             array(
@@ -78,7 +86,7 @@ class ProductController extends Controller
             )
         );
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Save'));
 
         return $form;
     }
@@ -197,6 +205,11 @@ class ProductController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add(
+                'heads_up',
+                "Your change was successfully Saved."
+            );
+
             return $this->redirect($this->generateUrl('product_edit', array('id' => $id)));
         }
 
@@ -214,23 +227,29 @@ class ProductController extends Controller
      * Deletes a Product entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AcmeSetupBundle:Product')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AcmeSetupBundle:Product')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Product entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
+        try {
+            $em->remove($entity);
+            $em->flush();
+        } catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set(
+                'error',
+                'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.'
+            );
+
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }
+        $this->get('session')->getFlashBag()->add('oh_snap', 'Product was successfully Deleted');
+
+        //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('product'));
     }
 

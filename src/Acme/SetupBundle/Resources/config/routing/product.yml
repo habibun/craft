@@ -27,4 +27,3 @@ product_update:
 product_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "AcmeSetupBundle:Product:delete" }
-    requirements: { _method: post|delete }
