@@ -17,8 +17,6 @@ class SupplierType extends AbstractType
         $builder
             ->add('name')
             ->add('address')
-            ->add('createdAt')
-            ->add('createdBy')
         ;
     }
     

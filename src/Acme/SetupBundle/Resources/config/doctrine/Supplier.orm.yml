@@ -22,4 +22,5 @@ Acme\SetupBundle\Entity\Supplier:
             targetEntity: Acme\UserBundle\Entity\User
             joinColumn:
                 name: created_by
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [setCreatedAt]

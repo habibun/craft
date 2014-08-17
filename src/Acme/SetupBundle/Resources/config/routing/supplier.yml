@@ -27,4 +27,3 @@ supplier_update:
 supplier_delete:
     path:     /{id}/delete
     defaults: { _controller: "AcmeSetupBundle:Supplier:delete" }
-    requirements: { _method: post|delete }
