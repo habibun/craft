@@ -27,4 +27,3 @@ company_update:
 company_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "AcmeSetupBundle:Company:delete" }
-    requirements: { _method: post|delete }

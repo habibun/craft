@@ -78,7 +78,7 @@ class CompanyController extends Controller
             )
         );
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Save'));
 
         return $form;
     }
@@ -214,23 +214,29 @@ class CompanyController extends Controller
      * Deletes a Company entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AcmeUserBundle:User')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AcmeSetupBundle:Company')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Company entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
         }
 
+        try {
+            $em->remove($entity);
+            $em->flush();
+        } catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set(
+                'error',
+                'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.'
+            );
+
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }
+        $this->get('session')->getFlashBag()->add('success', 'User was successfully Deleted. Thank you!');
+
+        //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('company'));
     }
 

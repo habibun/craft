@@ -3,15 +3,27 @@
 {% block title %}Company{% endblock %}
 
 {% block body -%}
-    <h1>Company creation</h1>
-
-    {{ form(form) }}
-
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('company') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>New Company</strong>
+                <span class="tools pull-right">
+                    <a class="icon-chevron-down" href="javascript:;"></a>
+                    <a class="icon-remove" href="javascript:;"></a>
+                </span>
+                </header>
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.name) }}
+                    <hr>
+                    <span class="pull-right">
+                        <a href="{{ path('company') }}" class="btn btn-primary">Back</a>
+                    </span>
+                    {{ form_widget(form.submit) }}
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}
