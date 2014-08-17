@@ -25,6 +25,14 @@ class CompanyController extends Controller
 
         $entities = $em->getRepository('AcmeSetupBundle:Company')->findAll();
 
+        $paginator = $this->get('knp_paginator');
+        $entities = $paginator->paginate(
+            $entities,
+            $this->get('request')->query->get('page', 1) /*page number*/,
+            10
+        /*limit per page*/
+        );
+
         return $this->render(
             'AcmeSetupBundle:Company:index.html.twig',
             array(

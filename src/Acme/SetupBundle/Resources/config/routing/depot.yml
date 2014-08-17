@@ -27,4 +27,3 @@ depot_update:
 depot_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "AcmeSetupBundle:Depot:delete" }
-    requirements: { _method: post|delete }
