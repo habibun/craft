@@ -206,7 +206,7 @@ class CompanyController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
-                'success',
+                'heads_up',
                 "Your change was successfully Saved."
             );
 
@@ -247,7 +247,7 @@ class CompanyController extends Controller
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        $this->get('session')->getFlashBag()->add('success', 'Company was successfully Deleted');
+        $this->get('session')->getFlashBag()->add('oh_snap', 'Company was successfully Deleted');
 
         //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('company'));
