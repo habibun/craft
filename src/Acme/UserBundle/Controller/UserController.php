@@ -214,8 +214,8 @@ class UserController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
-                'success',
-                "User's information was successfully Updated."
+                'heads_up',
+                "Your change was successfully saved."
             );
 
             return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
@@ -255,7 +255,7 @@ class UserController extends Controller
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        $this->get('session')->getFlashBag()->add('success', 'User was successfully Deleted. Thank you!');
+        $this->get('session')->getFlashBag()->add('oh_snap', 'User was successfully deleted.');
 
         //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('user'));
