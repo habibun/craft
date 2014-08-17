@@ -207,7 +207,7 @@ class ProductController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'heads_up',
-                "Your change was successfully Saved."
+                "Your change was successfully saved."
             );
 
             return $this->redirect($this->generateUrl('product_edit', array('id' => $id)));
@@ -247,7 +247,7 @@ class ProductController extends Controller
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        $this->get('session')->getFlashBag()->add('oh_snap', 'Product was successfully Deleted');
+        $this->get('session')->getFlashBag()->add('oh_snap', 'Product was successfully deleted.');
 
         //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('product'));
