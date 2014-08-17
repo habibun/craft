@@ -197,6 +197,11 @@ class CompanyController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                "Your change was successfully Saved."
+            );
+
             return $this->redirect($this->generateUrl('company_edit', array('id' => $id)));
         }
 
@@ -217,10 +222,10 @@ class CompanyController extends Controller
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AcmeUserBundle:User')->find($id);
+        $entity = $em->getRepository('AcmeSetupBundle:Company')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            throw $this->createNotFoundException('Unable to find Company entity.');
         }
 
         try {
@@ -234,7 +239,7 @@ class CompanyController extends Controller
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        $this->get('session')->getFlashBag()->add('success', 'User was successfully Deleted. Thank you!');
+        $this->get('session')->getFlashBag()->add('success', 'Company was successfully Deleted');
 
         //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('company'));
