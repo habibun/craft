@@ -17,3 +17,7 @@ AcmeSetupBundle_product:
 AcmeSetupBundle_supplier:
     resource: "@AcmeSetupBundle/Resources/config/routing/supplier.yml"
     prefix:   /supplier
+
+AcmeSetupBundle_location:
+    resource: "@AcmeSetupBundle/Resources/config/routing/location.yml"
+    prefix:   /location
