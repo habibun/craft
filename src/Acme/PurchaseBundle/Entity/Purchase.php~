@@ -1,0 +1,31 @@
+<?php
+
+namespace Acme\PurchaseBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+
+class Purchase
+{
+    protected $id;
+    protected $purchaseDate;
+    protected $supplier;
+    protected $location;
+    protected $status;
+    protected $lines;
+    protected $createdAt;
+    protected $createdBy;
+    protected $updatedAt;
+    protected $updatedBy;
+    protected $finalizedBy;
+    protected $finalizeDate;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lines = new ArrayCollection();
+        $this->SetCreatedAt(new \DateTime());
+    }
+
+} 

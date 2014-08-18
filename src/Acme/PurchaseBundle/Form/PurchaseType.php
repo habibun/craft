@@ -25,7 +25,6 @@ class PurchaseType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user = $this->securityContext->getToken()->getUser();
         $date = new \DateTime('now');
         $builder
             ->add(
@@ -41,17 +40,17 @@ class PurchaseType extends AbstractType
                 )
             )
             ->add(
-                'company',
+                'supplier',
                 'entity',
                 array(
-                    'class' => 'Acme\SetupBundle\Entity\Company'
+                    'class' => 'Acme\SetupBundle\Entity\Supplier'
                 )
             )
             ->add(
-                'depot',
+                'location',
                 'entity',
                 array(
-                    'class' => 'Acme\SetupBundle\Entity\Depot'
+                    'class' => 'Acme\SetupBundle\Entity\Location'
                 )
             );
     }

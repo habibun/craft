@@ -21,8 +21,8 @@
                     {{ bootstrap_set_style('horizontal') }}
                     {{ form_start(form, {'attr' :  { 'class': 'form-horizontal', 'id': 'masterForm', 'onSubmit': 'return masterOnSubmit();' } }) }}
                     {{ form_row(form.purchaseDate) }}
-                    {{ form_row(form.company) }}
-                    {{ form_row(form.depot) }}
+                    {{ form_row(form.supplier) }}
+                    {{ form_row(form.location) }}
                     {{ form_end(form) }}
                 </div>
                 <hr>
@@ -148,8 +148,8 @@
         }
 
         function submitBoth() {
-            if (!$('#acme_purchasebundle_purchase_company').val()) {
-                noty({force: true, text: 'Please select company.', type: 'error', layout: 'topCenter', timeout: 3000});
+            if (!$('#acme_purchasebundle_purchase_supplier').val()) {
+                noty({force: true, text: 'Please select supplier.', type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
             }
             if ($('table#lineViewer tbody').children().length <= 0) {

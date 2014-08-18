@@ -30,11 +30,11 @@ Acme\PurchaseBundle\Entity\Purchase:
             targetEntity: Acme\PurchaseBundle\Entity\PurchaseLine
             mappedBy: purchase
     manyToOne:
-        company:
-            targetEntity: Acme\SetupBundle\Entity\Company
+        supplier:
+            targetEntity: Acme\SetupBundle\Entity\Supplier
             nullable: false
-        depot:
-            targetEntity: Acme\SetupBundle\Entity\Depot
+        location:
+            targetEntity: Acme\SetupBundle\Entity\Location
             nullable: false
         createdBy:
             targetEntity: Acme\UserBundle\Entity\User
