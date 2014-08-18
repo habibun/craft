@@ -53,3 +53,4 @@ Acme\IssueBundle\Entity\Issue:
                 name: finalized_by
     lifecycleCallbacks:
         prePersist: [setCreatedAt]
+        preUpdate: [setupdatedAt]
