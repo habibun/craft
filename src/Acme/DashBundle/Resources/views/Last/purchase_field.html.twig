@@ -2,8 +2,8 @@
     <tr>
 
         <td>{{ p.purchaseDate|date('d/m/Y') }}</td>
-        <td>{{ p.company }}</td>
-        <td>{{ p.depot }}</td>
+        <td>{{ p.supplier }}</td>
+        <td>{{ p.location }}</td>
         <td>
             {% if p.status %}
                 <span class="label label-inverse">Finalized</span>
