@@ -23,14 +23,6 @@ class Issue
     private $finalizedBy;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->setCreatedAt(new \DateTime());
-    }
-
-    /**
      * @param mixed $fromLocation
      */
     public function setFromLocation($fromLocation)
@@ -131,7 +123,7 @@ class Issue
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime();
     }
 
     /**

@@ -15,8 +15,9 @@ Acme\IssueBundle\Entity\Issue:
             type: boolean
             nullable: false
         createdAt:
-            type: datetime
             column: created_at
+            type: datetime
+            nullable: false
         updatedAt:
             column: updated_at
             type: datetime
@@ -50,4 +51,5 @@ Acme\IssueBundle\Entity\Issue:
             nullable: true
             joinColumn:
                 name: finalized_by
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [setCreatedAt]
