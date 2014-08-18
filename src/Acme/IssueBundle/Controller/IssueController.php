@@ -254,7 +254,7 @@ class IssueController extends Controller
 
         $editForm->handleRequest($request);
         $data = $this->get('request')->request->all();
-        $data = $data['issue_line'];
+        $data = isset($data['issue_line']) ? $data['issue_line'] : array();
 
         if ($editForm->isValid()) {
             $entity->setUpdatedAt(new \DateTime('now'));
