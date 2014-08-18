@@ -3,6 +3,7 @@
 namespace Acme\PurchaseBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class Purchase
 {
@@ -25,7 +26,6 @@ class Purchase
     public function __construct()
     {
         $this->lines = new ArrayCollection();
-        $this->SetCreatedAt(new \DateTime());
     }
 
 
@@ -93,7 +93,7 @@ class Purchase
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime();
 
         return $this;
     }
