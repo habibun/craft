@@ -53,3 +53,4 @@ Acme\PurchaseBundle\Entity\Purchase:
                 name: finalized_by
     lifecycleCallbacks:
         prePersist: [setCreatedAt]
+        preUpdate: [setupdatedAt]

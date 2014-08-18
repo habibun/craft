@@ -257,7 +257,6 @@ class PurchaseController extends Controller
 
         if ($editForm->isValid()) {
             $purchase->setUpdatedBy($this->getUser());
-            $purchase->setUpdatedAt(new \DateTime('now'));
             if(isset($data['product'])){
                 foreach ($data['product'] as $key => $product) {
                     $line = new PurchaseLine();
