@@ -253,19 +253,22 @@ class PurchaseController extends Controller
         $editForm->handleRequest($request);
 
         $data = $this->get('request')->request->all();
-        $data = $data['purchase_line'];
+        $data = isset($data['purchase_line']) ? $data['purchase_line'] : array();
 
         if ($editForm->isValid()) {
             $purchase->setUpdatedBy($this->getUser());
             $purchase->setUpdatedAt(new \DateTime('now'));
-            foreach ($data['product'] as $key => $product) {
-                $line = new PurchaseLine();
-                $line->setPurchase($purchase);
-                $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->findOneById($product));
-                $line->setQuantity($data['quantity'][$key]);
-                $line->setPrice($data['price'][$key]);
-                $em->persist($line);
+            if(isset($data['product'])){
+                foreach ($data['product'] as $key => $product) {
+                    $line = new PurchaseLine();
+                    $line->setPurchase($purchase);
+                    $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->findOneById($product));
+                    $line->setQuantity($data['quantity'][$key]);
+                    $line->setPrice($data['price'][$key]);
+                    $em->persist($line);
+                }
             }
+
             $em->flush();
             $this->get('session')->getFlashBag()->add('heads_up', "Your change was successfully Saved");
 
