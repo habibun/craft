@@ -267,7 +267,7 @@ class PurchaseController extends Controller
                 $em->persist($line);
             }
             $em->flush();
-            $this->get('session')->getFlashBag()->add('well_done', "Your change was successfully Saved");
+            $this->get('session')->getFlashBag()->add('heads_up', "Your change was successfully Saved");
 
             return $this->redirect($this->generateUrl('purchase_edit', array('id' => $id)));
         }
@@ -301,7 +301,7 @@ class PurchaseController extends Controller
             if ($this->container->getParameter('purchase_status') == $purchase->getStatus()) {
                 throw new AccessDeniedException();
             } else {
-                $this->get('session')->getFlashBag()->add('well_done', 'Successfully Deleted');
+                $this->get('session')->getFlashBag()->add('oh_snap', 'Successfully Deleted');
             }
 
             $lines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(

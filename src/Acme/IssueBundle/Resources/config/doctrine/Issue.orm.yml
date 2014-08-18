@@ -26,6 +26,10 @@ Acme\IssueBundle\Entity\Issue:
             type: datetime
             nullable: true
     manyToOne:
+        fromLocation:
+            targetEntity: Acme\SetupBundle\Entity\Location
+            joinColumn:
+                name: from_location
         company:
             targetEntity: Acme\SetupBundle\Entity\Company
             nullable: false

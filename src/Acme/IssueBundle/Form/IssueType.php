@@ -23,6 +23,9 @@ class IssueType extends AbstractType
                     'class' => 'date-picker',
                     'value' => $date->format('d-m-Y'),
                 )))
+            ->add('fromLocation', 'entity', array(
+                'class' => 'Acme\SetupBundle\Entity\Location'
+            ))
             ->add('company', 'entity', array(
                 'class' => 'Acme\SetupBundle\Entity\Company'
             ))

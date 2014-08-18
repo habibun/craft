@@ -21,6 +21,7 @@
                     {{ bootstrap_set_style('horizontal') }}
                     {{ form_start(form, {'attr' :  { 'class': 'form-horizontal', 'id': 'masterForm', 'onSubmit': 'return masterOnSubmit();' } }) }}
                     {{ form_row(form.issueDate) }}
+                    {{ form_row(form.fromLocation) }}
                     {{ form_row(form.company) }}
                     {{ form_row(form.depot) }}
                     {{ form_end(form) }}

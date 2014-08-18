@@ -270,7 +270,7 @@ class IssueController extends Controller
             }
 
             $em->flush();
-            $this->get('session')->getFlashBag()->add('well_done', "Your change was successfully Saved");
+            $this->get('session')->getFlashBag()->add('heads_up', "Your change was successfully Saved");
 
             return $this->redirect($this->generateUrl('issue_edit', array('id' => $id)));
         }
@@ -308,7 +308,7 @@ class IssueController extends Controller
         $em->remove($entity);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add('well_done', "Successfully Deleted");
+        $this->get('session')->getFlashBag()->add('oh_snap', "Successfully Deleted");
 
         return $this->redirect($this->generateUrl('issue'));
     }

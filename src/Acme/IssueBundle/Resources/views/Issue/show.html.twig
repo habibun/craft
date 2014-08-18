@@ -42,6 +42,10 @@
                             <td>{{ issue.issueDate|date('d-m-Y') }}</td>
                         </tr>
                         <tr>
+                            <th>From Location</th>
+                            <td>{{ issue.getFromLocation().getName() }}</td>
+                        </tr>
+                        <tr>
                             <th>Company</th>
                             <td>{{ issue.company }}</td>
                         </tr>

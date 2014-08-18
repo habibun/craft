@@ -29,9 +29,10 @@
                                cellspacing="0" border="0">
                             <thead>
                             <tr>
-                                <th>Issue Date</th>
-                                <th>Company</th>
-                                <th>Depot</th>
+                                <th>Date</th>
+                                <th>From</th>
+                                <th>To Company</th>
+                                <th>To Depot</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -90,6 +91,11 @@
                         "mData": "issueDate",
                         "mDataProp": "issueDate",
                         "sName": "issueDate"
+                    },
+                    {
+                        "mData": "fromLocation.name",
+                        "mDataProp": "fromLocation.name",
+                        "sName": "fromLocation.name"
                     },
                     {
                         "mData": "company.name",

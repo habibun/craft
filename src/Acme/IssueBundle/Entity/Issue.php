@@ -11,6 +11,7 @@ class Issue
 {
     private $id;
     private $issueDate;
+    private $fromLocation;
     private $company;
     private $depot;
     private $status;
@@ -27,6 +28,22 @@ class Issue
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
+    }
+
+    /**
+     * @param mixed $fromLocation
+     */
+    public function setFromLocation($fromLocation)
+    {
+        $this->fromLocation = $fromLocation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFromLocation()
+    {
+        return $this->fromLocation;
     }
 
     /**
