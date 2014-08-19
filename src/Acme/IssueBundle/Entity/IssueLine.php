@@ -7,7 +7,7 @@ class IssueLine
     protected $id;
     protected $product;
     protected $quantity;
-    protected $comment;
+    protected $purpose;
     protected $issue;
 
     /**
@@ -59,19 +59,19 @@ class IssueLine
     }
 
     /**
-     * @param mixed $comment
+     * @param mixed $purpose
      */
-    public function setComment($comment)
+    public function setPurpose($purpose)
     {
-        $this->comment = $comment;
+        $this->purpose = $purpose;
     }
 
     /**
      * @return mixed
      */
-    public function getComment()
+    public function getPurpose()
     {
-        return $this->comment;
+        return $this->purpose;
     }
 
     /**

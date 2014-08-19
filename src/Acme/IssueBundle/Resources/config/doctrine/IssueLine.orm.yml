@@ -9,7 +9,7 @@ Acme\IssueBundle\Entity\IssueLine:
         quantity:
             type: decimal
             scale: 4
-        comment:
+        purpose:
             type: text
             nullable: false
     manyToOne:
