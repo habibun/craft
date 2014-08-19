@@ -264,6 +264,7 @@ class IssueController extends Controller
                     $line->setIssue($entity);
                     $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
                     $line->setQuantity($data['quantity'][$key]);
+                    $line->setComment($data['comment'][$key]);
                     $em->persist($line);
                 }
             }
