@@ -28,80 +28,16 @@ class Purchase
         $this->lines = new ArrayCollection();
     }
 
-
     /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     * @return Purchase
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set purchaseDate
-     *
-     * @param \DateTime $purchaseDate
-     * @return Purchase
-     */
-    public function setPurchaseDate($purchaseDate)
-    {
-        $this->purchaseDate = $purchaseDate;
-
-        return $this;
-    }
-
-    /**
-     * Get purchaseDate
-     *
-     * @return \DateTime
-     */
-    public function getPurchaseDate()
-    {
-        return $this->purchaseDate;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Purchase
+     * @param mixed $createdAt
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = new \DateTime();
-
-        return $this;
     }
 
     /**
-     * Get createdAt
-     *
-     * @return \DateTime
+     * @return mixed
      */
     public function getCreatedAt()
     {
@@ -109,147 +45,15 @@ class Purchase
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     * @return Purchase
+     * @param mixed $createdBy
      */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = new \DateTime();
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set finalizeDate
-     *
-     * @param \DateTime $finalizeDate
-     * @return Purchase
-     */
-    public function setFinalizeDate($finalizeDate)
-    {
-        $this->finalizeDate = $finalizeDate;
-
-        return $this;
-    }
-
-    /**
-     * Get finalizeDate
-     *
-     * @return \DateTime
-     */
-    public function getFinalizeDate()
-    {
-        return $this->finalizeDate;
-    }
-
-    /**
-     * Add lines
-     *
-     * @param \Acme\PurchaseBundle\Entity\PurchaseLine $lines
-     * @return Purchase
-     */
-    public function addLine(\Acme\PurchaseBundle\Entity\PurchaseLine $lines)
-    {
-        $this->lines[] = $lines;
-
-        return $this;
-    }
-
-    /**
-     * Remove lines
-     *
-     * @param \Acme\PurchaseBundle\Entity\PurchaseLine $lines
-     */
-    public function removeLine(\Acme\PurchaseBundle\Entity\PurchaseLine $lines)
-    {
-        $this->lines->removeElement($lines);
-    }
-
-    /**
-     * Get lines
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLines()
-    {
-        return $this->lines;
-    }
-
-    /**
-     * Set supplier
-     *
-     * @param \Acme\SetupBundle\Entity\Supplier $supplier
-     * @return Purchase
-     */
-    public function setSupplier(\Acme\SetupBundle\Entity\Supplier $supplier = null)
-    {
-        $this->supplier = $supplier;
-
-        return $this;
-    }
-
-    /**
-     * Get supplier
-     *
-     * @return \Acme\SetupBundle\Entity\Supplier
-     */
-    public function getSupplier()
-    {
-        return $this->supplier;
-    }
-
-    /**
-     * Set location
-     *
-     * @param \Acme\SetupBundle\Entity\Location $location
-     * @return Purchase
-     */
-    public function setLocation(\Acme\SetupBundle\Entity\Location $location = null)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * Get location
-     *
-     * @return \Acme\SetupBundle\Entity\Location
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * Set createdBy
-     *
-     * @param \Acme\UserBundle\Entity\User $createdBy
-     * @return Purchase
-     */
-    public function setCreatedBy(\Acme\UserBundle\Entity\User $createdBy = null)
+    public function setCreatedBy($createdBy)
     {
         $this->createdBy = $createdBy;
-
-        return $this;
     }
 
     /**
-     * Get createdBy
-     *
-     * @return \Acme\UserBundle\Entity\User
+     * @return mixed
      */
     public function getCreatedBy()
     {
@@ -257,48 +61,163 @@ class Purchase
     }
 
     /**
-     * Set updatedBy
-     *
-     * @param \Acme\UserBundle\Entity\User $updatedBy
-     * @return Purchase
+     * @param mixed $finalizeDate
      */
-    public function setUpdatedBy(\Acme\UserBundle\Entity\User $updatedBy = null)
+    public function setFinalizeDate($finalizeDate)
     {
-        $this->updatedBy = $updatedBy;
-
-        return $this;
+        $this->finalizeDate = $finalizeDate;
     }
 
     /**
-     * Get updatedBy
-     *
-     * @return \Acme\UserBundle\Entity\User
+     * @return mixed
+     */
+    public function getFinalizeDate()
+    {
+        return $this->finalizeDate;
+    }
+
+    /**
+     * @param mixed $finalizedBy
+     */
+    public function setFinalizedBy($finalizedBy)
+    {
+        $this->finalizedBy = $finalizedBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFinalizedBy()
+    {
+        return $this->finalizedBy;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $lines
+     */
+    public function setLines($lines)
+    {
+        $this->lines = $lines;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getLines()
+    {
+        return $this->lines;
+    }
+
+    /**
+     * @param mixed $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param mixed $purchaseDate
+     */
+    public function setPurchaseDate($purchaseDate)
+    {
+        $this->purchaseDate = $purchaseDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPurchaseDate()
+    {
+        return $this->purchaseDate;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $supplier
+     */
+    public function setSupplier($supplier)
+    {
+        $this->supplier = $supplier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSupplier()
+    {
+        return $this->supplier;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedBy
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+    }
+
+    /**
+     * @return mixed
      */
     public function getUpdatedBy()
     {
         return $this->updatedBy;
     }
 
-    /**
-     * Set finalizedBy
-     *
-     * @param \Acme\UserBundle\Entity\User $finalizedBy
-     * @return Purchase
-     */
-    public function setFinalizedBy(\Acme\UserBundle\Entity\User $finalizedBy = null)
-    {
-        $this->finalizedBy = $finalizedBy;
-
-        return $this;
-    }
-
-    /**
-     * Get finalizedBy
-     *
-     * @return \Acme\UserBundle\Entity\User
-     */
-    public function getFinalizedBy()
-    {
-        return $this->finalizedBy;
-    }
 }
