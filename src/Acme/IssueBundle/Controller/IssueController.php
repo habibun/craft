@@ -73,6 +73,7 @@ class IssueController extends Controller
                 $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
                 $line->setQuantity($data['quantity'][$key]);
                 $line->setPurpose($data['purpose'][$key]);
+                $line->setComment($data['comment'][$key]);
                 $em->persist($line);
             }
             $em->flush();
@@ -265,6 +266,7 @@ class IssueController extends Controller
                     $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
                     $line->setQuantity($data['quantity'][$key]);
                     $line->setPurpose($data['purpose'][$key]);
+                    $line->setComment($data['comment'][$key]);
                     $em->persist($line);
                 }
             }

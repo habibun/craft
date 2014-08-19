@@ -30,7 +30,8 @@ class IssueLineType extends AbstractType
                 )
             )
             ->add('quantity')
-            ->add('purpose', 'text');
+            ->add('purpose')
+            ->add('comment');
     }
 
     /**

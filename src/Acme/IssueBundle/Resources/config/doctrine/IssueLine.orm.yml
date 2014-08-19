@@ -10,8 +10,11 @@ Acme\IssueBundle\Entity\IssueLine:
             type: decimal
             scale: 4
         purpose:
-            type: text
+            type: string
             nullable: false
+        comment:
+            type: text
+            nullable: true
     manyToOne:
         issue:
             targetEntity: Acme\IssueBundle\Entity\Issue

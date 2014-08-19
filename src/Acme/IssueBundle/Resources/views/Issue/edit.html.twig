@@ -45,6 +45,7 @@
                     {{ form_row(line_form.product) }}
                     {{ form_row(line_form.quantity) }}
                     {{ form_row(line_form.purpose) }}
+                    {{ form_row(line_form.comment) }}
                     <span class="pull-right">
                         <input type="button" class="btn btn-info" id="lineAdd" value="Add Line" onclick="addLine();"/>
                     </span>
@@ -71,6 +72,7 @@
                             <th>Product</th>
                             <th>Amount</th>
                             <th>Purpose</th>
+                            <th>Comment</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -80,6 +82,7 @@
                                 <td>{{ line.product }}</td>
                                 <td>{{ line.quantity }}</td>
                                 <td>{{ line.purpose }}</td>
+                                <td>{{ line.comment }}</td>
                                 <td><a href="{{ path('issue_line_delete', {'id' : line.getId() }) }}"
                                        class="btn btn-danger btn-xs existing-line-delete"><i class="icon-trash"></i></a>
                                 </td>
@@ -133,6 +136,7 @@
             html += '<td>' + $('#issue_line_product option:selected').text() + '<input type="hidden" value="' + $('#issue_line_product').val() + '" name="' + $('#issue_line_product').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_quantity').val() + '<input type="hidden" value="' + $('#issue_line_quantity').val() + '" name="' + $('#issue_line_quantity').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_purpose').val() + '<input type="hidden" value="' + $('#issue_line_purpose').val() + '" name="' + $('#issue_line_purpose').attr('name') + '[]" /></td>';
+            html += '<td>' + $('#issue_line_comment').val() + '<input type="hidden" value="' + $('#issue_line_comment').val() + '" name="' + $('#issue_line_comment').attr('name') + '[]" /></td>';
             html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';
             html += '</tr>';
             $('table#lineViewer tbody').append(html);
