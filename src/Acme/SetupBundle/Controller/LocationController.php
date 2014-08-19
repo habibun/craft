@@ -37,6 +37,7 @@ class LocationController extends Controller
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Location entity.
      *
@@ -57,7 +58,7 @@ class LocationController extends Controller
 
         return $this->render('AcmeSetupBundle:Location:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -87,11 +88,11 @@ class LocationController extends Controller
     public function newAction()
     {
         $entity = new Location();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('AcmeSetupBundle:Location:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -112,7 +113,7 @@ class LocationController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('AcmeSetupBundle:Location:show.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -135,19 +136,19 @@ class LocationController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('AcmeSetupBundle:Location:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Location entity.
-    *
-    * @param Location $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Location entity.
+     *
+     * @param Location $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Location $entity)
     {
         $form = $this->createForm(new LocationType(), $entity, array(
@@ -159,6 +160,7 @@ class LocationController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Location entity.
      *
@@ -189,11 +191,12 @@ class LocationController extends Controller
         }
 
         return $this->render('AcmeSetupBundle:Location:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Location entity.
      *
@@ -237,7 +240,6 @@ class LocationController extends Controller
             ->setAction($this->generateUrl('location_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

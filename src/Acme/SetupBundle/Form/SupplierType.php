@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SupplierType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -16,10 +16,9 @@ class SupplierType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('address')
-        ;
+            ->add('address');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

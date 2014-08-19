@@ -32,7 +32,7 @@ class Purchase
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,7 +55,7 @@ class Purchase
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
@@ -78,7 +78,7 @@ class Purchase
     /**
      * Get purchaseDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPurchaseDate()
     {
@@ -101,7 +101,7 @@ class Purchase
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -124,7 +124,7 @@ class Purchase
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -147,7 +147,7 @@ class Purchase
     /**
      * Get finalizeDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFinalizeDate()
     {
@@ -180,7 +180,7 @@ class Purchase
     /**
      * Get lines
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLines()
     {
@@ -203,7 +203,7 @@ class Purchase
     /**
      * Get supplier
      *
-     * @return \Acme\SetupBundle\Entity\Supplier 
+     * @return \Acme\SetupBundle\Entity\Supplier
      */
     public function getSupplier()
     {
@@ -226,7 +226,7 @@ class Purchase
     /**
      * Get location
      *
-     * @return \Acme\SetupBundle\Entity\Location 
+     * @return \Acme\SetupBundle\Entity\Location
      */
     public function getLocation()
     {
@@ -249,7 +249,7 @@ class Purchase
     /**
      * Get createdBy
      *
-     * @return \Acme\UserBundle\Entity\User 
+     * @return \Acme\UserBundle\Entity\User
      */
     public function getCreatedBy()
     {
@@ -272,7 +272,7 @@ class Purchase
     /**
      * Get updatedBy
      *
-     * @return \Acme\UserBundle\Entity\User 
+     * @return \Acme\UserBundle\Entity\User
      */
     public function getUpdatedBy()
     {
@@ -295,7 +295,7 @@ class Purchase
     /**
      * Get finalizedBy
      *
-     * @return \Acme\UserBundle\Entity\User 
+     * @return \Acme\UserBundle\Entity\User
      */
     public function getFinalizedBy()
     {
