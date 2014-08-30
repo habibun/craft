@@ -80,6 +80,7 @@
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Price</th>
+                            <th>Transaction No</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -88,6 +89,7 @@
                                 <td>{{ line.product }}</td>
                                 <td>{{ line.quantity }}</td>
                                 <td>{{ line.price }}</td>
+                                <td>{{ line.id }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
