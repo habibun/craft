@@ -16,6 +16,7 @@ class IssueLineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('issueTo')
             ->add(
                 'product',
                 'entity',
@@ -30,7 +31,6 @@ class IssueLineType extends AbstractType
                 )
             )
             ->add('quantity')
-            ->add('purpose')
             ->add('comment');
     }
 
