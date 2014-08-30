@@ -9,22 +9,22 @@ class IssueLine
     protected $quantity;
     protected $issueTo;
     protected $issue;
-    protected $comment;
+    protected $referenceNumber;
 
     /**
-     * @param mixed $comment
+     * @param mixed $referenceNumber
      */
-    public function setComment($comment)
+    public function setReferenceNumber($referenceNumber)
     {
-        $this->comment = $comment;
+        $this->referenceNumber = $referenceNumber;
     }
 
     /**
      * @return mixed
      */
-    public function getComment()
+    public function getReferenceNumber()
     {
-        return $this->comment;
+        return $this->referenceNumber;
     }
 
     /**

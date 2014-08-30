@@ -16,6 +16,9 @@ class IssueLineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('referenceNumber','integer',array(
+                    'label' => "Ref No"
+                ))
             ->add('issueTo')
             ->add(
                 'product',
@@ -30,8 +33,7 @@ class IssueLineType extends AbstractType
                     'attr' => array('class' => 'chosen-select')
                 )
             )
-            ->add('quantity')
-            ->add('comment');
+            ->add('quantity');
     }
 
     /**

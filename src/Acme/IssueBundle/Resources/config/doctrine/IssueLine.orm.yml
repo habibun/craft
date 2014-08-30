@@ -12,9 +12,9 @@ Acme\IssueBundle\Entity\IssueLine:
         issueTo:
             type: string
             nullable: false
-        comment:
-            type: text
-            nullable: true
+        referenceNumber:
+            type: integer
+            nullable: false
     manyToOne:
         issue:
             targetEntity: Acme\IssueBundle\Entity\Issue

@@ -72,8 +72,8 @@ class IssueController extends Controller
                 $line->setIssue($entity);
                 $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
                 $line->setQuantity($data['quantity'][$key]);
-                $line->setPurpose($data['IssueTo'][$key]);
-                $line->setComment($data['comment'][$key]);
+                $line->setIssueTo($data['issueTo'][$key]);
+                $line->setReferenceNumber($data['referenceNumber'][$key]);
                 $em->persist($line);
             }
             $em->flush();
@@ -265,8 +265,8 @@ class IssueController extends Controller
                     $line->setIssue($entity);
                     $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
                     $line->setQuantity($data['quantity'][$key]);
-                    $line->setPurpose($data['IssueTo'][$key]);
-                    $line->setComment($data['comment'][$key]);
+                    $line->setIssueTo($data['issueTo'][$key]);
+                    $line->setReferenceNumber($data['referenceNumber'][$key]);
                     $em->persist($line);
                 }
             }
