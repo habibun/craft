@@ -13,3 +13,8 @@ homepage:
 last5:
   pattern:  /last5
   defaults: { _controller:  AcmeDashBundle:Last:index}
+
+_demo:
+    resource: "@AcmeDashBundle/Controller/SearchController.php"
+    type:     annotation
+    prefix:   /demo
