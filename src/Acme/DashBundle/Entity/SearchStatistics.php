@@ -1,16 +1,14 @@
 <?php
 
-namespace Xshare\ProductBundle\Entity;
+namespace Acme\DashBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Xshare\ProductBundle\Entity\SearchStatistics
  *
  * @ORM\Table(name="search_statistics")
- * @ORM\Entity(repositoryClass="Xshare\ProductBundle\Repository\SearchStatisticsRepository")
+ * @ORM\Entity(repositoryClass="Acme\DashBundle\Repository\SearchStatisticsRepository")
  */
 class SearchStatistics
 {
@@ -20,7 +18,7 @@ class SearchStatistics
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $search_id;
-    
+
     /**
      * @ORM\Column(type="string")
      */
@@ -30,7 +28,7 @@ class SearchStatistics
      * @ORM\Column(type="datetime")
      */
     private $date_search;
-    
+
     public function __construct()
     {
         $this->setDateSearch(new \DateTime);
@@ -39,7 +37,7 @@ class SearchStatistics
     /**
      * Get search_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getSearchId()
     {
@@ -59,7 +57,7 @@ class SearchStatistics
     /**
      * Get keyword_search
      *
-     * @return string 
+     * @return string
      */
     public function getKeywordSearch()
     {
@@ -79,7 +77,7 @@ class SearchStatistics
     /**
      * Get date_search
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDateSearch()
     {

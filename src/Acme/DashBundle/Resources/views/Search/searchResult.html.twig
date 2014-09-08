@@ -1,43 +1,22 @@
-{#{% extends 'XshareProductBundle::product.html.twig' %}#}
+{% extends '::base.html.twig' %}
 
-{% block title %}{{ "Search results"|trans }}{% endblock %}
+{% block title %}Search-Results{% endblock %}
 
-{% block stylesheets %}
-    {#{{ parent() }}#}
-    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/search.css') }}" type="text/css" media="all" />
-{% endblock %}
-
-{% block maincontent %}
-
-    <h2 class="search-header" >{{"Search results"|trans}}</h2>
+{% block body %}
+    {% include 'AcmeDashBundle:Search:searchForm.html.twig' %}
+    <h3><i class="icon-search page-header-icon"></i>Search results</h3>
     <div class="search-items-list">
-            {% if result.products is not empty %}
-            <dl class="search-entity-items" >
-            {% for item in result.products %}
-                <dt><a class="search-entity-name" href="{{ path('xshare_show_product', { pid: item.id }) }}">{{ item.name }}</a></dt>
-                <dd>{{ item.description }}</dd>
-            {% endfor %}
-            </dl>
-            {% endif %}
-
-            {% if result.categories is not empty %}
-            <ul class="search-entity-items">
-            {% for item in result.categories %}
-                <li><a class="search-entity-name" href="{{ path('product_category_show', { id: item.id }) }}">{{ item.name }}</a></li>
-            {% endfor %}
-            </ul>
-            {% endif %}
-
             {% if result.users is not empty %}
             <ul class="search-entity-items">
             {% for item in result.users %}
-                <li><a class="search-entity-name" href="{{ path('user_details', { id: item.id }) }}">{{ item.username }}</a> {{ item.firstname }} {{ item.lastname }}</li>
+                <li><a class="search-entity-name" href="{{ path('user_show', { id: item.id }) }}">{{ item.username }}</a> {{ item.email }}</li>
 
             {% endfor %}
             </ul>
             {% endif %}
-            {% if result.products is empty and result.categories is empty and result.users is empty %}
-                <p>{{ "There are no results"|trans }}</p>
+
+            {% if result.users is empty %}
+                <p>{{ "There are no results" }}</p>
             {% endif %}
     </div>
     <div class="clear"></div>

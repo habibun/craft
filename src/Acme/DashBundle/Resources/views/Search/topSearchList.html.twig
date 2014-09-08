@@ -1,0 +1,12 @@
+{% if words is not empty %}
+<div>
+    <h5>{{"Top search"}}</h5>
+    <ul>
+    {% for word in words %}
+        <li>
+            <a class="liensGray" href="{{ path('general_search', { 'searchWord': word['keyword_search'] }) }}">{{ word['keyword_search'] }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}

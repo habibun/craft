@@ -3,9 +3,8 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
-    {#Welcome#}
 
     {#{{ render(controller('AcmeDashBundle:Last:index', { 'max': 5 })) }}#}
-    {% include 'AcmeDashBundle::search.html.twig' %}
+    {% include 'AcmeDashBundle:Search:searchForm.html.twig' %}
 
 {% endblock %}
