@@ -3,8 +3,7 @@
 {% block title %}Search-Results{% endblock %}
 
 {% block body %}
-    {% include 'AcmeDashBundle:Search:searchForm.html.twig' %}
-    <h3><i class="icon-search page-header-icon"></i>Search results</h3>
+    <h4><i class="icon-search"></i>Search results</h4>
     <div class="search-items-list">
             {% if result.users is not empty %}
             <ul class="search-entity-items">
