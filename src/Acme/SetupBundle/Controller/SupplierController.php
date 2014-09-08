@@ -51,6 +51,7 @@ class SupplierController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+            $entity->setCreatedBy($this->getUser());
             $em->flush();
 
             return $this->redirect($this->generateUrl('supplier_show', array('id' => $entity->getId())));
