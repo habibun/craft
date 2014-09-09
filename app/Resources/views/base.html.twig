@@ -35,9 +35,11 @@
 <!--logo end-->
 <div class="top-nav ">
     <ul class="nav pull-right top-menu">
-        {#<li>
-            <input type="text" class="form-control search" placeholder="Search">
-        </li>#}
+        <li>
+            <form action="{{ path('general_search') }}" method="GET" id="search-form">
+                <input type="text" class="form-control search" placeholder="Search" name="search-keyword" id="search-input">
+            </form>
+        </li>
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">

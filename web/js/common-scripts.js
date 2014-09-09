@@ -169,6 +169,16 @@ $(document).on("click", "a.confirm-delete", function (e) {
     return true;
 });
 
+//search form submit functionality
+$('#search-form').submit(
+    function (evt) {
+        evt.preventDefault();
+        var searchVal = $.trim($('input[type="text"]', $(this)).val());
+        if (searchVal.length > 1) {
+            window.location = $(this).attr('action') + '/' + searchVal;
+        }
+    }
+);
 
 
 
