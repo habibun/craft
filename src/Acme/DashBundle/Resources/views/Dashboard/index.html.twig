@@ -5,19 +5,7 @@
 {% block body -%}
 
     {#{{ render(controller('AcmeDashBundle:Last:index', { 'max': 5 })) }}#}
+    {#{% include 'AcmeDashBundle:Search:searchForm.html.twig' %}#}
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-6">
-            <section class="panel">
-                <div class="well well-lg">
-                    <div class="panel search-panel">
-                        <div class="panel-body">
-                            {% include 'AcmeDashBundle:Search:searchForm.html.twig' %}
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
 
 {% endblock %}

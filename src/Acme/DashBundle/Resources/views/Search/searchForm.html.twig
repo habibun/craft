@@ -1,18 +1,30 @@
-<!-- Search form -->
-<form autocomplete="on" class="search-form bg-primary" action="{{ path('general_search') }}"
-      method="GET"
-      id="search-form">
-    <div class="input-group input-group-lg">
-        <span class="input-group-addon no-background"><i class="icon-search"></i></span>
-        <input type="text" placeholder="Type your search here..." class="form-control"
-               name="search-keyword"
-               id="search-input">
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default">Search</button>
-                    </span>
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <section class="panel">
+            <div class="well well-lg">
+                <div class="panel search-panel">
+                    <div class="panel-body">
+                        <!-- Search form -->
+                        <form autocomplete="on" class="search-form bg-primary" action="{{ path('general_search') }}"
+                              method="GET"
+                              id="search-form">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon no-background"><i class="icon-search"></i></span>
+                                <input type="text" placeholder="Type your search here..." class="form-control"
+                                       name="search-keyword"
+                                       id="search-input">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">Search</button>
+                                    </span>
+                            </div>
+                        </form>
+                        <!-- end Search form -->
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-</form>
-<!-- end Search form -->
+</div>
 
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script type="text/javascript">
