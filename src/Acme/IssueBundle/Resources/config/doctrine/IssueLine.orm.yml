@@ -10,9 +10,11 @@ Acme\IssueBundle\Entity\IssueLine:
             type: decimal
             scale: 4
         issueTo:
+            column: issue_to
             type: string
             nullable: false
         referenceNumber:
+            column: reference_number
             type: integer
             nullable: false
     manyToOne:

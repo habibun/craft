@@ -23,7 +23,23 @@ class SearchStatisticsRepository extends EntityRepository
 
         $result = array();
 
+        //search within the purchaseLine
+        $dql = 'SELECT  p.price, p.quantity,p.id id FROM AcmePurchaseBundle:PurchaseLine p
+                WHERE p.id LIKE :search_word';
 
+        $query = $this->_em->createQuery($dql)
+            ->setParameter('search_word', '%' . $search . '%');
+
+        $result['PurchaseLines'] = $query->getArrayResult();
+
+        //search within the issueLine
+        $dql = 'SELECT i.issueTo, i.referenceNumber, i.id id FROM AcmeIssueBundle:IssueLine i
+                WHERE i.issueTo LIKE :search_word';
+
+        $query = $this->_em->createQuery($dql)
+            ->setParameter('search_word', '%' . $search . '%');
+
+        $result['issueLines'] = $query->getArrayResult();
 
         //search within users
         $dql = 'SELECT u.username, u.email, u.id id FROM AcmeUserBundle:User u
