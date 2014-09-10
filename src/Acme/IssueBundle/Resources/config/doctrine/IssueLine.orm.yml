@@ -20,5 +20,7 @@ Acme\IssueBundle\Entity\IssueLine:
     manyToOne:
         issue:
             targetEntity: Acme\IssueBundle\Entity\Issue
+            nullable: false
         product:
             targetEntity: Acme\SetupBundle\Entity\Product
+            nullable: false
