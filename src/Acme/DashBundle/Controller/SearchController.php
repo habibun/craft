@@ -8,19 +8,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 
-class SearchController extends Controller {
+class SearchController extends Controller
+{
 
     /**
-     * render the Contacts page
-     *
-     * @author Iuli Dercaci
+     * render search results
      * @param $searchWord
      * @return Response
      * @Route("/search/{searchWord}", name="general_search", defaults={"searchWord"=""})
      * @Method({"GET"})
      */
 
-    public function searchAction($searchWord){
+    public function searchAction($searchWord)
+    {
 
         $result = array();
 
@@ -29,8 +29,8 @@ class SearchController extends Controller {
         if (strlen($search)) {
 
             $repository = $this->getDoctrine()
-                    ->getEntityManager()
-                    ->getRepository('AcmeDashBundle:SearchStatistics');
+                ->getEntityManager()
+                ->getRepository('AcmeDashBundle:SearchStatistics');
 
             $result = $repository->getGeneralSearchResults(strtolower($search));
 
@@ -38,20 +38,21 @@ class SearchController extends Controller {
             $repository->saveSerchRequest($search);
         }
 
-        return $this->render('AcmeDashBundle:Search:searchResult.html.twig', array(
-            'result'   => $result,
-        ));
+        return $this->render(
+            'AcmeDashBundle:Search:searchResult.html.twig',
+            array(
+                'result' => $result,
+            )
+        );
     }
 
     /**
      * list of 6 top searched words
-     *
-     * @author cchiu
      * @return Response
-     *
      * @Method({"GET"})
      */
-    public function topSearchListAction() {
+    public function topSearchListAction()
+    {
 
         //getting top 6 searched keywords from DB
         $words = $this->getDoctrine()
@@ -60,10 +61,12 @@ class SearchController extends Controller {
             ->getTopSearchedKeyWords(6);
 
         //responce
-
-        return $this->render('AcmeDashBundle:Search:topSearchList.html.twig', array(
+        return $this->render(
+            'AcmeDashBundle:Search:topSearchList.html.twig',
+            array(
                 'words' => $words,
-            ));
+            )
+        );
     }
 
 }
