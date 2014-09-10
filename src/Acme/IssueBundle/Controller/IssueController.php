@@ -2,6 +2,7 @@
 
 namespace Acme\IssueBundle\Controller;
 
+use Acme\PurchaseBundle\Entity\PurchaseLine;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\IssueBundle\Entity\Issue;
 use Acme\IssueBundle\Form\IssueType;
@@ -69,11 +70,14 @@ class IssueController extends Controller
             $em->persist($entity);
             foreach ($data['product'] as $key => $product) {
                 $line = new IssueLine();
+                $line2 = new PurchaseLine();
+                //$store_lin2 = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findOneById($line2->getId());
+                $workplace  = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findOneById($line2->getId());
                 $line->setIssue($entity);
                 $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
                 $line->setQuantity($data['quantity'][$key]);
                 $line->setIssueTo($data['issueTo'][$key]);
-                $line->setReferenceNumber($data['referenceNumber'][$key]);
+                $line->setReferenceNumber($workplace);
                 $em->persist($line);
             }
             $em->flush();

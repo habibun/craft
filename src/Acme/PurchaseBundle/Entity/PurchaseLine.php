@@ -3,6 +3,8 @@
 namespace Acme\PurchaseBundle\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class PurchaseLine
 {
     protected $id;
@@ -13,6 +15,13 @@ class PurchaseLine
     protected $purchase;
     protected $issueLines;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->issueLines = new ArrayCollection();
+    }
     /**
      * @param mixed $id
      */

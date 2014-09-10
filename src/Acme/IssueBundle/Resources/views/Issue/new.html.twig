@@ -116,11 +116,16 @@
                 return false;
             }
 
+            if (!$('#issue_line_referenceNumber').val()) {
+                noty({force: true, text: 'Please fill the form correctly', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+
             var html = '<tr class="' + $('#issue_line_product').val() + '">';
             html += '<td>' + $('#issue_line_product option:selected').text() + '<input type="hidden" value="' + $('#issue_line_product').val() + '" name="' + $('#issue_line_product').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_quantity').val() + '<input type="hidden" value="' + $('#issue_line_quantity').val() + '" name="' + $('#issue_line_quantity').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_issueTo').val() + '<input type="hidden" value="' + $('#issue_line_issueTo').val() + '" name="' + $('#issue_line_issueTo').attr('name') + '[]" /></td>';
-            html += '<td>' + $('#issue_line_referenceNumber').val() + '<input type="hidden" value="' + $('#issue_line_referenceNumber').val() + '" name="' + $('#issue_line_referenceNumber').attr('name') + '[]" /></td>';
+            html += '<td>' + $('#issue_line_referenceNumber option:selected').text() + '<input type="hidden" value="' + $('#issue_line_referenceNumber').val() + '" name="' + $('#issue_line_referenceNumber').attr('name') + '[]" /></td>';
             html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';
             html += '</tr>';
             $('table#lineViewer tbody').append(html);

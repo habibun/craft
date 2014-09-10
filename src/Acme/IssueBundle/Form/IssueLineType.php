@@ -22,7 +22,7 @@ class IssueLineType extends AbstractType
                 array(
                     'class' => 'AcmePurchaseBundle:PurchaseLine',
                     'property' => 'id',
-                    'empty_value' => 'Select Reference',
+                    'empty_value' => 'Select Reference Number',
                     'query_builder' => function (EntityRepository $er) {
                             return $er->createQueryBuilder('i')
                                 ->orderBy('i.id', 'DESC');
