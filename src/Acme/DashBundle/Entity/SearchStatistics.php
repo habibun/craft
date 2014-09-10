@@ -5,8 +5,7 @@ namespace Acme\DashBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Xshare\ProductBundle\Entity\SearchStatistics
- *
+ * Acme\DashBundle\Entity\SearchStatistics
  * @ORM\Table(name="search_statistics")
  * @ORM\Entity(repositoryClass="Acme\DashBundle\Repository\SearchStatisticsRepository")
  */
@@ -36,7 +35,6 @@ class SearchStatistics
 
     /**
      * Get search_id
-     *
      * @return integer
      */
     public function getSearchId()
@@ -46,7 +44,6 @@ class SearchStatistics
 
     /**
      * Set keyword_search
-     *
      * @param string $keywordSearch
      */
     public function setKeywordSearch($keywordSearch)
@@ -56,7 +53,6 @@ class SearchStatistics
 
     /**
      * Get keyword_search
-     *
      * @return string
      */
     public function getKeywordSearch()
@@ -66,7 +62,6 @@ class SearchStatistics
 
     /**
      * Set date_search
-     *
      * @param datetime $dateSearch
      */
     public function setDateSearch($dateSearch)
@@ -76,7 +71,6 @@ class SearchStatistics
 
     /**
      * Get date_search
-     *
      * @return datetime
      */
     public function getDateSearch()
