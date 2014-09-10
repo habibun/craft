@@ -16,9 +16,19 @@ class IssueLineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('referenceNumber','integer',array(
-                    'label' => "Ref No"
-                ))
+            ->add(
+                'referenceNumber',
+                'entity',
+                array(
+                    'class' => 'AcmePurchaseBundle:PurchaseLine',
+                    'property' => 'id',
+                    'empty_value' => 'Select Reference',
+                    'query_builder' => function (EntityRepository $er) {
+                            return $er->createQueryBuilder('i')
+                                ->orderBy('i.id', 'DESC');
+                        }
+                )
+            )
             ->add('issueTo')
             ->add(
                 'product',

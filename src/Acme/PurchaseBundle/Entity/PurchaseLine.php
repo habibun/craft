@@ -11,6 +11,7 @@ class PurchaseLine
     protected $price;
     protected $item;
     protected $purchase;
+    protected $issueLines;
 
     /**
      * @param mixed $id
@@ -108,5 +109,19 @@ class PurchaseLine
         return $this->quantity;
     }
 
+    /**
+     * @param mixed $issueLines
+     */
+    public function setIssueLines($issueLines)
+    {
+        $this->issueLines = $issueLines;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getIssueLines()
+    {
+        return $this->issueLines;
+    }
 }
