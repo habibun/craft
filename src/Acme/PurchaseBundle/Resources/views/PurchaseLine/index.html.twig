@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}PurchaseLine{% endblock %}
+
+{% block body -%}
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>PurchaseLine list</strong>
+                <span class="tools pull-right">
+                    <a class="icon-chevron-down" href="javascript:;"></a>
+                    <a class="icon-remove" href="javascript:;"></a>
+                </span>
+                </header>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Transaction No</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Purchase Id</th>
+                        <th>Purchase Date</th>
+                        <th>Supplier Name</th>
+                        <th>Created At</th>
+                        <th>Created By</th>
+                        <th>Updated At</th>
+                        <th>Updated By</th>
+                        <th>Finalize Date</th>
+                        <th>Finalize By</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{{ entity.id }}</td>
+                            <td>{{ entity.product.name }}</td>
+                            <td>{{ entity.quantity }}</td>
+                            <td>{{ entity.price }}</td>
+                            <td>{{ entity.purchase.id }}</td>
+                            <td>{{ entity.purchase.purchaseDate|date('Y-m-d') }}</td>
+                            <td>{{ entity.purchase.supplier.name }}</td>
+                            <td>{{ entity.purchase.createdAt|date('Y-m-d H:i:s') }}</td>
+                            <td>{{ entity.purchase.createdBy }}</td>
+                            <td>{{ entity.purchase.updatedAt|date('Y-m-d H:i:s') }}</td>
+                            <td>{{ entity.purchase.updatedBy }}</td>
+                            <td>{{ entity.purchase.finalizeDate|date('Y-m-d H:i:s') }}</td>
+                            <td>{{ entity.purchase.finalizedBy }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+{% endblock %}

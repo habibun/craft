@@ -6,3 +6,6 @@ AcmePurchaseBundle_purchase:
     resource: "@AcmePurchaseBundle/Resources/config/routing/purchase.yml"
     prefix:   /purchase
 
+AcmePurchaseBundle_purchase_line:
+    resource: "@AcmePurchaseBundle/Resources/config/routing/purchaseline.yml"
+    prefix:   /purchase-line

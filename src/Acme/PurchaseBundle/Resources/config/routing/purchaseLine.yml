@@ -1,0 +1,8 @@
+purchase_line:
+    pattern:  /
+    defaults: { _controller: "AcmePurchaseBundle:PurchaseLine:index" }
+
+purchase_line_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AcmePurchaseBundle:PurchaseLine:show" }
+
