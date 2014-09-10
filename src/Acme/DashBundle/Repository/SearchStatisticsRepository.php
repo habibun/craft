@@ -14,12 +14,11 @@ class SearchStatisticsRepository extends EntityRepository
 
     /**
      * general search implementation
-     *
-     * @author Iuli Dercaci
      * @param string $search
      * @return array
      */
-    public function getGeneralSearchResults($search) {
+    public function getGeneralSearchResults($search)
+    {
 
         $result = array();
 
@@ -46,7 +45,7 @@ class SearchStatisticsRepository extends EntityRepository
                 WHERE u.username LIKE :search_word';
 
         $query = $this->_em->createQuery($dql)
-                    ->setParameter('search_word', '%' . $search . '%');
+            ->setParameter('search_word', '%' . $search . '%');
 
         $result['users'] = $query->getArrayResult();
 
@@ -56,35 +55,33 @@ class SearchStatisticsRepository extends EntityRepository
 
     /**
      * saving the search word
-     *
      * @param string $searchWord
      * @return boolean
      */
-    public function saveSerchRequest($searchWord) {
+    public function saveSerchRequest($searchWord)
+    {
 
-            $statistics = new SearchStatistics();
-            $statistics->setKeywordSearch($searchWord);
-            $this->_em->persist($statistics);
-            $this->_em->flush();
+        $statistics = new SearchStatistics();
+        $statistics->setKeywordSearch($searchWord);
+        $this->_em->persist($statistics);
+        $this->_em->flush();
 
-            return true;
+        return true;
     }
 
     /**
-     * @author cchiu
      * get top 6 searched keywords
-     *
      * @param int $limit
      * @return \MakerLabs\PagerBundle\Adapter\ArrayAdapter
      */
     public function getTopSearchedKeyWords($limit = null)
     {
         $qb = $this->_em->createQueryBuilder()
-                ->select('s.keyword_search, count(s.search_id) as keywords')
-                ->from('XshareProductBundle:SearchStatistics', 's')
-                ->groupBy('s.keyword_search')
-                ->orderBy('keywords','desc')
-                ->setMaxResults($limit);
+            ->select('s.keyword_search, count(s.search_id) as keywords')
+            ->from('AcmeDashBundle:SearchStatistics', 's')
+            ->groupBy('s.keyword_search')
+            ->orderBy('keywords', 'desc')
+            ->setMaxResults($limit);
 
         $res = $qb->getQuery()->getArrayResult();
 
