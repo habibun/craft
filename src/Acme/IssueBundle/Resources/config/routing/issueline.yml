@@ -1,0 +1,8 @@
+issue_line:
+    pattern:  /
+    defaults: { _controller: "AcmeIssueBundle:IssueLine:index" }
+
+issue_line_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AcmeIssueBundle:IssueLine:show" }
+

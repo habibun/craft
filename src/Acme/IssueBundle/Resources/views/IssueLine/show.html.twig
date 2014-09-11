@@ -1,0 +1,79 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}IssueLine{% endblock %}
+
+{% block body -%}
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Reference Number # {{ entity.referenceNumber ? entity.referenceNumber.id|capitalize }}</strong>
+                <span class="tools pull-right">
+                    <a class="icon-chevron-down" href="javascript:;"></a>
+                    <a class="icon-remove" href="javascript:;"></a>
+                </span>
+                </header>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th>Reference No</th>
+                        <td>{{ entity.referenceNumber ? entity.referenceNumber.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Product Name</th>
+                        <td>{{ entity.product.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        <td>{{ entity.quantity }}</td>
+                    </tr>
+                    <tr>
+                        <th>Issue To</th>
+                        <td>{{ entity.issueTo }}</td>
+                    </tr>
+                    <tr>
+                        <th>Issue Id</th>
+                        <td>{{ entity.issue.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Issue Date</th>
+                        <td>{{ entity.issue.issueDate|date('Y-m-d') }}</td>
+                    </tr>
+                    <tr>
+                        <th>To Company</th>
+                        <td>{{ entity.issue.company.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>To Depot</th>
+                        <td>{{ entity.issue.depot.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td>{{ entity.issue.createdAt|date('Y-m-d H:i:s') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Created By</th>
+                        <td>{{ entity.issue.createdBy }}</td>
+                    </tr>
+                    <tr>
+                        <th>Updated At</th>
+                        <td>{{ entity.issue.updatedAt|date('Y-m-d H:i:s') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Updated By</th>
+                        <td>{{ entity.issue.updatedBy }}</td>
+                    </tr>
+                    <tr>
+                        <th>Finalize Date</th>
+                        <td>{{ entity.issue.finalizeDate|date('Y-m-d H:i:s') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Finalized By</th>
+                        <td>{{ entity.issue.finalizedBy }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+{% endblock %}

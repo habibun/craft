@@ -5,3 +5,8 @@ acme_issue_homepage:
 AcmeIssueBundle_issue:
     resource: "@AcmeIssueBundle/Resources/config/routing/issue.yml"
     prefix:   /issue
+
+AcmeIssueBundle_issue_line:
+    resource: "@AcmeIssueBundle/Resources/config/routing/issueline.yml"
+    prefix:   /issue-line
+
