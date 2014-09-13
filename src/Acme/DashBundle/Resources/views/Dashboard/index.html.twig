@@ -3,6 +3,16 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body -%}
+    <div class="row">
+        <div class="col-lg-12">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb">
+                <span class="text-info">You are here <span class="divider">»</span></span>
+                <li><i class="icon-home"></i> Dashboard</li>
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+    </div>
 
     {#{{ render(controller('AcmeDashBundle:Last:index', { 'max': 5 })) }}#}
     {#{% include 'AcmeDashBundle:Search:searchForm.html.twig' %}#}

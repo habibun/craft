@@ -4635,3 +4635,9 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 .site-min-height {
     min-height: 900px;
 }
+
+.my-add {
+    margin-right: -14px;
+    margin-top: -6px;
+}
+
