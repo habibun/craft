@@ -70,14 +70,11 @@ class IssueController extends Controller
             $em->persist($entity);
             foreach ($data['product'] as $key => $product) {
                 $line = new IssueLine();
-                $line2 = new PurchaseLine();
-                //$store_lin2 = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findOneById($line2->getId());
-                $workplace  = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findOneById($line2->getId());
                 $line->setIssue($entity);
                 $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->find($product));
                 $line->setQuantity($data['quantity'][$key]);
                 $line->setIssueTo($data['issueTo'][$key]);
-                $line->setReferenceNumber($workplace);
+                $line->setReferenceNumber($data['referenceNumber'][$key]);
                 $em->persist($line);
             }
             $em->flush();

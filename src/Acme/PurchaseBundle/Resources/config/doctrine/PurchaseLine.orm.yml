@@ -14,10 +14,6 @@ Acme\PurchaseBundle\Entity\PurchaseLine:
             type: decimal
             scale: 2
             nullable: false
-    oneToMany:
-        issueLines:
-            targetEntity: Acme\PurchaseBundle\Entity\PurchaseLine
-            mappedBy: referenceNumber
     manyToOne:
         product:
             targetEntity: Acme\SetupBundle\Entity\Product

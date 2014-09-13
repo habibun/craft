@@ -13,6 +13,10 @@ Acme\IssueBundle\Entity\IssueLine:
             column: issue_to
             type: string
             nullable: false
+        referenceNumber:
+            column: reference_number
+            type: integer
+            nullable: false
     manyToOne:
         issue:
             targetEntity: Acme\IssueBundle\Entity\Issue
@@ -20,10 +24,3 @@ Acme\IssueBundle\Entity\IssueLine:
         product:
             targetEntity: Acme\SetupBundle\Entity\Product
             nullable: false
-        referenceNumber:
-            targetEntity: Acme\PurchaseBundle\Entity\PurchaseLine
-            inversedBy: issueLines
-            nullable: false
-            joinColumn:
-              name: reference_number
-              referencedColumnName: id
