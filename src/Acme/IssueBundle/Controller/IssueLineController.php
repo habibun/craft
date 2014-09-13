@@ -24,10 +24,10 @@ class IssueLineController extends Controller{
             ));
     }
 
-    public function showAction($id)
+    public function showAction($PurchaseLine,$id)
     {
         $p = new PurchaseLine();
-        $id = $p->getId();
+        $this->$id = $p->getId();
 
 
         $em = $this->getDoctrine()->getManager();
