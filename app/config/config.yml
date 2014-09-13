@@ -32,6 +32,7 @@ twig:
     form:
         resources:
             - "::form_div_layout.html.twig"
+            - 'AcmeUserBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
