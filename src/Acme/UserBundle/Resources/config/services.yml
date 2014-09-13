@@ -1,7 +1,8 @@
 parameters:
-#    acme_user.example.class: Acme\UserBundle\Example
+    acme_user.my_twig_extension.class: Acme\UserBundle\Twig\MyTwigExtension
 
 services:
-#    acme_user.example:
-#        class: %acme_user.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    acme_user.my_twig_extension:
+        class: %acme_user.my_twig_extension.class%
+        tags:
+            - { name: twig.extension }
