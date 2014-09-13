@@ -36,7 +36,7 @@
                         <tbody>
                         {% for entity in entities %}
                             <tr>
-                                <td>{{ entity.referenceNumber ? entity.referenceNumber.id }}</td>
+                                <td>{{ entity.referenceNumber }}</td>
                                 <td>{{ entity.product.name }}</td>
                                 <td>{{ entity.quantity }}</td>
                                 <td>{{ entity.issueTo }}</td>
