@@ -65,6 +65,7 @@ class PurchaseController extends Controller
                 $line = new PurchaseLine();
                 $line->setPurchase($entity);
                 $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->findOneById($product));
+                $line->setManufacturer($data['manufacturer'][$key]);
                 $line->setQuantity($data['quantity'][$key]);
                 $line->setPrice($data['price'][$key]);
                 $em->persist($line);
@@ -262,6 +263,7 @@ class PurchaseController extends Controller
                     $line = new PurchaseLine();
                     $line->setPurchase($purchase);
                     $line->setProduct($em->getRepository('AcmeSetupBundle:Product')->findOneById($product));
+                    $line->setManufacturer($data['manufacturer'][$key]);
                     $line->setQuantity($data['quantity'][$key]);
                     $line->setPrice($data['price'][$key]);
                     $em->persist($line);

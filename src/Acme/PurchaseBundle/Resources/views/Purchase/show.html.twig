@@ -85,6 +85,7 @@
                         <thead>
                         <tr>
                             <th>Product</th>
+                            <th>Manufacturer</th>
                             <th>Quantity</th>
                             <th>Price</th>
                             <th>Transaction No</th>
@@ -94,6 +95,7 @@
                         {% for line in purchaseLines %}
                             <tr>
                                 <td>{{ line.product }}</td>
+                                <td>{{ line.manufacturer }}</td>
                                 <td>{{ line.quantity }}</td>
                                 <td>{{ line.price }}</td>
                                 <td>{{ line.id }}</td>

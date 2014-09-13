@@ -54,6 +54,7 @@
                     {{ bootstrap_set_style('horizontal') }}
                     {{ form_start(line_form, {'attr' :  { 'class': 'form-horizontal', 'id': 'lineForm' } }) }}
                     {{ form_row(line_form.product) }}
+                    {{ form_row(line_form.manufacturer) }}
                     {{ form_row(line_form.quantity) }}
                     {{ form_row(line_form.price) }}
                     <span class="pull-right">
@@ -80,6 +81,7 @@
                         <thead>
                         <tr>
                             <th>Product</th>
+                            <th>Manufacturer</th>
                             <th>Amount</th>
                             <th>Price</th>
                             <th>Action</th>
@@ -89,6 +91,7 @@
                         {% for line in lines %}
                             <tr class="{{ line.product.getId() }}">
                                 <td>{{ line.product }}</td>
+                                <td>{{ line.manufacturer }}</td>
                                 <td>{{ line.quantity }}</td>
                                 <td>{{ line.price }}</td>
                                 <td><a href="{{ path('purchase_line_delete', {'id' : line.getId() }) }}"
@@ -142,6 +145,7 @@
 
             var html = '<tr class="' + $('#purchase_line_product').val() + '">';
             html += '<td>' + $('#purchase_line_product option:selected').text() + '<input type="hidden" value="' + $('#purchase_line_product').val() + '" name="' + $('#purchase_line_product').attr('name') + '[]" /></td>';
+            html += '<td>' + $('#purchase_line_manufacturer').val() + '<input type="hidden" value="' + $('#purchase_line_manufacturer').val() + '" name="' + $('#purchase_line_manufacturer').attr('name') + '[]" /></td>';
             html += '<td>' + $('#purchase_line_quantity').val() + '<input type="hidden" value="' + $('#purchase_line_quantity').val() + '" name="' + $('#purchase_line_quantity').attr('name') + '[]" /></td>';
             html += '<td>' + $('#purchase_line_price').val() + '<input type="hidden" value="' + $('#purchase_line_price').val() + '" name="' + $('#purchase_line_price').attr('name') + '[]" /></td>';
             html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';

@@ -14,6 +14,9 @@ Acme\PurchaseBundle\Entity\PurchaseLine:
             type: decimal
             scale: 2
             nullable: false
+        manufacturer:
+            type: string
+            nullable: true
     manyToOne:
         product:
             targetEntity: Acme\SetupBundle\Entity\Product

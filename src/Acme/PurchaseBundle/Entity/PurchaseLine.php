@@ -2,9 +2,6 @@
 
 namespace Acme\PurchaseBundle\Entity;
 
-
-use Doctrine\Common\Collections\ArrayCollection;
-
 class PurchaseLine
 {
     protected $id;
@@ -13,14 +10,8 @@ class PurchaseLine
     protected $price;
     protected $item;
     protected $purchase;
+    protected $manufacturer;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->issueLines = new ArrayCollection();
-    }
     /**
      * @param mixed $id
      */
@@ -51,6 +42,22 @@ class PurchaseLine
     public function getItem()
     {
         return $this->item;
+    }
+
+    /**
+     * @param mixed $manufacturer
+     */
+    public function setManufacturer($manufacturer)
+    {
+        $this->manufacturer = $manufacturer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getManufacturer()
+    {
+        return $this->manufacturer;
     }
 
     /**

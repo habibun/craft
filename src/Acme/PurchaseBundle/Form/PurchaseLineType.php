@@ -30,6 +30,7 @@ class PurchaseLineType extends AbstractType
                     'attr' => array('class' => 'chosen-select')
                 )
             )
+            ->add('manufacturer')
             ->add('quantity')
             ->add('price');
     }
