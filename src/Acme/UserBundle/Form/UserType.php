@@ -24,12 +24,7 @@ class UserType extends AbstractType
         $builder
             ->add('username', 'text')
             ->add('email', 'email')
-            ->add('password', 'repeated', array(
-                    'type' => 'password',
-                    'first_options' => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Confirm your password'),
-                    'invalid_message' => "The entered passwords don't match",
-                ))
+            ->add('password')
             ->add('enabled', 'checkbox')
             ->add('roles', 'choice', array(
                 'choices' => $this->_flattenArray($this->rolesChoices),
