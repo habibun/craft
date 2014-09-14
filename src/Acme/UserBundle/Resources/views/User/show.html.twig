@@ -63,9 +63,7 @@
                         <th>Roles</th>
                         <td>
                             <ul>
-                                {% for role in entity.roles %}
-                                    <li>{{ role }}</li>
-                                {% endfor %}
+                                {{ entity.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}
                             </ul>
                         </td>
                     </tr>
