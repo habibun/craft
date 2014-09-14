@@ -26,10 +26,9 @@ class UserType extends AbstractType
             ->add('email', 'email')
             ->add('password', 'repeated', array(
                     'type' => 'password',
-                    'options' => array('translation_domain' => 'FOSUserBundle'),
-                    'first_options' => array('label' => 'form.password'),
-                    'second_options' => array('label' => 'form.password_confirmation'),
-                    'invalid_message' => 'fos_user.password.mismatch',
+                    'first_options' => array('label' => 'Password'),
+                    'second_options' => array('label' => 'Confirm your password'),
+                    'invalid_message' => "The entered passwords don't match",
                 ))
             ->add('enabled', 'checkbox')
             ->add('roles', 'choice', array(

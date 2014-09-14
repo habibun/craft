@@ -13,6 +13,7 @@ group:
 
 # Security
 "Bad credentials": Invalid username or password
+"User account is disabled.": User account is disabled.
 
 security:
     login:
@@ -91,6 +92,6 @@ form:
     email: "Email:"
     current_password: "Current password:"
     password: "Password:"
-    password_confirmation: "Confirm your password:"
+    password_confirmation: "Verification:"
     new_password: "New password:"
     new_password_confirmation: "Verification:"
