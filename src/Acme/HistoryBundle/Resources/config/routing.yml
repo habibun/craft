@@ -1,3 +1,11 @@
 acme_history_homepage:
     path:     /hello/{name}
     defaults: { _controller: AcmeHistoryBundle:Default:index }
+
+acme_history_purchase:
+    pattern: /purchase
+    defaults: { _controller:  AcmeHistoryBundle:History:purchase  }
+
+acme_history_issue:
+    pattern: /issue
+    defaults: { _controller:  AcmeHistoryBundle:History:issue  }
