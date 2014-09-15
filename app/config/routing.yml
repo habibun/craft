@@ -1,3 +1,7 @@
+acme_history:
+    resource: "@AcmeHistoryBundle/Resources/config/routing.yml"
+    prefix:   /
+
 acme_report:
     resource: "@AcmeReportBundle/Resources/config/routing.yml"
     prefix:   /
