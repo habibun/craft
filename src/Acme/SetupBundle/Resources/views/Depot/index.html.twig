@@ -7,10 +7,8 @@
         <div class="col-lg-12">
             <!--breadcrumbs start -->
             <ul class="breadcrumb">
-                <span class="text-info">You are here <span class="divider">»</span></span>
-                <li>
-                    <a href="{{ path('dashboard') }}"><i class="icon-home"></i>Dashboard</a>
-                </li>
+                <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
+                <li class="active">Setup</li>
                 <li class="active">Depot</li>
                 <ul class="pull-right">
                     <a class="btn btn-sm btn-primary my-add" href="{{ path('depot_new') }}">
