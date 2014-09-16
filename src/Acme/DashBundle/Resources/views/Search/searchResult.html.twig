@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{#{% extends '::base.html.twig' %}#}
 
 {% block title %}Search-Results{% endblock %}
 
@@ -9,9 +9,9 @@
         {% if result.PurchaseLines is not empty %}
             <dl class="search-entity-items">
                 {% for item in result.PurchaseLines %}
-                    <dt><a class="search-entity-name"
-                           href="{{ path('purchase_show', { id: item.id }) }}">{{ item.id }}</a></dt>
-                    <dd>{{ item.id }}</dd>
+                    <dt>{{ item.manufacturer }}</dt>
+                    <dd>{{ item.price }}</dd>
+                    <dd>{{ item.product.name }}</dd>
                 {% endfor %}
             </dl>
         {% endif %}
@@ -20,20 +20,12 @@
             <ul class="search-entity-items">
                 {% for item in result.issueLines %}
                     <li><a class="search-entity-name"
-                           href="{{ path('issue_show', { id: item.id }) }}">{{ item.issueTo }}</a></li>
+                           href="{{ path('issue_show', { id: item.id }) }}">{{ item.referenceNumber }}</a></li>
                 {% endfor %}
             </ul>
         {% endif %}
 
-        {% if result.users is not empty %}
-            <ul class="search-entity-items">
-                {% for item in result.users %}
-                    <li><a class="search-entity-name"
-                           href="{{ path('user_show', { id: item.id }) }}">{{ item.username }}</a> {{ item.email }}</li>
 
-                {% endfor %}
-            </ul>
-        {% endif %}
 
         {% if result.PurchaseLines is empty and result.issueLines is empty and result.users is empty %}
             <p>There are no results</p>

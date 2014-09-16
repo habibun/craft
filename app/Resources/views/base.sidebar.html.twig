@@ -26,6 +26,19 @@
         </li>
         {% endif %}
 
+        {% if is_granted('ROLE_HISTORY') %}
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="icon-book text-primary"></i>
+                    <span>History</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="{{ path('acme_history_purchase') }}"><i class="icon-book"></i>Purchase History</a></li>
+                    <li><a  href="{{ path('acme_history_issue') }}"><i class="icon-book"></i>Issue History</a></li>
+                </ul>
+            </li>
+        {% endif %}
+
         {% if is_granted('ROLE_SETUP') %}
         <li class="sub-menu">
             <a href="javascript:;">
@@ -45,7 +58,7 @@
         {% if is_granted('ROLE_REPORT') %}
         <li class="sub-menu">
             <a href="javascript:;">
-                <i class="icon-book text-primary"></i>
+                <i class="icon-th-list text-primary"></i>
                 <span>Reports</span>
             </a>
             <ul class="sub">
