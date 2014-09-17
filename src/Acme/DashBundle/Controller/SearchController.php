@@ -7,10 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-
 class SearchController extends Controller
 {
-
     /**
      * render search results
      * @param $searchWord
@@ -21,7 +19,6 @@ class SearchController extends Controller
 
     public function searchAction($searchWord)
     {
-
         $result = array();
 
         $search = trim($searchWord);
@@ -53,10 +50,9 @@ class SearchController extends Controller
      */
     public function topSearchListAction()
     {
-
         //getting top 6 searched keywords from DB
         $words = $this->getDoctrine()
-            ->getEntityManager()
+            ->getManager()
             ->getRepository("AcmeDashBundle:SearchStatistics")
             ->getTopSearchedKeyWords(6);
 
@@ -68,5 +64,4 @@ class SearchController extends Controller
             )
         );
     }
-
 }
