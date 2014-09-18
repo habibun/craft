@@ -23,17 +23,19 @@ class SearchStatisticsRepository extends EntityRepository
         $result = array();
 
         //search within the purchaseLine for price
-        $dql = 'SELECT p.price, p.manufacturer, p.quantity, p.id id
+        $dql = 'SELECT p.price, p.manufacturer, p.quantity, p.id id, pr.name, pu.purchaseDate
                 FROM AcmePurchaseBundle:PurchaseLine p
-                LEFT JOIN p.product j
-                WHERE (p.manufacturer LIKE :search_word)';
+                JOIN p.product pr
+                JOIN p.purchase pu
+                WHERE (pr.name LIKE :search_word)
+                ORDER BY p.id DESC';
 
         $query = $this->_em->createQuery($dql)
             ->setParameter('search_word', '%' . $search . '%');
 
         $result['PurchaseLines'] = $query->getArrayResult();
 
-        //search within the issueLine
+        //search within the issueLine for issue
         $dql = 'SELECT i.issueTo, i.referenceNumber, i.id id FROM AcmeIssueBundle:IssueLine i
                 WHERE i.referenceNumber LIKE :search_word';
 

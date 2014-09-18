@@ -11,7 +11,8 @@
                 {% for item in result.PurchaseLines %}
                     <dt>{{ item.manufacturer }}</dt>
                     <dd>{{ item.price }}</dd>
-                    <dd>{{ item.product.name }}</dd>
+                    <dd>{{ item.name }}</dd>
+                    <dd>{{ item.purchaseDate|date('Y-m-d') }}</dd>
                 {% endfor %}
             </dl>
         {% endif %}
