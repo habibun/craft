@@ -28,7 +28,8 @@ class HistoryController extends Controller
             ->leftJoin('pu.supplier', 'su')
             ->leftJoin('pu.createdBy', 'us')
             ->leftJoin('pu.updatedBy', 'use')
-            ->leftJoin('pu.finalizedBy', 'user');
+            ->leftJoin('pu.finalizedBy', 'user')
+            ->add('orderBy', 'p.id ASC');
 
         $gridConfig = new GridConfig();
         $gridConfig
@@ -44,23 +45,12 @@ class HistoryController extends Controller
                     'formatValueCallback' => function ($value) {
                             return $value->format('Y/m/d');
                         }
-                ))
-            )
+                )))
             ->addField(new Field('p.purchase.supplier.name', array('label' => 'Supplier')))
             ->addField(new Field('p.purchase.createdAt', array('label' => 'Created At')))
-            ->addField(
-                new Field('p.purchase.createdBy', array(
-                    'label' => 'Created By',
-                    'formatValueCallback' => function ($createdBy) {
-                            if (isset($createdBy['username'])) {
-                                return $createdBy['username'];
-                            }
-                        }
-                ))
-            )
+            ->addField(new Field('p.purchase.createdBy.username', array('label' => 'Created By')))
             ->addField(new Field('p.purchase.updatedAt', array('label' => 'Updated At')))
-            ->addField(
-                new Field('p.purchase.updatedBy', array(
+            ->addField(new Field('p.purchase.updatedBy', array(
                     'label' => 'Updated By',
                     'nullIfNotExists' => true,
                     'formatValueCallback' => function ($updatedBy) {
@@ -72,10 +62,10 @@ class HistoryController extends Controller
             )
             ->addField(new Field('p.purchase.finalizedAt', array(
                     'label' => 'Finalized At',
-                    'nullIfNotExists'=>true,
-                )))
-            ->addField(
-                new Field('p.purchase.finalizedBy', array(
+                    'nullIfNotExists' => true,
+                ))
+            )
+            ->addField(new Field('p.purchase.finalizedBy', array(
                     'label' => 'Finalized By',
                     'nullIfNotExists' => true,
                     'formatValueCallback' => function ($finalizedBy) {
@@ -118,7 +108,9 @@ class HistoryController extends Controller
             ->leftJoin('iss.depot', 'de')
             ->leftJoin('iss.createdBy', 'cr')
             ->leftJoin('iss.updatedBy', 'up')
-            ->leftJoin('iss.finalizedBy', 'fin');
+            ->leftJoin('iss.finalizedBy', 'fin')
+            ->add('orderBy', 'i.referenceNumber ASC');
+
 
         $gridConfig = new GridConfig();
         $gridConfig
@@ -134,28 +126,38 @@ class HistoryController extends Controller
                     'formatValueCallback' => function ($value) {
                             return $value->format('Y/m/d');
                         }
-                ))
-            )
+                )))
             ->addField(new Field('i.issue.company.name', array('label' => 'To Company')))
             ->addField(new Field('i.issue.depot.name', array('label' => 'To Depot')))
             ->addField(new Field('i.issue.createdAt', array('label' => 'Created At')))
             ->addField(new Field('i.issue.createdBy.username', array('label' => 'Created By')))
-            ->addField(new Field('i.issue.updatedAt', array(
+            ->addField(
+                new Field('i.issue.updatedAt', array(
                     'label' => 'Updated At',
-                    'nullIfNotExists'=>true,
-                )))
-            ->addField(new Field('i.issue.updatedBy', array(
+                    'nullIfNotExists' => true,
+                ))
+            )
+            ->addField(
+                new Field('i.issue.updatedBy', array(
                     'label' => 'Updated By',
-                    'nullIfNotExists'=>true,
-                )))
-            ->addField(new Field('i.issue.finalizedAt', array(
+                    'nullIfNotExists' => true,
+                    'formatValueCallback' => function ($updatedBy) {
+                            if (isset($updatedBy['username'])) {
+                                return $updatedBy['username'];
+                            }
+                        }
+                ))
+            )
+            ->addField(
+                new Field('i.issue.finalizedAt', array(
                     'label' => 'Finalized At',
-                    'nullIfNotExists'=>true,
-                )))
+                    'nullIfNotExists' => true,
+                ))
+            )
             ->addField(
                 new Field('i.issue.finalizedBy', array(
                     'label' => 'Finalized By',
-                    'nullIfNotExists'=>true,
+                    'nullIfNotExists' => true,
                     'formatValueCallback' => function ($finalizedBy) {
                             if (isset($finalizedBy['username'])) {
                                 return $finalizedBy['username'];
