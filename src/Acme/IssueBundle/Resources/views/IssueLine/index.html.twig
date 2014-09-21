@@ -29,7 +29,7 @@
                             <th>Created By</th>
                             <th>Updated At</th>
                             <th>Updated By</th>
-                            <th>Finalize Date</th>
+                            <th>Finalized At</th>
                             <th>Finalized By</th>
                         </tr>
                         </thead>
@@ -48,7 +48,7 @@
                                 <td>{{ entity.issue.createdBy }}</td>
                                 <td>{{ entity.issue.updatedAt|date('Y-m-d H:i:s') }}</td>
                                 <td>{{ entity.issue.updatedBy }}</td>
-                                <td>{{ entity.issue.finalizeDate|date('Y-m-d H:i:s') }}</td>
+                                <td>{{ entity.issue.finalizedAt|date('Y-m-d H:i:s') }}</td>
                                 <td>{{ entity.issue.finalizedBy }}</td>
                             </tr>
                         {% endfor %}

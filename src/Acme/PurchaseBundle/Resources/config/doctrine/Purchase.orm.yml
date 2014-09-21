@@ -22,8 +22,8 @@ Acme\PurchaseBundle\Entity\Purchase:
             column: updated_at
             type: datetime
             nullable: true
-        finalizeDate:
-            column: finalize_date
+        finalizedAt:
+            column: finalized_at
             type: datetime
             nullable: true
     oneToMany:
@@ -53,4 +53,4 @@ Acme\PurchaseBundle\Entity\Purchase:
                 name: finalized_by
     lifecycleCallbacks:
         prePersist: [setCreatedAt]
-        preUpdate: [setupdatedAt]
+        preUpdate: [setUpdatedAt]

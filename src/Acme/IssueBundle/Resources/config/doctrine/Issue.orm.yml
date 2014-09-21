@@ -22,8 +22,8 @@ Acme\IssueBundle\Entity\Issue:
             column: updated_at
             type: datetime
             nullable: true
-        finalizeDate:
-            column: finalize_date
+        finalizedAt:
+            column: finalized_at
             type: datetime
             nullable: true
     manyToOne:
@@ -53,4 +53,4 @@ Acme\IssueBundle\Entity\Issue:
                 name: finalized_by
     lifecycleCallbacks:
         prePersist: [setCreatedAt]
-        preUpdate: [setupdatedAt]
+        preUpdate: [setUpdatedAt]

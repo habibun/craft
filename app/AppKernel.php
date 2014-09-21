@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Acme\ReportBundle\AcmeReportBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Acme\HistoryBundle\AcmeHistoryBundle(),
+            new Kitpages\DataGridBundle\KitpagesDataGridBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

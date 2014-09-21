@@ -358,7 +358,7 @@ class IssueController extends Controller
         }
         $entity->setStatus(1);
         $entity->setFinalizedBy($this->getUser());
-        $entity->setfinalizeDate(new \DateTime('now'));
+        $entity->setFinalizedAt(new \DateTime('now'));
         $em->flush();
         $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
 
@@ -375,7 +375,7 @@ class IssueController extends Controller
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
         $entity->setStatus(0);
-        $entity->setfinalizeDate(null);
+        $entity->setFinalizedAt(null);
         $em->flush();
         $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
 

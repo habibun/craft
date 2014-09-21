@@ -17,8 +17,8 @@ class Purchase
     protected $createdBy;
     protected $updatedAt;
     protected $updatedBy;
+    protected $finalizedAt;
     protected $finalizedBy;
-    protected $finalizeDate;
 
     /**
      * Constructor
@@ -61,19 +61,19 @@ class Purchase
     }
 
     /**
-     * @param mixed $finalizeDate
+     * @param mixed $finalizedAt
      */
-    public function setFinalizeDate($finalizeDate)
+    public function setFinalizedAt($finalizedAt)
     {
-        $this->finalizeDate = $finalizeDate;
+        $this->finalizedAt = $finalizedAt;
     }
 
     /**
      * @return mixed
      */
-    public function getFinalizeDate()
+    public function getFinalizedAt()
     {
-        return $this->finalizeDate;
+        return $this->finalizedAt;
     }
 
     /**

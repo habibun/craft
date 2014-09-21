@@ -4,56 +4,48 @@
 
 {% block body -%}
     <div class="row">
+        <div class="col-lg-6">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
+                <li class="active">History</li>
+                <li class="active">Purchase History</li>
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+        <div class="col-lg-6">
+            {% block kit_grid_filter %}
+                <div class="clearfix">
+                    <form class="form-inline pull-right" action="{{ grid.requestUri }}" id="{{grid.filterFormName}}_form" method="GET">
+                        <div class="form-group">
+                        <input class="form-control search-query" type="text" name="{{grid.filterFormName}}" placeholder="{{ "Search" | trans }}" id="{{grid.filterFormName}}" value="{{ grid.filterValue }}"/>
+                        </div>
+                        <button type="submit" class="btn btn-mini btn-primary" value="{{ "Apply" | trans }}">{{ "Apply" | trans }}</button>
+                        <a class="btn btn-mini btn-default" href="{{ grid.requestUri }}" id="{{grid.filterFormName}}_reset_button">{{ "Reset" | trans }}</a>
+                    </form>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
                     <strong>Purchase History</strong>
-                <span class="tools pull-right">
-                    <a class="icon-chevron-down" href="javascript:;"></a>
-                    <a class="icon-remove" href="javascript:;"></a>
-                </span>
+                    <span class="tools pull-right">
+                        <a class="icon-chevron-down" href="javascript:;"></a>
+                        <a class="icon-remove" href="javascript:;"></a>
+                    </span>
                 </header>
                 <div class="panel-body">
-                    <table class="table table-bordered table-striped table-condensed">
-                        <thead>
-                        <tr>
-                            <th>Transaction No</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Purchase Id</th>
-                            <th>Purchase Date</th>
-                            <th>Supplier Name</th>
-                            <th>Created At</th>
-                            <th>Created By</th>
-                            <th>Updated At</th>
-                            <th>Updated By</th>
-                            <th>Finalize Date</th>
-                            <th>Finalized By</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for entity in entities %}
-                            <tr>
-                                <td>{{ entity.id }}</td>
-                                <td>{{ entity.product.name }}</td>
-                                <td>{{ entity.quantity }}</td>
-                                <td>{{ entity.price }}</td>
-                                <td>{{ entity.purchase.id }}</td>
-                                <td>{{ entity.purchase.purchaseDate|date('Y-m-d') }}</td>
-                                <td>{{ entity.purchase.supplier.name }}</td>
-                                <td>{{ entity.purchase.createdAt|date('Y-m-d H:i:s') }}</td>
-                                <td>{{ entity.purchase.createdBy }}</td>
-                                <td>{{ entity.purchase.updatedAt|date('Y-m-d H:i:s') }}</td>
-                                <td>{{ entity.purchase.updatedBy }}</td>
-                                <td>{{ entity.purchase.finalizeDate|date('Y-m-d H:i:s') }}</td>
-                                <td>{{ entity.purchase.finalizedBy }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                    {% embed '::Grid/bootstrap-grid.html.twig' with {'grid': grid} %}
+                        {% block kit_grid_thead_column %}
+                        {% endblock %}
+                        {% block kit_grid_tbody_column %}
+                        {% endblock %}
+                    {% endembed %}
                 </div>
             </section>
         </div>
-    </div>
 {% endblock %}

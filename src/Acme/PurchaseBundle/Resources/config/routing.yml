@@ -8,4 +8,4 @@ AcmePurchaseBundle_purchase:
 
 AcmePurchaseBundle_purchase_line:
     resource: "@AcmePurchaseBundle/Resources/config/routing/purchaseline.yml"
-    prefix:   /purchase-line
+    prefix:   /history/purchase-line

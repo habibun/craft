@@ -8,5 +8,5 @@ AcmeIssueBundle_issue:
 
 AcmeIssueBundle_issue_line:
     resource: "@AcmeIssueBundle/Resources/config/routing/issueline.yml"
-    prefix:   /issue-line
+    prefix:   /history/issue-line
 

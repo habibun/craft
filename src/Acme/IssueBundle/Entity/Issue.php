@@ -20,7 +20,7 @@ class Issue
     private $createdBy;
     private $updatedAt;
     private $updatedBy;
-    private $finalizeDate;
+    private $finalizedAt;
     private $finalizedBy;
 
     /**
@@ -40,19 +40,19 @@ class Issue
     }
 
     /**
-     * @param mixed $finalizeDate
+     * @param mixed $finalizedAt
      */
-    public function setFinalizeDate($finalizeDate)
+    public function setFinalizedAt($finalizedAt)
     {
-        $this->finalizeDate = $finalizeDate;
+        $this->finalizedAt = $finalizedAt;
     }
 
     /**
      * @return mixed
      */
-    public function getFinalizeDate()
+    public function getFinalizedAt()
     {
-        return $this->finalizeDate;
+        return $this->finalizedAt;
     }
 
     /**
