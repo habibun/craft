@@ -2,14 +2,12 @@
 
 namespace Acme\IssueBundle\Controller;
 
-use Acme\PurchaseBundle\Entity\PurchaseLine;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\IssueBundle\Entity\Issue;
 use Acme\IssueBundle\Form\IssueType;
 use Acme\IssueBundle\Entity\IssueLine;
 use Acme\IssueBundle\Form\IssueLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 
 
