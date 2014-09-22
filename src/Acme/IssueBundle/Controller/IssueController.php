@@ -257,6 +257,7 @@ class IssueController extends Controller
         $data = isset($data['issue_line']) ? $data['issue_line'] : array();
 
         if ($editForm->isValid()) {
+            $entity->setUpdatedAt(new \DateTime('now'));
             $entity->setUpdatedBy($this->getUser());
             if (!empty($data)) {
                 foreach ($data['product'] as $key => $product) {

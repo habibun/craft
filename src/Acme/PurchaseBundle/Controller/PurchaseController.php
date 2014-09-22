@@ -257,6 +257,7 @@ class PurchaseController extends Controller
         $data = isset($data['purchase_line']) ? $data['purchase_line'] : array();
 
         if ($editForm->isValid()) {
+            $purchase->setUpdatedAt(new \DateTime('now'));
             $purchase->setUpdatedBy($this->getUser());
             if (isset($data['product'])) {
                 foreach ($data['product'] as $key => $product) {
@@ -373,7 +374,6 @@ class PurchaseController extends Controller
         $entity->setStatus(1);
         $entity->setFinalizedBy($this->getUser());
         $entity->setFinalizedAt(new \DateTime('now'));
-        $entity->setUpdatedAt(null);
         $em->flush();
         $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
 
