@@ -19,7 +19,9 @@ class IssueLineType extends AbstractType
             ->add('referenceNumber','integer',array(
                     'label' => "Reference Number"
                 ))
-            ->add('issueTo')
+            ->add('issueTo','text',array(
+                    'label' => 'Issue To'
+                ))
             ->add(
                 'product',
                 'entity',
