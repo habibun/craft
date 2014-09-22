@@ -45,12 +45,14 @@ class HistoryController extends Controller
                     'formatValueCallback' => function ($value) {
                             return $value->format('Y/m/d');
                         }
-                )))
+                ))
+            )
             ->addField(new Field('p.purchase.supplier.name', array('label' => 'Supplier')))
             ->addField(new Field('p.purchase.createdAt', array('label' => 'Created At')))
             ->addField(new Field('p.purchase.createdBy.username', array('label' => 'Created By')))
             ->addField(new Field('p.purchase.updatedAt', array('label' => 'Updated At')))
-            ->addField(new Field('p.purchase.updatedBy', array(
+            ->addField(
+                new Field('p.purchase.updatedBy', array(
                     'label' => 'Updated By',
                     'nullIfNotExists' => true,
                     'formatValueCallback' => function ($updatedBy) {
@@ -60,12 +62,14 @@ class HistoryController extends Controller
                         }
                 ))
             )
-            ->addField(new Field('p.purchase.finalizedAt', array(
+            ->addField(
+                new Field('p.purchase.finalizedAt', array(
                     'label' => 'Finalized At',
                     'nullIfNotExists' => true,
                 ))
             )
-            ->addField(new Field('p.purchase.finalizedBy', array(
+            ->addField(
+                new Field('p.purchase.finalizedBy', array(
                     'label' => 'Finalized By',
                     'nullIfNotExists' => true,
                     'formatValueCallback' => function ($finalizedBy) {
@@ -126,7 +130,8 @@ class HistoryController extends Controller
                     'formatValueCallback' => function ($value) {
                             return $value->format('Y/m/d');
                         }
-                )))
+                ))
+            )
             ->addField(new Field('i.issue.company.name', array('label' => 'To Company')))
             ->addField(new Field('i.issue.depot.name', array('label' => 'To Depot')))
             ->addField(new Field('i.issue.createdAt', array('label' => 'Created At')))
