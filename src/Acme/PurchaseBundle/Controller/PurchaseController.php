@@ -391,6 +391,7 @@ class PurchaseController extends Controller
         }
         $entity->setStatus(0);
         $entity->setFinalizedAt(null);
+        $entity->setFinalizedBy(null);
         $em->flush();
         $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
 
