@@ -32,7 +32,10 @@ class PurchaseLineType extends AbstractType
             )
             ->add('manufacturer')
             ->add('quantity')
-            ->add('price');
+            ->add('price','text',
+                array('attr' => array(
+                    'input_group' => array('append' => '.00')
+                )));
     }
 
     /**
