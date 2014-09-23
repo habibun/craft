@@ -17,7 +17,7 @@ class IssueLineType extends AbstractType
     {
         $builder
             ->add('referenceNumber','integer',array(
-                    'label' => "Reference Number"
+                    'label' => "Reference No"
                 ))
             ->add('issueTo','text',array(
                     'label' => 'Issue To'
