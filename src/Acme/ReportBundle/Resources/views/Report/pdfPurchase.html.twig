@@ -12,6 +12,7 @@
         <tr>
             <th>Date</th>
             <th>Product</th>
+            <th>Manufacturer</th>
             <th>Price</th>
             <th>Qty</th>
             <th>Total</th>
@@ -29,6 +30,7 @@
                     <tr>
                 {% endif %}
                 <td>{{ line.product.name }}</td>
+                <td>{{ line.manufacturer }}</td>
                 <td>{{ (line.price/line.quantity)|number_format(2) }}</td>
                 <td>{{ line.quantity }}</td>
                 <td>{{ line.price|number_format(2) }}</td>
@@ -36,13 +38,13 @@
             {% endfor %}
             </tr>
             <tr>
-                <td colspan="4">Total</td>
+                <td colspan="5">Total</td>
                 <td><strong>{{ lineTotal|number_format(2) }}</strong></td>
             </tr>
             {% set total = total + lineTotal %}
         {% endfor %}
         <tr>
-            <th colspan="4">Sumary of Total</th>
+            <th colspan="5">Sumary of Total</th>
             <th>{{ total|number_format(2) }}</th>
         </tr>
         </tbody>
