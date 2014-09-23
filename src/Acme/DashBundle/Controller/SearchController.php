@@ -34,6 +34,13 @@ class SearchController extends Controller
             //save statistics
             $repository->saveSerchRequest($search);
         }
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $result,
+            $this->get('request')->query->get('page', 1) /*page number*/,
+            10
+        /*limit per page*/
+        );
 
         return $this->render(
             'AcmeDashBundle:Search:searchResult.html.twig',
