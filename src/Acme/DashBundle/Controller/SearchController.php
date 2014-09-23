@@ -39,6 +39,7 @@ class SearchController extends Controller
             'AcmeDashBundle:Search:searchResult.html.twig',
             array(
                 'result' => $result,
+                'search' => $search,
             )
         );
     }
