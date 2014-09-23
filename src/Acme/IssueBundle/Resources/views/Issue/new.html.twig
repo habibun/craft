@@ -51,6 +51,8 @@
                 </header>
                 <div class="panel-body">
                     {{ bootstrap_set_style('horizontal') }}
+                    {{ bootstrap_set_widget_col(9) }}
+                    {{ bootstrap_set_label_col(3) }}
                     {{ form_start(line_form, {'attr' :  { 'class': 'form-horizontal', 'id': 'lineForm' } }) }}
                     {{ form_row(line_form.referenceNumber) }}
                     {{ form_row(line_form.issueTo) }}
