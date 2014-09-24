@@ -31,16 +31,14 @@
                     {% if result.issueLines is not empty %}
                         {% include 'AcmeDashBundle:Search:_personResult.html.twig' %}
                     {% endif %}
-
-                    {% if result.PurchaseLines is empty and result.issueLines is empty %}
-                        <p>There are no results</p>
-                    {% endif %}
-
                     <div class="text-center">
                         <ul class="pagination">
                             {{ knp_pagination_render(result) }}
                         </ul>
                     </div>
+                    {% if result.PurchaseLines is empty and result.issueLines is empty %}
+                        <p>There are no results</p>
+                    {% endif %}
                 </div>
             </section>
         </div>
