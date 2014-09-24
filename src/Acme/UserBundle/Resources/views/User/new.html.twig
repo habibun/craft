@@ -29,11 +29,18 @@
                 </span>
                 </header>
                 <div class="panel-body">
-                    {{ form_start(form) }}
+                    {{ bootstrap_set_style('horizontal') }}
+                    {{ form_start(form, {'attr' :  { 'class': 'form-horizontal' }} ) }}
                     {{ form_row(form.username) }}
                     {{ form_row(form.email) }}
                     {{ form_row(form.password) }}
-                    {{ form_row(form.enabled) }}
+                    <div class="row form-group">
+                        {{ form_label(form.enabled , 'Enabled' , {'label_attr': { 'class':'col-sm-3 control-label'} } ) }}
+                        <div class="col-sm-6">
+                            {{ form_widget(form.enabled, {'attr': { 'class':' '} } ) }}
+                        </div>
+                        {{ form_errors(form.enabled) }}
+                    </div>
                     {{ form_row(form.roles) }}
                     <hr>
                     <span class="pull-right">

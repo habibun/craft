@@ -25,16 +25,27 @@ class UserType extends AbstractType
             ->add('username', 'text')
             ->add('email', 'email')
             ->add('password')
-            ->add('enabled', 'checkbox')
-            ->add('roles', 'choice', array(
-                'choices' => $this->_flattenArray($this->rolesChoices),
-                'multiple' => true,
-                'empty_value' => false,
-                'expanded' => false,
-                'required' => true,
-                'attr' => array('class' => 'chosen-select')
-            ))
-            /*->add('roles', 'collection',array(
+            ->add(
+                'enabled',
+                'checkbox',
+                array(
+                    'attr' => array(
+                        'align_with_widget' => true,
+                    )
+                )
+            )
+            ->add(
+                'roles',
+                'choice',
+                array(
+                    'choices' => $this->_flattenArray($this->rolesChoices),
+                    'multiple' => true,
+                    'empty_value' => false,
+                    'expanded' => false,
+                    'required' => true,
+                    'attr' => array('class' => 'chosen-select')
+                )
+            )/*->add('roles', 'collection',array(
                 'label' => 'Roles',
                 'type' => 'choice',
                 'options' =>array( 'choices' => array(
@@ -48,9 +59,11 @@ class UserType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Acme\UserBundle\Entity\User'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Acme\UserBundle\Entity\User'
+            )
+        );
     }
 
     /**
@@ -70,6 +83,7 @@ class UserType extends AbstractType
             $tempValue = ucwords(strtolower(str_replace("_", ' ', $tempValue)));
             $returnData[$key] = $tempValue;
         }
+
         return $returnData;
     }
 }
