@@ -15,20 +15,34 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-        <section class="panel">
-            <header class="panel-heading">
-                search completed &nbsp; » &nbsp;<strong>{{ search }}</strong>
+            <section class="panel">
+                <header class="panel-heading">
+                    search completed &nbsp; » &nbsp;<strong>{{ search }}</strong>
                 <span class="tools pull-right">
                 <a class="icon-chevron-down" href="javascript:;"></a>
                 <a class="icon-remove" href="javascript:;"></a>
             </span>
-            </header>
-            <div class="panel-body">
-                {% include 'AcmeDashBundle:Search:_productResult.html.twig' %}
-                {% include 'AcmeDashBundle:Search:_personResult.html.twig' %}
-                {% include 'AcmeDashBundle:Search:_noResult.html.twig' %}
-            </div>
-        </section>
+                </header>
+                <div class="panel-body">
+                    {% if result.PurchaseLines is not empty %}
+                        {% include 'AcmeDashBundle:Search:_productResult.html.twig' %}
+                    {% endif %}
+
+                    {% if result.issueLines is not empty %}
+                        {% include 'AcmeDashBundle:Search:_personResult.html.twig' %}
+                    {% endif %}
+
+                    {% if result.PurchaseLines is empty and result.issueLines is empty %}
+                        <p>There are no results</p>
+                    {% endif %}
+
+                    <div class="text-center">
+                        <ul class="pagination">
+                            {{ knp_pagination_render(result) }}
+                        </ul>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 {% endblock %}
