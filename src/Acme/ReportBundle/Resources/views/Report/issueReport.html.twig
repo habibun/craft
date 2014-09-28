@@ -3,34 +3,39 @@
 {% block title %}Report{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="/assets/bootstrap-datepicker/css/datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bootstrap-datepicker/css/datepicker.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bootstrap-daterangepicker/daterangepicker-bs3.css') }}"/>
 {% endblock %}
 
 {% block body -%}
     <!--date picker start-->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <section class="panel">
                 <header class="panel-heading">
-                    Date Pickers
+                    <strong>Issue Report</strong>
                           <span class="tools pull-right">
                             <a href="javascript:;" class="icon-chevron-down"></a>
                             <a href="javascript:;" class="icon-remove"></a>
                         </span>
                 </header>
                 <div class="panel-body">
-                    <form action="#" class="form-horizontal tasi-form">
+                    <form action="#" class="form-horizontal">
                         <div class="form-group">
                             <label class="control-label col-md-3">Date Range</label>
-                            <div class="col-md-4">
-                                <div class="input-group input-large" data-date="13/07/2013" data-date-format="mm/dd/yyyy">
+
+                            <div class="col-lg-8 col-xs-11">
+                                <div class="input-group input-large" data-date="13/07/2013"
+                                     data-date-format="mm/dd/yyyy">
                                     <input type="text" class="form-control dpd1" name="from">
                                     <span class="input-group-addon">To</span>
                                     <input type="text" class="form-control dpd2" name="to">
                                 </div>
-                                <span class="help-block">Select date range</span>
+                                <span class="help-block text-center">Select date range</span>
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-primary" type="submit" id="getReport" value="Get Report"/>
                         </div>
                     </form>
                 </div>
@@ -38,12 +43,9 @@
         </div>
     </div>
     <!--date picker end-->
-
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="/js/advanced-form-components.js"></script>
-
+    <script type="text/javascript" src="{{ asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 {% endblock %}
