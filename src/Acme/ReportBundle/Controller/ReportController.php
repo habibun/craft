@@ -50,7 +50,7 @@ class ReportController extends Controller
             }
         }
 
-        return $this->render('AcmeReportBundle:Report:purchase.html.twig');
+        return $this->render('AcmeReportBundle:Report:purchaseReport.html.twig');
     }
 
     private function _generatePurchaseReport($params)
