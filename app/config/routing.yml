@@ -4,7 +4,7 @@ acme_history:
 
 acme_report:
     resource: "@AcmeReportBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /report
 
 acme_issue:
     resource: "@AcmeIssueBundle/Resources/config/routing.yml"

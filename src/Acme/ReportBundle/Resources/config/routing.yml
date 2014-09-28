@@ -3,5 +3,9 @@ acme_report_homepage:
     defaults: { _controller: AcmeReportBundle:Default:index }
 
 purchase_report:
-    pattern: /report/purchase
+    pattern: /purchase
     defaults: { _controller: AcmeReportBundle:Report:purchase }
+
+issue_report:
+    pattern: /issue
+    defaults: { _controller: AcmeReportBundle:Report:issue }

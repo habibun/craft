@@ -86,4 +86,8 @@ class ReportController extends Controller
         return $reportData;
     }
 
+    public function issueAction()
+    {
+        return $this->render('AcmeReportBundle:Report:issueReport.html.twig');
+    }
 } 
