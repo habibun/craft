@@ -31,15 +31,11 @@
                 </header>
                 <div class="panel-body">
                     <form action="{{ path('purchase_report') }}" class="form-horizontal" method="post">
-
                         <div class="form-group">
                             <label class="control-label col-md-3">From Date</label>
-
                             <div class="col-lg-8 col-xs-11">
-                                <div data-date-format="yyyy-MM-dd" data-date=""
-                                     class="input-append date default-date-picker">
-                                    <input type="text" size="16" class="form-control" name="report[fromDate]"
-                                           id="datepicker"/>
+                                <div data-date-format="yyyy-MM-dd" data-date="" class="input-append date default-date-picker">
+                                    <input type="text" size="16" class="form-control" name="report[fromDate]" id="datepicker" />
                                       <span class="input-group-btn add-on">
                                         <button class="btn btn-info" type="button"><i class="icon-calendar"></i>
                                         </button>
@@ -47,15 +43,11 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label class="control-label col-md-3">To Date</label>
-
                             <div class="col-lg-8 col-xs-11">
-                                <div data-date-format="yyyy-MM-dd" data-date=""
-                                     class="input-append date default-date-picker">
-                                    <input type="text" size="16" class="form-control" name="report[toDate]"
-                                           id="datepicker"/>
+                                <div data-date-format="yyyy-MM-dd" data-date="" class="input-append date default-date-picker">
+                                    <input type="text" size="16" class="form-control" name="report[toDate]" id="datepicker" />
                                       <span class="input-group-btn add-on">
                                         <button class="btn btn-info" type="button"><i class="icon-calendar"></i>
                                         </button>
@@ -63,11 +55,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal-footer">
                             <input class="btn btn-primary" type="submit" id="getReport" value="Get Report"/>
                         </div>
-
                     </form>
                 </div>
             </section>
