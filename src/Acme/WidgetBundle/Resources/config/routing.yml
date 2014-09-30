@@ -1,3 +1,7 @@
 acme_widget_homepage:
     path:     /hello/{name}
     defaults: { _controller: AcmeWidgetBundle:Default:index }
+
+last_purchase:
+  pattern:  /last-purchase
+  defaults: { _controller: AcmeWidgetBundle:LastPurchase:lastPurchase }

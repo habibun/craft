@@ -1,9 +1,8 @@
 {#{% extends '::base.html.twig' %}#}
 
-{#{% block title %}Last5{% endblock %}#}
+{#{% block title %}Last Purchase{% endblock %}#}
 
 {% block stylesheets %}
-
 {% endblock %}
 
 {% block body -%}
@@ -11,7 +10,7 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    <strong>Last 5 Purchase</strong>
+                    <strong>Last Purchase</strong>
                     <span class="tools pull-right">
                         <a class="icon-chevron-down" href="javascript:;"></a>
                         <a class="icon-remove" href="javascript:;"></a>
@@ -28,7 +27,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% include 'AcmeDashBundle:Last:_lastPurchase.html.twig' with {'purchase' : purchase} %}
+                        {% include 'AcmeWidgetBundle:LastPurchase:_lastPurchase.html.twig' with {'lastPurchase' : lastPurchase} %}
                         </tbody>
                     </table>
                 </div>
@@ -38,5 +37,4 @@
 {% endblock %}
 
 {% block javascripts %}
-
 {% endblock %}

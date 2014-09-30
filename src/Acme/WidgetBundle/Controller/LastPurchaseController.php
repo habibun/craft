@@ -1,19 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: jony
- * Date: 7/19/14
- * Time: 10:39 AM
+ * User: Habibun
+ * Date: 9/30/14
+ * Time: 9:19 AM
  */
 
-namespace Acme\DashBundle\Controller;
+namespace Acme\WidgetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class LastController extends Controller
+class LastPurchaseController extends Controller
 {
 
-    public function indexAction($max = 5)
+    public function lastPurchaseAction($max = 5)
     {
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
@@ -23,12 +23,11 @@ class LastController extends Controller
             ->setMaxResults($max);
 
         $query = $qb->getQuery();
-        $purchases = $query->getResult();
+        $lastPurchase = $query->getResult();
 
         return $this->render(
-            'AcmeDashBundle:Last:index.html.twig',
-            array(
-                'purchase' => $purchases,
+            'AcmeWidgetBundle:LastPurchase:index.html.twig',array(
+                'lastPurchase' => $lastPurchase,
             )
         );
     }

@@ -1,6 +1,6 @@
 acme_widget:
     resource: "@AcmeWidgetBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /widget
 
 acme_history:
     resource: "@AcmeHistoryBundle/Resources/config/routing.yml"
