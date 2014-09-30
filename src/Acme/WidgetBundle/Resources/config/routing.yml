@@ -1,0 +1,3 @@
+acme_widget_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AcmeWidgetBundle:Default:index }
