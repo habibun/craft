@@ -26,7 +26,7 @@
 
 {% block javascripts %}
     <script type="text/javascript">
-        var tal = [{% for entity in totalCost %}{{ entity.total_price }} {% endfor %}];
+        var tal = [{% for entity in totalCost %}{{ entity.total_price }}{% endfor %}];
         function countUp4(count) {
             var div_by = 100,
                     speed = Math.round(count / div_by),
