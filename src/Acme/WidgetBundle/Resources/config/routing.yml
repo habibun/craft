@@ -5,3 +5,8 @@ acme_widget_homepage:
 last_purchase:
   pattern:  /last-purchase
   defaults: { _controller: AcmeWidgetBundle:LastPurchase:lastPurchase }
+
+total_cost:
+    pattern:    /total-cost
+    defaults:   { _controller:  AcmeWidgetBundle:TotalCost:totalCost }
+
