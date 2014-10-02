@@ -15,6 +15,7 @@
 
     {#{{ render(controller('AcmeDashBundle:Last:index', { 'max': 5 })) }}#}
     {#{% include 'AcmeDashBundle:Search:searchForm.html.twig' %}#}
+    {{ render(controller('AcmeWidgetBundle:TotalCost:totalCost')) }}
     {{ render(controller('AcmeDashBundle:Search:topSearchList')) }}
 
 {% endblock %}
