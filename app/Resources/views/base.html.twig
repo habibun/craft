@@ -31,7 +31,7 @@
     <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
 </div>
 <!--logo start-->
-<a href="index.html" class="logo" >Eon<span></span></a>
+<a href="{{ app.request.uri }}" class="logo">Eon<span>group</span></a>
 <!--logo end-->
 <div class="top-nav ">
     <ul class="nav pull-right top-menu">
@@ -43,12 +43,12 @@
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="/img/avatar1_jony.jpg">
+                <img alt="" src="{{ asset('img/avatar1_jony.jpg') }}">
                 <span class="username">{{ app.user.username }}</span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-                <div class="log-arrow-up"></div>
+                <span class="log-arrow-up"></span>
                 <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-signout"></i> Log Out</a></li>
             </ul>
         </li>
