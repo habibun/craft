@@ -10,3 +10,8 @@ total_cost:
     pattern:    /total-cost
     defaults:   { _controller:  AcmeWidgetBundle:TotalCost:totalCost }
 
+work_progress:
+    pattern:    /work-progress
+    defaults:   { _controller:  AcmeWidgetBundle:WorkProgress:workProgress }
+
+
