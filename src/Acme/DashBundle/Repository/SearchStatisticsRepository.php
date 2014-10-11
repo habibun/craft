@@ -25,8 +25,8 @@ class SearchStatisticsRepository extends EntityRepository
         //search within the purchaseLine for price information
         $dql = 'SELECT p.price, p.manufacturer, p.quantity, p.id id, pr.name, pu.purchaseDate
                 FROM AcmePurchaseBundle:PurchaseLine p
-                INNER JOIN p.product pr
-                INNER JOIN p.purchase pu
+                JOIN p.product pr
+                JOIN p.purchase pu
                 WHERE pr.name LIKE :search_word
                 ORDER BY pu.purchaseDate DESC';
 
@@ -38,8 +38,8 @@ class SearchStatisticsRepository extends EntityRepository
         //search within the issueLine for issue information
         $dql = 'SELECT i.issueTo, i.quantity, i.id id, iss.issueDate, pro.name
                 FROM AcmeIssueBundle:IssueLine i
-                INNER JOIN i.issue iss
-                INNER JOIN i.product pro
+                JOIN i.issue iss
+                JOIN i.product pro
                 WHERE i.issueTo LIKE :search_word
                 ORDER BY iss.issueDate DESC';
 
