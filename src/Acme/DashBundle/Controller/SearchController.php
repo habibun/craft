@@ -26,7 +26,7 @@ class SearchController extends Controller
         if (strlen($search)) {
 
             $repository = $this->getDoctrine()
-                ->getEntityManager()
+                ->getManager()
                 ->getRepository('AcmeDashBundle:SearchStatistics');
 
             $result = $repository->getGeneralSearchResults(strtolower($search));
