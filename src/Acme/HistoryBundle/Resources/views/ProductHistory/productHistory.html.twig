@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}History{% endblock %}
+
+{% block  stylesheets %}
+    <style type="text/css">
+    .profile-nav .user-heading {
+    	padding: 6px;
+    }
+    </style>
+{% endblock %}
+
+{% block body -%}
+  <!-- page start-->
+      <div class="row">
+          {{ render(controller('AcmeHistoryBundle:ProductHistory:productIn')) }}
+          {{ render(controller('AcmeHistoryBundle:ProductHistory:productOut')) }}
+      </div>
+  <!-- page end-->
+{% endblock %}
