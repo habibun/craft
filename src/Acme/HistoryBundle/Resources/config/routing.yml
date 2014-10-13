@@ -9,3 +9,17 @@ acme_history_purchase:
 acme_history_issue:
     pattern: /issue
     defaults: { _controller:  AcmeHistoryBundle:History:issue  }
+
+acme_history_product:
+    pattern: /product
+    defaults: { _controller:  AcmeHistoryBundle:ProductHistory:product  }
+
+acme_history_product_in:
+    pattern: /product-in
+    defaults: { _controller:  AcmeHistoryBundle:ProductHistory:productIn  }
+
+acme_history_product_out:
+    pattern: /product-out
+    defaults: { _controller:  AcmeHistoryBundle:ProductHistory:productOut  }
+
+    

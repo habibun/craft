@@ -1,0 +1,19 @@
+<div class="col-lg-6">
+  <!--widget start-->
+  <aside class="profile-nav alt green-border">
+      <section class="panel">
+          <div class="user-heading alt green-bg">
+              <h3>Total Product Out</h3>
+          </div>
+          <ul class="nav nav-pills nav-stacked">
+            {% for entity in totalProductOut %}
+                <li>
+                 <a href="javascript:;"> <i class="icon-asterisk"></i> {{ entity.name }}
+                 <span class="label label-info pull-right r-activity">{{ entity.total_product_out }}</span></a>
+                </li>
+            {% endfor %}
+          </ul>
+      </section>
+  </aside>
+  <!--widget end-->
+</div>
