@@ -13,6 +13,16 @@
 {% block body -%}
   <!-- page start-->
       <div class="row">
+          <div class="col-lg-12">
+              <!--breadcrumbs start -->
+              <ul class="breadcrumb">
+                  <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
+                  <li class="active">History</li>
+                  <li class="active">Product History</li>
+              </ul>
+              <!--breadcrumbs end -->
+          </div>
+
           {{ render(controller('AcmeHistoryBundle:ProductHistory:productIn')) }}
           {{ render(controller('AcmeHistoryBundle:ProductHistory:productOut')) }}
       </div>
