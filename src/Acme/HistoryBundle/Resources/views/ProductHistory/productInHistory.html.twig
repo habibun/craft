@@ -1,15 +1,15 @@
   <div class="col-lg-6">
       <!--widget start-->
       <aside class="profile-nav alt green-border">
-          <section class="panel">
-              <div class="user-heading alt green-bg">
-                  <h3>Total Product In</h3>
-              </div>
+          <section class="panel panel-success">
+              <header class="panel-heading">
+                  <h4>Total Product In</h4>
+              </header>
               <ul class="nav nav-pills nav-stacked">
 	              {% for entity in totalProductIn %}
 	                  <li>
 	                   <a href="javascript:;"> <i class="icon-asterisk"></i> {{ entity.name }}
-	                   <span class="label label-info pull-right r-activity">{{ entity.total_product_in }}</span></a>
+	                   <span class="label label-success pull-right r-activity">{{ entity.total_product_in }}</span></a>
 	                  </li>
 	              {% endfor %}
               </ul>
