@@ -381,7 +381,10 @@ class PurchaseController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
         }
-        $entity->_finalize($entity);
+        $entity->setStatus(1);
+        $entity->setFinalizedBy($this->getUser());
+        $entity->setFinalizedAt(new \DateTime('now'));
+        $em->flush();
 
         $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
 
