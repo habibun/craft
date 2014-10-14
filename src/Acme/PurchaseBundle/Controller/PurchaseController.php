@@ -10,6 +10,9 @@ use Acme\PurchaseBundle\Form\PurchaseType;
 use Acme\PurchaseBundle\Form\PurchaseLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Purchase controller.
@@ -362,6 +365,13 @@ class PurchaseController extends Controller
         return new HTTPResponse("Successfully deleted.", 200);
     }
 
+
+    /**
+     * render search results
+     * @param $id
+     * @return Response
+     */
+    
     public function finalizeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -371,10 +381,8 @@ class PurchaseController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Purchase entity.');
         }
-        $entity->setStatus(1);
-        $entity->setFinalizedBy($this->getUser());
-        $entity->setFinalizedAt(new \DateTime('now'));
-        $em->flush();
+        $entity->_finalize($entity);
+
         $this->get('session')->getFlashBag()->add('well_done', "Finalized Successfully!");
 
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
