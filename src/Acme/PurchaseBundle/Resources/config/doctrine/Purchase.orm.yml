@@ -1,6 +1,7 @@
 Acme\PurchaseBundle\Entity\Purchase:
     type: entity
     table: purchase
+    repositoryClass: Acme\PurchaseBundle\Repository\PurchaseRepository
     id:
         id:
             type: integer
