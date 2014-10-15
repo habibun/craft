@@ -111,6 +111,7 @@
             </div>
         {% endfor %}
         {% block body %}{% endblock %}
+        <div id="loading-full"></div><div class="loading-ball"></div>
         <!-- page end-->
     </section>
 </section>
@@ -139,6 +140,16 @@
 <script src="{{ asset('assets/chosen/chosen.jquery.min.js') }}"></script>
 <!--common script for all pages-->
 <script src="{{ asset('js/common-scripts.js') }}"></script>
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        $(document).ready(function() {
+            $("#search-form").submit(function() {
+                $("#loading-full,.loading-ball").fadeIn();
+            });
+        });
+        /* ]]> */
+    </script>
+{% endblock %}
 </body>
 </html>

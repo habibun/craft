@@ -170,7 +170,7 @@ $(document).on("click", "a.confirm-delete", function (e) {
 });
 
 //search form submit functionality
-/*$('#search-form').submit(
+$('#search-form').submit(
     function (evt) {
         evt.preventDefault();
         var searchVal = $.trim($('input[type="text"]', $(this)).val());
@@ -178,7 +178,7 @@ $(document).on("click", "a.confirm-delete", function (e) {
             window.location = $(this).attr('action') + '/' + searchVal;
         }
     }
-);*/
+);
 
 //date picker start(report)
 
