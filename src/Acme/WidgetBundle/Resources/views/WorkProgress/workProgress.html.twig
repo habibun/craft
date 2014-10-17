@@ -24,11 +24,11 @@
                     <th colspan="3" class="text-center">Issue</th>
                 </tr>
                 <tr>
-                    <th>Entry</th>
+                    <th>Created</th>
                     <th>Updated</th>
                     <th>Finalized</th>
 
-                    <th>Entry</th>
+                    <th>Created</th>
                     <th>Updated</th>
                     <th>Finalized</th>
                 </tr>
@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{ entity.name }}</td>
 
-                    <td><span class="badge bg-success">{{ entity.total_entry }}</span></td>
+                    <td><span class="badge bg-success">{{ entity.total_created }}</span></td>
                     <td>
                     {% if entity.total_updated <= 0 %}
                         <span class="badge bg-important">{{ entity.total_updated }}</span>
@@ -46,7 +46,13 @@
                         <span class="badge bg-warning">{{ entity.total_updated }}</span>
                     {% endif %} 
                     </td>
-                    <td><span class="badge bg-info">67%</span></td>
+                    <td>
+                        {% if entity.total_finalized <= 0 %}
+                        <span class="badge bg-important">{{ entity.total_finalized }}</span>
+                        {% else %}
+                        <span class="badge bg-info">{{ entity.total_finalized }}</span>
+                    {% endif %}
+                    </td>
 
                     <td>1</td>
                     <td>2</td>

@@ -24,11 +24,14 @@ class WorkProgressController extends Controller{
     {
     	$em = $this->getDoctrine()->getManager();
     	$query = $em->createQuery(
-            'SELECT COUNT(p.createdBy) AS total_entry, IDENTITY(p.createdBy) as users_id, u.username as name, count(p.updatedBy) as total_updated
+            'SELECT u.username as name, 
+            p.id id,
+            count(p.createdBy) AS total_created, 
+            count(p.updatedBy) as total_updated,
+            count(p.finalizedBy) as total_finalized
              FROM AcmePurchaseBundle:Purchase p
              JOIN p.createdBy u
-             group by users_id
-             '
+             group by name'
         );
         $result = $query->getResult();
         return $result;
