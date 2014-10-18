@@ -12,7 +12,8 @@
                 </div>
                 <div class="task-option">
                     <form action="{{ path('general_search') }}" method="GET" id="search-form">
-                        <input type="text" class="form-control search" placeholder="Search" name="search-keyword" id="search-input">
+                        <input type="text" class="form-control search" placeholder="Search" name="search-keyword"
+                               id="search-input">
                     </form>
                 </div>
             </div>
@@ -35,29 +36,29 @@
                 </thead>
                 <tbody>
                 {% for entity in workProgress %}
-                <tr>
-                    <td>{{ entity.name }}</td>
+                    <tr>
+                        <td>{{ entity.name }}</td>
 
-                    <td><span class="badge bg-success">{{ entity.total_created }}</span></td>
-                    <td>
-                    {% if entity.total_updated <= 0 %}
-                        <span class="badge bg-important">{{ entity.total_updated }}</span>
-                        {% else %}
-                        <span class="badge bg-warning">{{ entity.total_updated }}</span>
-                    {% endif %} 
-                    </td>
-                    <td>
-                        {% if entity.total_finalized <= 0 %}
-                        <span class="badge bg-important">{{ entity.total_finalized }}</span>
-                        {% else %}
-                        <span class="badge bg-info">{{ entity.total_finalized }}</span>
-                    {% endif %}
-                    </td>
+                        <td><span class="badge bg-success">{{ entity.total_created }}</span></td>
+                        <td>
+                            {% if entity.total_updated <= 0 %}
+                                <span class="badge bg-important">{{ entity.total_updated }}</span>
+                            {% else %}
+                                <span class="badge bg-warning">{{ entity.total_updated }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if entity.total_finalized <= 0 %}
+                                <span class="badge bg-important">{{ entity.total_finalized }}</span>
+                            {% else %}
+                                <span class="badge bg-info">{{ entity.total_finalized }}</span>
+                            {% endif %}
+                        </td>
 
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                </tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
