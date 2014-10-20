@@ -4,14 +4,14 @@ namespace Acme\WidgetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class TotalCostController extends Controller
+class StateOverviewController extends Controller
 {
     public function totalCostAction()
     {
         $totalCost = $this->_getTotalCostResults();
 
         return $this->render(
-            'AcmeWidgetBundle:TotalCost:totalCost.html.twig',
+            'AcmeWidgetBundle:StateOverview:totalCost.html.twig',
             array(
                 'totalCost' => $totalCost,
             )
