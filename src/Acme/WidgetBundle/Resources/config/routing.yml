@@ -6,9 +6,13 @@ last_purchase:
   pattern:  /last-purchase
   defaults: { _controller: AcmeWidgetBundle:LastPurchase:lastPurchase }
 
-state_overview:
-    pattern:    /state-overview
+state_overview_total_cost:
+    pattern:    /state-overview-total-cost
     defaults:   { _controller:  AcmeWidgetBundle:StateOverview:totalCost }
+
+state_overview_total_user:
+    pattern:    /state-overview-total-user
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:totalUser }
 
 work_progress:
     pattern:    /work-progress
