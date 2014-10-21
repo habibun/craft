@@ -6,6 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class StateOverviewController extends Controller
 {
+    public function stateOverviewAction()
+    {
+        return $this->render('AcmeWidgetBundle:StateOverview:stateOverview.html.twig');
+    }
+
     public function totalCostAction()
     {
         $totalCost = $this->_getTotalCostResults();
@@ -29,5 +34,21 @@ class StateOverviewController extends Controller
         );
         $result = $query->getResult();
         return $result;
+    }
+
+    public function totalUserAction()
+    {
+        $query_builder = $this->container->get('doctrine')->getManager()->createQueryBuilder();
+        $totalUser = $query_builder->select('COUNT(u) total_user')
+            ->from('AcmeUserBundle:User', 'u')
+            ->getQuery()
+            ->getResult();
+
+        return $this->render(
+            'AcmeWidgetBundle:StateOverview:totalUser.html.twig',
+            array(
+                'totalUser' => $totalUser,
+            )
+        );
     }
 }

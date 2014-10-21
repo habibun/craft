@@ -16,7 +16,7 @@
     {#{{ render(controller('AcmeDashBundle:Last:index', { 'max': 5 })) }}#}
     {#{% include 'AcmeDashBundle:Search:searchForm.html.twig' %}#}
 
-    {{ render(controller('AcmeWidgetBundle:StateOverview:totalCost')) }}
+    {{ render(controller('AcmeWidgetBundle:StateOverview:stateOverview')) }}
 
     <div class="row">
         {{ render(controller('AcmeWidgetBundle:WorkProgress:workProgress')) }}

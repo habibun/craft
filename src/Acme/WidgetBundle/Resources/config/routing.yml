@@ -8,10 +8,17 @@ last_purchase:
 
 state_overview:
     pattern:    /state-overview
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:stateOverview }
+
+state_overview_total_cost:
+    pattern:    /state-overview-total-cost
     defaults:   { _controller:  AcmeWidgetBundle:StateOverview:totalCost }
+
+state_overview_total_user:
+    pattern:    /state-overview-total-user
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:totalUser }
 
 work_progress:
     pattern:    /work-progress
     defaults:   { _controller:  AcmeWidgetBundle:WorkProgress:workProgress }
-
 
