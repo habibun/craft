@@ -22,6 +22,10 @@ state_overview_drafted_issue:
     pattern:    /state-overview-drafted-issue
     defaults:   { _controller:  AcmeWidgetBundle:StateOverview:draftedIssue }
 
+state_overview_drafted_purchase:
+    pattern:    /state-overview-drafted-purchase
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:draftedPurchase }
+
 work_progress:
     pattern:    /work-progress
     defaults:   { _controller:  AcmeWidgetBundle:WorkProgress:workProgress }

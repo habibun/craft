@@ -66,4 +66,19 @@ class StateOverviewController extends Controller
             )
         );
     }
+
+    public function draftedPurchaseAction()
+    {
+        $query_builder = $this->getDoctrine()->getManager()->createQueryBuilder();
+        $draftedPurchase = $query_builder->select('count(p.status) total_drafted_purchase')
+            ->from('AcmePurchaseBundle:Purchase','p')
+            ->where('p.status = 0')
+            ->getQuery()
+            ->getResult();
+        
+        return $this->render('AcmeWidgetBundle:StateOverview:draftedPurchase.html.twig',array(
+            'draftedPurchase' => $draftedPurchase,
+            )
+        );
+    }
 }
