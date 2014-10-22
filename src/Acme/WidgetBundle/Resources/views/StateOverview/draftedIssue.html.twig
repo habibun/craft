@@ -1,0 +1,54 @@
+{#{% extends '::base.html.twig' %}
+
+{% block title %}Drafted-Issue{% endblock %}#}
+
+{% block body %}
+    {% if draftedIssue is not empty %}
+        <div class="state-overview">
+            <div class="col-lg-3 col-sm-6">
+                    {% for entity in draftedIssue %}
+                        <section class="panel">
+                          <div class="symbol red">
+                              <i class="icon-tags"></i>
+                          </div>
+                          <div class="value">
+                              <h1 class=" count2">
+                                  0
+                              </h1>
+                              <p>Drafted Issue</p>
+                          </div>
+                      </section>
+                    {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript">
+        var iss = [{% for entity in draftedIssue %}{{ entity.total_drafted_issue }}{% endfor %}];
+        function countUp2(count)
+        {
+            var div_by = 100,
+                speed = Math.round(count / div_by),
+                $display = $('.count2'),
+                run_count = 1,
+                int_speed = 24;
+
+            var int = setInterval(function() {
+                if(run_count < div_by){
+                    $display.text(speed * run_count);
+                    run_count++;
+                } else if(parseInt($display.text()) < count) {
+                    var curr_count = parseInt($display.text()) + 1;
+                    $display.text(curr_count);
+                } else {
+                    clearInterval(int);
+                }
+            }, int_speed);
+        }
+
+        countUp2(iss);
+    </script>
+{% endblock %}

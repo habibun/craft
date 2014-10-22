@@ -51,4 +51,19 @@ class StateOverviewController extends Controller
             )
         );
     }
+
+    public function draftedIssueAction()
+    {
+        $query_builder = $this->getDoctrine()->getManager()->createQueryBuilder();
+        $draftedIssue = $query_builder->select('count(i.status) total_drafted_issue')
+            ->from('AcmeIssueBundle:Issue','i')
+            ->where('i.status = 0')
+            ->getQuery()
+            ->getResult();
+        
+        return $this->render('AcmeWidgetBundle:StateOverview:draftedIssue.html.twig',array(
+            'draftedIssue' => $draftedIssue,
+            )
+        );
+    }
 }
