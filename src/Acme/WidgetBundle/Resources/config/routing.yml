@@ -7,7 +7,7 @@ AcmeWidgetBundle_lastpurchase:
   defaults: { _controller: AcmeWidgetBundle:LastPurchase:lastPurchase }
 
 AcmeWidgetBundle_stateoverview:
-    resource: "@AcmeWidgetBundle/Resources/config/routing/stateOverview.yml"
+    resource: "@AcmeWidgetBundle/Resources/config/routing/stateoverview.yml"
     prefix:   /stateoverview
 
 AcmeWidgetBundle_workprogress:
