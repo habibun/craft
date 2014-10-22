@@ -2,31 +2,15 @@ acme_widget_homepage:
     path:     /hello/{name}
     defaults: { _controller: AcmeWidgetBundle:Default:index }
 
-last_purchase:
-  pattern:  /last-purchase
+AcmeWidgetBundle_lastpurchase:
+  pattern:  /lastpurchase
   defaults: { _controller: AcmeWidgetBundle:LastPurchase:lastPurchase }
 
-state_overview:
-    pattern:    /state-overview
-    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:stateOverview }
+AcmeWidgetBundle_stateoverview:
+    resource: "@AcmeWidgetBundle/Resources/config/routing/stateOverview.yml"
+    prefix:   /stateoverview
 
-state_overview_total_cost:
-    pattern:    /state-overview-total-cost
-    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:totalCost }
-
-state_overview_total_user:
-    pattern:    /state-overview-total-user
-    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:totalUser }
-
-state_overview_drafted_issue:
-    pattern:    /state-overview-drafted-issue
-    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:draftedIssue }
-
-state_overview_drafted_purchase:
-    pattern:    /state-overview-drafted-purchase
-    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:draftedPurchase }
-
-work_progress:
-    pattern:    /work-progress
+AcmeWidgetBundle_workprogress:
+    pattern:    /workprogress
     defaults:   { _controller:  AcmeWidgetBundle:WorkProgress:workProgress }
 

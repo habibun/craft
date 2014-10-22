@@ -1,0 +1,20 @@
+stateoverview:
+    pattern:    /
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:stateOverview }
+
+stateoverview_total_user:
+    pattern:    /total-user
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:totalUser }
+
+stateoverview_drafted_purchase:
+    pattern:    /drafted-purchase
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:draftedPurchase }
+
+stateoverview_drafted_issue:
+    pattern:    /drafted-issue
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:draftedIssue }
+
+stateoverview_total_cost:
+    pattern:    /total-cost
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:totalCost }
+
