@@ -38,7 +38,7 @@ class StateOverviewController extends Controller
 
     public function totalUserAction()
     {
-        $query_builder = $this->container->get('doctrine')->getManager()->createQueryBuilder();
+        $query_builder = $this->getDoctrine()->getManager()->createQueryBuilder();
         $totalUser = $query_builder->select('COUNT(u) total_user')
             ->from('AcmeUserBundle:User', 'u')
             ->getQuery()
