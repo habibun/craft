@@ -207,6 +207,10 @@ class ProductController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            if ($entity->file != null) {
+                $entity->setImage(uniqid().'.'.$entity->file->guessExtension());
+                $entity->file->move($entity->getUploadRootDir(), $entity->getImage());
+            }
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
