@@ -2,6 +2,20 @@
 
 {% block title %}Product{% endblock %}
 
+{% block stylesheets %}
+<style type="text/css">
+    .product-image img {
+    border: 1px solid #E2E2E2;
+    left: 10px;
+    max-width: 300px;
+    width: 279px; 
+    height: 222px;
+    position: relative;
+    top: 10px;
+}
+</style>
+{% endblock %}
+
 {% block body -%}
     <div class="row">
         <div class="col-lg-12">
@@ -31,28 +45,32 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    <strong>Product #{{ entity.id }}</strong>
+                    <strong>Product Details</strong>
                 <span class="tools pull-right">
                     <a class="icon-chevron-down" href="javascript:;"></a>
                     <a class="icon-remove" href="javascript:;"></a>
                 </span>
                 </header>
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <th>Id</th>
-                        <td>{{ entity.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td>{{ entity.name }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="row product-list">
+                    <div class="col-md-4">
+                        <section class="panel">
+                          <div class="pro-img-box product-image">
+                              <img src="/uploads/product/{{entity.getImage()}}" alt=""/>
+                          </div>
+                          <div class="panel-body text-center">
+                              <h4>
+                                  <span class="pro-title">
+                                      Product Name: {{entity.name}}
+                                  </span>
+                              </h4>
+                              <p class="price">Product Id: {{entity.id}}</p>
+                          </div>
+                        </section>
+                    </div>
+                </div>
             </section>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
         <span class="pull-right">
