@@ -52,6 +52,10 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            if ($entity->file != null) {
+                $entity->setImage(uniqid().'.'.$entity->file->guessExtension());
+                $entity->file->move($entity->getUploadRootDir(), $entity->getImage());
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
