@@ -2,3 +2,4 @@
 parameters:
     purchase_status: 1
     wkhtmltopdf:  "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe\""
+    access_error : "You do not have the necessary rights to access this action!"
