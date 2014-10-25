@@ -284,7 +284,7 @@ class IssueController extends Controller
             }
 
             $em->flush();
-            $this->get('session')->getFlashBag()->add('heads_up', "Your change was successfully Saved");
+            $this->get('session')->getFlashBag()->add('heads_up', $this->container->getParameter('update_success'));
 
             return $this->redirect($this->generateUrl('issue_edit', array('id' => $id)));
         }
