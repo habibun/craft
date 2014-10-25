@@ -171,16 +171,19 @@ class IssueController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        try{
 
+        $em = $this->getDoctrine()->getManager();
         $issue = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
 
         if (!$issue) {
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
         if ($issue->getStatus() == 1) {
-            throw $this->createNotFoundException('Issue is already finalized');
+            throw new AccessDeniedException();
+                exit();
         }
+        
         $editForm = $this->createEditForm($issue);
         $issueLine = new IssueLine();
         $lineForm = $this->createForm(
@@ -203,6 +206,14 @@ class IssueController extends Controller
                 'lines' => $issueLines
             )
         );
+        }
+        
+        catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t modify this');
+
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }
+        
     }
 
     /**
