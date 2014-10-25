@@ -8,6 +8,7 @@ use Acme\IssueBundle\Form\IssueType;
 use Acme\IssueBundle\Entity\IssueLine;
 use Acme\IssueBundle\Form\IssueLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -294,13 +295,17 @@ class IssueController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        try
+        {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
-        if ($entity->getStatus() == 1)
-            throw $this->createNotFoundException('Issue is already finalized');
+        if ($entity->getStatus() == 1){
+            throw new AccessDeniedException();
+                exit();
+        }
 
         $lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $entity));
         if (!empty($lines))
@@ -308,9 +313,14 @@ class IssueController extends Controller
                 $em->remove($line);
 
         $em->remove($entity);
-        $em->flush();
+        $em->flush(); 
+        }catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t delete this');
 
-        $this->get('session')->getFlashBag()->add('oh_snap', "Successfully Deleted");
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }
+        
+        $this->get('session')->getFlashBag()->add('well_done', "Successfully Deleted");
 
         return $this->redirect($this->generateUrl('issue'));
     }
@@ -371,7 +381,7 @@ class IssueController extends Controller
             $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('access_error'));
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
