@@ -2,6 +2,41 @@
 
 {% block title %}Product{% endblock %}
 
+{% block stylesheets %}
+<style type="text/css">
+.product-image img {
+    border: 1px solid #E2E2E2;
+    left: 10px;
+    max-width: 300px;
+    width: 279px; 
+    height: 222px;
+    position: relative;
+    top: 10px;
+}
+
+.hid {
+    background: #fc5959;
+    width: 100px;
+    /*height: 50px;*/
+    /*color: #fff;*/
+    /*display: inline-block;*/
+    text-align: center;
+    /*border: 3px solid #fff;*/
+    left: 34%;
+    bottom: -10px;
+    position: absolute;
+    /*color: #fff;*/
+    /*font-size: 12px;*/
+    /*line-height: 42px;*/
+    border-color: transparent transparent #FCB322;
+    border-bottom-color: #FCB322 !important;
+    border-top-color: #FCB322 !important;
+    /*background: transparent;*/
+    opacity: 1;
+}
+</style>
+{% endblock %}
+
 {% block body -%}
     <div class="row">
         <div class="col-lg-12">
@@ -21,7 +56,6 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <section class="panel">
                 <header class="panel-heading">
                     <strong>Product list</strong>
                     <span class="tools pull-right">
@@ -29,35 +63,54 @@
                         <a class="icon-remove" href="javascript:;"></a>
                     </span>
                 </header>
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div class="row product-list">
                     {% for entity in entities %}
-                        <tr>
-                            <td><a href="{{ path('product_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                            <td>{{ entity.name }}</td>
-                            <td>
-                                <a href="{{ path('product_show', { 'id': entity.id }) }}"
+                        <div class="col-md-4">
+                          <section class="panel">
+                              <div class="pro-img-box product-image">
+                                  <img src="/uploads/product/{{entity.getImage()}}" alt=""/>
+                                  <span class="hid">
+                                      <a href="{{ path('product_show', { 'id': entity.id }) }}"
                                    class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
                                 <a href="{{ path('product_edit', { 'id': entity.id }) }}"
                                    class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>
                                 <a href="{{ path('product_delete', { 'id': entity.id }) }}"
                                    class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
-                            </td>
-                        </tr>
+                                  </span>
+                              </div>
+                              <div class="panel-body text-center">
+                                  <h4>
+                                      <a href="#" class="pro-title">
+                                          Product Name: {{entity.name}}
+                                      </a>
+                                  </h4>
+                                  <p class="price">Product Id: {{entity.id}}</p>
+                              </div>
+                          </section>
+                        </div>
                     {% endfor %}
-                    </tbody>
-                </table>
+                </div>
                  <span class="pull-right">
                         {{ knp_pagination_render(entities, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}
                 </span>
-            </section>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.hid').hide();
+        $('.product-image').bind('mouseenter',function(){
+             var jony = $('.hid').show();
+            $(this).toggleClass('jony');
+        });
+        $('.product-image').bind('mouseleave',function(){
+             var jony = $('.hid').hide();
+            $(this).toggleClass('jony');
+        });
+    });
+    </script>
+
 {% endblock %}
