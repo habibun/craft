@@ -38,7 +38,7 @@ class StateOverviewController extends Controller
 
     public function totalUserAction()
     {
-        $query_builder = $this->container->get('doctrine')->getManager()->createQueryBuilder();
+        $query_builder = $this->getDoctrine()->getManager()->createQueryBuilder();
         $totalUser = $query_builder->select('COUNT(u) total_user')
             ->from('AcmeUserBundle:User', 'u')
             ->getQuery()
@@ -48,6 +48,36 @@ class StateOverviewController extends Controller
             'AcmeWidgetBundle:StateOverview:totalUser.html.twig',
             array(
                 'totalUser' => $totalUser,
+            )
+        );
+    }
+
+    public function draftedIssueAction()
+    {
+        $query_builder = $this->getDoctrine()->getManager()->createQueryBuilder();
+        $draftedIssue = $query_builder->select('count(i.status) total_drafted_issue')
+            ->from('AcmeIssueBundle:Issue','i')
+            ->where('i.status = 0')
+            ->getQuery()
+            ->getResult();
+        
+        return $this->render('AcmeWidgetBundle:StateOverview:draftedIssue.html.twig',array(
+            'draftedIssue' => $draftedIssue,
+            )
+        );
+    }
+
+    public function draftedPurchaseAction()
+    {
+        $query_builder = $this->getDoctrine()->getManager()->createQueryBuilder();
+        $draftedPurchase = $query_builder->select('count(p.status) total_drafted_purchase')
+            ->from('AcmePurchaseBundle:Purchase','p')
+            ->where('p.status = 0')
+            ->getQuery()
+            ->getResult();
+        
+        return $this->render('AcmeWidgetBundle:StateOverview:draftedPurchase.html.twig',array(
+            'draftedPurchase' => $draftedPurchase,
             )
         );
     }
