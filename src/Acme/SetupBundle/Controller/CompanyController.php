@@ -241,7 +241,7 @@ class CompanyController extends Controller
             $em->flush();
         } catch (\Exception $e) {
             $this->get('session')->getFlashBag()->set(
-                'error',
+                'oh_snap',
                 'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.'
             );
 
