@@ -14,3 +14,7 @@ AcmeWidgetBundle_workprogress:
     pattern:    /workprogress
     defaults:   { _controller:  AcmeWidgetBundle:WorkProgress:workProgress }
 
+AcmeWidgetBundle_topsearch:
+    pattern:    /topsearch
+    defaults:   { _controller:  AcmeWidgetBundle:TopSearch:topSearchList }
+
