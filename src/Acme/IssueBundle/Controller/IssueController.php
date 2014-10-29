@@ -8,6 +8,7 @@ use Acme\IssueBundle\Form\IssueType;
 use Acme\IssueBundle\Entity\IssueLine;
 use Acme\IssueBundle\Form\IssueLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -170,16 +171,19 @@ class IssueController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        try{
 
+        $em = $this->getDoctrine()->getManager();
         $issue = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
 
         if (!$issue) {
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
         if ($issue->getStatus() == 1) {
-            throw $this->createNotFoundException('Issue is already finalized');
+            throw new AccessDeniedException();
+                exit();
         }
+        
         $editForm = $this->createEditForm($issue);
         $issueLine = new IssueLine();
         $lineForm = $this->createForm(
@@ -202,6 +206,14 @@ class IssueController extends Controller
                 'lines' => $issueLines
             )
         );
+        }
+        
+        catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t modify this');
+
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }
+        
     }
 
     /**
@@ -272,7 +284,7 @@ class IssueController extends Controller
             }
 
             $em->flush();
-            $this->get('session')->getFlashBag()->add('heads_up', "Your change was successfully Saved");
+            $this->get('session')->getFlashBag()->add('heads_up', $this->container->getParameter('update_success'));
 
             return $this->redirect($this->generateUrl('issue_edit', array('id' => $id)));
         }
@@ -294,13 +306,17 @@ class IssueController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        try
+        {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Issue entity.');
         }
-        if ($entity->getStatus() == 1)
-            throw $this->createNotFoundException('Issue is already finalized');
+        if ($entity->getStatus() == 1){
+            throw new AccessDeniedException();
+                exit();
+        }
 
         $lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $entity));
         if (!empty($lines))
@@ -308,9 +324,14 @@ class IssueController extends Controller
                 $em->remove($line);
 
         $em->remove($entity);
-        $em->flush();
+        $em->flush(); 
+        }catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t delete this');
 
-        $this->get('session')->getFlashBag()->add('oh_snap', "Successfully Deleted");
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }
+        
+        $this->get('session')->getFlashBag()->add('well_done', "Successfully Deleted");
 
         return $this->redirect($this->generateUrl('issue'));
     }
@@ -366,6 +387,12 @@ class IssueController extends Controller
 
     public function deFinalizeAction($id)
     {
+        //checks if the user is authenticated
+        if(!$this->container->get('security.context')->isGranted('ROLE_ADMIN') ){
+            $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('access_error'));
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
@@ -377,7 +404,7 @@ class IssueController extends Controller
         $entity->setFinalizedAt(null);
         $entity->setFinalizedBy(null);
         $em->flush();
-        $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
+        $this->get('session')->getFlashBag()->add('well_done', "De-Finalized Successfully!");
 
         return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
     }

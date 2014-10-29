@@ -273,7 +273,7 @@ class PurchaseController extends Controller
             }
 
             $em->flush();
-            $this->get('session')->getFlashBag()->add('heads_up', "Your change was successfully Saved");
+            $this->get('session')->getFlashBag()->add('heads_up', $this->container->getParameter('update_success'));
 
             return $this->redirect($this->generateUrl('purchase_edit', array('id' => $id)));
         }
@@ -306,8 +306,7 @@ class PurchaseController extends Controller
             }
             if ($this->container->getParameter('purchase_status') == $purchase->getStatus()) {
                 throw new AccessDeniedException();
-            } else {
-                $this->get('session')->getFlashBag()->add('oh_snap', 'Successfully Deleted');
+                exit();
             }
 
             $lines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(
@@ -325,7 +324,8 @@ class PurchaseController extends Controller
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-
+        
+        $this->get('session')->getFlashBag()->add('well_done', 'Successfully Deleted');
         return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
     }
 
@@ -391,6 +391,13 @@ class PurchaseController extends Controller
 
     public function deFinalizeAction($id)
     {
+
+        //checks if the user is authenticated
+        if(!$this->container->get('security.context')->isGranted('ROLE_ADMIN') ){
+            $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('access_error'));
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AcmePurchaseBundle:Purchase')->find($id);
@@ -402,7 +409,7 @@ class PurchaseController extends Controller
         $entity->setFinalizedAt(null);
         $entity->setFinalizedBy(null);
         $em->flush();
-        $this->get('session')->getFlashBag()->add('oh_snap', "De-Finalized Successfully!");
+        $this->get('session')->getFlashBag()->add('well_done', "De-Finalized Successfully!");
 
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }

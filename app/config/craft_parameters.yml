@@ -2,3 +2,7 @@
 parameters:
     purchase_status: 1
     wkhtmltopdf:  "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe\""
+    access_error : "You do not have the necessary rights to access this action!"
+    finalize_modify_error: "This is a finalized record. You can\'t modify this!"
+    finalize_delete_error: "This is a finalized record. You can\'t delete this!"
+    update_success:	"Your change was successfully Saved"

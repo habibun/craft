@@ -52,6 +52,10 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            if ($entity->file != null) {
+                $entity->setImage(uniqid().'.'.$entity->file->guessExtension());
+                $entity->file->move($entity->getUploadRootDir(), $entity->getImage());
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -203,6 +207,10 @@ class ProductController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            if ($entity->file != null) {
+                $entity->setImage(uniqid().'.'.$entity->file->guessExtension());
+                $entity->file->move($entity->getUploadRootDir(), $entity->getImage());
+            }
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
@@ -241,7 +249,7 @@ class ProductController extends Controller
             $em->flush();
         } catch (\Exception $e) {
             $this->get('session')->getFlashBag()->set(
-                'error',
+                'oh_snap',
                 'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.'
             );
 

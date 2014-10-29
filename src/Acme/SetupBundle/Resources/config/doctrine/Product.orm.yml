@@ -11,4 +11,6 @@ Acme\SetupBundle\Entity\Product:
         name:
             type: string
             length: 255
+        image:
+            type: string
     lifecycleCallbacks: {  }
