@@ -1,0 +1,75 @@
+                <ul class="nav top-menu">
+                    <!-- settings start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-align-justify"></i>
+                            <span class="badge bg-success">
+	                            {% if workProgress.total_created is empty %}
+	                            	0
+	                            {% endif %}
+								{{ workProgress.total_created }}
+							</span>
+                        </a>
+                        <ul class="dropdown-menu extended tasks-bar">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">You have created total 
+                                	{% if workProgress.total_created is empty %}
+	                            		0
+	                            	{% endif %}
+									{{ workProgress.total_created }}		
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- settings end -->
+                    <!-- inbox dropdown start-->
+                    <li id="header_inbox_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-align-left"></i>
+                            <span class="badge bg-important">
+	                            {% if workProgress.total_updated is empty %}
+	                            	0
+	                            {% endif %}
+	                            {{ workProgress.total_updated }}
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu extended inbox">
+                            <div class="notify-arrow notify-arrow-red"></div>
+                            <li>
+                                <p class="red">You have updated total 
+                                	{% if workProgress.total_updated is empty %}
+                            			0
+                            		{% endif %}
+                            		{{ workProgress.total_updated }}
+                            	</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- inbox dropdown end -->
+                    <!-- notification dropdown start-->
+                    <li id="header_notification_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                            <i class="icon-align-right"></i>
+                            <span class="badge bg-warning">
+                            	{% if workProgress.total_finalized is empty %}
+                            		0
+                            	{% endif %}
+                            	{{ workProgress.total_finalized }}
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu extended notification">
+                            <div class="notify-arrow notify-arrow-yellow"></div>
+                            <li>
+                                <p class="yellow">You have updated total 
+                                	{% if workProgress.total_finalized is empty %}
+                            			0
+                            		{% endif %}
+                            		{{ workProgress.total_finalized }}
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- notification dropdown end -->
+                </ul>
