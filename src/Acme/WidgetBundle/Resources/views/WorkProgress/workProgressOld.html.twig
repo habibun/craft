@@ -1,0 +1,70 @@
+{#{% extends '::base.html.twig' %}
+
+{% block title %}Work-Progress{% endblock %}#}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-12">
+        <!--work progress start-->
+        <section class="panel">
+            <div class="panel-body progress-panel">
+                <div class="task-progress">
+                    <h1>Work Progress</h1>
+                </div>
+                <div class="task-option">
+                    <form action="{{ path('general_search') }}" method="GET" id="search-form">
+                        <input type="text" class="form-control search" placeholder="Search" name="search-keyword"
+                               id="search-input">
+                    </form>
+                </div>
+            </div>
+            <table class="table table-hover table-bordered personal-task">
+                <thead>
+                <tr>
+                    <th rowspan="2" class="text-center">Name</th>
+                    <th colspan="3" class="text-center">Purchase</th>
+                    <th colspan="3" class="text-center">Issue</th>
+                </tr>
+                <tr>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Finalized</th>
+
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Finalized</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entity in workProgress %}
+                    <tr>
+                        <td>{{ entity.name }}</td>
+
+                        <td><span class="badge bg-success">{{ entity.total_created }}</span></td>
+                        <td>
+                            {% if entity.total_updated <= 0 %}
+                                <span class="badge bg-important">{{ entity.total_updated }}</span>
+                            {% else %}
+                                <span class="badge bg-warning">{{ entity.total_updated }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if entity.total_finalized <= 0 %}
+                                <span class="badge bg-important">{{ entity.total_finalized }}</span>
+                            {% else %}
+                                <span class="badge bg-info">{{ entity.total_finalized }}</span>
+                            {% endif %}
+                        </td>
+
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <!--work progress end-->
+    </div>
+</div>    
+{% endblock %}

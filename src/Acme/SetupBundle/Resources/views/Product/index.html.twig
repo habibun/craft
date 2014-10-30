@@ -6,21 +6,18 @@
 <style type="text/css">
 .product-image img {
     border: 1px solid #E2E2E2;
-    left: 10px;
-    width: 279px; 
+    width: 277px;
     height: 222px;
     position: relative;
-    top: 10px;
 }
 
 .hid {
     background: #fc5959;
-    width: 279px;
+    width: 277px;
     display: inline-block;
     text-align: center;
-    left: 3%;
-    bottom: -10px;
-    position: absolute;
+    bottom: 0px;
+    position: relative;
 }
 </style>
 {% endblock %}
@@ -53,7 +50,7 @@
                 </header>
                 <div class="row product-list">
                     {% for entity in entities %}
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                           <section class="panel">
                               <div class="pro-img-box product-image">
                                   <img src="/uploads/product/{{entity.getImage()}}" alt=""/>
