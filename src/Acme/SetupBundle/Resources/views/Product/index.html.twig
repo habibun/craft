@@ -85,7 +85,7 @@
 {% block javascripts %}
 
     <script type="text/javascript">
-    $(document).ready(function(){
+    /*$(document).ready(function(){
         $('.hid').hide();
         $('.product-image').bind('mouseenter',function(){
              var jony = $('.hid').show();
@@ -94,6 +94,13 @@
         $('.product-image').bind('mouseleave',function(){
              var jony = $('.hid').hide();
             $(this).toggleClass('jony');
+        });
+    });*/
+    $(document).ready(function(){
+        $('.panel-body').hover(function() {
+            $('.hid').show();
+        }, function() {
+            $('.hid').hide();
         });
     });
     </script>
