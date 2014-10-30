@@ -7,7 +7,6 @@
 .product-image img {
     border: 1px solid #E2E2E2;
     left: 10px;
-    max-width: 300px;
     width: 279px; 
     height: 222px;
     position: relative;
@@ -16,23 +15,12 @@
 
 .hid {
     background: #fc5959;
-    width: 100px;
-    /*height: 50px;*/
-    /*color: #fff;*/
-    /*display: inline-block;*/
+    width: 279px;
+    display: inline-block;
     text-align: center;
-    /*border: 3px solid #fff;*/
-    left: 34%;
+    left: 3%;
     bottom: -10px;
     position: absolute;
-    /*color: #fff;*/
-    /*font-size: 12px;*/
-    /*line-height: 42px;*/
-    border-color: transparent transparent #FCB322;
-    border-bottom-color: #FCB322 !important;
-    border-top-color: #FCB322 !important;
-    /*background: transparent;*/
-    opacity: 1;
 }
 </style>
 {% endblock %}
@@ -69,7 +57,7 @@
                           <section class="panel">
                               <div class="pro-img-box product-image">
                                   <img src="/uploads/product/{{entity.getImage()}}" alt=""/>
-                                  <span class="hid">
+                                  <span class="hid" style="background-color:rgba(0, 0, 0, 0.3)">
                                       <a href="{{ path('product_show', { 'id': entity.id }) }}"
                                    class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
                                 <a href="{{ path('product_edit', { 'id': entity.id }) }}"

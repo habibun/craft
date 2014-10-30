@@ -13,14 +13,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class WorkProgressController extends Controller
 {
 
-    public function workProgressAction()
+    public function workProgressAction($username = null)
     {
-        $workProgress = $this->_getWorkProgressResults();
+        $username = $this->get('security.context')->getToken()->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+                        'SELECT sum(p.createdBy) as name FROM
+                        AcmePurchaseBundle:Purchase p
+                        join p.createdBy u
+                        WHERE u.username = :username')
+                    ->setParameters(
+                            array('username' => $username->getUsername())
+                        );
+                    
+        $workProgress= $query->getOneOrNullResult();
+
 
         return $this->render(
             'AcmeWidgetBundle:WorkProgress:workProgress.html.twig',
             array(
                 'workProgress' => $workProgress
+                
             )
         );
     }
