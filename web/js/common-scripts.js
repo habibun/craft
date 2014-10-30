@@ -169,7 +169,7 @@ $(document).on("click", "a.confirm-delete", function (e) {
     return true;
 });
 
-//search form submit functionality
+//search form submit
 $('#search-form').submit(
     function (evt) {
         evt.preventDefault();
@@ -177,6 +177,8 @@ $('#search-form').submit(
         if (searchVal.length > 1) {
             window.location = $(this).attr('action') + '/' + searchVal;
         }
+    $("#loading-full,.loading-ball").fadeIn();
+    $("#loading-full,.loading-ball").fadeOut();
     }
 );
 
