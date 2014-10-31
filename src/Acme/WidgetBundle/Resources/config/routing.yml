@@ -18,3 +18,7 @@ AcmeWidgetBundle_topsearch:
     pattern:    /topsearch
     defaults:   { _controller:  AcmeWidgetBundle:TopSearch:topSearchList }
 
+AcmeWidgetBundle_lockscreen:
+    pattern:    /lockscreen
+    defaults:   { _controller:  AcmeWidgetBundle:LockScreen:lockScreen }
+
