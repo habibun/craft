@@ -2,9 +2,9 @@ acme_widget_homepage:
     path:     /hello/{name}
     defaults: { _controller: AcmeWidgetBundle:Default:index }
 
-AcmeWidgetBundle_lastpurchase:
-  pattern:  /lastpurchase
-  defaults: { _controller: AcmeWidgetBundle:LastPurchase:lastPurchase }
+AcmeWidgetBundle_lasttab:
+  pattern:  /lasttab
+  defaults: { _controller: AcmeWidgetBundle:LastTab:lastTab }
 
 AcmeWidgetBundle_stateoverview:
     resource: "@AcmeWidgetBundle/Resources/config/routing/stateoverview.yml"
