@@ -57,6 +57,7 @@
                     {{ form_row(line_form.issueTo) }}
                     {{ form_row(line_form.product) }}
                     {{ form_row(line_form.quantity) }}
+                    <hr>
                     <span class="pull-right">
                         <input type="button" class="btn btn-info" id="lineAdd" value="Add Line" onclick="addLine();"/>
                     </span>
@@ -80,20 +81,20 @@
                     <table id="lineViewer" class="table table-striped">
                         <thead>
                         <tr>
+                            <th>Reference No</th>
+                            <th>Issue to</th>
                             <th>Product</th>
-                            <th>Amount</th>
-                            <th>IssueTo</th>
-                            <th>Ref No</th>
+                            <th>Quantity</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for line in lines %}
                             <tr class="{{ line.product.getId() }}">
+                                <td>{{ line.referenceNumber }}</td>
+                                <td>{{ line.issueTo }}</td>
                                 <td>{{ line.product }}</td>
                                 <td>{{ line.quantity }}</td>
-                                <td>{{ line.issueTo }}</td>
-                                <td>{{ line.referenceNumber }}</td>
                                 <td><a href="{{ path('issue_line_delete', {'id' : line.getId() }) }}"
                                        class="btn btn-danger btn-xs existing-line-delete"><i class="icon-trash"></i></a>
                                 </td>
@@ -144,10 +145,10 @@
             }
 
             var html = '<tr class="' + $('#issue_line_product').val() + '">';
+            html += '<td>' + $('#issue_line_referenceNumber').val() + '<input type="hidden" value="' + $('#issue_line_referenceNumber').val() + '" name="' + $('#issue_line_referenceNumber').attr('name') + '[]" /></td>';
+            html += '<td>' + $('#issue_line_issueTo').val() + '<input type="hidden" value="' + $('#issue_line_issueTo').val() + '" name="' + $('#issue_line_issueTo').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_product option:selected').text() + '<input type="hidden" value="' + $('#issue_line_product').val() + '" name="' + $('#issue_line_product').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_quantity').val() + '<input type="hidden" value="' + $('#issue_line_quantity').val() + '" name="' + $('#issue_line_quantity').attr('name') + '[]" /></td>';
-            html += '<td>' + $('#issue_line_issueTo').val() + '<input type="hidden" value="' + $('#issue_line_issueTo').val() + '" name="' + $('#issue_line_issueTo').attr('name') + '[]" /></td>';
-            html += '<td>' + $('#issue_line_referenceNumber').val() + '<input type="hidden" value="' + $('#issue_line_referenceNumber').val() + '" name="' + $('#issue_line_referenceNumber').attr('name') + '[]" /></td>';
             html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';
             html += '</tr>';
             $('table#lineViewer tbody').append(html);
