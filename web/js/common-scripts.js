@@ -250,5 +250,27 @@ $(function(){
 //date picker end
 
 
+//start lock screen
+var url = "http://craft.local/app_dev.php/widget/lockscreen";
+document.onkeydown = keyDownEvent;
+document.onkeyup = keyUpEvent;
+var isCtrl = false;
+function keyDownEvent() {
+    var keyid = event.keyCode;
 
+    if(keyid == 16) {
+        isCtrl = true;
+    }
+}
+function keyUpEvent() {
+    var keyid = event.keyCode;
+
+    if(keyid == 16) {
+        isCtrl = false;
+    }
+
+    if(keyid == 76 && isCtrl == true) {
+       $(location).attr('href',url);
+    }
+}
 

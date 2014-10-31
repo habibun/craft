@@ -147,34 +147,6 @@
 <script src="{{ asset('assets/chosen/chosen.jquery.min.js') }}"></script>
 <!--common script for all pages-->
 <script src="{{ asset('js/common-scripts.js') }}"></script>
-{% block javascripts %}
-<script type="text/javascript">
-var url = "http://stackoverflow.com";
-document.onkeydown = keyDownEvent;
-document.onkeyup = keyUpEvent;
-
-var isCtrl = false;
-
-function keyDownEvent() {
-    var keyid = event.keyCode;
-
-    if(keyid == 16) {
-        isCtrl = true;
-    }
-}
-
-function keyUpEvent() {
-    var keyid = event.keyCode;
-
-    if(keyid == 16) {
-        isCtrl = false;
-    }
-
-    if(keyid == 76 && isCtrl == true) {
-       $(location).attr('href',url);
-    }
-}
-</script>
-{% endblock %}
+{% block javascripts %}{% endblock %}
 </body>
 </html>
