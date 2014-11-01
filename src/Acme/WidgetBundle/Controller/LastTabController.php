@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class LastTabController extends Controller
 {
-    public function lastTabAction($max = 5)
+    public function lastTabAction($max = 3)
     {
         $result = array();
         $em = $this->getDoctrine()->getManager();
@@ -59,7 +59,7 @@ class LastTabController extends Controller
             ->setParameter('enabled', '%"1"%');
 
         if ($max) {
-            $query->setMaxResults($max);
+            $query->setMaxResults($max = 5);
         };
 
         $users = $query->getResult();

@@ -1,83 +1,74 @@
-{#{% extends '::base.html.twig' %}
-
-{% block title %}Last Tab{% endblock %}#}
-
-
-{% block body -%}
-    <div class="row">
-        <div class="col-lg-4">
-            <!--widget start-->
-            <section class="panel">
-                <header class="panel-heading tab-bg-dark-navy-blue">
-                    <ul class="nav nav-tabs nav-justified ">
-                        <li class="active">
-                            <a href="#popular" data-toggle="tab">
-                                Purchase
+<div class="col-lg-3">
+    <!--widget start-->
+    <section class="panel">
+        <header class="panel-heading tab-bg-dark-navy-blue">
+            <ul class="nav nav-tabs nav-justified ">
+                <li class="active">
+                    <a href="#popular" data-toggle="tab">
+                        Purchase
+                    </a>
+                </li>
+                <li>
+                    <a href="#comments" data-toggle="tab">
+                        Issue
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#recent" data-toggle="tab">
+                        Login
+                    </a>
+                </li>
+            </ul>
+        </header>
+        <div class="panel-body">
+            <div class="tab-content tasi-tab">
+                <div class="tab-pane active" id="popular">
+                    {% for entity in result.lastPurchase %}
+                        <article class="media">
+                            <a class="pull-left thumb p-thumb">
+                                <p><i class="icon-time"></i> {{ entity.purchase.purchaseDate|date('d/m/Y') }}
+                                </p>
                             </a>
-                        </li>
-                        <li>
-                            <a href="#comments" data-toggle="tab">
-                                Issue
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="#recent" data-toggle="tab">
-                                Login
-                            </a>
-                        </li>
-                    </ul>
-                </header>
-                <div class="panel-body">
-                    <div class="tab-content tasi-tab">
-                        <div class="tab-pane active" id="popular">
-                            {% for entity in result.lastPurchase %}
-                                <article class="media">
-                                    <a class="pull-left thumb p-thumb">
-                                        <p><i class="icon-time"></i> {{ entity.purchase.purchaseDate|date('d/m/Y') }}
-                                        </p>
-                                    </a>
 
-                                    <div class="media-body">
-                                        <p class="p-head">{{ entity.product.name }}</p>
+                            <div class="media-body">
+                                <p class="p-head">{{ entity.product.name }}</p>
 
-                                        <p>{{ entity.manufacturer }}</p>
-                                    </div>
-                                </article>
-                            {% endfor %}
-                        </div>
-
-                        <div class="tab-pane" id="comments">
-                            {% for entity in result.lastIssue %}
-                                <article class="media">
-                                    <a class="pull-left thumb p-thumb">
-                                        <p><i class="icon-time"></i> {{ entity.issue.issueDate|date('d/m/Y') }}</p>
-                                    </a>
-
-                                    <div class="media-body">
-                                        <p class="p-head">{{ entity.product.name }}</p>
-
-                                        <p>{{ entity.issueTo }}</p>
-                                    </div>
-                                </article>
-                            {% endfor %}
-                        </div>
-                        <div class="tab-pane " id="recent">
-                            {% for entity in users %}
-                                <article class="media">
-                                    <a class="pull-left thumb p-thumb">
-                                        <p><i class="icon-time"></i> {{ entity.lastLogin|date('Y-m-d H:i:s') }}</p>
-                                    </a>
-
-                                    <div class="media-body">
-                                        <p class="p-head">{{ entity.username }}</p>
-                                    </div>
-                                </article>
-                            {% endfor %}
-                        </div>
-                    </div>
+                                <p>{{ entity.manufacturer }}</p>
+                            </div>
+                        </article>
+                    {% endfor %}
                 </div>
-            </section>
+
+                <div class="tab-pane" id="comments">
+                    {% for entity in result.lastIssue %}
+                        <article class="media">
+                            <a class="pull-left thumb p-thumb">
+                                <p><i class="icon-time"></i> {{ entity.issue.issueDate|date('d/m/Y') }}</p>
+                            </a>
+
+                            <div class="media-body">
+                                <p class="p-head">{{ entity.product.name }}</p>
+
+                                <p>{{ entity.issueTo }}</p>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+                <div class="tab-pane " id="recent">
+                    {% for entity in users %}
+                        <article class="media">
+                            <a class="pull-left thumb p-thumb">
+                                <p><i class="icon-time"></i> {{ entity.lastLogin|date('Y-m-d H:i:s') }}</p>
+                            </a>
+
+                            <div class="media-body">
+                                <p class="p-head">{{ entity.username }}</p>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-    </div>
-{% endblock %}
+    </section>
+</div>
 {# {% include 'AcmeWidgetBundle:LastPurchase:_lastPurchase.html.twig' with {'lastPurchase' : lastPurchase} %} #}

@@ -15,7 +15,9 @@
     
     {#{% include 'AcmeDashBundle:Search:searchForm.html.twig' %}#}
     {{ render(controller('AcmeWidgetBundle:StateOverview:stateOverview')) }}
-    {{ render(controller('AcmeWidgetBundle:LastTab:lastTab' )) }}
-    {{ render(controller('AcmeWidgetBundle:TopSearch:topSearchList')) }}
+    <div class="row">
+        {{ render(controller('AcmeWidgetBundle:TopSearch:topSearchList')) }}
+        {{ render(controller('AcmeWidgetBundle:LastTab:lastTab' )) }}
+    </div>
 
 {% endblock %}
