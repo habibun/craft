@@ -82,10 +82,10 @@
                     <table id="lineViewer" class="table table-striped">
                         <thead>
                         <tr>
+                            <th>Reference No</th>
+                            <th>Issue to</th>
                             <th>Product</th>
                             <th>Quantity</th>
-                            <th>IssueTo</th>
-                            <th>Ref No</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -136,10 +136,10 @@
             }
 
             var html = '<tr class="' + $('#issue_line_product').val() + '">';
+            html += '<td>' + $('#issue_line_referenceNumber').val() + '<input type="hidden" value="' + $('#issue_line_referenceNumber').val() + '" name="' + $('#issue_line_referenceNumber').attr('name') + '[]" /></td>';
+            html += '<td>' + $('#issue_line_issueTo').val() + '<input type="hidden" value="' + $('#issue_line_issueTo').val() + '" name="' + $('#issue_line_issueTo').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_product option:selected').text() + '<input type="hidden" value="' + $('#issue_line_product').val() + '" name="' + $('#issue_line_product').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_quantity').val() + '<input type="hidden" value="' + $('#issue_line_quantity').val() + '" name="' + $('#issue_line_quantity').attr('name') + '[]" /></td>';
-            html += '<td>' + $('#issue_line_issueTo').val() + '<input type="hidden" value="' + $('#issue_line_issueTo').val() + '" name="' + $('#issue_line_issueTo').attr('name') + '[]" /></td>';
-            html += '<td>' + $('#issue_line_referenceNumber').val() + '<input type="hidden" value="' + $('#issue_line_referenceNumber').val() + '" name="' + $('#issue_line_referenceNumber').attr('name') + '[]" /></td>';
             html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';
             html += '</tr>';
             $('table#lineViewer tbody').append(html);

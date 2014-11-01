@@ -29,7 +29,7 @@ class ProductController extends Controller
         $entities = $paginator->paginate(
             $entities,
             $this->get('request')->query->get('page', 1) /*page number*/,
-            10
+            9
         /*limit per page*/
         );
 

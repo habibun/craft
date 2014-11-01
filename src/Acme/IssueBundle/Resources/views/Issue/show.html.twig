@@ -30,7 +30,7 @@
         <div class="col-lg-7">
             <section class="panel">
                 <header class="panel-heading">
-                    <strong>Issue - {{ issue.id }}</strong>
+                    <strong>Issue Detail's</strong>
                     <span class="tools pull-right">
                         <a class="icon-chevron-down" href="javascript:;"></a>
                         <a class="icon-remove" href="javascript:;"></a>
@@ -77,7 +77,7 @@
         <div class="col-lg-5">
             <section class="panel">
                 <header class="panel-heading">
-                    <strong>Products</strong>
+                    <strong>Product Info</strong>
                     <span class="tools pull-right">
                         <a class="icon-chevron-down" href="javascript:;"></a>
                         <a class="icon-remove" href="javascript:;"></a>
@@ -87,19 +87,19 @@
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
+                            <th>Reference No</th>
+                            <th>Issue to</th>
                             <th>Product</th>
                             <th>Quantity</th>
-                            <th>IssueTo</th>
-                            <th>Reference No</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for line in lines %}
                             <tr>
+                                <td>{{ line.referenceNumber }}</td>
+                                <td>{{ line.issueTo }}</td>
                                 <td>{{ line.product }}</td>
                                 <td>{{ line.quantity }}</td>
-                                <td>{{ line.issueTo }}</td>
-                                <td>{{ line.referenceNumber }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

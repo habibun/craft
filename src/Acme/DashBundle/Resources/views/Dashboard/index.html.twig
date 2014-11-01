@@ -12,10 +12,10 @@
             <!--breadcrumbs end -->
         </div>
     </div>
-    {#{{ render(controller('AcmeDashBundle:Last:index', { 'max': 5 })) }}#}
+    
     {#{% include 'AcmeDashBundle:Search:searchForm.html.twig' %}#}
     {{ render(controller('AcmeWidgetBundle:StateOverview:stateOverview')) }}
-    {{ render(controller('AcmeWidgetBundle:WorkProgress:workProgress')) }}
+    {{ render(controller('AcmeWidgetBundle:LastTab:lastTab' )) }}
     {{ render(controller('AcmeWidgetBundle:TopSearch:topSearchList')) }}
 
 {% endblock %}

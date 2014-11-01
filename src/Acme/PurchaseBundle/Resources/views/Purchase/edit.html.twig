@@ -51,11 +51,14 @@
                 </header>
                 <div class="panel-body">
                     {{ bootstrap_set_style('horizontal') }}
+                    {{ bootstrap_set_widget_col(9) }}
+                    {{ bootstrap_set_label_col(3) }}
                     {{ form_start(line_form, {'attr' :  { 'class': 'form-horizontal', 'id': 'lineForm' } }) }}
                     {{ form_row(line_form.product) }}
                     {{ form_row(line_form.manufacturer) }}
                     {{ form_row(line_form.quantity) }}
                     {{ form_row(line_form.price) }}
+                    <hr>
                     <span class="pull-right">
                         <input type="button" class="btn btn-info" id="lineAdd" value="Add Line" onclick="addLine();"/>
                     </span>
@@ -81,7 +84,7 @@
                         <tr>
                             <th>Product</th>
                             <th>Manufacturer</th>
-                            <th>Amount</th>
+                            <th>Quantity</th>
                             <th>Price</th>
                             <th>Action</th>
                         </tr>
