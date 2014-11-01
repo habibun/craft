@@ -33,6 +33,7 @@ class StateOverviewController extends Controller
              where pu.status = 1'
         );
         $result = $query->getResult();
+
         return $result;
     }
 
@@ -56,13 +57,15 @@ class StateOverviewController extends Controller
     {
         $query_builder = $this->getDoctrine()->getManager()->createQueryBuilder();
         $draftedIssue = $query_builder->select('count(i.status) total_drafted_issue')
-            ->from('AcmeIssueBundle:Issue','i')
+            ->from('AcmeIssueBundle:Issue', 'i')
             ->where('i.status = 0')
             ->getQuery()
             ->getResult();
-        
-        return $this->render('AcmeWidgetBundle:StateOverview:draftedIssue.html.twig',array(
-            'draftedIssue' => $draftedIssue,
+
+        return $this->render(
+            'AcmeWidgetBundle:StateOverview:draftedIssue.html.twig',
+            array(
+                'draftedIssue' => $draftedIssue,
             )
         );
     }
@@ -71,13 +74,15 @@ class StateOverviewController extends Controller
     {
         $query_builder = $this->getDoctrine()->getManager()->createQueryBuilder();
         $draftedPurchase = $query_builder->select('count(p.status) total_drafted_purchase')
-            ->from('AcmePurchaseBundle:Purchase','p')
+            ->from('AcmePurchaseBundle:Purchase', 'p')
             ->where('p.status = 0')
             ->getQuery()
             ->getResult();
-        
-        return $this->render('AcmeWidgetBundle:StateOverview:draftedPurchase.html.twig',array(
-            'draftedPurchase' => $draftedPurchase,
+
+        return $this->render(
+            'AcmeWidgetBundle:StateOverview:draftedPurchase.html.twig',
+            array(
+                'draftedPurchase' => $draftedPurchase,
             )
         );
     }

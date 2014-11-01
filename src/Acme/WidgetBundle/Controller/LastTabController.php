@@ -23,13 +23,14 @@ class LastTabController extends Controller
             ->from('AcmePurchaseBundle:PurchaseLine', 'p')
             ->orderBy('pu.purchaseDate', 'DESC')
             ->join('p.purchase', 'pu')
-            ->join('p.product','pr')
+            ->join('p.product', 'pr')
             ->addSelect("pu")
-            ->addSelect("pr") 
+            ->addSelect("pr")
             ->andWhere('pu.status = 1');
 
-        if(false === is_null($max))
+        if (false === is_null($max)) {
             $qb->setMaxResults($max);
+        }
 
         $query = $qb->getQuery();
         $result['lastPurchase'] = $query->getResult();
@@ -42,26 +43,30 @@ class LastTabController extends Controller
             ->addSelect("iss")
             ->andWhere('iss.status = 1');
 
-        if(false === is_null($max))
+        if (false === is_null($max)) {
             $qb->setMaxResults($max);
+        }
 
         $query = $qb->getQuery();
         $result['lastIssue'] = $query->getResult();
 
         //search for last login
-        $query = $em->createQuery('SELECT u FROM AcmeUserBundle:User u 
+        $query = $em->createQuery(
+            'SELECT u FROM AcmeUserBundle:User u
                 WHERE NOT u.enabled LIKE :enabled
-                ORDER BY u.lastLogin DESC')
-            ->setParameter('enabled', '%"1"%' );
+                ORDER BY u.lastLogin DESC'
+        )
+            ->setParameter('enabled', '%"1"%');
 
-        if ($max){
+        if ($max) {
             $query->setMaxResults($max);
         };
-            
-        $users = $query->getResult();      
+
+        $users = $query->getResult();
 
         return $this->render(
-            'AcmeWidgetBundle:LastTab:lastTab.html.twig',array(
+            'AcmeWidgetBundle:LastTab:lastTab.html.twig',
+            array(
                 'result' => $result,
                 'users' => $users
             )
