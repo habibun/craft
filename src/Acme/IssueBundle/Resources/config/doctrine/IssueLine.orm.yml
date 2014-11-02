@@ -8,7 +8,7 @@ Acme\IssueBundle\Entity\IssueLine:
     fields:
         quantity:
             type: decimal
-            scale: 2
+            nullable: false
         issueTo:
             column: issue_to
             type: string
