@@ -64,8 +64,12 @@ class SearchStatisticsRepository extends EntityRepository
             ->orderBy('keywords','desc')
             ->setMaxResults($limit);
 
-            $res = $qb->getQuery()->getArrayResult();
-            return $res;
+        try{
+            $result = $qb->getQuery()->getArrayResult();
+        } catch(\Doctrine\Orm\NoResultException $e){
+            $result = null;
+        }
 
+        return $result;
     }
 }
