@@ -43,6 +43,7 @@ class SearchStatisticsRepository extends EntityRepository
         return $result;
     }
 
+    //saving the search word
     public function saveSerchRequest($searchWord)
     {
         $statistics = new SearchStatistics();
@@ -51,5 +52,20 @@ class SearchStatisticsRepository extends EntityRepository
         $this->_em->flush();
 
         return true;
+    }
+
+    //get top 6 searched keywords
+    public function getTopSearchedKeyWords($limit = null)
+    {
+        $qb = $this->_em->createQueryBuilder()
+            ->select('s.keywordSearch, count(s.searchId) as keywords')
+            ->from('AcmeWidgetBundle:SearchStatistics', 's')
+            ->groupBy('s.keywordSearch')
+            ->orderBy('keywords','desc')
+            ->setMaxResults($limit);
+
+            $res = $qb->getQuery()->getArrayResult();
+            return $res;
+
     }
 }
