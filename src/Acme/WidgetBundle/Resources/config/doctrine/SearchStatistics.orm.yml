@@ -1,7 +1,7 @@
 Acme\WidgetBundle\Entity\SearchStatistics:
     type: entity
     table: search_statistics
-    repositoryClass: Acme\DashBundle\Repository\SearchStatisticsRepository
+    repositoryClass: Acme\WidgetBundle\Repository\SearchStatisticsRepository
     id:
         searchId:
             column: search_id
