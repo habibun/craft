@@ -22,3 +22,6 @@ AcmeWidgetBundle_lockscreen:
     pattern:    /lockscreen
     defaults:   { _controller:  AcmeWidgetBundle:LockScreen:lockScreen }
 
+AcmeWidgetBundle_SearchStatistics:
+    pattern:    /search/{searchWord}
+    defaults:   { _controller:  AcmeWidgetBundle:SearchStatistics:search, searchWord: null }

@@ -11,9 +11,9 @@ class TopSearchController extends Controller
         //getting top 6 searched keywords from DB
         $query_builder = $this->getDoctrine()->getManager()->createQueryBuilder();
         $qb = $query_builder
-            ->select('s.keyword_search, count(s.search_id) as keywords')
-            ->from('AcmeDashBundle:SearchStatistics', 's')
-            ->groupBy('s.keyword_search')
+            ->select('s.keywordSearch, count(s.searchId) as keywords')
+            ->from('AcmeWidgetBundle:SearchStatistics', 's')
+            ->groupBy('s.keywordSearch')
             ->orderBy('keywords', 'desc')
             ->setMaxResults($limit);
 

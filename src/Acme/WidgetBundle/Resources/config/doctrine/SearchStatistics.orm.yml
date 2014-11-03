@@ -1,0 +1,34 @@
+Acme\WidgetBundle\Entity\SearchStatistics:
+    type: entity
+    table: search_statistics
+    repositoryClass: Acme\DashBundle\Repository\SearchStatisticsRepository
+    id:
+        searchId:
+            column: search_id
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        keywordSearch:
+            column: keyword_search
+            type: string
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+        dateSearch:
+            column: date_search
+            type: datetime
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+    lifecycleCallbacks: {  }

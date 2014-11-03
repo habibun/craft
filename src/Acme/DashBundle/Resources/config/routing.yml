@@ -10,7 +10,4 @@ homepage:
     pattern:  /
     defaults: { _controller: AcmeDashBundle:Dashboard:index }
 
-general_search:
-    resource: "@AcmeDashBundle/Controller/SearchController.php"
-    type:     annotation
 
