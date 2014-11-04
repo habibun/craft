@@ -3,12 +3,27 @@
 namespace Acme\WidgetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Acme\WidgetBundle\Repository\StateOverviewModel;
 
 class StateOverviewController extends Controller
 {
     public function stateOverviewAction()
     {
-        return $this->render('AcmeWidgetBundle:StateOverview:stateOverview.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $state = new StateOverviewModel($em);
+
+        $totalCost = $state->_getTotalCostResults();
+        $totalUser = $state->_getTotalUserResults();
+        $draftedIssue = $state->_getdraftedIssueResults();
+        $draftedPurchase = $state->_getDraftedPurchaseResults();
+             
+        return $this->render('AcmeWidgetBundle:StateOverview:stateOverview.html.twig',
+            array(
+                'totalCost' => $totalCost,
+                'totalUser' => $totalUser,
+                'draftedIssue' => $draftedIssue,
+                'draftedPurchase' => $draftedPurchase,
+            ));
     }
 
     public function totalCostAction()
@@ -21,20 +36,6 @@ class StateOverviewController extends Controller
                 'totalCost' => $totalCost,
             )
         );
-    }
-
-    private function _getTotalCostResults()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery(
-            'SELECT sum(pl.price) as total_price, pu.status
-             FROM AcmePurchaseBundle:PurchaseLine pl
-             JOIN pl.purchase pu
-             where pu.status = 1'
-        );
-        $result = $query->getResult();
-
-        return $result;
     }
 
     public function totalUserAction()
