@@ -209,7 +209,7 @@ class IssueController extends Controller
         }
         
         catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t modify this');
+            $this->get('session')->getFlashBag()->set('oh_snap',$this->container->getParameter('finalize_modify_error'));
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
@@ -326,7 +326,7 @@ class IssueController extends Controller
         $em->remove($entity);
         $em->flush(); 
         }catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t delete this');
+            $this->get('session')->getFlashBag()->set('oh_snap',$this->container->getParameter('finalize_delete_error'));
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
