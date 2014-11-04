@@ -21,10 +21,14 @@ class StateOverviewModel
     			->select('sum(pl.price) total_price')
     			->from('AcmePurchaseBundle:PurchaseLine', 'pl')
     			->join('pl.purchase', 'pu')
-    			->andWhere('pu.status = 1');
-            	
-        $result = $query->getQuery()->getOneOrNullResult();
-        return $result;
+    			->andWhere('pu.status = 1')
+    			->getQuery();
+
+	    try {
+	        return $query->getSingleResult();
+	    } catch (\Doctrine\ORM\NoResultException $e) {
+	        return null;
+	    }
     }
 
     //get total user
@@ -33,10 +37,14 @@ class StateOverviewModel
     	$query_builder = $this->em->createQueryBuilder();
     	$query = $query_builder
     			->select('COUNT(u) total_user')
-            	->from('AcmeUserBundle:User', 'u');
+            	->from('AcmeUserBundle:User', 'u')
+            	->getQuery();
             	
-        $result = $query->getQuery()->getOneOrNullResult();
-        return $result;
+	    try {
+	        return $query->getSingleResult();
+	    } catch (\Doctrine\ORM\NoResultException $e) {
+	        return null;
+	    }
     }
 
     //get drafted issue 
@@ -46,11 +54,14 @@ class StateOverviewModel
     	$query = $query_builder
 	    		->select('count(i.status) total_drafted_issue')
 	            ->from('AcmeIssueBundle:Issue', 'i')
-	            ->where('i.status = 0');
+	            ->where('i.status = 0')
+	            ->getQuery();
 
-	    $result = $query->getQuery()->getOneOrNullResult();
-        return $result;
-
+	    try {
+        return $query->getSingleResult();
+	    } catch (\Doctrine\ORM\NoResultException $e) {
+	        return null;
+	    }
     }
 
     //get drafted purchase
@@ -60,9 +71,14 @@ class StateOverviewModel
     	$query = $query_builder
 	    		->select('count(p.status) total_drafted_purchase')
 	            ->from('AcmePurchaseBundle:Purchase', 'p')
-	            ->where('p.status = 0');
+	            ->where('p.status = 0')
+	            ->getQuery();
 
-	    $result = $query->getQuery()->getOneOrNullResult();
-        return $result;
+	    try {
+        return $query->getSingleResult();
+	    } catch (\Doctrine\ORM\NoResultException $e) {
+	        return null;
+	    }
     }
+    
 }
