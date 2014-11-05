@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d080207ab8c7b102e4e504fbe86425fe",
+    "hash": "22e5126779cf972297b7db95b8f2f8ad",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -66,65 +66,6 @@
                 "bootstrap"
             ],
             "time": "2014-04-03 17:17:03"
-        },
-        {
-            "name": "comur/image-bundle",
-            "version": "dev-master",
-            "target-dir": "Comur/ImageBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/comur/ComurImageBundle.git",
-                "reference": "7a9e3ac35778e044379b911236f5ac9cd47d6e7b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/comur/ComurImageBundle/zipball/7a9e3ac35778e044379b911236f5ac9cd47d6e7b",
-                "reference": "7a9e3ac35778e044379b911236f5ac9cd47d6e7b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "friendsofsymfony/jsrouting-bundle": "@stable",
-                "jms/translation-bundle": "@stable",
-                "php": ">=5.3.0",
-                "symfony/class-loader": "~2.2",
-                "symfony/config": "~2.2",
-                "symfony/form": "~2.2",
-                "symfony/http-foundation": "~2.2",
-                "symfony/routing": "~2.2",
-                "symfony/twig-bridge": "~2.2",
-                "symfony/validator": "~2.2",
-                "twig/extensions": "~1.0",
-                "twig/twig": "~1.12"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Comur\\ImageBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Can OMUR",
-                    "email": "omur.can@gmail.com",
-                    "homepage": "http://canomur.com"
-                }
-            ],
-            "description": "Symfony ComurImageBundle",
-            "homepage": "https://github.com/comur/ComurImageBundle",
-            "keywords": [
-                "Form Type",
-                "crop",
-                "image",
-                "jcrop",
-                "jquery upload",
-                "upload"
-            ],
-            "time": "2014-09-26 09:06:27"
         },
         {
             "name": "doctrine/annotations",
@@ -2662,8 +2603,7 @@
         "knplabs/knp-paginator-bundle": 20,
         "jms/serializer-bundle": 20,
         "knplabs/knp-snappy-bundle": 20,
-        "kitpages/data-grid-bundle": 20,
-        "comur/image-bundle": 20
+        "kitpages/data-grid-bundle": 20
     },
     "prefer-stable": false,
     "platform": {
