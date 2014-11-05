@@ -7,8 +7,8 @@ AcmeWidgetBundle_lasttab:
   defaults: { _controller: AcmeWidgetBundle:LastTab:lastTab }
 
 AcmeWidgetBundle_stateoverview:
-    resource: "@AcmeWidgetBundle/Resources/config/routing/stateoverview.yml"
-    prefix:   /stateoverview
+    pattern:    /stateoverview
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:stateOverview }
 
 AcmeWidgetBundle_workprogress:
     pattern:    /workprogress
@@ -25,3 +25,4 @@ AcmeWidgetBundle_lockscreen:
 AcmeWidgetBundle_SearchStatistics:
     pattern:    /search/{searchWord}
     defaults:   { _controller:  AcmeWidgetBundle:SearchStatistics:search, searchWord: null }
+

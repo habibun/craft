@@ -47,4 +47,17 @@ class SearchStatisticsController extends Controller{
         );
     }
 
+    public function topSearchListAction()
+    {
+        //getting top 6 searched keywords from DB
+        $words = $this->getDoctrine()
+                      ->getEntityManager()
+                      ->getRepository("AcmeWidgetBundle:SearchStatistics")
+                      ->getTopSearchedKeyWords(6);
+
+        return $this->render('AcmeWidgetBundle:SearchStatistics:topSearchList.html.twig', array(
+                'words' => $words,
+            ));                      
+        }
+
 } 
