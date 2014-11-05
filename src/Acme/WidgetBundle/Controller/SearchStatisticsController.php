@@ -51,7 +51,7 @@ class SearchStatisticsController extends Controller{
     {
         //getting top 6 searched keywords from DB
         $words = $this->getDoctrine()
-                      ->getEntityManager()
+                      ->getManager()
                       ->getRepository("AcmeWidgetBundle:SearchStatistics")
                       ->getTopSearchedKeyWords(6);
 
