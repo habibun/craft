@@ -177,7 +177,8 @@ $('#search-form').submit(
         if (searchVal.length > 1) {
             window.location = $(this).attr('action') + '/' + searchVal;
         }
-        $('#loading-full,.loading-ball').fadeIn(1500).delay(3500).fadeOut(1500);
+        $("#loading-full,.loading-ball").fadeIn();
+        $("#loading-full,.loading-ball").fadeOut();
     }
 );
 
