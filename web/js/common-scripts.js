@@ -16,7 +16,6 @@ $(function() {
 var Script = function () {
 
 //    sidebar dropdown menu auto scrolling
-
     jQuery('#sidebar .sub-menu > a').click(function () {
         var o = ($(this).offset());
         diff = 250 - o.top;
@@ -89,19 +88,14 @@ var Script = function () {
         jQuery(this).parents(".panel").parent().remove();
     });
 
-
 //    tool tips
-
     $('.tooltips').tooltip();
 
 //    popovers
-
     $('.popovers').popover();
 
 
-
 // custom bar chart
-
     if ($(".custom-bar-chart")) {
         $(".bar").each(function () {
             var i = $(this).find(".value").html();
@@ -169,23 +163,7 @@ $(document).on("click", "a.confirm-delete", function (e) {
     return true;
 });
 
-//search form submit
-$('#search-form').submit(
-    function (evt) {
-        evt.preventDefault();
-        var searchVal = $.trim($('input[type="text"]', $(this)).val());
-        if (searchVal.length > 1) {
-            window.location = $(this).attr('action') + '/' + searchVal;
-        }
-        $("#loading-full,.loading-ball").fadeIn(1500, function() {
-            $(this).fadeTo('slow',0.5);
-        });
-        $("#loading-full,.loading-ball" ).fadeOut();
-    }
-);
-
 //date picker start(report)
-
 if (top.location != location) {
     top.location.href = document.location.href ;
 }
@@ -196,7 +174,6 @@ $(function(){
     });
     $('.dpYears').datepicker();
     $('.dpMonths').datepicker();
-
 
     var startDate = new Date(2012,1,20);
     var endDate = new Date(2012,1,25);
@@ -248,31 +225,4 @@ $(function(){
         checkout.hide();
     }).data('datepicker');
 });
-
-//date picker end
-
-
-//start lock screen
-var url = "http://craft.local/app_dev.php/widget/lockscreen";
-document.onkeydown = keyDownEvent;
-document.onkeyup = keyUpEvent;
-var isCtrl = false;
-function keyDownEvent() {
-    var keyid = event.keyCode;
-
-    if(keyid == 16) {
-        isCtrl = true;
-    }
-}
-function keyUpEvent() {
-    var keyid = event.keyCode;
-
-    if(keyid == 16) {
-        isCtrl = false;
-    }
-
-    if(keyid == 76 && isCtrl == true) {
-       $(location).attr('href',url);
-    }
-}
 

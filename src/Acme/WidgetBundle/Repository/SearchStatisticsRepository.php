@@ -54,6 +54,36 @@ class SearchStatisticsRepository extends EntityRepository
         return true;
     }
 
+    //get suggested results
+    public function getSuggestSearchResults($search) {
+
+        $result = array();
+
+        //search within the product for product name
+        $dql = 'SELECT p.name FROM AcmeSetupBundle:Product p
+                WHERE p.name LIKE :search_word';
+
+        $query = $this->_em->createQuery($dql)
+                    ->setParameter('search_word', '%' . $search . '%');
+
+        foreach ($query->getArrayResult() as $value) {
+            $result[] = $value['name'];
+        }
+
+        //search within the issueLine for issued person
+        $dql = 'SELECT i.issueTo FROM AcmeIssueBundle:IssueLine i
+                WHERE i.issueTo LIKE :search_word';
+
+        $query = $this->_em->createQuery($dql)
+                    ->setParameter('search_word', '%' . $search . '%');
+
+        foreach ($query->getArrayResult() as $value) {
+            $result[] = $value['issueTo'];
+        }
+
+        return $result;
+}
+
     //get top 6 searched keywords
     public function getTopSearchedKeyWords($limit = null)
     {

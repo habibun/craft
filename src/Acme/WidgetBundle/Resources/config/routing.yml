@@ -26,3 +26,7 @@ AcmeWidgetBundle_SearchStatistics:
     pattern:    /search/{searchWord}
     defaults:   { _controller:  AcmeWidgetBundle:SearchStatistics:search, searchWord: null }
 
+AcmeWidgetBundle_SearchAutocomplete:
+    pattern:    /search-autocomplete
+    defaults:   { _controller:  AcmeWidgetBundle:SearchStatistics:autocomplete }
+    requirements: { _method: get }

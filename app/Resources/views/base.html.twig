@@ -42,9 +42,7 @@
 <!--search & user info start-->
     <ul class="nav pull-right top-menu">
         <li>
-            <form action="{{ path('AcmeWidgetBundle_SearchStatistics') }}" method="GET" id="search-form">
-                <input type="text" class="form-control search" placeholder="Search" name="search-keyword" id="search-input">
-            </form>
+            {% include 'AcmeWidgetBundle:SearchStatistics:_search.html.twig' %}
         </li>
         <!-- user login dropdown start-->
         <li class="dropdown">
