@@ -3,6 +3,7 @@
 {% block title %}Product{% endblock %}
 
 {% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="/assets/bootstrap-fileupload/bootstrap-fileupload.css" />
 <style type="text/css">
 .product-image img {
     width: 279px;
@@ -32,7 +33,7 @@
                 <li class="active">Setup</li>
                 <li class="active">Product</li>
                 <ul class="pull-right">
-                    <a class="btn btn-sm btn-primary my-add" href="{{ path('product_new') }}">
+                    <a class="btn btn-sm btn-primary my-add" href="#newProduct" data-toggle="modal">
                         Add <i class="icon-plus"></i>
                     </a>
                 </ul>
@@ -50,6 +51,7 @@
                 </span>
             </header>
             </section>
+            {% include 'AcmeSetupBundle:Product:_modalNew.html.twig' %}
             <div class="row product-list">
                 {% for entity in entities %}
                     <div class="col-md-4">
@@ -83,6 +85,7 @@
 {% endblock %}
 
 {% block javascripts %}
+<script type="text/javascript" src="/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
     <script type="text/javascript">
     /*$(document).ready(function(){
         $('.hid').hide();
