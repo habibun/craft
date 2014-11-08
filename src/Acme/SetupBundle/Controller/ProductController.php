@@ -21,8 +21,12 @@ class ProductController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $entity = new Product();
+        $form = $this->createCreateForm($entity);
+        $request = $this->getRequest();
+        $session = $request->getSession();
 
+        $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('AcmeSetupBundle:Product')->findAll();
 
         $paginator = $this->get('knp_paginator');
@@ -37,6 +41,7 @@ class ProductController extends Controller
             'AcmeSetupBundle:Product:index.html.twig',
             array(
                 'entities' => $entities,
+                'form' => $form->createView(),
             )
         );
     }

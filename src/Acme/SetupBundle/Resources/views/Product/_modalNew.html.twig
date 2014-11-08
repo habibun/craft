@@ -1,0 +1,29 @@
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="newProduct" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                    <h4 class="modal-title">New Product</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form, {'method':'post','role':'form','enctype':'multipart/form-data','attr':{'class':'form-group'}}) }}
+                        <div class="form-group">
+                            {{ form_label(form.file,"Name :" ,{'label_attr': { 'class':'control-label'}} ) }}
+                            {{ form_widget(form.name, {'attr': {'placeholder':'Enter name', 'class':'form-control'}} ) }}
+                            {{ form_errors(form.name) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.file,"Image :" ,{'label_attr': { 'class':'control-label'}} ) }}
+                            {{ form_widget(form.file, {'attr': {'class':'form-control'}} ) }}
+                            {{ form_errors(form.file) }}
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-lg-offset-3 col-lg-10">
+                                {{ form_widget(form.submit) }}
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>

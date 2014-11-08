@@ -5,11 +5,11 @@
  * Date: 3/11/2014
  * Time: 2:39 PM
  */
-
 namespace Acme\WidgetBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class SearchStatisticsController extends Controller{
 
@@ -47,6 +47,26 @@ class SearchStatisticsController extends Controller{
         );
     }
 
+    public function autocompleteAction(Request $request){
+
+        $search = strtolower( trim($request->get('term') ));
+        
+        $result = array();
+
+        if (strlen($search) > 2) {
+
+            $result = $this->getDoctrine()
+                    ->getEntityManager()
+                    ->getRepository('AcmeWidgetBundle:SearchStatistics')
+                    ->getSuggestSearchResults($search);
+        }
+
+        $response = new Response(json_encode($result));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }    
+
     public function topSearchListAction()
     {
         //getting top 6 searched keywords from DB
@@ -59,5 +79,4 @@ class SearchStatisticsController extends Controller{
                 'words' => $words,
             ));                      
         }
-
-} 
+}
