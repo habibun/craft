@@ -58,7 +58,7 @@ class ProductController extends Controller
 
         if ($form->isValid()) {
             if ($entity->file != null) {
-                $entity->setImage(uniqid().'.'.$entity->file->guessExtension());
+                $entity->setImage(uniqid() . '.' . $entity->file->guessExtension());
                 $entity->file->move($entity->getUploadRootDir(), $entity->getImage());
             }
             $em = $this->getDoctrine()->getManager();
@@ -161,7 +161,7 @@ class ProductController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'AcmeSetupBundle:Product:edit.html.twig',
+            'AcmeSetupBundle:Product:_modalEdit.html.twig',
             array(
                 'entity' => $entity,
                 'edit_form' => $editForm->createView(),
@@ -213,7 +213,7 @@ class ProductController extends Controller
 
         if ($editForm->isValid()) {
             if ($entity->file != null) {
-                $entity->setImage(uniqid().'.'.$entity->file->guessExtension());
+                $entity->setImage(uniqid() . '.' . $entity->file->guessExtension());
                 $entity->file->move($entity->getUploadRootDir(), $entity->getImage());
             }
             $em->flush();

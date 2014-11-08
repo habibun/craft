@@ -8,7 +8,7 @@
                 <div class="modal-body">
                     {{ form_start(form, {'method':'post','role':'form','enctype':'multipart/form-data','attr':{'class':'form-group'}}) }}
                         <div class="form-group">
-                            {{ form_label(form.file,"Name :" ,{'label_attr': { 'class':'control-label'}} ) }}
+                            {{ form_label(form.name,"Name :" ,{'label_attr': { 'class':'control-label'}} ) }}
                             {{ form_widget(form.name, {'attr': {'placeholder':'Enter name', 'class':'form-control'}} ) }}
                             {{ form_errors(form.name) }}
                         </div>
