@@ -1,9 +1,9 @@
 <form action="{{ path('AcmeWidgetBundle_SearchStatistics') }}" method="GET" id="search-form">
     <input type="text" class="form-control search" value="Search..." name="search-keyword" id="search-input">
 </form>
-<style type="text/css"></style>
+
 <script src="{{ asset('js/jquery.js') }}"></script>
-<script src="{{ asset('js/jquery-ui-1.8.21.custom.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css">
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -30,7 +30,6 @@
         );
         //autcomplit
         var cache = {}, lastXhr;
-
         $( '#search-input' ).autocomplete({
             minLength: 3,
             source: function( request, response ) {
@@ -40,7 +39,6 @@
                     response( cache[ term ] );
                     return;
                 }
-
                 lastXhr = $.getJSON( "{{ path('AcmeWidgetBundle_SearchAutocomplete') }}", request, function( data, status, xhr ) {
                     cache[ term ] = data;
                     if ( xhr === lastXhr ) {
