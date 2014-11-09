@@ -31,7 +31,6 @@ class AppKernel extends Kernel
             new Acme\HistoryBundle\AcmeHistoryBundle(),
             new Kitpages\DataGridBundle\KitpagesDataGridBundle(),
             new Acme\WidgetBundle\AcmeWidgetBundle(),
-            new FSi\Bundle\DataSourceBundle\DataSourceBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
