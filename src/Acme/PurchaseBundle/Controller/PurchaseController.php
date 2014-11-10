@@ -11,7 +11,7 @@ use Acme\PurchaseBundle\Form\PurchaseLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
-
+use Acme\SetupBundle\Entity\Supplier;
 /**
  * Purchase controller.
  *
@@ -412,5 +412,45 @@ class PurchaseController extends Controller
         $this->get('session')->getFlashBag()->add('well_done', "De-Finalized Successfully!");
 
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
+    }
+
+    public function SupplierPurchaseStatusAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $this->$em->getRepository('AcmeSetupBundle:Supplier')->findOneById($id);
+
+
+         //$jony = $entity->getName();
+          // print_r($entity);
+         
+
+        /*$query = $em->createQuery(
+                'SELECT sum(pl.price) as status
+                 FROM AcmePurchaseBundle:Purchase p
+                 join p.lines pl
+                 join p.supplier s
+                 where (s.id = 6 and p.status = 1)
+                 ');*/
+
+        // $result = $query->getOneOrNullResult();
+        
+
+        /*try {
+            $result = $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            $result = null;
+        }*/
+        // return $result;
+        
+//sql query = SELECT SUM(purchase_line.`price`) FROM purchase JOIN purchase_line ON purchase.`id` = purchase_line.`purchase_id` WHERE supplier_id = "6";
+        
+
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:supplier.html.twig',
+            array(
+                'entity' => $entity
+
+            )
+        );
     }
 }
