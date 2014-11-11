@@ -417,32 +417,13 @@ class PurchaseController extends Controller
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 
-    public function SupplierPurchaseStatusAction($supplier = null)
+    public function supplierTotalPurchasedAction()
     {
         $em = $this->getDoctrine()->getManager();
         $data = $this->get('request')->request->all();
         $supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
-
-        $query = $em->createQuery(
-            'SELECT sum(pl.price) as status
-             FROM AcmePurchaseBundle:Purchase p
-             join p.lines pl
-             join p.supplier s
-             where (s.id = :supplier and p.status = 1)
-             ')
-
-            ->setParameters(
-                array('supplier' => $supplier)
-            );
-
-        try {
-            $supplierStatus = $query->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            $supplierStatus = null;
-        }
-
-//        $supplierStatus = $query->getOneOrNullResult();
-
-        return new JsonResponse(array('supplierStatus' => $supplierStatus));
+        $repository = $this->getDoctrine()->getManager()->getRepository('AcmePurchaseBundle:Purchase');
+        $result = $repository->_getSupplierTotalPurchased($supplier);
+        return new JsonResponse(array('result' => $result));
     }
 }

@@ -48,6 +48,6 @@ purchase_definalize:
     pattern: /{id}/definalize
     defaults: { _controller: "AcmePurchaseBundle:Purchase:deFinalize" }
 
-supplier_purchase_status:
-    pattern: /supplier-status
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:SupplierPurchaseStatus" }
+supplier_total_purchased:
+    pattern: /supplier-total-purchased
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:supplierTotalPurchased" }
