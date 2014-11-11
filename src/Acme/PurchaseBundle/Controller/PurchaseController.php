@@ -2,6 +2,7 @@
 
 namespace Acme\PurchaseBundle\Controller;
 
+use Acme\Purchase\Repository\SupplierStatusModel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Acme\PurchaseBundle\Entity\Purchase;
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Acme\SetupBundle\Entity\Supplier;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * Purchase controller.
  *
@@ -414,43 +417,32 @@ class PurchaseController extends Controller
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 
-    public function SupplierPurchaseStatusAction($id)
+    public function SupplierPurchaseStatusAction($supplier = null)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $this->$em->getRepository('AcmeSetupBundle:Supplier')->findOneById($id);
+        $data = $this->get('request')->request->all();
+        $supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
 
+        $query = $em->createQuery(
+            'SELECT sum(pl.price) as status
+             FROM AcmePurchaseBundle:Purchase p
+             join p.lines pl
+             join p.supplier s
+             where (s.id = :supplier and p.status = 1)
+             ')
 
-         //$jony = $entity->getName();
-          // print_r($entity);
-         
+            ->setParameters(
+                array('supplier' => $supplier)
+            );
 
-        /*$query = $em->createQuery(
-                'SELECT sum(pl.price) as status
-                 FROM AcmePurchaseBundle:Purchase p
-                 join p.lines pl
-                 join p.supplier s
-                 where (s.id = 6 and p.status = 1)
-                 ');*/
-
-        // $result = $query->getOneOrNullResult();
-        
-
-        /*try {
-            $result = $query->getSingleResult();
+        try {
+            $supplierStatus = $query->getSingleResult();
         } catch (\Doctrine\ORM\NoResultException $e) {
-            $result = null;
-        }*/
-        // return $result;
-        
-//sql query = SELECT SUM(purchase_line.`price`) FROM purchase JOIN purchase_line ON purchase.`id` = purchase_line.`purchase_id` WHERE supplier_id = "6";
-        
+            $supplierStatus = null;
+        }
 
-        return $this->render(
-            'AcmePurchaseBundle:Purchase:supplier.html.twig',
-            array(
-                'entity' => $entity
+//        $supplierStatus = $query->getOneOrNullResult();
 
-            )
-        );
+        return new JsonResponse(array('supplierStatus' => $supplierStatus));
     }
 }

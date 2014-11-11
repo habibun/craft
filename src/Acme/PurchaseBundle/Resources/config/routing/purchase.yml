@@ -49,5 +49,5 @@ purchase_definalize:
     defaults: { _controller: "AcmePurchaseBundle:Purchase:deFinalize" }
 
 supplier_purchase_status:
-    pattern: /{id}/supplierstatus
+    pattern: /supplier-status
     defaults: { _controller: "AcmePurchaseBundle:Purchase:SupplierPurchaseStatus" }

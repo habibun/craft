@@ -33,6 +33,12 @@
                     {{ form_start(form, {'attr' :  { 'class': 'form-horizontal', 'id': 'masterForm', 'onSubmit': 'return masterOnSubmit();' } }) }}
                     {{ form_row(form.purchaseDate) }}
                     {{ form_row(form.supplier) }}
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">Supplier Total Purchased</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="supplier-status" type="text" placeholder="0.00" value="0" disabled>
+                        </div>
+                    </div>
                     {{ form_row(form.location) }}
                     {{ form_end(form) }}
                 </div>
@@ -174,6 +180,20 @@
                 var id = $(parentTr).attr('class');
                 $(parentTr).remove();
                 delete addedLines[id];
+            });
+
+            $('#acme_purchasebundle_purchase_supplier').change(function(){
+                $.post(
+                        '{{ path('supplier_purchase_status') }}',
+                        {
+                            'supplier': $('#acme_purchasebundle_purchase_supplier').val()
+                        },
+                        function(data)
+                        {
+                            $('#supplier-status').val(data.supplierStatus.status);
+                        },
+                        'json'
+                );
             });
         });
     </script>
