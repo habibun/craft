@@ -409,4 +409,22 @@ class IssueController extends Controller
         return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
     }
 
+    public function productCurrentStockAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = $this->get('request')->request->all();
+        // $product = $em->getRepository('AcmeSetupBundle:Product')->find($data['product']);
+        $repository = $em->getRepository('AcmeIssueBundle:Issue');
+        $result = $repository->getProductCurrentStockResult(5);
+
+        // return new JsonResponse(array('result' => $result));
+
+        return $this->render(
+            'AcmeIssueBundle:Issue:product.html.twig',
+            array(
+                'result' => $result,
+            )
+        );
+    }
+
 }

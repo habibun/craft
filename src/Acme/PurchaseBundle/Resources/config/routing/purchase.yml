@@ -48,10 +48,7 @@ purchase_definalize:
     pattern: /{id}/definalize
     defaults: { _controller: "AcmePurchaseBundle:Purchase:deFinalize" }
 
-supplier_total_purchased:
-    pattern: /supplier-total-purchased
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:supplierTotalPurchased" }
+supplier_total_purchase:
+    pattern: /supplier-total-purchase
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:supplierTotalPurchase" }
 
-product_current_stock:
-    pattern:  /product-current-stock
-    defaults: { _controller:  "AcmePurchaseBundle:Purchase:productCurrentStock" }
