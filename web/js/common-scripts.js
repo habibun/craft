@@ -253,7 +253,7 @@ $(document).ready(function () {
             }
         }
     );
-    
+
     //remove default value
     /*$('#search-input').focus(function(evt){
      if($(this).val() == 'Search...')
