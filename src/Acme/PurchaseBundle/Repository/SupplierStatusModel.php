@@ -10,14 +10,14 @@ class SupplierStatusModel
     * @var Doctrine\Orm\EntityManager
     * */
 
-	private $em;
+    private $em;
 
-	public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
-    } 
+    }
 
-    public function _getSupplierPurchaseStatus(EntityManager $em,Supplier $supplier)
+    public function _getSupplierPurchaseStatus(EntityManager $em, Supplier $supplier)
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery(
@@ -25,13 +25,13 @@ class SupplierStatusModel
              FROM AcmePurchaseBundle:Purchase p
              join p.lines pl
              join p.supplier s
-             where s.supplier = :supplier')
-
+             where s.supplier = :supplier'
+        )
             ->setParameters(
                 array('supplier' => $supplier)
             );
 
         return $query->getSingleResult();
     }
-    
+
 }

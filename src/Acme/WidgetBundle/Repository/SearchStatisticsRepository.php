@@ -55,7 +55,8 @@ class SearchStatisticsRepository extends EntityRepository
     }
 
     //get suggested results
-    public function getSuggestSearchResults($search) {
+    public function getSuggestSearchResults($search)
+    {
 
         $result = array();
 
@@ -64,7 +65,7 @@ class SearchStatisticsRepository extends EntityRepository
                 WHERE p.name LIKE :search_word';
 
         $query = $this->_em->createQuery($dql)
-                    ->setParameter('search_word', '%' . $search . '%');
+            ->setParameter('search_word', '%' . $search . '%');
 
         foreach ($query->getArrayResult() as $value) {
             $result[] = $value['name'];
@@ -75,14 +76,14 @@ class SearchStatisticsRepository extends EntityRepository
                 WHERE i.issueTo LIKE :search_word';
 
         $query = $this->_em->createQuery($dql)
-                    ->setParameter('search_word', '%' . $search . '%');
+            ->setParameter('search_word', '%' . $search . '%');
 
         foreach ($query->getArrayResult() as $value) {
             $result[] = $value['issueTo'];
         }
 
         return $result;
-}
+    }
 
     //get top 6 searched keywords
     public function getTopSearchedKeyWords($limit = null)
@@ -91,12 +92,12 @@ class SearchStatisticsRepository extends EntityRepository
             ->select('s.keywordSearch, count(s.searchId) as keywords')
             ->from('AcmeWidgetBundle:SearchStatistics', 's')
             ->groupBy('s.keywordSearch')
-            ->orderBy('keywords','desc')
+            ->orderBy('keywords', 'desc')
             ->setMaxResults($limit);
 
-        try{
+        try {
             $result = $qb->getQuery()->getArrayResult();
-        } catch(\Doctrine\Orm\NoResultException $e){
+        } catch (\Doctrine\Orm\NoResultException $e) {
             $result = null;
         }
 

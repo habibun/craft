@@ -200,7 +200,10 @@ class PurchaseController extends Controller
                 )
             );
         } catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set('oh_snap',$this->container->getParameter('finalize_modify_error'));
+            $this->get('session')->getFlashBag()->set(
+                'oh_snap',
+                $this->container->getParameter('finalize_modify_error')
+            );
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
@@ -315,20 +318,25 @@ class PurchaseController extends Controller
             $lines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(
                 array('purchase' => $purchase->getId())
             );
-            if (!empty($lines))
+            if (!empty($lines)) {
                 foreach ($lines as $line) {
                     $em->remove($line);
                 }
+            }
 
             $em->remove($purchase);
             $em->flush();
         } catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set('oh_snap',$this->container->getParameter('finalize_delete_error'));
+            $this->get('session')->getFlashBag()->set(
+                'oh_snap',
+                $this->container->getParameter('finalize_delete_error')
+            );
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        
+
         $this->get('session')->getFlashBag()->add('well_done', 'Successfully Deleted');
+
         return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
     }
 
@@ -372,7 +380,7 @@ class PurchaseController extends Controller
      * @param $id
      * @return Response
      */
-    
+
     public function finalizeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -396,8 +404,9 @@ class PurchaseController extends Controller
     {
 
         //checks if the user is authenticated
-        if(!$this->container->get('security.context')->isGranted('ROLE_ADMIN') ){
+        if (!$this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
             $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('access_error'));
+
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
 
@@ -424,6 +433,7 @@ class PurchaseController extends Controller
         $supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
         $repository = $this->getDoctrine()->getManager()->getRepository('AcmePurchaseBundle:Purchase');
         $result = $repository->_getSupplierTotalPurchased($supplier);
+
         return new JsonResponse(array('result' => $result));
     }
 }
