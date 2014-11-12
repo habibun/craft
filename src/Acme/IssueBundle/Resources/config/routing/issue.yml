@@ -47,3 +47,8 @@ issue_finalize:
 issue_definalize:
     pattern:  /{id}/definalize
     defaults: { _controller: "AcmeIssueBundle:Issue:deFinalize" }
+
+product_current_stock:
+    pattern:  /product-current-stock
+    defaults: { _controller:  "AcmeIssueBundle:Issue:productCurrentStock" }
+

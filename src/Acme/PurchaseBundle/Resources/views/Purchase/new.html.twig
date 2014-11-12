@@ -184,7 +184,7 @@
 
             $('#acme_purchasebundle_purchase_supplier').change(function(){
                 $.post(
-                        '{{ path('supplier_total_purchased') }}',
+                        '{{ path('supplier_total_purchase') }}',
                         {
                             'supplier': $('#acme_purchasebundle_purchase_supplier').val()
                         },

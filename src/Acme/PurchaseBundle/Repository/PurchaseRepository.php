@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class PurchaseRepository extends EntityRepository
 {
-    public function _getSupplierTotalPurchased($supplier = null)
+    public function getSupplierTotalPurchaseResult($supplier = null)
     {
         $dql = 'SELECT sum(pl.price) as total
              	FROM AcmePurchaseBundle:Purchase p
@@ -30,12 +30,5 @@ class PurchaseRepository extends EntityRepository
         } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }
-    }
-
-    public function _getProductCurrentStockResult(){
-        $dql = 'Select sum()
-        from AcmePurchaseBundle:PurchaseLine pl
-        ';
-
     }
 }

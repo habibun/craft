@@ -409,4 +409,15 @@ class IssueController extends Controller
         return $this->redirect($this->generateUrl('issue_show', array('id' => $id)));
     }
 
+    public function productCurrentStockAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = $this->get('request')->request->all();
+        $product = $em->getRepository('AcmeSetupBundle:Product')->find($data['product']);
+        $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
+        $result = $repository->_getProductCurrentStockResult($product);
+
+        return new JsonResponse(array('result' => $result));
+    }
+
 }
