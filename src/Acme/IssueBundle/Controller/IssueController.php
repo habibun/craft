@@ -414,8 +414,8 @@ class IssueController extends Controller
         $em = $this->getDoctrine()->getManager();
         $data = $this->get('request')->request->all();
         $product = $em->getRepository('AcmeSetupBundle:Product')->find($data['product']);
-        $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
-        $result = $repository->_getProductCurrentStockResult($product);
+        $repository = $em->getRepository('AcmeIssueBundle:Issue');
+        $result = $repository->getProductCurrentStockResult($product);
 
         return new JsonResponse(array('result' => $result));
     }
