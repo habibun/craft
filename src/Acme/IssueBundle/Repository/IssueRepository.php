@@ -29,5 +29,9 @@ class IssueRepository extends EntityRepository
                 ->getSingleResult();                
 
         return $result = $available['available'] - $unavailable['unavailable'];
+
+        foreach ($query->getArrayResult() as $value) {
+            $result[] = $value[];
+        }
     }
 }

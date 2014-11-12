@@ -50,5 +50,5 @@ issue_definalize:
 
 product_current_stock:
     pattern:  /product-current-stock
-    defaults: { _controller:  "AcmeIssueBundle:Issue:productCurrentStock" }
+    defaults: { _controller: "AcmeIssueBundle:Issue:productCurrentStock" }
 
