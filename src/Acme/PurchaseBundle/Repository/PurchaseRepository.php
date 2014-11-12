@@ -10,7 +10,7 @@ class PurchaseRepository extends EntityRepository
 {
 	public function _getSupplierTotalPurchased($supplier = null)
 	{
-		$dql = 'SELECT sum(pl.price) as status
+		$dql = 'SELECT sum(pl.price) as total
              	FROM AcmePurchaseBundle:Purchase p
              	join p.lines pl
              	join p.supplier s
