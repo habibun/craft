@@ -18,9 +18,12 @@ class PurchaseRepository extends EntityRepository
              	where (s.id = :supplier and p.status = 1)';
 
         $query = $this->_em->createQuery($dql)
-            ->setParameters(
-                array('supplier' => $supplier)
-            );
+            ->setParameter('supplier', $supplier);
+
+        //when multiple parameter
+        /*->setParameters(
+            array('supplier' => $supplier)
+        );*/
 
         try {
             return $query->getSingleResult();
