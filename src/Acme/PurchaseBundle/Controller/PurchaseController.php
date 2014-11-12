@@ -417,7 +417,7 @@ class PurchaseController extends Controller
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
     }
 
-    public function supplierTotalPurchasedAction()
+    public function supplierTotalPurchasedAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $data = $this->get('request')->request->all();
