@@ -31,4 +31,11 @@ class PurchaseRepository extends EntityRepository
             return null;
         }
     }
+
+    public function _getProductCurrentStockResult(){
+        $dql = 'Select sum()
+        from AcmePurchaseBundle:PurchaseLine pl
+        ';
+
+    }
 }

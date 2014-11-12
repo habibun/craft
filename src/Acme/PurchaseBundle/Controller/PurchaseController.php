@@ -431,9 +431,14 @@ class PurchaseController extends Controller
         $em = $this->getDoctrine()->getManager();
         $data = $this->get('request')->request->all();
         $supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
-        $repository = $this->getDoctrine()->getManager()->getRepository('AcmePurchaseBundle:Purchase');
+        $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
         $result = $repository->_getSupplierTotalPurchased($supplier);
 
         return new JsonResponse(array('result' => $result));
+    }
+
+    public function productCurrentStockAction(Request $request){
+
+        return $this->render('AcmePurchaseBundle:Purchase:product.html.twig');
     }
 }
