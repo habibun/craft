@@ -1,5 +1,5 @@
 /*---LEFT BAR ACCORDION----*/
-$(function() {
+$(function () {
     $('#nav-accordion').dcAccordion({
         eventType: 'click',
         autoClose: true,
@@ -19,15 +19,15 @@ var Script = function () {
     jQuery('#sidebar .sub-menu > a').click(function () {
         var o = ($(this).offset());
         diff = 250 - o.top;
-        if(diff>0)
-            $("#sidebar").scrollTo("-="+Math.abs(diff),500);
+        if (diff > 0)
+            $("#sidebar").scrollTo("-=" + Math.abs(diff), 500);
         else
-            $("#sidebar").scrollTo("+="+Math.abs(diff),500);
+            $("#sidebar").scrollTo("+=" + Math.abs(diff), 500);
     });
 
 //    sidebar toggle
 
-    $(function() {
+    $(function () {
         function responsiveView() {
             var wSize = $(window).width();
             if (wSize <= 768) {
@@ -40,6 +40,7 @@ var Script = function () {
                 $('#sidebar > ul').show();
             }
         }
+
         $(window).on('load', responsiveView);
         $(window).on('resize', responsiveView);
     });
@@ -67,9 +68,26 @@ var Script = function () {
     });
 
 // custom scrollbar
-    $("#sidebar").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '3', cursorborderradius: '10px', background: '#404040', spacebarenabled:false, cursorborder: ''});
+    $("#sidebar").niceScroll({
+        styler: "fb",
+        cursorcolor: "#e8403f",
+        cursorwidth: '3',
+        cursorborderradius: '10px',
+        background: '#404040',
+        spacebarenabled: false,
+        cursorborder: ''
+    });
 
-    $("html").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
+    $("html").niceScroll({
+        styler: "fb",
+        cursorcolor: "#e8403f",
+        cursorwidth: '6',
+        cursorborderradius: '10px',
+        background: '#404040',
+        spacebarenabled: false,
+        cursorborder: '',
+        zindex: '1000'
+    });
 
 // widget tools
 
@@ -110,34 +128,32 @@ var Script = function () {
 }();
 
 //chosen selection
-$(function() {
+$(function () {
     $(".chosen-select").chosen();
 });
 
 //it work's too for delete-confirm
 /*$('.delete-confirm').click(function (){
-    var answer = confirm("You really like to delete this Item?");
-    if (answer) {
-        return true;
-    }else{
-        return false;
-    }
-});*/
+ var answer = confirm("You really like to delete this Item?");
+ if (answer) {
+ return true;
+ }else{
+ return false;
+ }
+ });*/
 
 //delete confirm message
-function confirmDelete()
-{
+function confirmDelete() {
     return confirm('Are you sure you want to delete!!!');
 }
 
 //delete confirm function
-$(".delete-confirm").click(function(event){
+$(".delete-confirm").click(function (event) {
     event.stopPropagation();
-    if(confirmDelete()) {
+    if (confirmDelete()) {
         return true;
     }
-    else
-    {
+    else {
         event.preventDefault();
         return false;
     }
@@ -145,18 +161,17 @@ $(".delete-confirm").click(function(event){
 
 //when enable datepicker in specific field only
 /*$(function() {
-    $( "#acme_purchasebundle_purchase_purchaseDate" ).datepicker();
-});*/
+ $( "#acme_purchasebundle_purchase_purchaseDate" ).datepicker();
+ });*/
 
 //datepicker function for purchase and issue
-$(function() {
-    $('.date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
+$(function () {
+    $('.date-picker').datepicker({dateFormat: 'dd-mm-yy'});
 });
 
 //confirm delete function
 $(document).on("click", "a.confirm-delete", function (e) {
-    if(!confirmDelete())
-    {
+    if (!confirmDelete()) {
         e.stopPropagation();
         return false;
     }
@@ -165,9 +180,9 @@ $(document).on("click", "a.confirm-delete", function (e) {
 
 //date picker start(report)
 if (top.location != location) {
-    top.location.href = document.location.href ;
+    top.location.href = document.location.href;
 }
-$(function(){
+$(function () {
     window.prettyPrint && prettyPrint();
     $('.default-date-picker').datepicker({
         format: 'dd-mm-yyyy'
@@ -175,11 +190,11 @@ $(function(){
     $('.dpYears').datepicker();
     $('.dpMonths').datepicker();
 
-    var startDate = new Date(2012,1,20);
-    var endDate = new Date(2012,1,25);
+    var startDate = new Date(2012, 1, 20);
+    var endDate = new Date(2012, 1, 25);
     $('.dp4').datepicker()
-        .on('changeDate', function(ev){
-            if (ev.date.valueOf() > endDate.valueOf()){
+        .on('changeDate', function (ev) {
+            if (ev.date.valueOf() > endDate.valueOf()) {
                 $('.alert').show().find('strong').text('The start date can not be greater then the end date');
             } else {
                 $('.alert').hide();
@@ -189,8 +204,8 @@ $(function(){
             $('.dp4').datepicker('hide');
         });
     $('.dp5').datepicker()
-        .on('changeDate', function(ev){
-            if (ev.date.valueOf() < startDate.valueOf()){
+        .on('changeDate', function (ev) {
+            if (ev.date.valueOf() < startDate.valueOf()) {
                 $('.alert').show().find('strong').text('The end date can not be less then the start date');
             } else {
                 $('.alert').hide();
@@ -205,10 +220,10 @@ $(function(){
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
     var checkin = $('.dpd1').datepicker({
-        onRender: function(date) {
+        onRender: function (date) {
             return date.valueOf() < now.valueOf() ? 'disabled' : '';
         }
-    }).on('changeDate', function(ev) {
+    }).on('changeDate', function (ev) {
         if (ev.date.valueOf() > checkout.date.valueOf()) {
             var newDate = new Date(ev.date)
             newDate.setDate(newDate.getDate() + 1);
@@ -218,11 +233,36 @@ $(function(){
         $('.dpd2')[0].focus();
     }).data('datepicker');
     var checkout = $('.dpd2').datepicker({
-        onRender: function(date) {
+        onRender: function (date) {
             return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
         }
-    }).on('changeDate', function(ev) {
+    }).on('changeDate', function (ev) {
         checkout.hide();
     }).data('datepicker');
 });
 
+//form submit functionality
+$(document).ready(function () {
+    $('#search-form').submit(
+        function (evt) {
+            $("#loading-full,.loading-ball").fadeIn();
+            evt.preventDefault();
+            var searchVal = $.trim($('input[type="text"]', $(this)).val());
+            if (searchVal.length > 1) {
+                window.location = $(this).attr('action') + '/' + searchVal;
+            }
+        }
+    );
+    
+    //remove default value
+    /*$('#search-input').focus(function(evt){
+     if($(this).val() == 'Search...')
+     $(this).val('');
+     });*/
+
+    //add default value
+    /*$('#search-input').blur(function(evt){
+     if($(this).val() == '')
+     $(this).val('Search...');
+     });*/
+});
