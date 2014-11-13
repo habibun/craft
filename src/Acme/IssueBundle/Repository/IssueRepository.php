@@ -16,22 +16,21 @@ class IssueRepository extends EntityRepository
                 WHERE pl.product = :product';
 
         $available = $this->_em->createQuery($dql)
-                ->setParameter('product', $product)
-                ->getSingleResult();
-
+            ->setParameter('product', $product)
+            ->getOneOrNullResult();
 
         $dql = 'SELECT sum(i.quantity) as unavailable
                 FROM AcmeIssueBundle:IssueLine i
                 WHERE i.product = :product';
 
         $unavailable = $this->_em->createQuery($dql)
-                ->setParameter('product', $product)
-                ->getSingleResult();                
+            ->setParameter('product', $product)
+            ->getOneOrNullResult();
+
+        if ((!$available) && (!$unavailable)) {
+            return false;
+        }
 
         return $result = $available['available'] - $unavailable['unavailable'];
-
-        foreach ($query->getArrayResult() as $value) {
-            $result[] = $value[];
-        }
     }
 }

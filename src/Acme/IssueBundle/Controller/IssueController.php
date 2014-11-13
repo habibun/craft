@@ -3,14 +3,16 @@
 namespace Acme\IssueBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Acme\IssueBundle\Entity\Issue;
 use Acme\IssueBundle\Form\IssueType;
 use Acme\IssueBundle\Entity\IssueLine;
 use Acme\IssueBundle\Form\IssueLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\Response;
+use Acme\SetupBundle\Entity\Supplier;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Issue controller.
@@ -171,49 +173,50 @@ class IssueController extends Controller
      */
     public function editAction($id)
     {
-        try{
+        try {
 
-        $em = $this->getDoctrine()->getManager();
-        $issue = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
+            $em = $this->getDoctrine()->getManager();
+            $issue = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
 
-        if (!$issue) {
-            throw $this->createNotFoundException('Unable to find Issue entity.');
-        }
-        if ($issue->getStatus() == 1) {
-            throw new AccessDeniedException();
+            if (!$issue) {
+                throw $this->createNotFoundException('Unable to find Issue entity.');
+            }
+            if ($issue->getStatus() == 1) {
+                throw new AccessDeniedException();
                 exit();
-        }
-        
-        $editForm = $this->createEditForm($issue);
-        $issueLine = new IssueLine();
-        $lineForm = $this->createForm(
-            new IssueLineType($this->get('security.context')),
-            $issueLine,
-            array(
-                'action' => 'javascript:void(0);',
-                'method' => 'POST',
-            )
-        );
+            }
 
-        $issueLines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $id));
+            $editForm = $this->createEditForm($issue);
+            $issueLine = new IssueLine();
+            $lineForm = $this->createForm(
+                new IssueLineType($this->get('security.context')),
+                $issueLine,
+                array(
+                    'action' => 'javascript:void(0);',
+                    'method' => 'POST',
+                )
+            );
 
-        return $this->render(
-            'AcmeIssueBundle:Issue:edit.html.twig',
-            array(
-                'issue' => $issue,
-                'form' => $editForm->createView(),
-                'line_form' => $lineForm->createView(),
-                'lines' => $issueLines
-            )
-        );
-        }
-        
-        catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set('oh_snap',$this->container->getParameter('finalize_modify_error'));
+            $issueLines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $id));
+
+            return $this->render(
+                'AcmeIssueBundle:Issue:edit.html.twig',
+                array(
+                    'issue' => $issue,
+                    'form' => $editForm->createView(),
+                    'line_form' => $lineForm->createView(),
+                    'lines' => $issueLines
+                )
+            );
+        } catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set(
+                'oh_snap',
+                $this->container->getParameter('finalize_modify_error')
+            );
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        
+
     }
 
     /**
@@ -306,31 +309,35 @@ class IssueController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        try
-        {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Issue entity.');
-        }
-        if ($entity->getStatus() == 1){
-            throw new AccessDeniedException();
+        try {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Issue entity.');
+            }
+            if ($entity->getStatus() == 1) {
+                throw new AccessDeniedException();
                 exit();
-        }
+            }
 
-        $lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $entity));
-        if (!empty($lines))
-            foreach ($lines as $line)
-                $em->remove($line);
+            $lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $entity));
+            if (!empty($lines)) {
+                foreach ($lines as $line) {
+                    $em->remove($line);
+                }
+            }
 
-        $em->remove($entity);
-        $em->flush(); 
-        }catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set('oh_snap',$this->container->getParameter('finalize_delete_error'));
+            $em->remove($entity);
+            $em->flush();
+        } catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set(
+                'oh_snap',
+                $this->container->getParameter('finalize_delete_error')
+            );
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        
+
         $this->get('session')->getFlashBag()->add('well_done', "Successfully Deleted");
 
         return $this->redirect($this->generateUrl('issue'));
@@ -388,8 +395,9 @@ class IssueController extends Controller
     public function deFinalizeAction($id)
     {
         //checks if the user is authenticated
-        if(!$this->container->get('security.context')->isGranted('ROLE_ADMIN') ){
+        if (!$this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
             $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('access_error'));
+
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
 
@@ -413,18 +421,16 @@ class IssueController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $data = $this->get('request')->request->all();
-        // $product = $em->getRepository('AcmeSetupBundle:Product')->find($data['product']);
+        $product = $em->getRepository('AcmeSetupBundle:Product')->find($data['product']);
         $repository = $em->getRepository('AcmeIssueBundle:Issue');
-        $result = $repository->getProductCurrentStockResult(5);
+        $result = $repository->getProductCurrentStockResult($product);
 
-        // return new JsonResponse(array('result' => $result));
+        $response = json_encode(array('result' => $result));
 
-        return $this->render(
-            'AcmeIssueBundle:Issue:product.html.twig',
-            array(
-                'result' => $result,
+        return new Response(
+            $response, 200, array(
+                'Content-Type' => 'application/json'
             )
         );
     }
-
 }
