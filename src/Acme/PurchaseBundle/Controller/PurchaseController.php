@@ -2,7 +2,6 @@
 
 namespace Acme\PurchaseBundle\Controller;
 
-use Acme\Purchase\Repository\SupplierStatusModel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Acme\PurchaseBundle\Entity\Purchase;
