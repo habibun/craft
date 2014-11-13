@@ -434,6 +434,12 @@ class PurchaseController extends Controller
         $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
         $result = $repository->getSupplierTotalPurchaseResult($supplier);
 
-        return new JsonResponse(array('result' => $result));
+        $response = json_encode(array('result' => $result));
+
+        return new Response(
+            $response, 200, array(
+                'Content-Type' => 'application/json'
+            )
+        );
     }
 }
