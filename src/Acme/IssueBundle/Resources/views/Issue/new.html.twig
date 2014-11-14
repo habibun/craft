@@ -147,7 +147,7 @@
             }
 
             if ($('#product-stock').val() < $('#issue_line_quantity').val()) {
-                noty({force: true, text: "May be you forget your product's current stock!", type: 'error', layout: 'topCenter', timeout: 3000});
+                noty({force: true, text: "May be you forget your current stock!", type: 'error', layout: 'topCenter', timeout: 3000});
                 return false;
             }
 
