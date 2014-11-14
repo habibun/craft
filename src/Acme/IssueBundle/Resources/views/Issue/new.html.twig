@@ -141,6 +141,16 @@
                 return false;
             }
 
+            if ($('#product-stock').val() <= 0) {
+                noty({force: true, text: 'Insufficient stock', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+
+            if ($('#product-stock').val() < $('#issue_line_quantity').val()) {
+                noty({force: true, text: 'May be you forgot your current stock?', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+
             var html = '<tr class="' + $('#issue_line_product').val() + '">';
             html += '<td>' + $('#issue_line_referenceNumber').val() + '<input type="hidden" value="' + $('#issue_line_referenceNumber').val() + '" name="' + $('#issue_line_referenceNumber').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_issueTo').val() + '<input type="hidden" value="' + $('#issue_line_issueTo').val() + '" name="' + $('#issue_line_issueTo').attr('name') + '[]" /></td>';
