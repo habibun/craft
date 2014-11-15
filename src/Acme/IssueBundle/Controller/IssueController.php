@@ -422,6 +422,10 @@ class IssueController extends Controller
         $em = $this->getDoctrine()->getManager();
         $data = $this->get('request')->request->all();
         $product = $em->getRepository('AcmeSetupBundle:Product')->find($data['product']);
+        if(!isset($data['product']))
+        {
+            return new JsonResponse('Unable to find Product id');
+        }
         $repository = $em->getRepository('AcmeIssueBundle:Issue');
         $result = $repository->getProductCurrentStockResult($product);
 
