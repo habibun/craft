@@ -51,7 +51,8 @@ class PurchaseType extends AbstractType
                 'location',
                 'entity',
                 array(
-                    'class' => 'Acme\SetupBundle\Entity\Location'
+                    'class' => 'Acme\SetupBundle\Entity\Location',
+                    'empty_value' => 'Select Location',
                 )
             );
     }
