@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Acme\HistoryBundle\AcmeHistoryBundle(),
             new Kitpages\DataGridBundle\KitpagesDataGridBundle(),
             new Acme\WidgetBundle\AcmeWidgetBundle(),
+            new Sg\DatatablesBundle\SgDatatablesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

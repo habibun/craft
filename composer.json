@@ -26,7 +26,12 @@
         "lankit/datatables-bundle": "*",
         "jms/serializer-bundle": "dev-master",
         "knplabs/knp-snappy-bundle": "dev-master",
-        "kitpages/data-grid-bundle": "1.*@dev"
+        "kitpages/data-grid-bundle": "1.*@dev",
+        "components/jquery": "1.11.1",
+        "datatables/datatables": "1.10.4",
+        "moment/moment": "2.6.0",
+        "friendsofsymfony/jsrouting-bundle": "@stable",
+        "sg/datatablesbundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
