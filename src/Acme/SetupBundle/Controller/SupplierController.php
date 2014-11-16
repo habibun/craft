@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\SetupBundle\Entity\Supplier;
 use Acme\SetupBundle\Form\SupplierType;
 
+use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Supplier controller.
  *
@@ -240,5 +243,58 @@ class SupplierController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm();
+    }
+
+    public function ajaxSupplierListAction(Request $request)
+    {
+        $get = $request->query->all();
+
+        /* Array of database columns which should be read and sent back to DataTables. Use a space where
+        * you want to insert a non-database field (for example a counter or static image)
+        */
+        $columns = array( 'id', 'name', 'address');
+        $get['columns'] = &$columns;
+
+        $em = $this->getDoctrine()->getManager();
+        $rResult = $em->getRepository('AcmeSetupBundle:Supplier')->ajaxTable($get, true)->getArrayResult();
+
+        /* Data set length after filtering */
+        $iFilteredTotal = count($rResult);
+
+        /*
+        * Output
+        */
+        $output = array(
+            //"sEcho" => intval($get['sEcho']),
+            "iTotalRecords" => $em->getRepository('AcmeSetupBundle:Supplier')->getCount(),
+            "iTotalDisplayRecords" => $iFilteredTotal,
+            "aaData" => array()
+        );
+
+        foreach($rResult as $aRow)
+        {
+            $row = array();
+            for ( $i=0 ; $i<count($columns) ; $i++ ){
+                if ( $columns[$i] == "version" ){
+                    /* Special output formatting for 'version' column */
+                    $row[] = ($aRow[ $columns[$i] ]=="0") ? '-' : $aRow[ $columns[$i] ];
+                }elseif ( $columns[$i] != ' ' ){
+                    /* General output */
+                    $row[] = $aRow[ $columns[$i] ];
+                }
+            }
+            $output['aaData'][] = $row;
+        }
+
+        unset($rResult);
+
+        return new Response(
+            json_encode($output)
+        );
+    }
+
+    public function supplierListAction()
+    {
+        return $this->render('AcmeSetupBundle:Supplier:supplierList.html.twig');
     }
 }

@@ -27,3 +27,11 @@ supplier_update:
 supplier_delete:
     path:     /{id}/delete
     defaults: { _controller: "AcmeSetupBundle:Supplier:delete" }
+
+ajax_supplier_list:
+    path: /ajax-supplier-list
+    defaults: { _controller:  "AcmeSetupBundle:Supplier:ajaxSupplierList" }
+
+supplier_list:
+      path: /supplier-list
+      defaults: { _controller: "AcmeSetupBundle:Supplier:supplierList" }
