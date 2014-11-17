@@ -1,33 +1,29 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="editProduct" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h4 class="modal-title">Edit Product</h4>
-                </div>
-                <div class="modal-body">
-                    {{ form_start(edit_form, {'method':'post','role':'form','enctype':'multipart/form-data','attr':{'class':'form-group'}}) }}
-                        <div class="form-group">
-                            {{ form_label(edit_form.file,"Name :" ,{'label_attr': { 'class':'control-label'}} ) }}
-                            {{ form_widget(edit_form.name, {'attr': {'placeholder':'Enter name', 'class':'form-control'}} ) }}
-                            {{ form_errors(edit_form.name) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(edit_form.file,"Image :" ,{'label_attr': { 'class':'control-label'}} ) }}
-                            {{ form_widget(edit_form.file, {'attr': {'class':'form-control'}} ) }}
-                            {{ form_errors(edit_form.file) }}
-                        </div>
-                        <div class="modal-footer">
-                            <div class="col-lg-offset-3 col-lg-10">
-                                {{ form_widget(edit_form.submit) }}
-                            </div>
-                        </div>
-                    {{ form_end(edit_form) }}
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+            <h4 class="modal-title">Edit Product</h4>
+        </div>
+        <div class="modal-body">
+            {{ form_start(edit_form, {'method':'post','role':'form','enctype':'multipart/form-data','attr':{'class':'form-group' }}
+            ) }}
+            {{ form_errors(edit_form) }}
+            <div class="form-group">
+                {{ form_label(edit_form.file,"Name :" ,{'label_attr': { 'class':'control-label' }} ) }}
+                {{ form_errors(edit_form.name) }}
+                {{ form_widget(edit_form.name, {'attr': {'placeholder':'Enter name', 'class':'form-control' }} ) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.file,"Image :" ,{'label_attr': { 'class':'control-label' }} ) }}
+                {{ form_errors(edit_form.file) }}
+                {{ form_widget(edit_form.file, {'attr': {'class':'form-control' }} ) }}
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-offset-3 col-lg-10">
+                    {{ form_widget(edit_form.submit) }}
                 </div>
             </div>
+            {{ form_end(edit_form) }}
         </div>
     </div>
-{% endblock %}
+</div>

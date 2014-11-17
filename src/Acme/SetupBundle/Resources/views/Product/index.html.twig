@@ -3,25 +3,26 @@
 {% block title %}Product{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap-fileupload/bootstrap-fileupload.css" />
-<style type="text/css">
-.product-image img {
-    width: 279px;
-    height: 222px;
-    position: relative;
-}
-.hid {
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-    position: absolute;
-    bottom: -22px;
-}
-.my-pagination{
-      margin-right: -14px;
-      margin-top: -4px;
-}
-</style>
+    <style type="text/css">
+        .product-image img {
+            width: 279px;
+            height: 222px;
+            position: relative;
+        }
+
+        .hid {
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+            position: absolute;
+            bottom: -22px;
+        }
+
+        .my-pagination {
+            margin-right: -14px;
+            margin-top: -4px;
+        }
+    </style>
 {% endblock %}
 
 {% block body -%}
@@ -33,7 +34,8 @@
                 <li class="active">Setup</li>
                 <li class="active">Product</li>
                 <ul class="pull-right">
-                    <a class="btn btn-sm btn-primary my-add" href="#newProduct" data-toggle="modal">
+                    <a href="{{ path('product_new') }}" class="btn btn-sm btn-primary my-add ajax-modal"
+                       data-toggle="modal">
                         Add <i class="icon-plus"></i>
                     </a>
                 </ul>
@@ -42,41 +44,41 @@
         </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
-        <section class="panel">
-            <header class="panel-heading">
-                <strong>Product list</strong>
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Product list</strong>
                 <span class="pull-right">
                     {{ knp_pagination_render(entities, "", {}, { "class": "my-pagination pagination-sm" }) }}
                 </span>
-            </header>
+                </header>
             </section>
-            {% include 'AcmeSetupBundle:Product:_modalNew.html.twig' %}
             <div class="row product-list">
                 {% for entity in entities %}
                     <div class="col-md-4">
-                      <section class="panel">
-                          <div class="pro-img-box product-image">
-                              <img src="/uploads/product/{{entity.getImage()}}" alt=""/>
-                              <hr>
+                        <section class="panel">
+                            <div class="pro-img-box product-image">
+                                <img src="/uploads/product/{{ entity.getImage() }}" alt=""/>
+                                <hr>
                               <span class="hid" style="background-color:rgba(0, 0, 0, 0.1)">
                                   <a href="{{ path('product_show', { 'id': entity.id }) }}"
-                               class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
+                                     class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
                             <a href="{{ path('product_edit', { 'id': entity.id }) }}" data-toggle="modal"
-                               class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>
+                               class="btn btn-info btn-xs ajax-modal"><i class="icon-pencil"></i></a>
                             <a href="{{ path('product_delete', { 'id': entity.id }) }}"
                                class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
                               </span>
-                          </div>
-                          <div class="panel-body text-center">
-                              <h4>
-                                  <a href="#" class="pro-title">
-                                      Product Name: {{entity.name}}
-                                  </a>
-                              </h4>
-                              <p class="price">Product Id: {{entity.id}}</p>
-                          </div>
-                      </section>
+                            </div>
+                            <div class="panel-body text-center">
+                                <h4>
+                                    <a href="#" class="pro-title">
+                                        Product Name: {{ entity.name }}
+                                    </a>
+                                </h4>
+
+                                <p class="price">Product Id: {{ entity.id }}</p>
+                            </div>
+                        </section>
                     </div>
                 {% endfor %}
             </div>
@@ -85,26 +87,25 @@
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
     <script type="text/javascript">
-    /*$(document).ready(function(){
+        /*$(document).ready(function(){
+         $('.hid').hide();
+         $('.product-image').bind('mouseenter',function(){
+         var jony = $('.hid').show();
+         $(this).toggleClass('jony');
+         });
+         $('.product-image').bind('mouseleave',function(){
+         var jony = $('.hid').hide();
+         $(this).toggleClass('jony');
+         });
+         });*/
         $('.hid').hide();
-        $('.product-image').bind('mouseenter',function(){
-             var jony = $('.hid').show();
-            $(this).toggleClass('jony');
+        $(document).ready(function () {
+            $('.pro-img-box').hover(function () {
+                $('.hid').show();
+            }, function () {
+                $('.hid').hide();
+            });
         });
-        $('.product-image').bind('mouseleave',function(){
-             var jony = $('.hid').hide();
-            $(this).toggleClass('jony');
-        });
-    });*/
-    $('.hid').hide();
-    $(document).ready(function(){
-        $('.pro-img-box').hover(function() {
-            $('.hid').show();
-        }, function() {
-            $('.hid').hide();
-        });
-    });
     </script>
 {% endblock %}

@@ -266,3 +266,24 @@ $(document).ready(function () {
      $(this).val('Search...');
      });*/
 });
+
+//for modal
+$(function () {
+    var modalRequestRunning = false;
+    $('body').on('click', '.ajax-modal[data-toggle="modal"]', function (e) {
+        e.preventDefault();
+        if (modalRequestRunning)
+            return false;
+        modalRequestRunning = true;
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (response) {
+                modalRequestRunning = false;
+                $('<div class="modal fade ajax-modal-content"></div>').html(response).modal();
+            }
+        });
+        return false;
+    });
+});
