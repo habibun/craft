@@ -26,6 +26,86 @@ class PurchaseController extends Controller
      * Lists all Purchase entities.
      *
      */
+
+    public function stweAction()
+    {
+        $postDatatable = $this->get("sg_datatables.post");
+        $postDatatable->buildDatatableView();
+
+        return $this->render('AcmePurchaseBundle:Purchase:stwe.html.twig',array(
+                "datatable" => $postDatatable,
+            ));
+    }
+
+    public function stweResultsAction()
+    {
+        /**
+         * @var \Sg\DatatablesBundle\Datatable\Data\DatatableData $datatable
+         */
+        $datatable = $this->get("sg_datatables.datatable")->getDatatable($this->get("sg_datatables.post"));
+
+        // Callback example
+        $function = function($qb)
+        {
+            $qb->andWhere("Post.visible = true");
+        };
+
+        // Add callback
+        $datatable->addWhereBuilderCallback($function);
+
+        return $datatable->getResponse();
+    }
+
+
+    public function bulkDeleteAction()
+    {
+        $request = $this->getRequest();
+        $isAjax = $request->isXmlHttpRequest();
+
+        if ($isAjax) {
+            $choices = $request->request->get("data");
+
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository("AcmePurchaseBundle:Purchase");
+
+            foreach ($choices as $choice) {
+                $entity = $repository->find($choice["value"]);
+                $em->remove($entity);
+            }
+
+            $em->flush();
+
+            return new Response("This is ajax response.");
+        }
+
+        return new Response("This is not ajax.", 400);
+    }
+
+    public function bulkDisableAction()
+    {
+        $request = $this->getRequest();
+        $isAjax = $request->isXmlHttpRequest();
+
+        if ($isAjax) {
+            $choices = $request->request->get("data");
+
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository("AcmePurchaseBundle:Purchase");
+
+            foreach ($choices as $choice) {
+                $entity = $repository->find($choice["value"]);
+                $entity->setVisible(false);
+                $em->persist($entity);
+            }
+
+            $em->flush();
+
+            return new Response("This is ajax response.");
+        }
+
+        return new Response("This is not ajax.", 400);
+    }
+
     public function indexAction()
     {
         return $this->render('AcmePurchaseBundle:Purchase:index.html.twig');

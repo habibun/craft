@@ -52,3 +52,18 @@ supplier_total_purchase:
     pattern: /supplier-total-purchase
     defaults: { _controller: "AcmePurchaseBundle:Purchase:supplierTotalPurchase" }
 
+post:
+    pattern:  /stwe
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:stwe" }
+
+post_results:
+    pattern:  /results
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:stweResults" }
+
+post_bulk_delete:
+    pattern:  /bulk/delete
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:bulkDelete" }
+
+post_bulk_disable:
+    pattern:  /bulk/disable
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:bulkDisable" }

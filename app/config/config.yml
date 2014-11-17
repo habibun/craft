@@ -55,6 +55,55 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
     assets:
+        data_tables_css:
+            input:  %kernel.root_dir%/../vendor/datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.css
+            output: css/datatables.css
+            filter: [cssrewrite]
+        data_tables_js:
+            inputs:
+                    - %kernel.root_dir%/../vendor/datatables/datatables/media/js/jquery.dataTables.js
+                    - %kernel.root_dir%/../vendor/datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.js
+            output: js/datatables.js
+        moment_js:
+            inputs:
+                    - '%kernel.root_dir%/../vendor/moment/moment/moment.js'
+            output: js/moment.js
+        moment_locale:
+            inputs:
+                    - '%kernel.root_dir%/../vendor/moment/moment/lang/%locale%.js'
+            output: js/moment.locale.js
+        data_tables_jquery_css:
+            input:  %kernel.root_dir%/../vendor/datatables/datatables/media/css/jquery.dataTables.css
+            output: css/jquery.dataTables.css
+            filter: ['cssrewrite']
+        data_tables_bootstrap_css:
+            input:  %kernel.root_dir%/../vendor/datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.css
+            output: css/dataTables.bootstrap.css
+            filter: ['cssrewrite']
+        data_tables_responsive_css:
+            input:  %kernel.root_dir%/../vendor/datatables/responsive/css/dataTables.responsive.css
+            output: css/dataTables.responsive.css
+        data_tables_responsive_js:
+            input:  %kernel.root_dir%/../vendor/datatables/responsive/js/dataTables.responsive.js
+            output: js/dataTables.responsive.js
+        data_tables_bootstrap_js:
+            input:  %kernel.root_dir%/../vendor/datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.js
+            output: js/datatables.js
+        data_tables_img_sort_both:
+            input:  %kernel.root_dir%/../vendor/datatables/plugins/integration/bootstrap/images/sort_both.png
+            output: images/sort_both.png
+        data_tables_img_sort_asc:
+            input:  %kernel.root_dir%/../vendor/datatables/plugins/integration/bootstrap/images/sort_asc.png
+            output: images/sort_asc.png
+        data_tables_img_sort_desc:
+            input:  %kernel.root_dir%/../vendor/datatables/plugins/integration/bootstrap/images/sort_desc.png
+            output: images/sort_desc.png
+        data_tables_img_sort_asc_disabled:
+            input:  %kernel.root_dir%/../vendor/datatables/plugins/integration/bootstrap/images/sort_asc_disabled.png
+            output: images/sort_asc_disabled.png
+        data_tables_img_sort_desc_disabled:
+            input:  %kernel.root_dir%/../vendor/datatables/plugins/integration/bootstrap/images/sort_desc_disabled.png
+            output: images/sort_desc_disabled.png
         jquery_js:
             inputs:
                 - '%kernel.root_dir%/../components/jquery/jquery.min.js'

@@ -1,0 +1,16 @@
+{% extends 'AcmePurchaseBundle::layout.html.twig' %}
+
+ {% block stylesheets %}
+     <link href="{{ asset('assets/data-tables-bootstrap3/css/datatables.css') }}" rel="stylesheet">
+ {% endblock %}
+
+{% block body %}
+    {{ datatable_render(datatable) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
+    <script type="text/javascript">
+
+    </script>
+{% endblock %}
