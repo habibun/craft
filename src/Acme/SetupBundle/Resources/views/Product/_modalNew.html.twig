@@ -7,15 +7,16 @@
         <div class="modal-body">
             {{ form_start(form, {'method':'post','role':'form','enctype':'multipart/form-data','attr':{'class':'form-group' }}
             ) }}
+            {{ form_errors(form) }}
             <div class="form-group">
-                {{ form_label(form.name,"Name :" ,{'label_attr': { 'class':'control-label' }} ) }}
-                {{ form_widget(form.name, {'attr': {'placeholder':'Enter name', 'class':'form-control' }} ) }}
+                {{ form_label(form.name,'Name :' ,{'label_attr': { 'class':'control-label' }} ) }}
                 {{ form_errors(form.name) }}
+                {{ form_widget(form.name, {'attr': {'placeholder':'Enter name', 'class':'form-control' }} ) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.file,"Image :" ,{'label_attr': { 'class':'control-label' }} ) }}
-                {{ form_widget(form.file, {'attr': {'class':'form-control' }} ) }}
+                {{ form_label(form.file,'Image :' ,{'label_attr': { 'class':'control-label' }} ) }}
                 {{ form_errors(form.file) }}
+                {{ form_widget(form.file, {'attr': {'class':'form-control' }} ) }}
             </div>
             <div class="modal-footer">
                 <div class="col-lg-offset-3 col-lg-10">
