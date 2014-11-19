@@ -21,6 +21,10 @@ class User extends BaseUser
      */
     public $file;
 
+    protected $createdAt;
+
+    protected $createdBy;
+
     public function __construct()
     {
         parent::__construct();
@@ -119,5 +123,37 @@ class User extends BaseUser
         if ($file = $this->getAbsolutePath()) {
             unlink($file);
         }
+    }
+
+        /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdBy
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }

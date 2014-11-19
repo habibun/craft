@@ -50,12 +50,14 @@ class UserController extends Controller
         $entity = new User();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        $user = $this->get('security.context')->getToken()->getUser();
 
         if ($form->isValid()) {
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($entity);
             $password = $encoder->encodePassword($entity->getUsername(), $entity->getSalt());
             $entity->setPassword($password);
+            $entity->setCreatedBy($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
