@@ -34,9 +34,12 @@
                     <thead>
                     <tr>
                         <th>Id</th>
+                        <th>Image</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Status</th>
+                        <th>Created At</th>
+                        <th>Created By</th>
                         <th>Roles</th>
                         <th>Lastlogin</th>
                         <th>Actions</th>
@@ -46,6 +49,7 @@
                     {% for entity in entities %}
                         <tr>
                             <td>{{ entity.id }}</td>
+                            <td><img src="/uploads/users/{{entity.getImage()}}" width="70px" height="50px" ></td>
                             <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
                             <td>{{ entity.email }}</td>
                             <td>
@@ -55,6 +59,8 @@
                                     <span class="label label-warning label-mini">disabled</span>
                                 {% endif %}
                             </td>
+                            <td>{{ entity.createdAt|date('d-m-Y H:i:s') }}</td>
+                            <td>{{ entity.createdBy }}</td>
                             <td>
                                 <ul>
                                         <li>{{ entity.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</li>
