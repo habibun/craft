@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends BaseUser
 {
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     private $image;
 
@@ -49,7 +49,6 @@ class User extends BaseUser
 
     /**
      * performs some actions after updating the database
-     * @ORM\prePersist
      */
     public function preUpload()
     {
@@ -97,7 +96,6 @@ class User extends BaseUser
 
     /**
      * uploads the file
-     * @ORM\postPersist
      */
     public function upload()
     {
