@@ -49,7 +49,15 @@
                     {% for entity in entities %}
                         <tr>
                             <td>{{ entity.id }}</td>
-                            <td><img src="/uploads/users/{{entity.getImage()}}" width="70px" height="50px" ></td>
+                            <td>
+                                <img src="
+                                    {% if entity.image == true %}
+                                        {{ asset(['/uploads/users/', entity.getImage()]|join) }}
+                                    {% else %}
+                                        {{ asset('/uploads/users/avatar1_jony.JPG') }}
+                                    {% endif %}
+                                     " width="70px" height="50px" alt="" />
+                            </td>
                             <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
                             <td>{{ entity.email }}</td>
                             <td>
@@ -79,10 +87,11 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <span class="pull-right">
+                
+            </section>
+            <span class="pull-right">
                         {{ knp_pagination_render(entities, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}
                 </span>
-            </section>
             {#{{ knp_pagination_render(entities, "", {}, { "style": "pager", "aligned": true }) }}#}
             {#        <span class="" style="float: left;margin-top: 20px">
                         <a class="btn btn-primary btn-sm" href="{{ path('user_new') }}">
