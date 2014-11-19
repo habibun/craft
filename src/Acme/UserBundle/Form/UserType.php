@@ -44,14 +44,8 @@ class UserType extends AbstractType
                     'expanded' => false,
                     'required' => true,
                     'attr' => array('class' => 'chosen-select')
-                )
-            )/*->add('roles', 'collection',array(
-                'label' => 'Roles',
-                'type' => 'choice',
-                'options' =>array( 'choices' => array(
-                    'ROLE_USER' => 'user', 'ROLE_ADMIN' => 'admin')
-                )))*/
-        ;
+                ))
+            ->add('file');
     }
 
     /**

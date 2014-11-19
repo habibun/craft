@@ -6,3 +6,10 @@ Acme\UserBundle\Entity\User:
             type: integer
             generator:
                 strategy: AUTO
+    fields:
+        image:
+            type: string
+            nullable: true
+    lifecycleCallbacks:
+        prePersist: [ preUpload ]
+        postPersist: [ upload ]
