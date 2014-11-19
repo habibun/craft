@@ -113,7 +113,6 @@ class User extends BaseUser
 
     /**
      * performs some actions after deleting from the DB
-     * @ORM\postRemove
      */
     public function removeUpload()
     {

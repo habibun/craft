@@ -13,3 +13,4 @@ Acme\UserBundle\Entity\User:
     lifecycleCallbacks:
         prePersist: [ preUpload ]
         postPersist: [ upload ]
+        postRemove: [ removeUpload ]
