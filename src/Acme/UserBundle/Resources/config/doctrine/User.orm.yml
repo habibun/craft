@@ -10,6 +10,16 @@ Acme\UserBundle\Entity\User:
         image:
             type: string
             nullable: true
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: false
+    manyToOne:
+        createdBy:
+            targetEntity: Acme\UserBundle\Entity\User
+            joinColumn:
+                name: created_by
     lifecycleCallbacks:
-        prePersist: [ preUpload ]
+        prePersist: [ preUpload,setCreatedAt ]
         postPersist: [ upload ]
+        postRemove: [ removeUpload ]

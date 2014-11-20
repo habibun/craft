@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends BaseUser
 {
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     private $image;
 
@@ -20,6 +20,10 @@ class User extends BaseUser
      * @Assert\Image()
      */
     public $file;
+
+    protected $createdAt;
+
+    protected $createdBy;
 
     public function __construct()
     {
@@ -49,7 +53,6 @@ class User extends BaseUser
 
     /**
      * performs some actions after updating the database
-     * @ORM\prePersist
      */
     public function preUpload()
     {
@@ -97,7 +100,6 @@ class User extends BaseUser
 
     /**
      * uploads the file
-     * @ORM\postPersist
      */
     public function upload()
     {
@@ -115,12 +117,43 @@ class User extends BaseUser
 
     /**
      * performs some actions after deleting from the DB
-     * @ORM\postRemove
      */
     public function removeUpload()
     {
         if ($file = $this->getAbsolutePath()) {
             unlink($file);
         }
+    }
+
+        /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdBy
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }
