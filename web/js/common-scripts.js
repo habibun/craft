@@ -287,3 +287,9 @@ $(function () {
         return false;
     });
 });
+
+//enalble tooltip
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
