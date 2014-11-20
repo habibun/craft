@@ -29,9 +29,9 @@
         </div>
     </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <section class="panel">
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
                 <header class="panel-heading">
                     <strong>{{ entity.username|capitalize }}'s Details</strong>
                     <span class="tools pull-right">
@@ -39,58 +39,59 @@
                         <a class="icon-remove" href="javascript:;"></a>
                     </span>
                 </header>
-            <div class="panel-body">
-                <div class="col-md-4">
-                  <div class="pro-img-details">
-                      <img src="/uploads/users/{{entity.getImage()}}" width="372px" height="286px" >
-                  </div>
-            </div>
-            <div class="col-md-8">
-                  <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <th>Id</th>
-                        <td>{{ entity.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Username</th>
-                        <td>{{ entity.username }}</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>{{ entity.email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Status</th>
-                        <td>{% if entity.enabled %}
-                                <span class="label label-inverse">Enabled</span>
-                            {% else %}
-                                <span class="label label-warning">disabled</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Created At</th>
-                        <td>{{ entity.createdAt|date('d-m-Y H:i:s') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Created By</th>
-                        <td>{{ entity.createdBy }}</td>
-                    </tr>
-                    <tr>
-                        <th>Roles</th>
-                        <td>
-                            <ul>
-                                {{ entity.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}
-                            </ul>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                <div class="panel-body">
+                    <div class="col-md-3">
+                        <div class="pro-img-details">
+                            <img src="/uploads/users/{{ entity.getImage() }}" width="200px" height="286px">
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ entity.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Username</th>
+                                <td>{{ entity.username }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ entity.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td>{% if entity.enabled %}
+                                        <span class="label label-inverse">Enabled</span>
+                                    {% else %}
+                                        <span class="label label-warning">disabled</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Created At</th>
+                                <td>{{ entity.createdAt|date('d-m-Y H:i:s') }}</td>
+                            </tr>
+                            <tr>
+                                <th>Created By</th>
+                                <td>{{ entity.createdBy }}</td>
+                            </tr>
+                            <tr>
+                                <th>Roles</th>
+                                <td>
+                                    <ul>
+                                        {{ entity.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
     <div class="row">
         <div class="col-md-12">
             <span class="pull-right">
