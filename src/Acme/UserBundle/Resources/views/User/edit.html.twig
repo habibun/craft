@@ -40,6 +40,13 @@
                         {{ form_errors(edit_form.enabled) }}
                     </div>
                     {{ form_row(edit_form.roles) }}
+                    <div class="form-group">
+                        {{ form_label(edit_form.file,"Image" ,{'label_attr': { 'class':'col-sm-3 control-label'} } ) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(edit_form.file, {'attr': {'placeholder':'photo', 'class':'form-control'} } ) }}
+                        </div>
+                        {{ form_errors(edit_form.file) }}
+                    </div>
                     <hr>
             <span class="pull-right">
                 <a href="{{ path('user') }}" class="btn btn-primary">Back</a>
