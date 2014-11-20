@@ -50,7 +50,7 @@
                 <!-- user login dropdown start-->
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <img alt="" src="{{ asset('img/avatar1_jony.jpg') }}">
+                        <img alt="" src="{{ asset(['uploads/users/', app.user.getImage()]|join) }}" width="29px" height="29px" alt="">
                         <span class="username">{{ app.user.username }}</span>
                         <b class="caret"></b>
                     </a>
