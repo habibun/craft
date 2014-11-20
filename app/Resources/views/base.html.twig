@@ -50,14 +50,21 @@
                 <!-- user login dropdown start-->
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <img alt="" src="{{ asset(['uploads/users/', app.user.getImage()]|join) }}" width="29px" height="29px" alt="">
+                        <img src="
+                                    {% if app.user.getImage() == true %}
+                                        {{ asset(['uploads/users/', app.user.getImage()]|join) }}
+                                    {% else %}
+                                        {{ asset('uploads/users/userDefaultLogoBlack.png') }}
+                                    {% endif %}
+                                     " width="29px" height="29px" alt=""/>
                         <span class="username">{{ app.user.username }}</span>
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <div class="log-arrow-up"></div>
-                            <li><a href="{{ path('fos_user_profile_show') }}"><i class=" icon-suitcase"></i> Profile</a></li>
-                            <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+                        <li><a href="{{ path('fos_user_profile_show') }}"><i class=" icon-suitcase"></i> Profile</a>
+                        </li>
+                        <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                         <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-signout"></i> Log Out</a>
                         </li>
                     </ul>
