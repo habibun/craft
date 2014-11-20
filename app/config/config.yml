@@ -167,7 +167,10 @@ braincrafted_bootstrap:
     jquery_path: %kernel.root_dir%/../components/jquery/jquery.min.js
     auto_configure:
         assetic: true
-        knp_paginator: true
+        knp_paginator: false
+knp_paginator:
+    template:
+        pagination: BraincraftedBootstrapBundle:Pagination:bootstrap.html.twig
 
 # KnpPaginatorBundle Configuration
 knp_paginator:
@@ -178,7 +181,7 @@ knp_paginator:
         sort_direction_name: direction # sort direction query parameter name
         distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
-        #pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
 # JMSSerializerBundle Configuration
