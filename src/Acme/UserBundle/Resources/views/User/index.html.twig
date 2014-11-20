@@ -54,9 +54,9 @@
                                     {% if entity.image == true %}
                                         {{ asset(['/uploads/users/', entity.getImage()]|join) }}
                                     {% else %}
-                                        {{ asset('/uploads/users/avatar1_jony.JPG') }}
+                                        {{ asset('uploads/users/defaultLogo.png') }}
                                     {% endif %}
-                                     " width="70px" height="50px" alt="" />
+                                     " width="70px" height="50px" alt=""/>
                             </td>
                             <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
                             <td>{{ entity.email }}</td>
@@ -71,7 +71,7 @@
                             <td>{{ entity.createdBy }}</td>
                             <td>
                                 <ul>
-                                        <li>{{ entity.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</li>
+                                    <li>{{ entity.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</li>
                                 </ul>
                             </td>
                             <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -87,17 +87,10 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                
             </section>
             <span class="pull-right">
-                        {{ knp_pagination_render(entities, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}
-                </span>
-            {#{{ knp_pagination_render(entities, "", {}, { "style": "pager", "aligned": true }) }}#}
-            {#        <span class="" style="float: left;margin-top: 20px">
-                        <a class="btn btn-primary btn-sm" href="{{ path('user_new') }}">
-                            Add New
-                        </a>
-                    </span>#}
+                {{ knp_pagination_render(entities, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}
+            </span>
         </div>
     </div>
 {% endblock %}

@@ -14,11 +14,10 @@ Acme\UserBundle\Entity\User:
             column: created_at
             type: datetime
             nullable: false
-    manyToOne:
         createdBy:
-            targetEntity: Acme\UserBundle\Entity\User
-            joinColumn:
-                name: created_by
+            column: created_by
+            type: string
+            nullable: false
     lifecycleCallbacks:
         prePersist: [ preUpload,setCreatedAt ]
         postPersist: [ upload ]
