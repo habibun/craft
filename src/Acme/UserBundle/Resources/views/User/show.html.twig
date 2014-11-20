@@ -42,7 +42,11 @@
                 <div class="panel-body">
                     <div class="col-md-3">
                         <div class="pro-img-details">
-                            <img src="/uploads/users/{{ entity.getImage() }}" width="200px" height="286px">
+                        {% if entity.image == true %}
+                                <img src="{{ asset(['uploads/users/', entity.getImage()]|join) }}" width="200px" height="286px" />
+                            {% else %}
+                                <img src="{{ asset('uploads/users/userDefaultLogo.png') }}" width="200px" height="286px" />
+                        {% endif %}
                         </div>
                     </div>
                     <div class="col-md-9">
