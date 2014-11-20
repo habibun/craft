@@ -52,7 +52,7 @@
                             <td>
                                 <img src="
                                     {% if entity.image == true %}
-                                        {{ asset(['/uploads/users/', entity.getImage()]|join) }}
+                                        {{ asset(['uploads/users/', entity.getImage()]|join) }}
                                     {% else %}
                                         {{ asset('uploads/users/defaultLogo.png') }}
                                     {% endif %}
