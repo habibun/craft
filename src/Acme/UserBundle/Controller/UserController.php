@@ -213,6 +213,10 @@ class UserController extends Controller
             $encoder = $factory->getEncoder($entity);
             $password = $encoder->encodePassword($entity->getUsername(), $entity->getSalt());
             $entity->setPassword($password);
+            if ($entity->file != null) {
+                $entity->setImage(uniqid().'.'.$entity->file->guessExtension());
+                $entity->file->move($entity->getUploadRootDir(), $entity->getImage());
+            }
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
