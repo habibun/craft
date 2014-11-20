@@ -125,7 +125,7 @@ class User extends BaseUser
         }
     }
 
-        /**
+    /**
      * @param mixed $createdAt
      */
     public function setCreatedAt($createdAt)
