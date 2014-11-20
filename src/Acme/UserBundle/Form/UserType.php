@@ -45,7 +45,11 @@ class UserType extends AbstractType
                     'required' => true,
                     'attr' => array('class' => 'chosen-select')
                 ))
-            ->add('file');
+            ->add('file','file',array(
+                    'attr' => array(
+                        'class' => 'file'
+                    )
+                ));
     }
 
     /**

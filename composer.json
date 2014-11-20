@@ -32,7 +32,8 @@
         "moment/moment": "2.6.0",
         "friendsofsymfony/jsrouting-bundle": "@stable",
         "sg/datatablesbundle": "dev-master",
-        "imagine/imagine": "dev-master"
+        "imagine/imagine": "dev-master",
+        "twitter/bootstrap": "2.3.*"
     },
     "scripts": {
         "post-install-cmd": [
