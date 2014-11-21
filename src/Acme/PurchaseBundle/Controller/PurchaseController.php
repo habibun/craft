@@ -513,12 +513,16 @@ class PurchaseController extends Controller
         $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
         $result = $repository->getSupplierTotalPurchaseResult($supplier);
 
-        $response = json_encode(array('result' => $result));
+        /*$response = json_encode(array('result' => $result));
 
         return new Response(
             $response, 200, array(
                 'Content-Type' => 'application/json'
             )
-        );
+        );*/
+         return new JsonResponse(array('result' => $result));
+        /*return $this->render('AcmePurchaseBundle:Purchase:detail.html.twig',array(
+                'result' => $result,
+            ));*/
     }
 }

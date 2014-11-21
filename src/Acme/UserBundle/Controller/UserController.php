@@ -254,16 +254,12 @@ class UserController extends Controller
             $em->remove($entity);
             $em->flush();
         } catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set(
-                'error',
-                'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.'
-            );
+            $this->get('session')->getFlashBag()->set('oh_snap',$this->container->getParameter('used_error_long'));
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        $this->get('session')->getFlashBag()->add('oh_snap', 'User was successfully deleted.');
+        $this->get('session')->getFlashBag()->add('well_done', 'User was successfully deleted.');
 
-        //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('user'));
     }
 

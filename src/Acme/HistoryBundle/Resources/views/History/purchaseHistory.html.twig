@@ -17,8 +17,8 @@
             {% block kit_grid_filter %}
                 <div class="clearfix">
                     <form class="form-inline pull-right" action="{{ grid.requestUri }}" id="{{grid.filterFormName}}_form" method="GET">
-                        <div class="form-group">
-                        <input class="form-control search-query" type="text" name="{{grid.filterFormName}}" placeholder="{{ "Search" | trans }}" id="{{grid.filterFormName}}" value="{{ grid.filterValue }}"/>
+                        <div class="form-group" data-toggle="tooltip" title="Only transaction number's are allowed.">
+                        <input class="form-control search-query" type="text" name="{{grid.filterFormName}}" placeholder="{{ "Search" | trans }}" id="{{grid.filterFormName}}" value="{{ grid.filterValue }}" />
                         </div>
                         <button type="submit" class="btn btn-mini btn-primary" value="{{ "Apply" | trans }}">{{ "Apply" | trans }}</button>
                         <a class="btn btn-mini btn-default" href="{{ grid.requestUri }}" id="{{grid.filterFormName}}_reset_button">{{ "Reset" | trans }}</a>
