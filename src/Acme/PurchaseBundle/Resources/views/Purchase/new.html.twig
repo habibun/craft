@@ -35,14 +35,16 @@
                     {{ form_row(form.supplier) }}
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label text-info"></label>
-                        <label class="col-sm-3 col-sm-4 control-label text-info">Total Purchased</label>
+                        <label class="col-sm-3 col-sm-3 control-label text-info">Total Purchased</label>
+
                         <div class="col-sm-4">
-                            <input class="form-control" id="supplier-total" type="text" placeholder="0.00" value="0" disabled>
+                            <input class="form-control" id="supplier-total" type="text" placeholder="0.00" value="0"
+                                   disabled>
                         </div>
                         <div class="col-sm-3">
                             <a class="btn btn-default" data-toggle="modal" href="#myModal">
-                                 <i class="icon-eye-open"></i> See Detail's
-                              </a>
+                                <i class="icon-eye-open"></i> Show Detail's
+                            </a>
                         </div>
                     </div>
                     {{ form_row(form.location) }}
@@ -119,9 +121,9 @@
         </div>
     </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-       {% include 'AcmePurchaseBundle:Purchase:_supplierDetails.html.twig' %}                           
-</div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        {% include 'AcmePurchaseBundle:Purchase:_supplierDetails.html.twig' %}
+    </div>
 
 {% endblock %}
 
@@ -136,17 +138,35 @@
 
         function addLine() {
             if (addedLines.hasOwnProperty($('#purchase_line_product').val())) {
-                noty({force: true, text: 'You already added this product please add another. Or delete existing and try again.', type: 'error', layout: 'topCenter', timeout: 3000});
+                noty({
+                    force: true,
+                    text: 'You already added this product please add another. Or delete existing and try again.',
+                    type: 'error',
+                    layout: 'topCenter',
+                    timeout: 3000
+                });
                 return false;
             }
 
             if (!$('#purchase_line_product').val() || !$('#purchase_line_quantity').val() || !$('#purchase_line_price').val()) {
-                noty({force: true, text: 'Please fill the form correctly', type: 'error', layout: 'topCenter', timeout: 3000});
+                noty({
+                    force: true,
+                    text: 'Please fill the form correctly',
+                    type: 'error',
+                    layout: 'topCenter',
+                    timeout: 3000
+                });
                 return false;
             }
 
             if (!$('#purchase_line_manufacturer').val()) {
-                noty({force: true, text: 'Please add Manufacturer information', type: 'error', layout: 'topCenter', timeout: 3000});
+                noty({
+                    force: true,
+                    text: 'Please add Manufacturer information',
+                    type: 'error',
+                    layout: 'topCenter',
+                    timeout: 3000
+                });
                 return false;
             }
 
@@ -193,14 +213,13 @@
                 delete addedLines[id];
             });
 
-            $('#acme_purchasebundle_purchase_supplier').change(function(){
+            $('#acme_purchasebundle_purchase_supplier').change(function () {
                 $.post(
                         '{{ path('supplier_total_purchase') }}',
                         {
                             'supplier': $('#acme_purchasebundle_purchase_supplier').val()
                         },
-                        function(data)
-                        {
+                        function (data) {
                             $('#supplier-total').val(data.result.total);
                         },
                         'json'
