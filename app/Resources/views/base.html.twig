@@ -42,7 +42,7 @@
             <!--search & user info start-->
             <ul class="nav pull-right top-menu">
                 <li>
-                    <form action="{{ path('AcmeWidgetBundle_SearchStatistics') }}" method="GET" id="search-form">
+                    <form action="{{ path('searchstatistics_general') }}" method="GET" id="search-form">
                         <input type="text" class="form-control search" placeholder="Search..." name="search-keyword"
                                id="search-input">
                     </form>
@@ -174,7 +174,7 @@
                     response(cache[term]);
                     return;
                 }
-                lastXhr = $.getJSON("{{ path('AcmeWidgetBundle_SearchAutocomplete') }}", request, function (data, status, xhr) {
+                lastXhr = $.getJSON("{{ path('searchstatistics_autocomplete') }}", request, function (data, status, xhr) {
                     cache[term] = data;
                     if (xhr === lastXhr) {
                         response(data);

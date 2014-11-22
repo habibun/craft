@@ -22,13 +22,13 @@ AcmeWidgetBundle_lockscreen:
     pattern:    /lockscreen
     defaults:   { _controller:  AcmeWidgetBundle:LockScreen:lockScreen }
 
-AcmeWidgetBundle_SearchStatistics:
-    pattern:    /search/{searchWord}
-    defaults:   { _controller:  AcmeWidgetBundle:SearchStatistics:search, searchWord: null }
+AcmeWidgetBundle_searchstatistics:
+    resource: "@AcmeWidgetBundle/Resources/config/routing/searchstatistics.yml"
+    prefix:   /search
 
-AcmeWidgetBundle_SearchAutocomplete:
-    pattern:    /search-autocomplete
-    defaults:   { _controller:  AcmeWidgetBundle:SearchStatistics:autocomplete }
+searchstatistics_autocomplete:
+    pattern:  /autocomplete
+    defaults: { _controller: AcmeWidgetBundle:SearchStatistics:autocomplete }
     requirements: { _method: get }
 
 acme_widget_available_product:

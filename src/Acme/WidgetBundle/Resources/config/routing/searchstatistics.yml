@@ -1,0 +1,3 @@
+searchstatistics_general:
+    pattern:    /{searchWord}
+    defaults:   { _controller:  AcmeWidgetBundle:SearchStatistics:search, searchWord: null }

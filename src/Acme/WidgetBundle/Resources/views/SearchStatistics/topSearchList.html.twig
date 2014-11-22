@@ -6,7 +6,7 @@
         {% if words is not empty %}
             {% for word in words %}
                 <a class="list-group-item"
-                   href="{{ path('AcmeWidgetBundle_SearchStatistics', { 'searchWord': word['keywordSearch'] }) }}">{{ word['keywordSearch'] }}</a>
+                   href="{{ path('searchstatistics_general', { 'searchWord': word['keywordSearch'] }) }}">{{ word['keywordSearch'] }}</a>
             {% endfor %}
         {% endif %}
     </section>
