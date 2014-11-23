@@ -7,29 +7,20 @@ AcmeWidgetBundle_lasttab:
   defaults: { _controller: AcmeWidgetBundle:LastTab:lastTab }
 
 AcmeWidgetBundle_stateoverview:
-    pattern:    /stateoverview
+    pattern:    /state-overview
     defaults:   { _controller:  AcmeWidgetBundle:StateOverview:stateOverview }
 
 AcmeWidgetBundle_workprogress:
-    pattern:    /workprogress
+    pattern:    /work-progress
     defaults:   { _controller:  AcmeWidgetBundle:WorkProgress:workProgress }
 
-AcmeWidgetBundle_topsearch:
-    pattern:    /topsearch
-    defaults:   { _controller:  AcmeWidgetBundle:TopSearch:topSearchList }
-
 AcmeWidgetBundle_lockscreen:
-    pattern:    /lockscreen
+    pattern:    /lock-screen
     defaults:   { _controller:  AcmeWidgetBundle:LockScreen:lockScreen }
 
 AcmeWidgetBundle_searchstatistics:
     resource: "@AcmeWidgetBundle/Resources/config/routing/searchstatistics.yml"
     prefix:   /search
-
-searchstatistics_autocomplete:
-    pattern:  /autocomplete
-    defaults: { _controller: AcmeWidgetBundle:SearchStatistics:autocomplete }
-    requirements: { _method: get }
 
 acme_widget_available_product:
     pattern:    /available-product

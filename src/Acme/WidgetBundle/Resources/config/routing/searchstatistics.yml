@@ -1,3 +1,12 @@
+searchstatistics_autocomplete:
+    pattern:  /auto-complete
+    defaults: { _controller: "AcmeWidgetBundle:SearchStatistics:autocomplete" }
+
 searchstatistics_general:
     pattern:    /{searchWord}
-    defaults:   { _controller:  AcmeWidgetBundle:SearchStatistics:search, searchWord: null }
+    defaults:   { _controller:  "AcmeWidgetBundle:SearchStatistics:search", searchWord: null }
+    requirements: { _method: get }
+
+searchstatistics_topsearch:
+    pattern:    /top-search
+    defaults:   { _controller:  "AcmeWidgetBundle:TopSearch:topSearchList" }
