@@ -2,6 +2,14 @@
 
 {% block title %}User{% endblock %}
 
+{% block stylesheets %}
+    <style type="text/css">
+        .breadcrumb>li+li:nth-last-child(1):before {
+            content: " ";
+        }
+    </style>
+{% endblock %}
+
 {% block body -%}
     <div class="row">
         <div class="col-lg-12">
@@ -11,11 +19,12 @@
                 <li class="active">Admin</li>
                 <li class="active">Manage User</li>
                 <li class="active">User</li>
-                <ul class="pull-right">
+                <li class="pull-right">
                     <a class="btn btn-sm btn-primary my-add" href="{{ path('user_new') }}">
                         Add <i class="icon-plus"></i>
                     </a>
-                </ul>
+                </li>
+
             </ul>
             <!--breadcrumbs end -->
         </div>

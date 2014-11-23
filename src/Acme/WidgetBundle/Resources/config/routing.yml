@@ -3,7 +3,7 @@ acme_widget_homepage:
     defaults: { _controller: AcmeWidgetBundle:Default:index }
 
 AcmeWidgetBundle_lasttab:
-  pattern:  /lasttab
+  pattern:  /last-tab
   defaults: { _controller: AcmeWidgetBundle:LastTab:lastTab }
 
 AcmeWidgetBundle_stateoverview:
