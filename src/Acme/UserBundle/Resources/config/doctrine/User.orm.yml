@@ -1,6 +1,7 @@
 Acme\UserBundle\Entity\User:
     type:  entity
     table: users
+    repositoryClass:  Acme\UserBundle\Repository\UserRepository
     id:
         id:
             type: integer
