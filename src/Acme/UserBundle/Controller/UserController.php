@@ -214,7 +214,7 @@ class UserController extends Controller
             $password = $encoder->encodePassword($entity->getUsername(), $entity->getSalt());
             $entity->setPassword($password);
             if ($entity->file != null) {
-                $entity->setImage(uniqid().'.'.$entity->file->guessExtension());
+                $entity->setImage(uniqid() . '.' . $entity->file->guessExtension());
                 $entity->file->move($entity->getUploadRootDir(), $entity->getImage());
             }
             $em->flush();
@@ -254,7 +254,7 @@ class UserController extends Controller
             $em->remove($entity);
             $em->flush();
         } catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set('oh_snap',$this->container->getParameter('used_error_long'));
+            $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('used_error_long'));
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
@@ -294,5 +294,30 @@ class UserController extends Controller
         }
 
         return $roles;
+    }
+
+
+    public function findUsernameAction()
+    {
+        $request = $this->get('request');
+        $username = $request->request->get('username');
+
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('AcmeUserBundle:User')->findUsernameResult($username);
+
+        $paginator = $this->get('knp_paginator');
+        $entities = $paginator->paginate(
+            $entities,
+            $this->get('request')->query->get('page', 1) /*page number*/,
+            10
+        /*limit per page*/
+        );
+
+        return $this->render(
+            'AcmeUserBundle:User:userResult.html.twig',
+            array(
+                'entities' => $entities
+            )
+        );
     }
 }

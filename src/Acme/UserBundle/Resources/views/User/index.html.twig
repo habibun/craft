@@ -24,9 +24,8 @@
             <!--breadcrumbs end -->
         </div>
         <div class="col-lg-2">
-            <form action="{{ path('searchstatistics_general') }}" method="GET" id="search-form">
-                <input type="text" class="form-control" placeholder="Search..." name="search-keyword"
-                       id="search-input">
+            <form action="{{ path('user_find_username') }}" method="post" accept-charset="UTF-8" role="search">
+                <input type="text" class="form-control" placeholder="Search..." name="username" />
             </form>
         </div>
         <div class="col-lg-4">

@@ -1,0 +1,7 @@
+{% for entity in entities %}
+    {% include 'AcmeUserBundle:User:index.html.twig' %}
+{% else %}
+    {% include 'AcmeUserBundle:User:emptyResult.html.twig' %}
+{% endfor %}
+
+
