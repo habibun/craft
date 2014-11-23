@@ -5,34 +5,35 @@
             <h4 class="modal-title">Product Details</h4>
         </div>
         <div class="modal-body">
-            <div class="row product-list">
-                <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
                     <section class="panel">
-                        <div class="pro-img-box product-image">
-                            <img src="/uploads/product/{{ entity.getImage() }}" alt=""/>
-                        </div>
-                        <div class="panel-body text-center">
-                            <h4>
-                                  <span class="pro-title">
-                                      Name: {{ entity.name }}
-                                  </span>
-                            </h4>
-
-                            <p class="price"> Id # {{ entity.id }}</p>
+                        <div class="row product-list">
+                            <div class="col-md-8">
+                                <div class="pro-img-box product-image">
+                                    <img src="/uploads/product/{{ entity.getImage() }}" alt=""/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel-body pull-right">
+                                    <div class="hidden-phone">
+                                        <p class="price"> Id # {{ entity.id }}</p>
+                                    </div>
+                                    <span class="task-title-sp">Name: {{ entity.name }}</span>
+                                </div>
+                            </div>    
                         </div>
                     </section>
                 </div>
-            </div>
-            <hr>
-            <div class="row">
+                <hr>
                 <div class="col-md-12">
-                <span class="pull-right">
-                     <a href="{{ path('product') }}" class="btn btn-primary">
-                         Back
-                     </a>
-                </span>
+                    <span class="pull-right">
+                         <a href="{{ path('product') }}" class="btn btn-primary">
+                             Back
+                         </a>
+                    </span>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>    
+    </div>    
 </div>

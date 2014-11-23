@@ -2,8 +2,9 @@
 
 namespace Acme\UserBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Request;
 
 use Acme\UserBundle\Entity\User;
 use Acme\UserBundle\Form\UserType;
@@ -297,12 +298,16 @@ class UserController extends Controller
     }
 
 
-    public function findUsernameAction()
+    public function findUsernameAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
         $username = $request->request->get('username');
 
-        $em = $this->getDoctrine()->getManager();
+        if (!$username) {
+            throw $this->createNotFoundException('Unable to find Username.');
+        }
+
         $entities = $em->getRepository('AcmeUserBundle:User')->findUsernameResult($username);
 
         $paginator = $this->get('knp_paginator');

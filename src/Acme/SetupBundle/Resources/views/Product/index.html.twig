@@ -9,6 +9,11 @@
             height: 222px;
             position: relative;
         }
+        .product-image-show img {
+            width: 400px;
+            height: 222px;
+            position: relative;
+        }
         .hid {
             width: 100%;
             display: inline-block;
@@ -67,13 +72,11 @@
                                         class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
                               </span>
                             </div>
-                            <div class="panel-body text-center">
-                                <h4>
-                                    <a href="#" class="pro-title">
-                                        Name: {{ entity.name }}
-                                    </a>
-                                </h4>
-                                <p class="price"> Id # {{ entity.id }}</p>
+                            <div class="panel-body">
+                                <span class="task-title-sp">Name: {{ entity.name }}</span>
+                                <div class="pull-right hidden-phone">
+                                    <p class="price"> Id # {{ entity.id }}</p>
+                                </div>
                             </div>
                         </section>
                     </div>
