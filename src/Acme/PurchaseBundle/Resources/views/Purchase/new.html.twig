@@ -42,15 +42,14 @@
                                    disabled>
                         </div>
                         <div class="col-sm-3">
-                            <a  href="{{ path('purchase_supplier_detail') }}" data-toggle="modal" class="btn btn-default ajax-modal" id="test">
-                                <i class="icon-eye-open"></i> Show Detail's
-                            </a>
+                            <button href="#myModal-1" type="button" data-toggle="modal" class="btn btn-default" id="test"><i class="icon-eye-open"></i> Show Detail's </button>
                         </div>
                     </div>
                     {{ form_row(form.location) }}
                     {{ form_end(form) }}
                 </div>
                 <hr>
+                {{ dump(form.vars.value.supplier) }}
             </section>
         </div>
         <div class="col-lg-5">
@@ -121,9 +120,9 @@
         </div>
     </div>
 
-    {#<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        {% include 'AcmePurchaseBundle:Purchase:_modalSupplierDetail.html.twig' %}
-    </div>#}
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade">
+    {% include 'AcmePurchaseBundle:Purchase:_modalSupplierDetail.html.twig' %}
+</div>
 
 {% endblock %}
 
@@ -221,6 +220,20 @@
                         },
                         function (data) {
                             $('#supplier-total').val(data.result.total);
+                        },
+                        'json'
+                );
+            });
+
+            $('#test').click(function () {
+                $.post(
+                        '{{ path('purchase_supplier_detail') }}',
+                        {
+                            'supplier': $('#acme_purchasebundle_purchase_supplier').val()
+                        },
+                        function (data) {
+                            $('#inputProductId').val(data.result.product_id);
+                            $('#inputPrice').val(data.result.price);
                         },
                         'json'
                 );
