@@ -31,4 +31,18 @@ class PurchaseRepository extends EntityRepository
             return null;
         }
     }
+
+    public function getSupplierDetailResult($supplier = null)
+    {
+        $dql = 'select COUNT (pl.product) as timeof, SUM (pl.price) as price, (pl.product) as product_id
+        from AcmePurchaseBundle:Purchase p
+        join p.lines pl
+        join p.supplier s
+        where s.id = :supplier and p.status = 1';
+
+        $query = $this->_em->createQuery($dql)
+            ->setParameter('supplier',$supplier);
+
+        return $query->getSingleResult();
+    }
 }

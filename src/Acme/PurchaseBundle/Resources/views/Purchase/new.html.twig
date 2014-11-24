@@ -42,7 +42,7 @@
                                    disabled>
                         </div>
                         <div class="col-sm-3">
-                            <a class="btn btn-default" data-toggle="modal" href="#myModal">
+                            <a  href="{{ path('purchase_supplier_detail') }}" data-toggle="modal" class="btn btn-default ajax-modal" id="test">
                                 <i class="icon-eye-open"></i> Show Detail's
                             </a>
                         </div>
@@ -121,9 +121,9 @@
         </div>
     </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        {% include 'AcmePurchaseBundle:Purchase:_supplierDetails.html.twig' %}
-    </div>
+    {#<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        {% include 'AcmePurchaseBundle:Purchase:_modalSupplierDetail.html.twig' %}
+    </div>#}
 
 {% endblock %}
 

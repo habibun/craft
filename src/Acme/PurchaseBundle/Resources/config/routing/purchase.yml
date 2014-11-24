@@ -52,6 +52,10 @@ supplier_total_purchase:
     pattern: /supplier-total-purchase
     defaults: { _controller: "AcmePurchaseBundle:Purchase:supplierTotalPurchase" }
 
+purchase_supplier_detail:
+    pattern:  /supplier-detail
+    defaults: { _controller:  "AcmePurchaseBundle:Purchase:supplierDetail"  }
+
 post:
     pattern:  /stwe
     defaults: { _controller: "AcmePurchaseBundle:Purchase:stwe" }

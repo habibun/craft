@@ -525,4 +525,20 @@ class PurchaseController extends Controller
                 'result' => $result,
             ));*/
     }
+
+    public function supplierDetailAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = $this->get('request')->request->all();
+        //$supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
+        $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
+        $result = $repository->getSupplierDetailResult(1);
+
+//        var_dump($result);
+        return $this->render('AcmePurchaseBundle:Purchase:SupplierDetail.html.twig',array(
+                'result' => $result
+            ));
+
+//        return new JsonResponse(array('result' => $result));
+    }
 }
