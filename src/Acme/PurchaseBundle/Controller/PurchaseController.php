@@ -530,15 +530,16 @@ class PurchaseController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $data = $this->get('request')->request->all();
-        //$supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
+        $supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
         $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
-        $result = $repository->getSupplierDetailResult(1);
+        $result = $repository->getSupplierDetailResult($supplier);
 
 //        var_dump($result);
-        return $this->render('AcmePurchaseBundle:Purchase:SupplierDetail.html.twig',array(
+        // return array('result' => $result);
+        /*return $this->render('AcmePurchaseBundle:Purchase:_modalSupplierDetail.html.twig',array(
                 'result' => $result
-            ));
+            ));*/
 
-//        return new JsonResponse(array('result' => $result));
+       return new JsonResponse(array('result' => $result));
     }
 }
