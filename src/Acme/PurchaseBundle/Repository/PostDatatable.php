@@ -5,9 +5,9 @@ namespace Acme\PurchaseBundle\Repository;
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 
 /**
- * Class PostDatatable
+ * Class ClientDatatable
  *
- * @package Acme\PurchaseBundle\Repository
+ * @package Fdelapena\SomeBundle\Datatables
  */
 class PostDatatable extends AbstractDatatableView
 {
@@ -16,123 +16,116 @@ class PostDatatable extends AbstractDatatableView
      */
     public function buildDatatableView()
     {
-        //-------------------------------------------------
-        // Datatable
-        //-------------------------------------------------
-
-        // Features (defaults)
         $this->getFeatures()
-            ->setAutoWidth(true)
-            ->setDeferRender(false)
-            ->setInfo(true)
-            ->setJQueryUI(false)
-            ->setLengthChange(true)
-            ->setOrdering(true)
-            ->setPaging(true)
-            ->setProcessing(true)  // default: false
-            ->setScrollX(true)     // default: false
-            ->setScrollY("")
-            ->setSearching(true)
-            ->setServerSide(true)  // default: false
-            ->setStateSave(false)
-            ->setDelay(500);       // default: 0
-
-        // Options (for more options see file: Sg\DatatablesBundle\Datatable\View\Options.php)
-        //$this->getOptions()->setLengthMenu(array(10, 25, 50));
-        $this->getOptions()
-            ->setLengthMenu(array(10, 25, 50, 100, -1))
-            ->setOrder(array("column" => 1, "direction" => "desc"));
+            ->setServerSide(true)
+            ->setProcessing(true);
 
         $this->getAjax()->setUrl($this->getRouter()->generate("post_results"));
 
         $this->getMultiselect()
             ->setEnabled(true)
             ->setPosition("last")
-            ->addAction("Hide post", "post_bulk_disable")
-            ->addAction("Delete post", "post_bulk_delete")
-            ->setAttributes(array(
-                    "class" => "testclass123"
-                ))
-            ->setClassName("multi-test-class")
-            ->setWidth("90px");
+            ->setWidth("0.875em")
+            ->setClassName("multiselect-checkbox-cell")
+            ->addAction($this->getTranslator()->trans("Disable selected Posts"), "Post_bulk_disable")
+            ->addAction($this->getTranslator()->trans("Enable selected Posts"), "Post_bulk_enable")
+            ->addAction($this->getTranslator()->trans("Delete selected Posts"), "Post_bulk_delete");
 
         $this->setStyle(self::BOOTSTRAP_3_STYLE);
 
-        $this->setIndividualFiltering(true);
-
-
-        //-------------------------------------------------
-        // Columns
-        //-------------------------------------------------
-
         $this->getColumnBuilder()
-            ->add("id", "column", array(
-                    "title" => "Post-id",
-                    "searchable" => true,
-                    "orderable" => true,
-                    "visible" => true,
-                    "class" => "active",
-                    "width" => "100px"
-                ))
-            ->add("createdBy.username", "column", array(
-                    "title" => "Created by"
-                ))
-            ->add("updatedBy.username", "column", array(
-                    "title" => "Updated by"
-                ))
-
-            ->add("status", "boolean", array(
-                    "title" => "Visible",
-                    "true_label" => "yes",
-                    "false_label" => "no",
+            ->add('id', 'column', array('title' => $this->getTranslator()->trans('Id'),))
+            ->add('status', 'boolean', array(
+                    "title" => $this->getTranslator()->trans("Enabled"),
                     "true_icon" => "glyphicon glyphicon-ok",
-                    "false_icon" => "glyphicon glyphicon-remove"
+                    "false_icon" => "glyphicon glyphicon-remove",
+                    "true_label" => $this->getTranslator()->trans("Yes"),
+                    "false_label" => $this->getTranslator()->trans("No"),
                 ))
-            ->add("createdAt", /*choose timeago or datetime*/ "datetime", array(
-                    "title" => "Created at"
-                ))
-
             ->add(null, "action", array(
-                    "title" => "Actions",
-                    "start" => '<div class="wrapper">',
-                    "end" => '</div>',
+                    "title" => $this->getTranslator()->trans("Actions"),
+                    "start" => '<span class="btn-group">',
+                    "end" => '</span>',
+                    "class" => "action-cell",
+                    "width" => "11em",
                     "actions" => array(
                         array(
-                            "route" => "post_edit",
+                            "route" => "Post_show",
+                            "route_parameters" => array(
+                                "id" => "id"
+                            ),
+                            "icon" => "glyphicon glyphicon-eye-open",
+                            "attributes" => array(
+                                "data-toggle" => "tooltip",
+                                "title" => $this->getTranslator()->trans("Show"),
+                                "class" => "btn btn-default",
+                                "role" => "button"
+                            ),
+                            "role" => "ROLE_ADMIN",
+                        ),
+                        array(
+                            "route" => "Post_edit",
                             "route_parameters" => array(
                                 "id" => "id"
                             ),
                             "icon" => "glyphicon glyphicon-edit",
                             "attributes" => array(
-                                "rel" => "tooltip",
-                                "title" => "Edit",
-                                "class" => "btn btn-primary btn-xs",
+                                "data-toggle" => "tooltip",
+                                "title" => $this->getTranslator()->trans("Edit"),
+                                "class" => "btn btn-default",
                                 "role" => "button"
                             ),
-                            "confirm" => true,
-                            "confirm_message" => "Are you sure?",
                             "role" => "ROLE_ADMIN",
-                            "renderif" => array(
-                                "visible"
-                            )
                         ),
                         array(
-                            "route" => "post_show",
+                            "route" => "Post_disable",
                             "route_parameters" => array(
                                 "id" => "id"
                             ),
-                            "label" => "Show",
+                            "icon" => "glyphicon glyphicon-ban-circle",
                             "attributes" => array(
-                                "rel" => "tooltip",
-                                "title" => "Show",
-                                "class" => "btn btn-default btn-xs",
+                                "data-toggle" => "tooltip",
+                                "title" => $this->getTranslator()->trans("Disable"),
+                                "class" => "btn btn-default",
                                 "role" => "button"
                             ),
-                            //"role" => "ROLE_USER",
-                            //"renderif" => array("visible")
+                            "role" => "ROLE_USER",
+                            "renderif" => array("enabled"),
+                        ),
+                        array(
+                            "route" => "Post_enable",
+                            "route_parameters" => array(
+                                "id" => "id"
+                            ),
+                            "icon" => "glyphicon glyphicon-ok-circle",
+                            "attributes" => array(
+                                "data-toggle" => "tooltip",
+                                "title" => $this->getTranslator()->trans("Enable"),
+                                "class" => "btn btn-default",
+                                "role" => "button"
+                            ),
+                            "role" => "ROLE_USER",
+                            "renderif" => array("enabled) == false; var dummy = function(){}; dummy("),
+                        ),
+                        array(
+                            "route" => "Post_delete",
+                            "route_parameters" => array(
+                                "id" => "id"
+                            ),
+                            "icon" => "glyphicon glyphicon-trash",
+                            "attributes" => array(
+                                "data-toggle" => "tooltip",
+                                "title" => $this->getTranslator()->trans("Delete"),
+                                "class" => "btn btn-default",
+                                "role" => "button"
+                            ),
+                            "confirm" => true,
+                            "confirm_message" => $this->getTranslator()->trans("This operation will erase the Post, all its groups and all their contacts"),
+                            "role" => "ROLE_ADMIN",
                         )
                     )
-                ));
+                ))
+        ;
     }
 
     /**
@@ -148,6 +141,6 @@ class PostDatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return "post_datatable";
+        return "Post_datatable";
     }
 }

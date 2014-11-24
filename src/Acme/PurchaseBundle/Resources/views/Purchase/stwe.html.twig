@@ -1,16 +1,44 @@
 {% extends 'AcmePurchaseBundle::layout.html.twig' %}
 
- {% block stylesheets %}
-     <link href="{{ asset('assets/data-tables-bootstrap3/css/datatables.css') }}" rel="stylesheet">
- {% endblock %}
+{% block title %}Clients{% endblock %}
 
-{% block body %}
-    {{ datatable_render(datatable) }}
+{% block stylesheets %}
+    <link href="{{ asset('assets/data-tables-bootstrap3/css/datatables.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
 {% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
-    <script type="text/javascript">
 
+{% block body %}
+    <h1>{% trans %}Clients{% endtrans %}</h1>
+
+    <p class="btn-group">
+        <a href="{{ path('client_new') }}" class="btn btn-success">
+            <span class="glyphicon glyphicon glyphicon-plus"></span>
+            {% trans %}New client{% endtrans %}
+        </a>
+    </p>
+    <p>
+        {% trans %}Client list:{% endtrans %}
+    </p>
+
+    {% block content_content %}
+        {{ datatable_render(datatable) }}
+    {% endblock %}
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="/fdelapena/web/bundles/fosjsrouting/js/router.js"></script>
+    <script src="/fdelapena/web/app_dev.php/js/routing?callback=fos.Router.setData"></script>
+    <script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#purchaseDataTable').DataTable();
+        } );
     </script>
 {% endblock %}
