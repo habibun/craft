@@ -3,7 +3,6 @@
 namespace Acme\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 
 use Acme\UserBundle\Entity\User;
@@ -303,10 +302,6 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
         $username = $request->request->get('username');
-
-        if (!$username) {
-            throw $this->createNotFoundException('Unable to find Username.');
-        }
 
         $entities = $em->getRepository('AcmeUserBundle:User')->findUsernameResult($username);
 
