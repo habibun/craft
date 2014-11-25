@@ -11,7 +11,6 @@ use Acme\PurchaseBundle\Form\PurchaseLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
-use Acme\SetupBundle\Entity\Supplier;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -27,33 +26,22 @@ class PurchaseController extends Controller
      *
      */
 
-    public function stweAction()
+    public function clientAction()
     {
-        $postDatatable = $this->get("sg_datatables.post");
-        $postDatatable->buildDatatableView();
+        $clientDatatable = $this->get("sg_datatables.client");
+        $clientDatatable->buildDatatableView();
 
-        return $this->render(
-            'AcmePurchaseBundle:Purchase:stwe.html.twig',
-            array(
-                "datatable" => $postDatatable,
-            )
-        );
+        return $this->render('AcmePurchaseBundle:Purchase:client.html.twig',array(
+                "datatable" => $clientDatatable,
+            ));
     }
 
-    public function stweResultsAction()
+    public function clientResultsAction()
     {
         /**
          * @var \Sg\DatatablesBundle\Datatable\Data\DatatableData $datatable
          */
-        $datatable = $this->get("sg_datatables.datatable")->getDatatable($this->get("sg_datatables.post"));
-
-        // Callback example
-        $function = function ($qb) {
-            $qb->andWhere("Post.visible = true");
-        };
-
-        // Add callback
-        $datatable->addWhereBuilderCallback($function);
+        $datatable = $this->get("sg_datatables.datatable")->getDatatable($this->get("sg_datatables.client"));
 
         return $datatable->getResponse();
     }
@@ -97,6 +85,31 @@ class PurchaseController extends Controller
             foreach ($choices as $choice) {
                 $entity = $repository->find($choice["value"]);
                 $entity->setVisible(false);
+                $em->persist($entity);
+            }
+
+            $em->flush();
+
+            return new Response("This is ajax response.");
+        }
+
+        return new Response("This is not ajax.", 400);
+    }
+
+    public function bulkEnableAction()
+    {
+        $request = $this->getRequest();
+        $isAjax = $request->isXmlHttpRequest();
+
+        if ($isAjax) {
+            $choices = $request->request->get("data");
+
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository("FdelapenaSomeBundle:Client");
+
+            foreach ($choices as $choice) {
+                $entity = $repository->findOneByUsername($choice["value"]);
+                $entity->setEnabled(true);
                 $em->persist($entity);
             }
 

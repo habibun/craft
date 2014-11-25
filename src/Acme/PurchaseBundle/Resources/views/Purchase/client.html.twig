@@ -1,0 +1,29 @@
+{% extends "AcmePurchaseBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Clients{% endtrans %}{% endblock %}
+
+{% block content_header '' %}
+{% block stylesheets %}
+{% endblock %}
+
+    {% block content %}
+        <h1>{% trans %}Clients{% endtrans %}</h1>
+
+        <p class="btn-group">
+            <a href="{{ path('purchase_new') }}" class="btn btn-success">
+                <span class="glyphicon glyphicon glyphicon-plus"></span>
+                {% trans %}New client{% endtrans %}
+            </a>
+        </p>
+        <p>
+            {% trans %}Client list:{% endtrans %}
+        </p>
+
+        {% block content_content %}
+            {{ datatable_render(datatable) }}
+        {% endblock %}
+
+    {% endblock %}
+
+{% block javascripts %}
+{% endblock %}

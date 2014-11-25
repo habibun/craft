@@ -9,7 +9,7 @@ use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
  *
  * @package Fdelapena\SomeBundle\Datatables
  */
-class PostDatatable extends AbstractDatatableView
+class ClientDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
@@ -20,16 +20,16 @@ class PostDatatable extends AbstractDatatableView
             ->setServerSide(true)
             ->setProcessing(true);
 
-        $this->getAjax()->setUrl($this->getRouter()->generate("post_results"));
+        $this->getAjax()->setUrl($this->getRouter()->generate("client_results"));
 
         $this->getMultiselect()
             ->setEnabled(true)
             ->setPosition("last")
             ->setWidth("0.875em")
             ->setClassName("multiselect-checkbox-cell")
-            ->addAction($this->getTranslator()->trans("Disable selected Posts"), "Post_bulk_disable")
-            ->addAction($this->getTranslator()->trans("Enable selected Posts"), "Post_bulk_enable")
-            ->addAction($this->getTranslator()->trans("Delete selected Posts"), "Post_bulk_delete");
+            ->addAction($this->getTranslator()->trans("Disable selected clients"), "client_bulk_disable")
+            ->addAction($this->getTranslator()->trans("Enable selected clients"), "client_bulk_enable")
+            ->addAction($this->getTranslator()->trans("Delete selected clients"), "client_bulk_delete");
 
         $this->setStyle(self::BOOTSTRAP_3_STYLE);
 
@@ -50,7 +50,7 @@ class PostDatatable extends AbstractDatatableView
                     "width" => "11em",
                     "actions" => array(
                         array(
-                            "route" => "Post_show",
+                            "route" => "client_show",
                             "route_parameters" => array(
                                 "id" => "id"
                             ),
@@ -64,7 +64,7 @@ class PostDatatable extends AbstractDatatableView
                             "role" => "ROLE_ADMIN",
                         ),
                         array(
-                            "route" => "Post_edit",
+                            "route" => "client_edit",
                             "route_parameters" => array(
                                 "id" => "id"
                             ),
@@ -78,7 +78,7 @@ class PostDatatable extends AbstractDatatableView
                             "role" => "ROLE_ADMIN",
                         ),
                         array(
-                            "route" => "Post_disable",
+                            "route" => "client_disable",
                             "route_parameters" => array(
                                 "id" => "id"
                             ),
@@ -93,7 +93,7 @@ class PostDatatable extends AbstractDatatableView
                             "renderif" => array("enabled"),
                         ),
                         array(
-                            "route" => "Post_enable",
+                            "route" => "client_enable",
                             "route_parameters" => array(
                                 "id" => "id"
                             ),
@@ -108,7 +108,7 @@ class PostDatatable extends AbstractDatatableView
                             "renderif" => array("enabled) == false; var dummy = function(){}; dummy("),
                         ),
                         array(
-                            "route" => "Post_delete",
+                            "route" => "client_delete",
                             "route_parameters" => array(
                                 "id" => "id"
                             ),
@@ -120,7 +120,7 @@ class PostDatatable extends AbstractDatatableView
                                 "role" => "button"
                             ),
                             "confirm" => true,
-                            "confirm_message" => $this->getTranslator()->trans("This operation will erase the Post, all its groups and all their contacts"),
+                            "confirm_message" => $this->getTranslator()->trans("This operation will erase the client, all its groups and all their contacts"),
                             "role" => "ROLE_ADMIN",
                         )
                     )
@@ -133,7 +133,7 @@ class PostDatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return "AcmePurchaseBundle:Purchase";
+        return "Acme\PurchaseBundle\Entity\Client";
     }
 
     /**
@@ -141,6 +141,6 @@ class PostDatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return "Post_datatable";
+        return "client_datatable";
     }
 }

@@ -2,8 +2,7 @@ parameters:
 #    ra_purchase.example.class: Ra\Bundle\PurchaseBundle\Example
 
 services:
-
-    sg_datatables.post:
-        class: Acme\PurchaseBundle\Repository\PostDatatable
+    sg_datatables.client:
+        class: Acme\PurchaseBundle\Repository\ClientDatatable
         tags:
             - { name: sg.datatable.view }

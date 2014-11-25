@@ -110,7 +110,7 @@ assetic:
             filters: [?yui_js]
         bootstrap_js:
             inputs:
-                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-transition.js'
+                - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/transition.js'
                 - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/alert.js'
                 - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/modal.js'
                 - '%kernel.root_dir%/../vendor/twitter/bootstrap/js/dropdown.js'
