@@ -42,7 +42,9 @@
                                    disabled>
                         </div>
                         <div class="col-sm-3">
-                            <button href="#myModal-1" type="button" data-toggle="modal" class="btn btn-default" id="test"><i class="icon-eye-open"></i> Show Detail's </button>
+                            <button href="#myModal-1" type="button" data-toggle="modal" class="btn btn-default"
+                                    id="test"><i class="icon-eye-open"></i> Show Detail's
+                            </button>
                         </div>
                     </div>
                     {{ form_row(form.location) }}
@@ -120,9 +122,10 @@
         </div>
     </div>
 
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade">
-    {% include 'AcmePurchaseBundle:Purchase:_modalSupplierDetail.html.twig' %}
-</div>
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1"
+         class="modal fade">
+        {% include 'AcmePurchaseBundle:Purchase:_modalSupplierDetail.html.twig' %}
+    </div>
 
 {% endblock %}
 
@@ -232,8 +235,7 @@
                             'supplier': $('#acme_purchasebundle_purchase_supplier').val()
                         },
                         function (data) {
-                            $('#inputProductId').val(data.result.product_id);
-                            $('#inputPrice').val(data.result.price);
+                            console.log(data);
                         },
                         'json'
                 );

@@ -32,9 +32,12 @@ class PurchaseController extends Controller
         $postDatatable = $this->get("sg_datatables.post");
         $postDatatable->buildDatatableView();
 
-        return $this->render('AcmePurchaseBundle:Purchase:stwe.html.twig',array(
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:stwe.html.twig',
+            array(
                 "datatable" => $postDatatable,
-            ));
+            )
+        );
     }
 
     public function stweResultsAction()
@@ -45,8 +48,7 @@ class PurchaseController extends Controller
         $datatable = $this->get("sg_datatables.datatable")->getDatatable($this->get("sg_datatables.post"));
 
         // Callback example
-        $function = function($qb)
-        {
+        $function = function ($qb) {
             $qb->andWhere("Post.visible = true");
         };
 
@@ -510,20 +512,13 @@ class PurchaseController extends Controller
         $em = $this->getDoctrine()->getManager();
         $data = $this->get('request')->request->all();
         $supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
+        if (!isset($data['supplier'])) {
+            return new JsonResponse('Unable to find Supplier id');
+        }
         $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
         $result = $repository->getSupplierTotalPurchaseResult($supplier);
 
-        /*$response = json_encode(array('result' => $result));
-
-        return new Response(
-            $response, 200, array(
-                'Content-Type' => 'application/json'
-            )
-        );*/
-         return new JsonResponse(array('result' => $result));
-        /*return $this->render('AcmePurchaseBundle:Purchase:detail.html.twig',array(
-                'result' => $result,
-            ));*/
+        return new JsonResponse(array('result' => $result));
     }
 
     public function supplierDetailAction(Request $request)
@@ -536,10 +531,18 @@ class PurchaseController extends Controller
 
 //        var_dump($result);
         // return array('result' => $result);
-        /*return $this->render('AcmePurchaseBundle:Purchase:_modalSupplierDetail.html.twig',array(
+        /*return $this->render('AcmePurchaseBundle:Purchase:SupplierDetail.html.twig',array(
                 'result' => $result
             ));*/
 
-       return new JsonResponse(array('result' => $result));
+//        $response = json_encode(array('result' => $result));
+
+        /*return new Response(
+            $response, 200, array(
+                'Content-Type' => 'application/json'
+            )
+        );*/
+
+        return new JsonResponse(array('result' => $result));
     }
 }

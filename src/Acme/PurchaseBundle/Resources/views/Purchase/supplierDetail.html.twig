@@ -1,3 +1,5 @@
-{{ result.timeof }}
-{{ result.price }}
-{{ result.product_id }}
+{% for result in result %}
+    <p>{{ result.timeof }}</p>
+    <p>{{ result.price }}</p>
+    <p>{{ result.product_id }}</p>
+{% endfor %}
