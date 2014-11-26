@@ -1,70 +1,88 @@
-{#{% extends '::base.html.twig' %}
-
-{% block title %}Work-Progress{% endblock %}#}
+{% extends '::base.html.twig' %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-lg-12">
-            <!--work progress start-->
-            <section class="panel">
-                <div class="panel-body progress-panel">
-                    <div class="task-progress">
-                        <h1>Work Progress</h1>
-                    </div>
-                    <div class="task-option">
-                        <form action="{{ path('product') }}" method="GET" id="search-form">
-                            <input type="text" class="form-control search" placeholder="Search" name="search-keyword"
-                                   id="search-input">
-                        </form>
-                    </div>
-                </div>
-                <table class="table table-hover table-bordered personal-task">
-                    <thead>
-                    <tr>
-                        <th rowspan="2" class="text-center">Name</th>
-                        <th colspan="3" class="text-center">Purchase</th>
-                        <th colspan="3" class="text-center">Issue</th>
-                    </tr>
-                    <tr>
-                        <th>Created</th>
-                        <th>Updated</th>
-                        <th>Finalized</th>
+    
+    <div class="col-lg-8">
+                      <!--work progress start-->
+                      <section class="panel">
+                          <div class="panel-body progress-panel">
+                              <div class="task-progress">
+                                  <h1>Available Product</h1>
+                                  <p>total product type</p>
+                              </div>
+                              <div class="task-option">
+                                  	<span class="tools pull-right">
+                        				<a class="icon-chevron-down" href="javascript:;"></a>
+                        				<a class="icon-remove" href="javascript:;"></a>
+                    				</span>
+                              </div>
+                          </div>
+                          <table class="table table-hover personal-task">
+                              <tbody>
+                              <tr>
+                                  <td>1</td>
+                                  <td>
+                                      Target Sell
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-important">75%</span>
+                                  </td>
+                                  <td>
+                                    <div id="work-progress1"></div>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>2</td>
+                                  <td>
+                                      Product Delivery
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-success">43%</span>
+                                  </td>
+                                  <td>
+                                      <div id="work-progress2"></div>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>3</td>
+                                  <td>
+                                      Payment Collection
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-info">67%</span>
+                                  </td>
+                                  <td>
+                                      <div id="work-progress3"></div>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>4</td>
+                                  <td>
+                                      Work Progress
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-warning">30%</span>
+                                  </td>
+                                  <td>
+                                      <div id="work-progress4"></div>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>5</td>
+                                  <td>
+                                      Delivery Pending
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-primary">15%</span>
+                                  </td>
+                                  <td>
+                                      <div id="work-progress5"></div>
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+                      </section>
+                      <!--work progress end-->
+                  </div>
 
-                        <th>Created</th>
-                        <th>Updated</th>
-                        <th>Finalized</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for entity in result %}
-                        <tr>
-                            <td>{{ entity.name }}</td>
-
-                            <td><span class="badge bg-success">{{ entity.total_created }}</span></td>
-                            <td>
-                                {% if entity.total_updated <= 0 %}
-                                    <span class="badge bg-important">{{ entity.total_updated }}</span>
-                                {% else %}
-                                    <span class="badge bg-warning">{{ entity.total_updated }}</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if entity.total_finalized <= 0 %}
-                                    <span class="badge bg-important">{{ entity.total_finalized }}</span>
-                                {% else %}
-                                    <span class="badge bg-info">{{ entity.total_finalized }}</span>
-                                {% endif %}
-                            </td>
-
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </section>
-            <!--work progress end-->
-        </div>
-    </div>
 {% endblock %}

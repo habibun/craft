@@ -2,19 +2,23 @@ acme_widget_homepage:
     path:     /hello/{name}
     defaults: { _controller: AcmeWidgetBundle:Default:index }
 
-AcmeWidgetBundle_lasttab:
+acme_widget_lasttab:
   pattern:  /last-tab
-  defaults: { _controller: AcmeWidgetBundle:LastTab:lastTab }
+  defaults: { _controller: "AcmeWidgetBundle:LastTab:lastTab" }
 
-AcmeWidgetBundle_stateoverview:
+acme_widget_state_overview:
     pattern:    /state-overview
     defaults:   { _controller:  AcmeWidgetBundle:StateOverview:stateOverview }
 
-AcmeWidgetBundle_workprogress:
+acme_widget_workprogress:
     pattern:    /work-progress
-    defaults:   { _controller:  AcmeWidgetBundle:WorkProgress:workProgress }
+    defaults:   { _controller:  "AcmeWidgetBundle:WorkProgress:workProgress" }
 
-AcmeWidgetBundle_lockscreen:
+acme_widget_workprogress_all:
+    pattern:    /work-progress-all
+    defaults:   { _controller:  "AcmeWidgetBundle:WorkProgress:workProgressAll" }
+
+acme_widget_lockscreen:
     pattern:    /lock-screen
     defaults:   { _controller:  AcmeWidgetBundle:LockScreen:lockScreen }
 
@@ -25,3 +29,7 @@ AcmeWidgetBundle_searchstatistics:
 acme_widget_available_product:
     pattern:    /available-product
     defaults:   { _controller:  AcmeWidgetBundle:AvailableProduct:availableProduct }
+
+searchstatistics_test:
+    pattern:    /test
+    defaults:   { _controller:  "AcmeWidgetBundle:SearchStatistics:test" }
