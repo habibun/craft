@@ -56,32 +56,4 @@ purchase_supplier_detail:
     pattern:  /supplier-detail
     defaults: { _controller:  "AcmePurchaseBundle:Purchase:supplierDetail"  }
 
-client:
-    pattern:  /client
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:client" }
-    options:
-        expose: true
 
-client_results:
-    pattern:  /results
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:clientResults" }
-    options:
-        expose: true
-
-client_bulk_delete:
-    pattern:  /bulk/delete
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:bulkDelete" }
-    options:
-        expose: true
-
-client_bulk_disable:
-    pattern:  /bulk/disable
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:bulkDisable" }
-    options:
-        expose: true
-
-client_bulk_enable:
-    pattern:  /bulk/enable
-    defaults: { _controller:  "AcmePurchaseBundle:Purchase:bulkEnable"  }
-    options:
-        expose: true
