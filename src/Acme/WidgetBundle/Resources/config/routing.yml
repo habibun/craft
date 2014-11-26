@@ -29,3 +29,7 @@ AcmeWidgetBundle_searchstatistics:
 acme_widget_available_product:
     pattern:    /available-product
     defaults:   { _controller:  AcmeWidgetBundle:AvailableProduct:availableProduct }
+
+searchstatistics_test:
+    pattern:    /test
+    defaults:   { _controller:  "AcmeWidgetBundle:SearchStatistics:test" }

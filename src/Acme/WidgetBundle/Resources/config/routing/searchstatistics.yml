@@ -9,4 +9,4 @@ searchstatistics_general:
 
 searchstatistics_topsearch:
     pattern:    /top-search
-    defaults:   { _controller:  "AcmeWidgetBundle:TopSearch:topSearchList" }
+    defaults:   { _controller:  "AcmeWidgetBundle:SearchStatistics:topSearchList" }
