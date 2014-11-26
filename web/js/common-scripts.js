@@ -253,18 +253,6 @@ $(document).ready(function () {
             }
         }
     );
-
-    //remove default value
-    $('#search-input').focus(function(evt){
-     if($(this).val() == 'Search...')
-     $(this).val('');
-     });
-
-    //add default value
-    $('#search-input').blur(function(evt){
-     if($(this).val() == '')
-     $(this).val('Search...');
-     });
 });
 
 //for modal

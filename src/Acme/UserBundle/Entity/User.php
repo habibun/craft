@@ -28,7 +28,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->setImage("userDefaultLogo.png");
+        $this->setImage("userDefaultLogoBlack.png");
     }
 
     /**

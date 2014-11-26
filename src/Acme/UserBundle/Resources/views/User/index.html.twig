@@ -8,6 +8,12 @@
         .breadcrumb > li + li:nth-last-child(1):before {
             content: " ";
         }
+        {# add default btn-default class #}
+        .btn-default {
+            color: #333333;
+            background-color: #ffffff;
+            border-color: #cccccc;
+        }
     </style>
 {% endblock %}
 
@@ -24,8 +30,16 @@
             <!--breadcrumbs end -->
         </div>
         <div class="col-lg-2">
-            <form action="{{ path('user_find_username') }}" method="post" accept-charset="UTF-8" role="search">
-                <input type="text" class="form-control" placeholder="Search..." name="username" />
+            <form class="row" action="{{ path('user_find_username') }}" id="form" method="post" accept-charset="UTF-8"
+                  role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="username" size="10"
+                           value="Search..." id="username"/>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="icon-search"></i>
+                            </button>
+                        </span>
+                </div>
             </form>
         </div>
         <div class="col-lg-4">
@@ -118,4 +132,19 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#username').focus(function (evt) {
+                if ($(this).val() == 'Search...')
+                    $(this).val('');
+            });
+            $('#username').blur(function (evt) {
+                if ($(this).val() == '')
+                    $(this).val('Search...');
+            });
+        });
+    </script>
 {% endblock %}
