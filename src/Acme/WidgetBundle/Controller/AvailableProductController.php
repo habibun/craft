@@ -8,6 +8,6 @@ class AvailableProductController extends Controller
 {
 	public function availableProductAction()
 	{
-		
+		return $this->render('AcmeWidgetBundle:AvailableProduct:availableProduct.html.twig');
 	}
 }
