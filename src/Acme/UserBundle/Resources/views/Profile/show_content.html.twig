@@ -3,4 +3,6 @@
 <div class="fos_user_user_show">
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <p>Last Login: {{ user.lastLogin|date('d-m-Y H:i:s') }}</p>
+    <p>Roles: {{ user.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</p>
 </div>
