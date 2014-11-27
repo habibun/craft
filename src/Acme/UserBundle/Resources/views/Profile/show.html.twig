@@ -8,8 +8,9 @@
             <!--breadcrumbs start -->
             <ul class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
-                <li class="active"><a href="{{ path('user') }}">User</a></li>
+                <li class="active">User</li>
                 <li class="active">Profile</li>
+                <li class="active">Show</li>
             </ul>
             <!--breadcrumbs end -->
         </div>
@@ -25,7 +26,7 @@
                 </span>
                 </header>
                 <div class="panel-body">
-                    {#Logged in as admin | Logout#}
+                    {# Logged in as admin | Logout #}
                     {% block fos_user_content %}
                         {% include "AcmeUserBundle:Profile:show_content.html.twig" %}
                     {% endblock fos_user_content %}
