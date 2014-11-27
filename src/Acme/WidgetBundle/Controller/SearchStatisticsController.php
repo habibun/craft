@@ -67,12 +67,4 @@ class SearchStatisticsController extends Controller
             )
         );
     }
-
-    public function testAction()
-    {
-        return $this->render(
-            'AcmeWidgetBundle:SearchStatistics:_issueResult.html.twig'
-            
-        );
-    }
 }
