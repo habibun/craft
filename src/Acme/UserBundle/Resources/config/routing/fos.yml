@@ -5,3 +5,9 @@ fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
     prefix: /profile
 
+fos_user_profile_show:
+    pattern: /profile/show
+    defaults: { _controller: FOSUserBundle:Profile:show }
+    requirements:
+        _method: GET    
+
