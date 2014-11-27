@@ -1,0 +1,15 @@
+<table class="table table-inbox table-hover">
+    <tbody>
+        {% for item in result.issueLines %}
+            <tr class="">
+                <td class="inbox-small-cells">
+                    <input type="checkbox" class="mail-checkbox">
+                </td>
+                <td class="inbox-small-cells"><i class="icon-star"></i></td>
+                <td class="view-message dont-show">{{ (item.name) }}</td>
+                <td class="view-message view-message">{{ (item.quantity)|number_format(2) }}</td>
+                <td class="view-message text-right">{{ item.issueDate|date('d-m-Y') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
