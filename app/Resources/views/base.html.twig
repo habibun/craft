@@ -51,7 +51,7 @@
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <img src="
-                                    {% if app.user.getImage() == true %}
+                                    {% if app.user.getImage() != "userDefaultLogo.png" %}
                                         {{ asset(['uploads/users/', app.user.getImage()]|join) }}
                                     {% else %}
                                         {{ asset('uploads/users/userDefaultLogoBlack.png') }}
