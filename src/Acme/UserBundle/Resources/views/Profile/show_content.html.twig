@@ -8,75 +8,77 @@
 </div> #}
 
 <!-- page start-->
-              <div class="row">
-                  <aside class="profile-nav col-lg-3">
-                      <section class="panel">
-                          <div class="user-heading round">
-                              <a href="#">
-                                  <img src="
+<div class="row">
+    <aside class="profile-nav col-lg-3">
+        <section class="panel">
+            <div class="user-heading round">
+                <a href="#">
+                    <img src="
                                     {% if app.user.getImage() != "userDefaultLogo.png" %}
                                         {{ asset(['uploads/users/', app.user.getImage()]|join) }}
                                     {% else %}
                                         {{ asset('uploads/users/userDefaultLogoBlack.png') }}
                                     {% endif %}
                                      " width="140px" height="140px" alt=""/>
-                              </a>
-                              <h1>{{ user.username }}</h1>
-                              <p>{{ user.email }}</p>
-                          </div>
+                </a>
 
-                          <ul class="nav nav-pills nav-stacked">
-                              <li class="active"><a href="profile.html"> <i class="icon-user"></i> Profile</a></li>
-                              <li><a href="{{ path('fos_user_profile_edit') }}"> <i class="icon-edit"></i> Edit profile</a></li>
-                          </ul>
+                <h1>{{ user.username }}</h1>
 
-                      </section>
-                  </aside>
-                  <aside class="profile-info col-lg-9">
-                      <section class="panel">
-                          <table class="table table-striped table-hover table-bordered">
-                            <tbody>
-                            <tr>
-                                <th>Id</th>
-                                <td>{{ user.id }}</td>
-                            </tr>
-                            <tr>
-                                <th>Username</th>
-                                <td>{{ user.username }}</td>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <td>{{ user.email }}</td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td>{% if user.enabled %}
-                                        <span class="label label-inverse">Enabled</span>
-                                    {% else %}
-                                        <span class="label label-warning">disabled</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Created At</th>
-                                <td>{{ user.createdAt|date('d-m-Y H:i:s') }}</td>
-                            </tr>
-                            <tr>
-                                <th>Created By</th>
-                                <td>{{ user.createdBy }}</td>
-                            </tr>
-                            <tr>
-                                <th>Roles</th>
-                                <td>
-                                    <ul>
-                                        {{ user.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}
-                                    </ul>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                      </section>
-                  </aside>
-              </div>
+                <p>{{ user.email }}</p>
+            </div>
 
-              <!-- page end-->
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="{{ path('acme_user_profile_show') }}"> <i class="icon-user"></i> Profile</a></li>
+                <li><a href="{{ path('acme_user_profile_edit') }}"> <i class="icon-edit"></i> Edit profile</a></li>
+            </ul>
+
+        </section>
+    </aside>
+    <aside class="profile-info col-lg-9">
+        <section class="panel">
+            <table class="table table-striped table-hover table-bordered">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{% if user.enabled %}
+                            <span class="label label-inverse">Enabled</span>
+                        {% else %}
+                            <span class="label label-warning">disabled</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Created At</th>
+                    <td>{{ user.createdAt|date('d-m-Y H:i:s') }}</td>
+                </tr>
+                <tr>
+                    <th>Created By</th>
+                    <td>{{ user.createdBy }}</td>
+                </tr>
+                <tr>
+                    <th>Roles</th>
+                    <td>
+                        <ul>
+                            {{ user.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </aside>
+</div>
+
+<!-- page end-->

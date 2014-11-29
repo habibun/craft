@@ -1,8 +1,15 @@
 parameters:
     acme_user.my_twig_extension.class: Acme\UserBundle\Twig\MyTwigExtension
+    acme_user.my_profile_form_type: Acme\UserBundle\Form\Type\ProfileFormType
 
 services:
     acme_user.my_twig_extension:
         class: %acme_user.my_twig_extension.class%
         tags:
             - { name: twig.extension }
+
+    acme_user.profile.form.type:
+        class: %acme_user.my_profile_form_type%
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: acme_user_profile }

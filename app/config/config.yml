@@ -110,6 +110,9 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Acme\UserBundle\Entity\User
+    profile:
+        form:
+            type: acme_user_profile
 
 # BraincraftedBootstrapBundle Configuration
 braincrafted_bootstrap:

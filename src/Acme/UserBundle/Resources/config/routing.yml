@@ -2,12 +2,15 @@ acme_user_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: AcmeUserBundle:Default:index }
 
-_acme_fos:
-    resource: "@AcmeUserBundle/Resources/config/routing/fos.yml"
-    prefix: /
-
 AcmeUserBundle_user:
     resource: "@AcmeUserBundle/Resources/config/routing/user.yml"
     prefix:   /admin/user
+
+AcmeUserBundle_security:
+    resource: "@AcmeUserBundle/Resources/config/routing/security.xml"
+
+AcmeUserBundle_profile:
+    resource: "@AcmeUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
 
 
