@@ -13,4 +13,7 @@ AcmeUserBundle_profile:
     resource: "@AcmeUserBundle/Resources/config/routing/profile.xml"
     prefix: /profile
 
+acme_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /change-password
 
