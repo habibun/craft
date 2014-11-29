@@ -13,3 +13,7 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: acme_user_profile }
+
+    acme_user.user_provider.username:
+        class: Acme\UserBundle\Security\UserProvider
+        arguments: [@fos_user.user_manager]

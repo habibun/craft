@@ -3,8 +3,8 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username        
+        acme_userbundle:
+            id: acme_user.user_provider.username
 
     firewalls:
         dev:
@@ -14,11 +14,11 @@ security:
         main:
             pattern: .*
             form_login:
-                provider:       fos_userbundle
+                provider:       acme_userbundle
                 csrf_provider:  form.csrf_provider
-                login_path:     fos_user_security_login
+                login_path:     acme_user_security_login
                 use_forward:    false
-                check_path:     fos_user_security_check
+                check_path:     acme_user_security_check
                 failure_path:   null
             remember_me:
                 key:      %secret%
@@ -26,6 +26,6 @@ security:
                 path:     /
                 domain:   ~                
             logout:       
-                path:           fos_user_security_logout
+                path:           acme_user_security_logout
                 target:         /
             anonymous:          true
