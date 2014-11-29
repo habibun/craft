@@ -36,47 +36,28 @@
     </aside>
     <aside class="profile-info col-lg-9">
         <section class="panel">
-            <table class="table table-striped table-hover table-bordered">
-                <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ user.id }}</td>
-                </tr>
-                <tr>
-                    <th>Username</th>
-                    <td>{{ user.username }}</td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{ user.email }}</td>
-                </tr>
-                <tr>
-                    <th>Status</th>
-                    <td>{% if user.enabled %}
+            <ul class="nav nav-pills nav-stacked labels-info inbox-divider">
+                <!-- <li> <h4>Labels</h4> </li> -->
+                  <li> <a href="#"> <i class=" icon-sign-blank text-danger"></i> Id <span class="pull-right">{{ user.id }}</span></a> </li>
+
+                  <li> <a href="#"> <i class=" icon-sign-blank text-success"></i> Username <span class="pull-right">{{ user.username }}</span></a> </li>
+
+                  <li> <a href="#"> <i class=" icon-sign-blank text-info "></i> Email <span class="pull-right">{{  user.email }}</span></a></li>
+
+                  <li> <a href="#"> <i class=" icon-sign-blank text-warning "></i> Created At <span class="pull-right">{{ user.createdAt|date('d-m-Y H:i:s') }}</span></a></li>
+
+                  <li> <a href="#"> <i class=" icon-sign-blank text-primary "></i> Created By <span class="pull-right">{{ user.createdBy }}</span></a></li>
+
+                  <li> <a href="#"> <i class=" icon-sign-blank text-danger"></i> Status <span class="pull-right">{% if user.enabled %}
                             <span class="label label-inverse">Enabled</span>
                         {% else %}
                             <span class="label label-warning">disabled</span>
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th>Created At</th>
-                    <td>{{ user.createdAt|date('d-m-Y H:i:s') }}</td>
-                </tr>
-                <tr>
-                    <th>Created By</th>
-                    <td>{{ user.createdBy }}</td>
-                </tr>
-                <tr>
-                    <th>Roles</th>
-                    <td>
-                        <ul>
-                            {{ user.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}
-                        </ul>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        {% endif %}</span></a> </li>
+
+                    <li> <a href="#"> <i class=" icon-sign-blank text-success"></i> Roles <span class="pull-right">{{ user.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</span></a> </li>
+
+                    <li> <a href="#"> <i class=" icon-sign-blank text-info "></i> Last Login <span class="pull-right">{{  user.lastLogin|date('d-m-y H:i:s') }}</span></a></li>
+            </ul>
         </section>
     </aside>
 </div>
