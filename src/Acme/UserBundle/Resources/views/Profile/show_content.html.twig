@@ -14,12 +14,12 @@
             <div class="user-heading round">
                 <a href="#">
                     <img src="
-                                    {% if app.user.getImage() != "userDefaultLogo.png" %}
-                                        {{ asset(['uploads/users/', app.user.getImage()]|join) }}
-                                    {% else %}
-                                        {{ asset('uploads/users/userDefaultLogoBlack.png') }}
-                                    {% endif %}
-                                     " width="140px" height="140px" alt=""/>
+                            {% if app.user.getImage() != "userDefaultLogo.png" %}
+                                {{ asset(['uploads/users/', app.user.getImage()]|join) }}
+                            {% else %}
+                                {{ asset('uploads/users/userDefaultLogoBlack.png') }}
+                            {% endif %}
+                             " width="140px" height="140px" alt=""/>
                 </a>
 
                 <h1>{{ user.username }}</h1>
@@ -28,7 +28,8 @@
             </div>
 
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="{{ path('acme_user_profile_show') }}"> <i class="icon-user"></i> Profile</a></li>
+                <li class="active"><a href="{{ path('acme_user_profile_show') }}"> <i class="icon-user"></i> Profile</a>
+                </li>
                 <li><a href="{{ path('acme_user_profile_edit') }}"> <i class="icon-edit"></i> Edit profile</a></li>
             </ul>
 
@@ -38,25 +39,34 @@
         <section class="panel">
             <ul class="nav nav-pills nav-stacked labels-info inbox-divider">
                 <!-- <li> <h4>Labels</h4> </li> -->
-                  <li> <a href="#"> <i class=" icon-sign-blank text-danger"></i> Id <span class="pull-right">{{ user.id }}</span></a> </li>
+                <li><a href="#"> <i class=" icon-sign-blank text-danger"></i> Id <span
+                                class="pull-right">{{ user.id }}</span></a></li>
 
-                  <li> <a href="#"> <i class=" icon-sign-blank text-success"></i> Username <span class="pull-right">{{ user.username }}</span></a> </li>
+                <li><a href="#"> <i class=" icon-sign-blank text-success"></i> Username <span
+                                class="pull-right">{{ user.username }}</span></a></li>
 
-                  <li> <a href="#"> <i class=" icon-sign-blank text-info "></i> Email <span class="pull-right">{{  user.email }}</span></a></li>
+                <li><a href="#"> <i class=" icon-sign-blank text-info "></i> Email <span
+                                class="pull-right">{{ user.email }}</span></a></li>
 
-                  <li> <a href="#"> <i class=" icon-sign-blank text-warning "></i> Created At <span class="pull-right">{{ user.createdAt|date('d-m-Y H:i:s') }}</span></a></li>
+                <li><a href="#"> <i class=" icon-sign-blank text-warning "></i> Created At <span
+                                class="pull-right">{{ user.createdAt|date('d-m-Y H:i:s') }}</span></a></li>
 
-                  <li> <a href="#"> <i class=" icon-sign-blank text-primary "></i> Created By <span class="pull-right">{{ user.createdBy }}</span></a></li>
+                <li><a href="#"> <i class=" icon-sign-blank text-primary "></i> Created By <span
+                                class="pull-right">{{ user.createdBy }}</span></a></li>
 
-                  <li> <a href="#"> <i class=" icon-sign-blank text-danger"></i> Status <span class="pull-right">{% if user.enabled %}
+                <li><a href="#"> <i class=" icon-sign-blank text-danger"></i> Status <span
+                                class="pull-right">{% if user.enabled %}
                             <span class="label label-inverse">Enabled</span>
                         {% else %}
-                            <span class="label label-warning">disabled</span>
-                        {% endif %}</span></a> </li>
+                                <span class="label label-warning">disabled</span>
+                            {% endif %}</span></a></li>
 
-                    <li> <a href="#"> <i class=" icon-sign-blank text-success"></i> Roles <span class="pull-right">{{ user.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</span></a> </li>
+                <li><a href="#"> <i class=" icon-sign-blank text-success"></i> Roles <span
+                                class="pull-right">{{ user.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</span></a>
+                </li>
 
-                    <li> <a href="#"> <i class=" icon-sign-blank text-info "></i> Last Login <span class="pull-right">{{  user.lastLogin|date('d-m-y H:i:s') }}</span></a></li>
+                <li><a href="#"> <i class=" icon-sign-blank text-info "></i> Last Login <span
+                                class="pull-right">{{ user.lastLogin|date('d-m-y H:i:s') }}</span></a></li>
             </ul>
         </section>
     </aside>
