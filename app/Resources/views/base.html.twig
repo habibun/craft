@@ -38,6 +38,19 @@
             {{ render(controller('AcmeWidgetBundle:WorkProgress:workProgress')) }}
             <!--  notification end -->
         </div>
+        <div class="nav notify-row">
+        <ul class="nav text-center top-menu">
+                <li>
+                    <div class="mail-option">
+                        <div class="btn-group">
+                            <a class="btn mini tooltips" href="#" data-toggle="dropdown" data-placement="top" title="Refresh" id="refresh">
+                                <i class=" icon-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <div class="top-nav ">
             <!--search & user info start-->
             <ul class="nav pull-right top-menu">
@@ -180,6 +193,9 @@
                     }
                 });
             }
+        });
+        $('#refresh').click(function(){
+            location.reload();
         });
     })
 </script>

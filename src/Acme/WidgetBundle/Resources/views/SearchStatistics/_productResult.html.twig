@@ -1,4 +1,15 @@
 <table class="table table-inbox table-hover">
+    <thead>
+        <tr>
+            <th><input type="checkbox" class="mail-checkbox"></i></th>
+            <th><i class="icon-star"></i></th>
+            <th>Manufacturer</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Net Price</th>
+            <th>Purchase Date</th>
+        </tr>
+    </thead>
     <tbody>
         {% for item in result.PurchaseLines %}
             <tr class="">
@@ -6,10 +17,11 @@
                     <input type="checkbox" class="mail-checkbox">
                 </td>
                 <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                <td class="view-message dont-show">{{ item.manufacturer }}</td>
-                <td class="view-message view-message">{{ (item.price/item.quantity)|number_format(2) }}</td>
-                <td class="view-message inbox-small-cells">{{ 1|number_format(2) }}</td>
-                <td class="view-message text-right">{{ item.purchaseDate|date('d-m-Y') }}</td>
+                <td>{{ item.manufacturer }}</td>
+                <td>{{ item.price|number_format(2) }}</td>
+                <td>{{ item.quantity|number_format(2) }}</td>
+                <td>{{ (item.price/item.quantity)|number_format(2) }}</td>
+                <td>{{ item.purchaseDate|date('d-m-Y') }}</td>
             </tr>
         {% endfor %}
     </tbody>
