@@ -235,7 +235,7 @@
                             'supplier': $('#acme_purchasebundle_purchase_supplier').val()
                         },
                         function (data) {
-                            console.log(data);
+                            $("#inputPrice").val(JSON.stringify(data.result));
                         },
                         'json'
                 );
