@@ -3,7 +3,6 @@
 {% block title %}Search{% endblock %}
 
 {% block body %}
-
     <div class="row">
         <div class="col-lg-12">
             <!--breadcrumbs start -->
@@ -15,27 +14,34 @@
             <!--breadcrumbs end -->
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    search results &nbsp; » &nbsp;<strong>{{ search }}</strong>
+                    <span class="tools pull-right">
+                    <a class="icon-chevron-down" href="javascript:;"></a>
+                    <a class="icon-remove" href="javascript:;"></a>
+                    </span>
+                </header>
+                <div class="panel-body">
+                    {% if result.PurchaseLines is not empty %}
+                        {% include 'AcmeWidgetBundle:SearchStatistics:_productResult.html.twig' %}
+                    {% endif %}
 
-    <!--mail inbox start-->
-    <div class="mail-box">
-        <aside class="lg-side">
-            <div class="inbox-body">
-                {% if result.PurchaseLines is not empty %}
-                    {% include 'AcmeWidgetBundle:SearchStatistics:_productResult.html.twig' %}
-                {% endif %}
-                {% if result.issueLines is not empty %}
-                    {% include 'AcmeWidgetBundle:SearchStatistics:_issueResult.html.twig' %}
-                {% endif %}
-                <div class="text-center">
-                    <ul class="pagination">
-                        {{ knp_pagination_render(result) }}
-                    </ul>
+                    {% if result.issueLines is not empty %}
+                        {% include 'AcmeWidgetBundle:SearchStatistics:_issueResult.html.twig' %}
+                    {% endif %}
+                    <div class="text-center">
+                        <ul class="pagination">
+                            {{ knp_pagination_render(result) }}
+                        </ul>
+                    </div>
+                    {% if result.PurchaseLines is empty and result.issueLines is empty %}
+                        <p>There are no results</p>
+                    {% endif %}
                 </div>
-                {% if result.PurchaseLines is empty and result.issueLines is empty %}
-                    <p>There are no results</p>
-                {% endif %}
-            </div>
-        </aside>
+            </section>
+        </div>
     </div>
-    <!--mail inbox end-->
 {% endblock %}
