@@ -25,6 +25,8 @@ class User extends BaseUser
 
     protected $createdBy;
 
+    protected $lastLogin;
+
     public function __construct()
     {
         parent::__construct();
@@ -155,5 +157,17 @@ class User extends BaseUser
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+
+    public function setLastLogin(\DateTime $time = null)
+    {
+        $this->lastLogin = $time;
+
+        return $this;
+    }
+
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
     }
 }
