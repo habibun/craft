@@ -67,6 +67,10 @@
 
                 <li><a href="#"> <i class=" icon-sign-blank text-info "></i> Last Login <span
                                 class="pull-right">{{ user.lastLogin|date('d-m-y H:i:s') }}</span></a></li>
+
+                                {% set now = "now" %}
+                 <li><a href="#"> <i class=" icon-sign-blank text-warning "></i> Duration <span
+                                class="pull-right">{{ "now"|date - (user.lastLogin|date) }}</span></a></li>               
             </ul>
         </section>
     </aside>
