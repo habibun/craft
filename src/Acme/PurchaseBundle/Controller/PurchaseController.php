@@ -463,4 +463,74 @@ class PurchaseController extends Controller
 
         return new JsonResponse(array('result' => $result));
     }
+
+    public function purchaseListAction()
+    {
+        $postDatatable = $this->get('tommygnr_datatables.post');
+        $postDatatable->buildDatatableView();
+
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:purchaseList.html.twig',
+            array(
+                'datatable' => $postDatatable,
+            )
+        );
+    }
+
+    public function ajaxPurchaseListAction()
+    {
+        $datatable = $this->get('tommygnr_datatables.datatable')->getDatatable('AcmePurchaseBundle:Purchase');
+
+        return $datatable->getResults();
+    }
+
+    public function bulkDeleteAction()
+    {
+        $request = $this->getRequest();
+        $isAjax = $request->isXmlHttpRequest();
+
+        if ($isAjax) {
+            $choices = $request->request->get('data');
+
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
+
+            foreach ($choices as $choice) {
+                $entity = $repository->find($choice['value']);
+                $em->remove($entity);
+            }
+
+            $em->flush();
+
+            return new Response('This is ajax response.');
+        }
+
+        return new Response('This is not ajax.', 400);
+    }
+
+    public function bulkDisableAction()
+    {
+        $request = $this->getRequest();
+        $isAjax = $request->isXmlHttpRequest();
+
+        if ($isAjax) {
+            $choices = $request->request->get('data');
+
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
+
+            foreach ($choices as $choice) {
+                $entity = $repository->find($choice['value']);
+                $entity->setVisible(false);
+                $em->persist($entity);
+            }
+
+            $em->flush();
+
+            return new Response('This is ajax response.');
+        }
+
+        return new Response('This is not ajax.', 400);
+    }
+
 }

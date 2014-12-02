@@ -56,4 +56,21 @@ purchase_supplier_detail:
     pattern:  /supplier-detail
     defaults: { _controller:  "AcmePurchaseBundle:Purchase:supplierDetail"  }
 
+post:
+    pattern:  /purchase-list
+    defaults: { _controller:  "AcmePurchaseBundle:Purchase:purchaseList" }
+    requirements: { _method: get }
 
+post_results:
+    pattern:  /ajax-purchase-result
+    defaults: { _controller:  "AcmePurchaseBundle:Purchase:ajaxPurchaseList" }
+
+post_bulk_delete:
+    pattern:  /
+    defaults: { _controller:  "AcmePurchaseBundle:Purchase:bulkDelete" }
+    requirements: { _method:  post  }
+
+post_bulk_disable:
+    pattern:  /
+    defaults: { _controller:  "AcmePurchaseBundle:Purchase:bulkDisable" }
+    requirements: { _method:  post  }
