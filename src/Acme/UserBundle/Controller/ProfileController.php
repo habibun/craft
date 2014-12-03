@@ -34,21 +34,11 @@ class ProfileController extends ContainerAware
     public function showAction()
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $entity = $em->getRepository('AcmeUserBundle:User')->find($user);
-
-        $now = new \DateTime('now');
-        $last = $entity->getLastLogin();
-
-        $interval = $now->diff($last);
-
-        //echo $interval->y . " Year " .$interval->m . " Month " .$interval->d ." Days ". $interval->h . " Hours, " . $interval->i." Mintues, ".$interval->s." seconds <br/>"; 
-
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user,'interval' => $interval));
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
     }
 
     /**

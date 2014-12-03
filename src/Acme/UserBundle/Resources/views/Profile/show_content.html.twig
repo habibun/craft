@@ -1,13 +1,5 @@
 {% trans_default_domain 'AcmeUserBundle' %}
 
-{# <div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-    <p>Last Login: {{ user.lastLogin|date('d-m-Y H:i:s') }}</p>
-    <p>Roles: {{ user.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</p>
-</div> #}
-
-<!-- page start-->
 <div class="row">
     <aside class="profile-nav col-lg-3">
         <section class="panel">
@@ -66,13 +58,9 @@
                 </li>
 
                 <li><a href="#"> <i class=" icon-sign-blank text-info "></i> Last Login <span
-                                class="pull-right">{{ user.lastLogin|date('d-m-y H:i:s') }}</span></a></li>
+                                class="pull-right">{{ user.lastLogin|time_ago_in_words }}</span></a></li>
 
-                 <li><a href="#"> <i class=" icon-sign-blank text-warning "></i> Duration <span
-                                class="pull-right">{{ interval|date('d-m-y H:i:s') }}</span></a></li>               
             </ul>
         </section>
     </aside>
 </div>
-
-<!-- page end-->
