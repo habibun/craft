@@ -27,6 +27,7 @@
         "knplabs/knp-snappy-bundle": "dev-master",
         "kitpages/data-grid-bundle": "1.*@dev",
         "friendsofsymfony/jsrouting-bundle": "@stable",
+        "salavert/time-ago-in-words": "1.*",
         "imagine/imagine": "dev-master",
         "twitter/bootstrap": "2.3.*",
         "symfony/framework-bundle": "~2.3",

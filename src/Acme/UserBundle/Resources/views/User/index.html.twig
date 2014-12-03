@@ -111,7 +111,7 @@
                                     <li>{{ entity.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</li>
                                 </ul>
                             </td>
-                            <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{% if entity.lastLogin %}{{ entity.lastLogin|time_ago_in_words }}{% endif %}</td>
                             <td>
                                 <a href="{{ path('user_show', { 'id': entity.id }) }}"
                                    class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>

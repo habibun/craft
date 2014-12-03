@@ -17,3 +17,9 @@ services:
     acme_user.user_provider.username:
         class: Acme\UserBundle\Security\UserProvider
         arguments: [@fos_user.user_manager]
+
+    salavert.twig.time_ago:
+        class: Salavert\Twig\Extension\TimeAgoExtension
+        arguments: [@translator]
+        tags:
+        - { name: twig.extension }
