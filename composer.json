@@ -36,7 +36,7 @@
         "mopa/bootstrap-bundle": "v3.0.0-beta3",
         "twbs/bootstrap": "v3.0.0",
         "moment/moment": "2.5.1",
-        "tommygnr/datatables-bundle": "dev-master"
+        "ali/datatable": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

@@ -4,8 +4,54 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "de7d51afe22aa65771809e3f61cbd9ce",
+    "hash": "841d19aa1425bd5fda58888fc974ff0c",
     "packages": [
+        {
+            "name": "ali/datatable",
+            "version": "dev-master",
+            "target-dir": "Ali/DatatableBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AliHichem/AliDatatableBundle.git",
+                "reference": "5a91b32451d703b55e3b5b7424088631719cbaca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AliHichem/AliDatatableBundle/zipball/5a91b32451d703b55e3b5b7424088631719cbaca",
+                "reference": "5a91b32451d703b55e3b5b7424088631719cbaca",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": ">=2.1,<2.4.x-dev",
+                "php": ">=5.3.0",
+                "twig/twig": ">=1.8,<2.0-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ali\\DatatableBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ali hichem",
+                    "email": "ali.hichem@mail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony2 Ajax Datagrid Bundle for doctrine2 entities",
+            "homepage": "https://github.com/AliHichem/AliDatatableBundle",
+            "keywords": [
+                "Symfony2",
+                "datatable",
+                "jquery"
+            ],
+            "time": "2014-09-05 20:18:11"
+        },
         {
             "name": "braincrafted/bootstrap-bundle",
             "version": "dev-master",
@@ -2656,60 +2702,6 @@
             "time": "2014-10-24 06:55:39"
         },
         {
-            "name": "tommygnr/datatables-bundle",
-            "version": "dev-master",
-            "target-dir": "TommyGNR/DatatablesBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tommygnr/DatatablesBundle.git",
-                "reference": "f84b4e1822efbf20ab2636ee065d72fa4c401fbf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tommygnr/DatatablesBundle/zipball/f84b4e1822efbf20ab2636ee065d72fa4c401fbf",
-                "reference": "f84b4e1822efbf20ab2636ee065d72fa4c401fbf",
-                "shasum": ""
-            },
-            "require": {
-                "friendsofsymfony/jsrouting-bundle": "@stable",
-                "php": ">=5.4.0",
-                "symfony/framework-bundle": "~2.3"
-            },
-            "suggest": {
-                "moment/moment": "2.5.1",
-                "mopa/bootstrap-bundle": "v3.0.0-beta3"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "TommyGNR\\DatatablesBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tom Corrigan",
-                    "email": "tom@tomcorrigan.com.au"
-                }
-            ],
-            "description": "datatables.net integration into Symfony2 with Doctrine",
-            "homepage": "https://github.com/tommygnr/DatatablesBundle",
-            "keywords": [
-                "Symfony2",
-                "datagrid",
-                "datatable",
-                "datatables",
-                "datatables.net",
-                "doctrine",
-                "grid",
-                "table"
-            ],
-            "time": "2014-12-01 02:00:09"
-        },
-        {
             "name": "twbs/bootstrap",
             "version": "v3.0.0",
             "source": {
@@ -2933,7 +2925,7 @@
         "imagine/imagine": 20,
         "datatables/datatables": 20,
         "mopa/bootstrap-bundle": 10,
-        "tommygnr/datatables-bundle": 20
+        "ali/datatable": 20
     },
     "prefer-stable": false,
     "platform": {
