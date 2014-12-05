@@ -32,7 +32,7 @@ class AppKernel extends Kernel
             new Kitpages\DataGridBundle\KitpagesDataGridBundle(),
             new Acme\WidgetBundle\AcmeWidgetBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new TommyGNR\DatatablesBundle\TommyGNRDatatablesBundle(),
+            new Ali\DatatableBundle\AliDatatableBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
