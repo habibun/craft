@@ -151,4 +151,9 @@ knp_snappy:
         binary:     %wkhtmltopdf%
         options:    []
 
+# CgKintBundle Configuration
+cg_kint:
+    enabled:          true
+    nesting_depth:    5
+    string_length:    60
 
