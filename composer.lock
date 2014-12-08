@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f0ba4051a84fec0e6ebedba5b3bff274",
+    "hash": "a810523fe05b660cd745ad8e8cf051d6",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -163,29 +163,6 @@
             "description": "jQuery JavaScript Library",
             "homepage": "http://jquery.com",
             "time": "2014-10-11 11:50:53"
-        },
-        {
-            "name": "datatables/datatables",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DataTables/DataTables.git",
-                "reference": "bc256721ce3eec9a28c2409618a8af12a677b680"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/bc256721ce3eec9a28c2409618a8af12a677b680",
-                "reference": "bc256721ce3eec9a28c2409618a8af12a677b680",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.",
-            "homepage": "http://www.datatables.net/",
-            "time": "2014-11-28 10:02:22"
         },
         {
             "name": "doctrine/annotations",
@@ -921,63 +898,6 @@
                 "User management"
             ],
             "time": "2014-08-04 23:04:17"
-        },
-        {
-            "name": "imagine/imagine",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/avalanche123/Imagine.git",
-                "reference": "10e9522f11a6e846061226b7e54347909a849e09"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/10e9522f11a6e846061226b7e54347909a849e09",
-                "reference": "10e9522f11a6e846061226b7e54347909a849e09",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "sami/sami": "dev-master"
-            },
-            "suggest": {
-                "ext-gd": "to use the GD implementation",
-                "ext-gmagick": "to use the Gmagick implementation",
-                "ext-imagick": "to use the Imagick implementation"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-develop": "0.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Imagine": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bulat Shakirzyanov",
-                    "email": "mallluhuct@gmail.com",
-                    "homepage": "http://avalanche123.com"
-                }
-            ],
-            "description": "Image processing for PHP 5.3",
-            "homepage": "http://imagine.readthedocs.org/",
-            "keywords": [
-                "drawing",
-                "graphics",
-                "image manipulation",
-                "image processing"
-            ],
-            "time": "2014-08-26 11:26:34"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1719,40 +1639,6 @@
                 "datatables"
             ],
             "time": "2013-06-09 12:40:29"
-        },
-        {
-            "name": "moment/moment",
-            "version": "2.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moment/moment.git",
-                "reference": "abc3a14b2ed7c9f4ff420395f3e1f198459528d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moment/moment/zipball/abc3a14b2ed7c9f4ff420395f3e1f198459528d8",
-                "reference": "abc3a14b2ed7c9f4ff420395f3e1f198459528d8",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Parse, validate, manipulate, and display dates in javascript.",
-            "homepage": "http://github.com/moment/moment/",
-            "keywords": [
-                "date",
-                "ender",
-                "format",
-                "i18n",
-                "l10n",
-                "moment",
-                "parse",
-                "time",
-                "validate"
-            ],
-            "time": "2014-01-22 09:26:21"
         },
         {
             "name": "monolog/monolog",
@@ -2888,8 +2774,6 @@
         "knplabs/knp-snappy-bundle": 20,
         "kitpages/data-grid-bundle": 20,
         "friendsofsymfony/jsrouting-bundle": 0,
-        "imagine/imagine": 20,
-        "datatables/datatables": 20,
         "cg/kint-bundle": 20
     },
     "prefer-stable": false,

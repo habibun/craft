@@ -28,12 +28,6 @@
         "kitpages/data-grid-bundle": "1.*@dev",
         "friendsofsymfony/jsrouting-bundle": "@stable",
         "salavert/time-ago-in-words": "1.*",
-        "imagine/imagine": "dev-master",
-        "symfony/framework-bundle": "~2.3",
-        "components/jquery": "1.10.2",
-        "datatables/datatables": "dev-master",
-        "twbs/bootstrap": "v3.0.0",
-        "moment/moment": "2.5.1",
         "cg/kint-bundle": "dev-master"
     },
     "scripts": {
