@@ -28,7 +28,8 @@
         "kitpages/data-grid-bundle": "1.*@dev",
         "friendsofsymfony/jsrouting-bundle": "@stable",
         "salavert/time-ago-in-words": "1.*",
-        "cg/kint-bundle": "dev-master"
+        "cg/kint-bundle": "dev-master",
+        "ali/datatable": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

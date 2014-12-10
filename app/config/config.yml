@@ -157,3 +157,6 @@ cg_kint:
     nesting_depth:    5
     string_length:    60
 
+ali_datatable:
+    all:    ~
+    js:     ~

@@ -464,4 +464,44 @@ class PurchaseController extends Controller
         return new JsonResponse(array('result' => $result));
     }
 
+
+    /**
+     * set datatable configs
+     *
+     * @return \Ali\DatatableBundle\Util\Datatable
+     */
+    private function _datatable()
+    {
+        return $this->get('datatable')
+            ->setEntity("AcmePurchaseBundle:Purchase", "x")                          // replace "XXXMyBundle:Entity" by your entity
+            ->setFields(
+                array(
+                    "Name"          => 'x.id',                        // Declaration for fields:
+                    "Address"        => 'x.id',                    //      "label" => "alias.field_attribute_for_dql"
+                    "_identifier_"  => 'x.id')                          // you have to put the identifier field without label. Do not replace the "_identifier_"
+            )
+
+            ->setHasAction(true);                                           // you can disable action column from here by setting "false".
+    }
+
+
+    /**
+     * Grid action
+     * @return Response
+     */
+    public function gridAction()
+    {
+        return $this->_datatable()->execute();                                      // call the "execute" method in your grid action
+    }
+
+    /**
+     * Lists all entities.
+     * @return Response
+     */
+    public function purchaseListAction()
+    {
+        $this->_datatable();                                                        // call the datatable config initializer
+        return $this->render('AcmePurchaseBundle:Purchase:purchaseList.html.twig');                 // replace "XXXMyBundle:Module:index.html.twig" by yours
+    }
+
 }
