@@ -3,6 +3,7 @@
 namespace Acme\WidgetBundle\Repository;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NoResultException;
 
 class StateOverviewModel
 {
@@ -26,7 +27,7 @@ class StateOverviewModel
 
 	    try {
 	        return $query->getSingleResult();
-	    } catch (\Doctrine\ORM\NoResultException $e) {
+	    } catch (NoResultException $e) {
 	        return null;
 	    }
     }
@@ -42,7 +43,7 @@ class StateOverviewModel
             	
 	    try {
 	        return $query->getSingleResult();
-	    } catch (\Doctrine\ORM\NoResultException $e) {
+	    } catch (NoResultException $e) {
 	        return null;
 	    }
     }
@@ -59,7 +60,7 @@ class StateOverviewModel
 
 	    try {
         return $query->getSingleResult();
-	    } catch (\Doctrine\ORM\NoResultException $e) {
+	    } catch (NoResultException $e) {
 	        return null;
 	    }
     }
@@ -76,7 +77,7 @@ class StateOverviewModel
 
 	    try {
         return $query->getSingleResult();
-	    } catch (\Doctrine\ORM\NoResultException $e) {
+	    } catch (NoResultException $e) {
 	        return null;
 	    }
     }
