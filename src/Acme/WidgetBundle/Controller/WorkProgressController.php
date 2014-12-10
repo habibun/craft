@@ -41,9 +41,13 @@ class WorkProgressController extends Controller
     public function workProgressAllAction()
     {
         $result = $this->_getWorkProgressAllResult();
+
         // var_dump($result);
-        return $this->render('AcmeWidgetBundle:WorkProgress:workProgressAll.html.twig',array(
-            'result' => $result));
+        return $this->render(
+            'AcmeWidgetBundle:WorkProgress:workProgressAll.html.twig',
+            array(
+                'result' => $result)
+        );
     }
 
     private function _getWorkProgressAllResult()
@@ -52,27 +56,27 @@ class WorkProgressController extends Controller
         $query = $em->createQuery(
             'SELECT p
             FROM AcmePurchaseBundle:PurchaseLine p
-            
+
             '
         );
 
         $products = $query->getResult();
 
-    /*
-        $em = $this->getDoctrine()->getManager();
+        /*
+            $em = $this->getDoctrine()->getManager();
 
-        $query = $em->createQuery(
-            'SELECT sum(pl.quantity) as available
-            FROM AcmePurchaseBundle:PurchaseLine pl')
+            $query = $em->createQuery(
+                'SELECT sum(pl.quantity) as available
+                FROM AcmePurchaseBundle:PurchaseLine pl')
 
-        $products = $query->getResult();
+            $products = $query->getResult();
 
-        $query = $em->createQuery(
-            'SELECT sum(i.quantity) as unavailable
-            FROM AcmeIssueBundle:IssueLine i')
+            $query = $em->createQuery(
+                'SELECT sum(i.quantity) as unavailable
+                FROM AcmeIssueBundle:IssueLine i')
 
-        $products['unavailable'] = $query->getResult();
+            $products['unavailable'] = $query->getResult();
 
-        return $result = $available['available'] - $unavailable['unavailable'];*/
+            return $result = $available['available'] - $unavailable['unavailable'];*/
     }
 }
