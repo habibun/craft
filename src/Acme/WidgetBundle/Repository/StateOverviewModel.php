@@ -49,7 +49,7 @@ class StateOverviewModel
     }
 
     //get drafted issue 
-    public function _getdraftedIssueResults()
+    public function _getDraftedIssueResults()
     {
     	$query_builder = $this->em->createQueryBuilder();
     	$query = $query_builder

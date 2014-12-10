@@ -14,7 +14,7 @@ class StateOverviewController extends Controller
 
         $totalCost = $state->_getTotalCostResults();
         $totalUser = $state->_getTotalUserResults();
-        $draftedIssue = $state->_getdraftedIssueResults();
+        $draftedIssue = $state->_getDraftedIssueResults();
         $draftedPurchase = $state->_getDraftedPurchaseResults();
 
         return $this->render('AcmeWidgetBundle:StateOverview:stateOverview.html.twig',
