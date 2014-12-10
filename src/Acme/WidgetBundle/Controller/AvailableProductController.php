@@ -8,47 +8,84 @@ class AvailableProductController extends Controller
 {
     public function availableProductAction()
     {
-        $ap = $this->_getAvailableProductResult();
-        var_dump($ap);
+        $repository = $this->getDoctrine()
+    		->getRepository('AcmePurchaseBundle:PurchaseLine');
 
-        return $this->render('AcmeWidgetBundle:AvailableProduct:index.html.twig',array(
+		$query = $repository->createQueryBuilder('pl')
+				->join('pl.purchase', 'pu')
+				->join('pl.product', 'pr')
+				->where('pu.status = 1')
+				->having(
+                "SUM(pl.quantity) > (
+    			SELECT SUM(i.quantity)
+    			FROM AcmeIssueBundle:IssueLine i
+    			)"
+            	)
+				->groupBy('pr.name')
+		    	->getQuery();
+
+		$products = $query->getResult();
+        die(\Doctrine\Common\Util\Debug::dump($products));
+
+        /*return $this->render('AcmeWidgetBundle:AvailableProduct:index.html.twig',array(
                 'ap' => $ap
-            ));
+            ));*/
     }
 
     private function _getAvailableProductResult()
     {
-        $query = $this->getEntityManager($this->em)
-            ->createQueryBuilder('u')
-            ->select(
-                'u.ratingkey, u.origTitle, u.origTitleEp, u.episode, u.season, u.year, u.xml, count(u.title) as playCount'
-            )
-            ->from($this->class, 'u')
-            ->groupBy('u.title')
-            ->orderBy('playCount', 'desc')
-            ->addOrderBy('u.ratingkey', 'desc')
-            ->setMaxResults(10)
-            ->getQuery();
 
-        return $query->getResult();
-    }
+		$repository = $this->getDoctrine()
+    		->getRepository('AcmePurchaseBundle:PurchaseLine');
 
-    private function testResult()
-    {
-        $q = Doctrine_Query::create()
-            ->select('count(*)')
-            ->from('mbScoreByGenre s')
-            ->where('s.parent_genre_id = ?', $genre['parent_id'])
+		$query = $repository->createQueryBuilder('p')
+		    ->getQuery();
+
+		$products = $query->getResult();    	
+
+
+        /*$em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+
+        //search for last purchase
+        $qb->select('pl.price')
+            ->from('AcmePurchaseBundle:PurchaseLine', 'pl')
+            ->join('pl.purchase', 'pu')
+            ->join('pl.product', 'pr')
+            ;
+
+			$query = $qb->getQuery();
+        	$result = $query->getResult();*/
+
+    	/*$query->select('pl')
+            ->from('AcmePurchaseBundle:PurchaseLine pl')
+            ->join('pl.purchase', 'p')
+            ->where('p.status = 1')
             ->having(
-                "SUM(s.score) > (
-    SELECT SUM(p.score)
-    FROM mbScoreByGenre p
-    WHERE p.parent_genre_id = {$genre['parent_id']}
-      AND p.user_id = {$user_id})"
+                "SUM(pl.quantity) - (
+   	 			SELECT SUM(i.quantity)
+    			FROM AcmeIssueBundle:IssueLine i
+    			WHERE p.status = 1)"
             )
-            ->groupBy('s.user_id');
+            ->groupBy('pl.product');
+            $query = $qb->getQuery();
 
-        $result = $q->execute(array(), Doctrine::HYDRATE_SCALAR);
-        var_dump($result);
+        $result = getResult;
+        var_dump($result);*/
     }
 }
+
+/*
+$query = $em->createQuery('
+        SELECT p
+        FROM WIC\ProductBundle\Entity\Product p
+        LEFT JOIN WIC\ListingBundle\Entity\Listing l
+            WITH l.product = p.id
+        LEFT JOIN WIC\ListingBundle\Entity\ListingAma la
+            WITH la.id = l.id
+        WHERE la.standardProductIdValue LIKE :stringValue
+        AND   p.account = :account_id')
+        ->setMaxResults(10)
+        ->setParameter('stringValue', "%B00AM204Q6%")
+        ->setParameter('account_id', $account_id);*/
+
