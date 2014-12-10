@@ -1,7 +1,6 @@
 <table class="table table-inbox table-hover">
     <thead>
         <tr>
-            <th><input type="checkbox" class="mail-checkbox"></i></th>
             <th><i class="icon-star"></i></th>
             <th>Manufacturer</th>
             <th>Price</th>
@@ -13,9 +12,6 @@
     <tbody>
         {% for item in result.PurchaseLines %}
             <tr class="">
-                <td class="inbox-small-cells">
-                    <input type="checkbox" class="mail-checkbox">
-                </td>
                 <td class="inbox-small-cells"><i class="icon-star"></i></td>
                 <td>{{ item.manufacturer }}</td>
                 <td>{{ item.price|number_format(2) }}</td>
