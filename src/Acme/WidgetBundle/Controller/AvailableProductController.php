@@ -16,15 +16,15 @@ class AvailableProductController extends Controller
 				->join('pl.product', 'pr')
 				->where('pu.status = 1')
 				->having(
-                "SUM(pl.quantity) > (
-    			SELECT SUM(i.quantity)
-    			FROM AcmeIssueBundle:IssueLine i
-    			)"
+                    "SUM(pl.quantity) > (
+    			    SELECT SUM(i.quantity)
+    			    FROM AcmeIssueBundle:IssueLine i)"
             	)
 				->groupBy('pr.name')
 		    	->getQuery();
 
 		$products = $query->getResult();
+
         die(\Doctrine\Common\Util\Debug::dump($products));
 
         /*return $this->render('AcmeWidgetBundle:AvailableProduct:index.html.twig',array(
