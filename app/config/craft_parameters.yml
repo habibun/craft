@@ -1,8 +1,17 @@
 # This file is auto-generated during the composer install
 parameters:
     purchase_status: 1
+    #user service
+    acme_user.my_twig_extension.class: Acme\UserBundle\Twig\MyTwigExtension
+    acme_user.my_profile_form_type: Acme\UserBundle\Form\Type\ProfileFormType
+    acme_user_salavert.twig.time_ago: Salavert\Twig\Extension\TimeAgoExtension
     fos_user.template.engine: 'twig'
+    acme_user.user_provider.username: Acme\UserBundle\Security\UserProvider
+
+    #pdf
     wkhtmltopdf:  "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe\""
+
+    #message
     access_error : "You do not have the necessary rights to access this action !"
     finalize_modify_error: "This is a finalized record. You can't modify this !"
     finalize_delete_error: "This is a finalized record. You can't delete this !"
