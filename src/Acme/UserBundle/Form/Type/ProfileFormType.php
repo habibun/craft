@@ -42,12 +42,10 @@ class ProfileFormType extends AbstractType
 
         $builder->add('current_password', 'password', array(
             'label' => 'form.current_password',
-            'translation_domain' => 'FOSUserBundle',
+            'translation_domain' => 'AcmeUserBundle',
             'mapped' => false,
             'constraints' => $constraint,
-        ))
-        ->add('file');
-        ;
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -72,9 +70,9 @@ class ProfileFormType extends AbstractType
     protected function buildUserForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
-            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-            ->add('file', 'file', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
+            ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'AcmeUserBundle'))
+            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'AcmeUserBundle'))
+            ->add('file', 'file', array('label' => 'form.file', 'translation_domain' => 'AcmeUserBundle'))
         ;
     }
 }
