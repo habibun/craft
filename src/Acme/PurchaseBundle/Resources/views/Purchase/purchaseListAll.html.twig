@@ -32,8 +32,8 @@
                         <tr class="gradeX">
                             <td><a href="{{ path('purchase_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                             <td>{{ entity.purchaseDate|date }}</td>
-                            <td class="hidden-phone">{{ entity.supplier.name }}</td>
-                            <td class="center hidden-phone">{{ entity.location.name }}</td>
+                            <td class="hidden-phone">{{ entity.supplier }}</td>
+                            <td class="center hidden-phone">{{ entity.location }}</td>
                             <td class="center hidden-phone">
                                 {% if entity.status == 1 %}
                                     <span class="label label-inverse label-mini">Finalized</span>
