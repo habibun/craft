@@ -64,3 +64,7 @@ ajax_purchase_list:
     pattern:  /ajax-purchase-list
     defaults: { _controller:  "AcmePurchaseBundle:Purchase:grid"  }
 
+purchase_list_all:
+    pattern:  /list-all
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:purchaseListAll"}
+

@@ -473,15 +473,16 @@ class PurchaseController extends Controller
     private function _datatable()
     {
         return $this->get('datatable')
-            ->setEntity("AcmePurchaseBundle:Purchase", "x")                          // replace "XXXMyBundle:Entity" by your entity
+            ->setEntity("AcmePurchaseBundle:Purchase", "x")// replace "XXXMyBundle:Entity" by your entity
             ->setFields(
                 array(
-                    "Name"          => 'x.id',                        // Declaration for fields:
-                    "Address"        => 'x.id',                    //      "label" => "alias.field_attribute_for_dql"
-                    "_identifier_"  => 'x.id')                          // you have to put the identifier field without label. Do not replace the "_identifier_"
+                    "Name" => 'x.id',                        // Declaration for fields:
+                    "Address" => 'x.id',                    //      "label" => "alias.field_attribute_for_dql"
+                    "_identifier_" => 'x.id')                          // you have to put the identifier field without label. Do not replace the "_identifier_"
             )
-
-            ->setHasAction(true);                                           // you can disable action column from here by setting "false".
+            ->setHasAction(
+                true
+            );                                           // you can disable action column from here by setting "false".
     }
 
 
@@ -491,7 +492,8 @@ class PurchaseController extends Controller
      */
     public function gridAction()
     {
-        return $this->_datatable()->execute();                                      // call the "execute" method in your grid action
+        return $this->_datatable()->execute(
+        );                                      // call the "execute" method in your grid action
     }
 
     /**
@@ -500,8 +502,27 @@ class PurchaseController extends Controller
      */
     public function purchaseListAction()
     {
-        $this->_datatable();                                                        // call the datatable config initializer
-        return $this->render('AcmePurchaseBundle:Purchase:purchaseList.html.twig');                 // replace "XXXMyBundle:Module:index.html.twig" by yours
+        $this->_datatable(
+        );                                                        // call the datatable config initializer
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:purchaseList.html.twig'
+        );                 // replace "XXXMyBundle:Module:index.html.twig" by yours
     }
 
+    public function purchaseListAllAction(Request $request)
+    {
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT p FROM AcmePurchaseBundle:Purchase p";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+        // parameters to template
+        return $this->render('AcmePurchaseBundle:Purchase:purchaseListAll.html.twig', array('entities' => $pagination));
+    }
 }

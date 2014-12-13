@@ -1,0 +1,127 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Purchase{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/advanced-datatable/media/css/demo_page.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/advanced-datatable/media/css/demo_table.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <!-- page start-->
+    <section class="panel">
+        <header class="panel-heading">
+            Purchase List
+        </header>
+        <div class="panel-body">
+            <div class="adv-table">
+                <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered"
+                       id="hidden-table-info">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Purchase Date</th>
+                        <th class="hidden-phone">Supplier</th>
+                        <th class="hidden-phone">Location</th>
+                        <th class="hidden-phone">Status</th>
+                        <th class="hidden-phone">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr class="gradeX">
+                            <td><a href="{{ path('purchase_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                            <td>{{ entity.purchaseDate|date }}</td>
+                            <td class="hidden-phone">{{ entity.supplier.name }}</td>
+                            <td class="center hidden-phone">{{ entity.location.name }}</td>
+                            <td class="center hidden-phone">
+                                {% if entity.status == 1 %}
+                                    <span class="label label-inverse label-mini">Finalized</span>
+                                {% else %}
+                                    <span class="label label-warning label-mini">Drafted</span>
+                                {% endif %}
+                            </td>
+                            <td class="center hidden-phone">
+                                <a href="{{ path('purchase_show', { 'id': entity.id }) }}"
+                                   class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
+                                <a href="{{ path('purchase_edit', { 'id': entity.id }) }}"
+                                   class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>
+                                <a href="{{ path('purchase_delete', { 'id': entity.id }) }}"
+                                   class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </section>
+    <!-- page end-->
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/advanced-datatable/media/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/advanced-datatable/media/js/jquery.dataTables.js') }}"></script>
+
+    <script type="text/javascript">
+        /* Formating function for row details */
+        function fnFormatDetails(oTable, nTr) {
+            var aData = oTable.fnGetData(nTr);
+            var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+            sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
+            sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+            sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+            sOut += '</table>';
+
+            return sOut;
+        }
+
+        $(document).ready(function () {
+            /*
+             * Insert a 'details' column to the table
+             */
+            var nCloneTh = document.createElement('th');
+            var nCloneTd = document.createElement('td');
+            nCloneTd.innerHTML = '<img src="/assets/advanced-datatable/examples/examples_support/details_open.png">';
+            nCloneTd.className = "center";
+
+            $('#hidden-table-info thead tr').each(function () {
+                this.insertBefore(nCloneTh, this.childNodes[0]);
+            });
+
+            $('#hidden-table-info tbody tr').each(function () {
+                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+            });
+
+            /*
+             * Initialse DataTables, with no sorting on the 'details' column
+             */
+            var oTable = $('#hidden-table-info').dataTable({
+                "aoColumnDefs": [
+                    {"bSortable": false, "aTargets": [0]}
+                ],
+                "aaSorting": [[1, 'asc']]
+            });
+
+            /* Add event listener for opening and closing details
+             * Note that the indicator for showing which row is open is not controlled by DataTables,
+             * rather it is done here
+             */
+            $('#hidden-table-info tbody td img').live('click', function () {
+                var nTr = $(this).parents('tr')[0];
+                if (oTable.fnIsOpen(nTr)) {
+                    /* This row is already open - close it */
+                    this.src = "/assets/advanced-datatable/examples/examples_support/details_open.png";
+                    oTable.fnClose(nTr);
+                }
+                else {
+                    /* Open this row */
+                    this.src = "/assets/advanced-datatable/examples/examples_support/details_close.png";
+                    oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
