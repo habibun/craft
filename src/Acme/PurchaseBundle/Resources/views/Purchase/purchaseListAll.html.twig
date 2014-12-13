@@ -3,8 +3,7 @@
 {% block title %}Purchase{% endblock %}
 
 {% block stylesheets %}
-    <link href="{{ asset('assets/advanced-datatable/media/css/demo_page.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/advanced-datatable/media/css/demo_table.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/data-tables-bootstrap3/css/datatables.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -31,7 +30,7 @@
                     {% for entity in entities %}
                         <tr class="gradeX">
                             <td><a href="{{ path('purchase_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                            <td>{{ entity.purchaseDate|date }}</td>
+                            <td>{{ entity.purchaseDate|date('d-M-Y') }}</td>
                             <td class="hidden-phone">{{ entity.supplier }}</td>
                             <td class="center hidden-phone">{{ entity.location }}</td>
                             <td class="center hidden-phone">
@@ -61,10 +60,11 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/advanced-datatable/media/js/jquery.js') }}"></script>
-    <script src="{{ asset('assets/advanced-datatable/media/js/jquery.dataTables.js') }}"></script>
-
+<script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
+<script type="text/javascript" language="javascript" src="/assets/advanced-datatable/media/js/jquery.js"></script>
     <script type="text/javascript">
+        var dom = {};
+        dom.query = jQuery.noConflict( true );
         /* Formating function for row details */
         function fnFormatDetails(oTable, nTr) {
             var aData = oTable.fnGetData(nTr);
@@ -101,7 +101,13 @@
                 "aoColumnDefs": [
                     {"bSortable": false, "aTargets": [0]}
                 ],
-                "aaSorting": [[1, 'asc']]
+                "aaSorting": [[1, 'asc']],
+                "fnPreDrawCallback": function (oSettings, json) {
+                    $('.dataTables_filter input').addClass('form-control input-sm');
+                    $('.dataTables_filter input').css('width', '200px');
+                    $('.dataTables_length select').addClass('form-control input-sm');
+                    $('.dataTables_length select').css('width', '75px');
+                }
             });
 
             /* Add event listener for opening and closing details
