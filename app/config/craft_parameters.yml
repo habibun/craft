@@ -1,6 +1,8 @@
 # This file is auto-generated during the composer install
 parameters:
+    #purchase status
     purchase_status: 1
+
     #user service
     acme_user.my_twig_extension.class: Acme\UserBundle\Twig\MyTwigExtension
     acme_user.my_profile_form_type: Acme\UserBundle\Form\Type\ProfileFormType
