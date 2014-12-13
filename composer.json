@@ -21,7 +21,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "braincrafted/bootstrap-bundle": "dev-master",
-        "knplabs/knp-paginator-bundle": "dev-master",
+        "knplabs/knp-paginator-bundle": "2.4.*@dev",
         "lankit/datatables-bundle": "*",
         "jms/serializer-bundle": "dev-master",
         "knplabs/knp-snappy-bundle": "dev-master",
@@ -29,7 +29,8 @@
         "friendsofsymfony/jsrouting-bundle": "@stable",
         "salavert/time-ago-in-words": "1.*",
         "cg/kint-bundle": "dev-master",
-        "ali/datatable": "dev-master"
+        "ali/datatable": "dev-master",
+        "knplabs/knp-components": "1.2.*@dev"
     },
     "scripts": {
         "post-install-cmd": [
