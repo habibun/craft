@@ -21,9 +21,13 @@ class CompanyController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+/*        $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AcmeSetupBundle:Company')->findAll();
+        $entities = $em->getRepository('AcmeSetupBundle:Company')->findAll();*/
+
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT c FROM AcmeSetupBundle:Company c";
+        $entities = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
         $entities = $paginator->paginate(

@@ -2,6 +2,19 @@
 
 {% block title %}Company{% endblock %}
 
+{% block stylesheets %}
+    <link href="{{ asset('assets/data-tables-bootstrap3/css/datatables.css') }}" rel="stylesheet">
+    <style type="text/css">
+        .sorted:after{
+            font-family: FontAwesome;
+            content: "\f15d";
+        }
+        .unsorted:after{
+            font-family: FontAwesome;
+            content: "\f15e";
+        }
+    </style>
+{% endblock %}
 {% block body -%}
     <div class="row">
         <div class="col-lg-12">
@@ -33,7 +46,7 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
+                        <th{% if entities.isSorted('c.name') %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(entities, 'Name', 'c.name') }}</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
