@@ -515,6 +515,11 @@ class PurchaseController extends Controller
             ->getRepository('AcmePurchaseBundle:Purchase')
             ->findBy(array(), array('id' => 'DESC'));
 
-        return $this->render('AcmePurchaseBundle:Purchase:purchaseListAll.html.twig', array('entities' => $entities));
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:purchaseListAll.html.twig',
+            array(
+                'entities' => $entities
+            )
+        );
     }
 }
