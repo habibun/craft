@@ -4683,3 +4683,9 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
     100% { -webkit-transform:rotate(-360deg); }
 }
 /** ***************** **/
+
+/*my_edited for user add button*/
+.my-add-plus {
+    margin-right: -24px;
+    margin-top: -38px;
+}
