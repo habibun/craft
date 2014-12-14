@@ -511,8 +511,9 @@ class PurchaseController extends Controller
 
     public function purchaseListAllAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();
+        $entities = $this->getDoctrine()->getManager()
+            ->getRepository('AcmePurchaseBundle:Purchase')
+            ->findBy(array(), array('id' => 'DESC'));
 
         return $this->render('AcmePurchaseBundle:Purchase:purchaseListAll.html.twig', array('entities' => $entities));
     }

@@ -3,7 +3,8 @@
 {% block title %}Purchase{% endblock %}
 
 {% block stylesheets %}
-    <link href="{{ asset('assets/data-tables-bootstrap3/css/datatables.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/advanced-datatable/media/css/demo_page.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/advanced-datatable/media/css/demo_table.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -60,8 +61,9 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
-<script type="text/javascript" language="javascript" src="/assets/advanced-datatable/media/js/jquery.js"></script>
+    <script src="{{ asset('assets/advanced-datatable/media/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/advanced-datatable/media/js/jquery.dataTables.js') }}"></script>
+
     <script type="text/javascript">
         var dom = {};
         dom.query = jQuery.noConflict( true );
@@ -114,7 +116,7 @@
              * Note that the indicator for showing which row is open is not controlled by DataTables,
              * rather it is done here
              */
-            $('#hidden-table-info tbody td img').live('click', function () {
+            $('#hidden-table-info tbody td img').on('click', function () {
                 var nTr = $(this).parents('tr')[0];
                 if (oTable.fnIsOpen(nTr)) {
                     /* This row is already open - close it */
@@ -129,5 +131,4 @@
             });
         });
     </script>
-
 {% endblock %}
