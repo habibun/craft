@@ -511,18 +511,9 @@ class PurchaseController extends Controller
 
     public function purchaseListAllAction(Request $request)
     {
-        $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT p FROM AcmePurchaseBundle:Purchase p";
-        $query = $em->createQuery($dql);
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('AcmePurchaseBundle:Purchase')->findAll();
 
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $request->query->get('page', 1)/*page number*/,
-            10/*limit per page*/
-        );
-
-        // parameters to template
-        return $this->render('AcmePurchaseBundle:Purchase:purchaseListAll.html.twig', array('entities' => $pagination));
+        return $this->render('AcmePurchaseBundle:Purchase:purchaseListAll.html.twig', array('entities' => $entities));
     }
 }
