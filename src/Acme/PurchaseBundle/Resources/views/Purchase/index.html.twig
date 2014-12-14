@@ -3,185 +3,130 @@
 {% block title %}Purchase{% endblock %}
 
 {% block stylesheets %}
-    <link href="{{ asset('assets/data-tables-bootstrap3/css/datatables.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/advanced-datatable/media/css/demo_page.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/advanced-datatable/media/css/demo_table.css') }}" rel="stylesheet">
 {% endblock %}
 
-{% block body -%}
-    <div class="row">
-        <div class="col-lg-12">
-            <!--breadcrumbs start -->
-            <ul class="breadcrumb">
-                <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
-                <li class="active">Purchase</li>
-                <ul class="pull-right">
-                    <a class="btn btn-sm btn-primary my-add" href="{{ path('purchase_new') }}">
-                        Add <i class="icon-plus"></i>
-                    </a>
-                </ul>
-            </ul>
-            <!--breadcrumbs end -->
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-7">
-            <section class="panel">
-                <header class="panel-heading">
-                    <strong>Purchase List</strong>
-                    <span class="tools pull-right">
-                        <a class="icon-chevron-down" href="javascript:;"></a>
-                        <a class="icon-remove" href="javascript:;"></a>
-                    </span>
-                </header>
-                <div class="panel-body">
-                    <div class="adv-table">
-                        <table id="purchaseDataTable" class="table table-bordered table-hover" cellpadding="0"
-                               cellspacing="0" border="0">
-                            <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Supplier</th>
-                                <th>Location</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+{% block body %}
+    <!-- page start-->
+    <section class="panel">
+        <header class="panel-heading">
+            Purchase List
+        </header>
+        <div class="panel-body">
+            <div class="adv-table">
+                <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered"
+                       id="hidden-table-info">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th class="text-center">Purchase Date</th>
+                        <th class="text-center">Supplier</th>
+                        <th class="text-center">Location</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr class="gradeX">
+                            <td><a href="{{ path('purchase_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                            <td class="center hidden-phone">{{ entity.purchaseDate|date('d-M-Y') }}</td>
+                            <td class="center hidden-phone">{{ entity.supplier }}</td>
+                            <td class="center hidden-phone">{{ entity.location }}</td>
+                            <td class="center hidden-phone">
+                                {% if entity.status == 1 %}
+                                    <span class="label label-inverse label-mini">Finalized</span>
+                                {% else %}
+                                    <span class="label label-warning label-mini">Drafted</span>
+                                {% endif %}
+                            </td>
+                            <td class="center hidden-phone">
+                                <a href="{{ path('purchase_show', { 'id': entity.id }) }}"
+                                   class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
+                                <a href="{{ path('purchase_edit', { 'id': entity.id }) }}"
+                                   class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>
+                                <a href="{{ path('purchase_delete', { 'id': entity.id }) }}"
+                                   class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+            </div>
         </div>
-        <div class="col-lg-5">
-            <section class="panel">
-                <header class="panel-heading">
-                    <strong>Product Info</strong>
-                    <span class="tools pull-right">
-                        <a class="icon-chevron-down" href="javascript:;"></a>
-                        <a class="icon-remove" href="javascript:;"></a>
-                    </span>
-                </header>
-                <div class="panel-body">
-                    <div class="adv-table">
-                        <table id="purchaseLineDataTable" class="table table-bordered table-hover"
-                               cellpadding="0" cellspacing="0" border="0">
-                            <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Manufacturer</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Transaction No</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
+    </section>
+    <!-- page end-->
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/data-tables-bootstrap3/js/datatables.js') }}"></script>
-    <script>
+    <script src="{{ asset('assets/advanced-datatable/media/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/advanced-datatable/media/js/jquery.dataTables.js') }}"></script>
+
+    <script type="text/javascript">
+        var dom = {};
+        dom.query = jQuery.noConflict( true );
+        /* Formating function for row details */
+        function fnFormatDetails(oTable, nTr) {
+            var aData = oTable.fnGetData(nTr);
+            var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+            sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
+            sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+            sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+            sOut += '</table>';
+
+            return sOut;
+        }
+
         $(document).ready(function () {
-            var purchaseTable = $('#purchaseDataTable').dataTable({
-                "bProcessing": true,
-                "bServerSide": true,
-                "sAjaxSource": '{{ path('purchase_result') }}',
-                "aoColumns": [
-                    {
-                        "mData": "purchaseDate",
-                        "mDataProp": "purchaseDate",
-                        "sName": "purchaseDate"
-                    },
-                    {
-                        "mData": "supplier.name",
-                        "mDataProp": "supplier.name",
-                        "sName": "supplier.name"
-                    },
-                    {
-                        "mData": "location.name",
-                        "mDataProp": "location.name",
-                        "sName": "location.name"
-                    },
-                    {
-                        "mData": "status",
-                        "mDataProp": "status",
-                        "sName": "status",
-                        "fnRender": function (oObj) {
-                            if (oObj.aData['status'] == 1) {
-                                return '<span class="label label-inverse">Finalized</span>'
-                            }
+            /*
+             * Insert a 'details' column to the table
+             */
+            var nCloneTh = document.createElement('th');
+            var nCloneTd = document.createElement('td');
+            nCloneTd.innerHTML = '<img src="/assets/advanced-datatable/examples/examples_support/details_open.png">';
+            nCloneTd.className = "center";
 
-                            return '<span class="label label-warning">Drafted</span>';
-                        }
-                    },
-                    {
-                        "mData": "id",
-                        "mDataProp": "id",
-                        "sName": "id",
-                        "bSearchable": false,
-                        "bSortable": false,
-                        "sDefaultContent": "",
-                        "fnRender": function (oObj) {
-                            var showURL = '{{ path('purchase_show', {'id': 'repPID'}) }}';
-                            var editURL = '{{ path('purchase_edit', {'id': 'repPID'}) }}';
-                            var deleteURL = '{{ path('purchase_delete', {'id': 'repPID'}) }}';
-
-                            return '<a href="' + showURL.replace('repPID', oObj.aData['id']) + '" class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>' +
-                                    ' <a href="' + editURL.replace('repPID', oObj.aData['id']) + '" class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>' +
-                                    ' <a href="' + deleteURL.replace('repPID', oObj.aData['id']) + '" class="btn btn-danger btn-xs confirm-delete"><i class="icon-trash"></i></a>';
-                        }
-                    }
-                ]
+            $('#hidden-table-info thead tr').each(function () {
+                this.insertBefore(nCloneTh, this.childNodes[0]);
             });
-        });
-    </script>
 
-    <script>
-        $(document).ready(function () {
-            var purchaseLineTable = $('#purchaseLineDataTable').dataTable({
-                "bProcessing": true,
-                "bServerSide": true,
-                "sAjaxSource": '{{ path('purchase_line_result') }}',
-                "aoColumns": [
-                    {
-                        "mData": "product.name",
-                        "mDataProp": "product.name",
-                        "sName": "product.name"
-                    },
-                    {
-                        "mData": "manufacturer",
-                        "mDataProp": "manufacturer",
-                        "sName": "manufacturer"
-                    },
-                    {
-                        "mData": "quantity",
-                        "mDataProp": "quantity",
-                        "sName": "quantity"
-                    },
-                    {
-                        "mData": "price",
-                        "mDataProp": "price",
-                        "sName": "price"
-                    },
-                    {
-                        "mData": "id",
-                        "mDataProp": "id",
-                        "sName": "id"
-                    }
+            $('#hidden-table-info tbody tr').each(function () {
+                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+            });
+
+            /*
+             * Initialse DataTables, with no sorting on the 'details' column
+             */
+            var oTable = $('#hidden-table-info').dataTable({
+                "aoColumnDefs": [
+                    {"bSortable": false, "aTargets": [0]}
                 ],
+                "aaSorting": [[1, 'asc']],
                 "fnPreDrawCallback": function (oSettings, json) {
                     $('.dataTables_filter input').addClass('form-control input-sm');
                     $('.dataTables_filter input').css('width', '200px');
                     $('.dataTables_length select').addClass('form-control input-sm');
                     $('.dataTables_length select').css('width', '75px');
+                }
+            });
+
+            /* Add event listener for opening and closing details
+             * Note that the indicator for showing which row is open is not controlled by DataTables,
+             * rather it is done here
+             */
+            $('#hidden-table-info tbody td img').on('click', function () {
+                var nTr = $(this).parents('tr')[0];
+                if (oTable.fnIsOpen(nTr)) {
+                    /* This row is already open - close it */
+                    this.src = "/assets/advanced-datatable/examples/examples_support/details_open.png";
+                    oTable.fnClose(nTr);
+                }
+                else {
+                    /* Open this row */
+                    this.src = "/assets/advanced-datatable/examples/examples_support/details_close.png";
+                    oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
                 }
             });
         });
