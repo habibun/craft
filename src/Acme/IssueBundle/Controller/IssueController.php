@@ -37,13 +37,6 @@ class IssueController extends Controller
         return $datatable->getSearchResults();
     }
 
-    public function getIssueLineResultAction()
-    {
-        $datatable = $this->get('lankit_datatables')->getDatatable('AcmeIssueBundle:IssueLine');
-
-        return $datatable->getSearchResults();
-    }
-
     /**
      * Creates a new Issue entity.
      *
