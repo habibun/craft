@@ -1,0 +1,7 @@
+# src/Acme/UserBundle/Resources/config/validation.yml
+Acme\EmailBundle\Entity\Email:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        email:
+            - Email: ~

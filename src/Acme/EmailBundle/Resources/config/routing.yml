@@ -1,0 +1,7 @@
+acme_email_email:
+    resource: "@AcmeEmailBundle/Resources/config/routing/email.yml"
+    prefix:   /email
+
+acme_email_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AcmeEmailBundle:Default:index }

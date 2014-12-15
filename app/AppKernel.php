@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Cg\KintBundle\CgKintBundle(),
             new Ali\DatatableBundle\AliDatatableBundle(),
+            new Acme\EmailBundle\AcmeEmailBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
