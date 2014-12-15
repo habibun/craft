@@ -26,23 +26,31 @@ class PurchaseController extends Controller
      *
      */
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->render('AcmePurchaseBundle:Purchase:index.html.twig');
-    }
+        $entities = $this->getDoctrine()->getManager()
+        ->getRepository('AcmePurchaseBundle:Purchase')
+        ->findBy(array(), array('id' => 'DESC'));
 
-    public function getPurchaseResultAction()
-    {
-        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
+        /*$em = $this->getDoctrine()->getManager(); 
+        $query = $em->createQuery( 
+            'SELECT p.id as id, p.purchaseDate as purchaseDate, s.name as supplier, l.name as location, p.status as status, pl.price 
+            FROM AcmePurchaseBundle:PurchaseLine pl
+            JOIN pl.purchase p
+            JOIN p.supplier s
+            JOIN p.location l
+            ORDER BY p.id DESC' );
 
-        return $datatable->getSearchResults();
-    }
+        $entities = $query->getArrayResult();
 
-    public function getPurchaseLineResultAction()
-    {
-        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:PurchaseLine');
+        var_dump($entities);*/
 
-        return $datatable->getSearchResults();
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:index.html.twig',
+            array(
+                'entities' => $entities
+            )
+        );
     }
 
     /**
@@ -511,15 +519,25 @@ class PurchaseController extends Controller
 
     public function purchaseListAllAction(Request $request)
     {
-        $entities = $this->getDoctrine()->getManager()
-            ->getRepository('AcmePurchaseBundle:Purchase')
-            ->findBy(array(), array('id' => 'DESC'));
 
-        return $this->render(
-            'AcmePurchaseBundle:Purchase:purchaseListAll.html.twig',
-            array(
-                'entities' => $entities
-            )
-        );
+    }
+
+    public function lankitAction()
+    {
+        return $this->render('AcmePurchaseBundle:Purchase:lankit.html.twig');
+    }
+
+    public function getLankitPurchaseResultAction()
+    {
+        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
+
+        return $datatable->getSearchResults();
+    }
+
+    public function getLankitPurchaseLineResultAction()
+    {
+        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:PurchaseLine');
+
+        return $datatable->getSearchResults();
     }
 }

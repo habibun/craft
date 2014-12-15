@@ -4,9 +4,12 @@
 
 {% block stylesheets %}
     <style type="text/css">
-        {# remove last separator if 1 or 2 #}
+        {# remove last separator if last or more 
         .breadcrumb > li + li:nth-last-child(1):before {
             content: " ";
+        } #}
+        .breadcrumb > li + li.pull-right:last-child:before {
+            content: "";
         }
         {# add default btn-default class #}
         .btn-default {
@@ -47,7 +50,7 @@
             <ul class="breadcrumb">
                 <li class="active">
                     <li class="pull-right">
-                        <a class="btn btn-sm btn-primary my-add" href="{{ path('user_new') }}">
+                        <a class="btn btn-sm btn-primary my-add-plus" href="{{ path('user_new') }}">
                             Add <i class="icon-plus"></i>
                         </a>
                     </li>
