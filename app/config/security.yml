@@ -6,10 +6,11 @@ security:
         ROLE_USER:
         ROLE_PURCHASE:    ROLE_PURCHASE
         ROLE_ISSUE:       ROLE_ISSUE
+        ROLE_EMAIL:       ROLE_EMAIL
         ROLE_HISTORY:     ROLE_HISTORY
         ROLE_SETUP:       ROLE_SETUP
         ROLE_REPORT:      ROLE_REPORT
-        ROLE_ADMIN:       [ROLE_PURCHASE, ROLE_ISSUE, ROLE_HISTORY, ROLE_SETUP, ROLE_REPORT, ROLE_ADMIN]
+        ROLE_ADMIN:       [ROLE_PURCHASE, ROLE_ISSUE, ROLE_EMAIL, ROLE_HISTORY, ROLE_SETUP, ROLE_REPORT, ROLE_ADMIN]
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     access_control:
@@ -18,6 +19,7 @@ security:
         - { path: ^/dashboard, role: ROLE_USER }
         - { path: ^/purchase, role: ROLE_PURCHASE }
         - { path: ^/issue, role: ROLE_ISSUE }
+        - { path: ^/email, role: ROLE_EMAIL }
         - { path: ^/history, role: ROLE_HISTORY }
         - { path: ^/setup, role: ROLE_SETUP }
         - { path: ^/report, role: ROLE_REPORT }
