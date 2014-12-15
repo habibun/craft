@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new Cg\KintBundle\CgKintBundle(),
             new Ali\DatatableBundle\AliDatatableBundle(),
             new Acme\EmailBundle\AcmeEmailBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

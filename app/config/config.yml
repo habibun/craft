@@ -157,6 +157,12 @@ cg_kint:
     nesting_depth:    5
     string_length:    60
 
+# AliDatatableBundle Configuration
 ali_datatable:
     all:    ~
     js:     ~
+
+# GenemuFormBundle Configuration
+genemu_form:
+    date: ~ 
+    autocomplete: ~    
