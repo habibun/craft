@@ -18,7 +18,7 @@ Acme\EmailBundle\Entity\Email:
             column: created_at
         status:
             type: boolean
-            nullable: false
+            nullable: true
     manyToOne:
         createdBy:
             targetEntity: Acme\UserBundle\Entity\User
