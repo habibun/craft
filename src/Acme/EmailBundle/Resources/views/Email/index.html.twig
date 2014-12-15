@@ -2,6 +2,10 @@
 
 {% block title %}Email{% endblock %}
 
+{% block stylesheets %}
+    {{ form_stylesheet(searchForm) }}
+{% endblock %}
+
 {% block body -%}
     <div class="row">
         <div class="col-lg-12">
@@ -36,8 +40,8 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Createdat</th>
-                        <th>Createdby</th>
+                        <th>Created At</th>
+                        <th>Created By</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -77,4 +81,13 @@
             </a>
         </li>
     </ul>
+
+    <form class="pure-form pure-g form-wrapper cf">
+          {{ form_widget(searchForm.email,{'attr': {'class': 'ui-autocomplete-input pure-input-rounded','placeholder':'Search here...'}}) }}
+        <button type="submit" class="pure-button">Search</button>
+    </form>
     {% endblock %}
+
+{% block javascripts %}
+    {{ form_javascript(searchForm) }}
+{% endblock %}

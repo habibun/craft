@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Acme\EmailBundle\Entity\Email;
 use Acme\EmailBundle\Form\EmailType;
+use Acme\DashBundle\Form\SearchType;
 
 /**
  * Email controller.
@@ -25,8 +26,12 @@ class EmailController extends Controller
 
         $entities = $em->getRepository('AcmeEmailBundle:Email')->findAll();
 
+        // search Form
+        $searchForm = $this->createForm(new SearchType('Acme\EmailBundle\Entity\Email'), null);
+
         return $this->render('AcmeEmailBundle:Email:index.html.twig', array(
             'entities' => $entities,
+            'searchForm' => $searchForm->createView()
         ));
     }
     /**
