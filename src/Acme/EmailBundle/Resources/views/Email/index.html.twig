@@ -5,16 +5,17 @@
 {% block stylesheets %}
     {{ form_stylesheet(searchForm) }}
     <style type="text/css">
+        /* remove last breadcrumb separator */
         .breadcrumb > li + li.pull-right:last-child:before {
             content: "";
         }
-        {# add default btn-default class #}
+        /* override btn-default class */
         .btn-default {
             color: #333333;
             background-color: #ffffff;
             border-color: #cccccc;
         }
-        /*for sorting email*/
+        /* for sorting/unsorting email */
         .sorted:after{
             font-family: FontAwesome;
             content: "\f15d";
@@ -78,7 +79,7 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th{% if entities.isSorted('e.email') %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(entities, 'Name', 'e.email') }}</th>
+                        <th{% if entities.isSorted('e.email') %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(entities, 'Name', 'e.email') }}<span></span></th>
                         <th>Email</th>
                         <th>Created At</th>
                         <th>Created By</th>
@@ -113,7 +114,7 @@
             </table>
         </section>
     </div>
-</div>    
+</div>
 {% endblock %}
 
 {% block javascripts %}
