@@ -44,7 +44,7 @@ class EmailController extends Controller
         $searchForm = $this->createForm(new SearchType('Acme\EmailBundle\Entity\Email'), null);
 
         return $this->render('AcmeEmailBundle:Email:index.html.twig', array(
-            'entities' => $pagination,
+            'emailEntities' => $pagination,
             'searchForm' => $searchForm->createView()
         ));
     }
