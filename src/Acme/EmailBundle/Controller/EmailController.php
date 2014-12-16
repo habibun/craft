@@ -9,6 +9,13 @@ use Acme\EmailBundle\Entity\Email;
 use Acme\EmailBundle\Form\EmailType;
 use Acme\DashBundle\Form\SearchType;
 
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineCollectionAdapter;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 /**
  * Email controller.
  *
@@ -243,13 +250,13 @@ class EmailController extends Controller
         ;
     }
 
-        public function findAction(Request $request)
+    public function findAction(Request $request)
     {
         try {
         $allRequest = $request->createFromGlobals();
         $s = $allRequest->request->all();
 
-        $search = strip_tags(trim($s['search']));
+        $search = strip_tags(trim($s['no']));
 
         if ($search == null or $search == ' ') {
             return $this->redirect($this->generateUrl('homepage'));
@@ -260,4 +267,21 @@ class EmailController extends Controller
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => ''));
         }
     }
+
+    public function searchBlogsByTitleAction($slug = null, $page)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($slug);
+
+        $adapter = new ArrayAdapter($searchedBlogs);
+        $pagerBlog = new Pagerfanta($adapter);
+        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
+
+            $pagerBlog->setCurrentPage($page);
+
+        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
+            'blogs' => $pagerBlog,
+            'filter' => $slug
+        ));
+    }   
 }

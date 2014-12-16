@@ -29,7 +29,12 @@ email_delete:
     defaults: { _controller: "AcmeEmailBundle:Email:delete" }
     requirements: { _method: post|delete }
 
-email_find:
+blog_find:
     pattern:  /blog/find
-    defaults: { _controller: EtheriqBlogBundle:Email:find }
+    defaults: { _controller: "AcmeEmailBundle:Email:find" }
+
+blog_search:
+    pattern:  /{_locale}/blog/search/{slug}/{page}
+    defaults: { _controller: AcmeEmailBundle:Email:searchBlogsByTitle, page: 1, slug: '' }
     requirements:
+            page:  \d+
