@@ -20,17 +20,27 @@ class EmailController extends Controller
      * Lists all Email entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entities = $em->getRepository('AcmeEmailBundle:Email')->findAll();
+
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT e FROM AcmeEmailBundle:Email e";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+        $query,
+        $request->query->get('page', 1)/*page number*/,
+        10/*limit per page*/
+        );
 
         // search Form
         $searchForm = $this->createForm(new SearchType('Acme\EmailBundle\Entity\Email'), null);
 
         return $this->render('AcmeEmailBundle:Email:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $pagination,
             'searchForm' => $searchForm->createView()
         ));
     }

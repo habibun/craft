@@ -14,6 +14,15 @@
             background-color: #ffffff;
             border-color: #cccccc;
         }
+        /*for sorting email*/
+        .sorted:after{
+            font-family: FontAwesome;
+            content: "\f15d";
+        }
+        .unsorted:after{
+            font-family: FontAwesome;
+            content: "\f15e";
+        }
     </style>
 {% endblock %}
 
@@ -69,7 +78,7 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
+                        <th{% if entities.isSorted('e.email') %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(entities, 'Name', 'e.email') }}</th>
                         <th>Email</th>
                         <th>Created At</th>
                         <th>Created By</th>
