@@ -56,10 +56,10 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                 <span class="pull-right">
-                        {{ knp_pagination_render(entities, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}
-                </span>
             </section>
+                <div class="add-task-row">
+                    <span>{{ knp_pagination_render(entities, "", {}, { "style": "pager", "aligned": true }) }}</span>
+                </div>
         </div>
     </div>
 {% endblock %}
