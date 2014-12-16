@@ -31,7 +31,8 @@
         "cg/kint-bundle": "dev-master",
         "ali/datatable": "dev-master",
         "knplabs/knp-components": "1.2.*@dev",
-        "genemu/form-bundle": "2.2.*"
+        "genemu/form-bundle": "2.2.*",
+        "white-october/pagerfanta-bundle": "1.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

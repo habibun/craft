@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Ali\DatatableBundle\AliDatatableBundle(),
             new Acme\EmailBundle\AcmeEmailBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

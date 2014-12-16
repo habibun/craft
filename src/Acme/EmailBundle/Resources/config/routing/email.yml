@@ -28,3 +28,8 @@ email_delete:
     path:     /{id}/delete
     defaults: { _controller: "AcmeEmailBundle:Email:delete" }
     requirements: { _method: post|delete }
+
+email_find:
+    pattern:  /blog/find
+    defaults: { _controller: EtheriqBlogBundle:Email:find }
+    requirements:

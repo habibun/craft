@@ -242,4 +242,22 @@ class EmailController extends Controller
             ->getForm()
         ;
     }
+
+        public function findAction(Request $request)
+    {
+        try {
+        $allRequest = $request->createFromGlobals();
+        $s = $allRequest->request->all();
+
+        $search = strip_tags(trim($s['search']));
+
+        if ($search == null or $search == ' ') {
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->redirect($this->generateUrl('blog_search', array('slug' => $search)));
+        } catch (NotFoundHttpException $e) {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => ''));
+        }
+    }
 }
