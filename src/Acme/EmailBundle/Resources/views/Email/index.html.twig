@@ -79,8 +79,9 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th{% if entities.isSorted('e.email') %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(entities, 'Name', 'e.email') }}<span></span></th>
-                        <th>Email</th>
+                        <th>Name</th>
+                        <th{% if entities.direction == 'asc' %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(entities, 'Email', 'e.email') }}
+                        </th>
                         <th>Created At</th>
                         <th>Created By</th>
                         <th>Status</th>
@@ -129,6 +130,16 @@
                     if ($(this).val() == '')
                         $(this).val('Search here...');
                 });
+
+                /*$("th,.sorted").click(function(){
+                     alert('this is a test');
+                });*/
+
+                // $('.sorted').toggle('unsorted');
+/*jQuery('#jony').click(function () {
+    jQuery(this).find('span').removeClass('sorted').addClass('unsorted');
+});*/
+
             });
     </script>
 {% endblock %}

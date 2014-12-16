@@ -20,7 +20,7 @@ class EmailController extends Controller
      * Lists all Email entities.
      *
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('AcmeEmailBundle:Email')->findAll();
@@ -32,8 +32,12 @@ class EmailController extends Controller
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
         $query,
-        $request->query->get('page', 1)/*page number*/,
-        10/*limit per page*/
+        $this->get('request')->query->get('page', 1),
+        $this->container->getParameter('knp_limit_per_page'),
+        array(
+            'defaultSortFieldName' => 'e.email',
+            'defaultSortDirection' => 'asc',
+        )
         );
 
         // search Form
