@@ -1,19 +1,17 @@
 # This file is auto-generated during the composer install
 parameters:
-    #purchase status
+    # purchase
     purchase_status: 1
 
-    #user service
-    acme_user.my_twig_extension.class: Acme\UserBundle\Twig\MyTwigExtension
+    # user
     acme_user.my_profile_form_type: Acme\UserBundle\Form\Type\ProfileFormType
-    acme_user_salavert.twig.time_ago: Salavert\Twig\Extension\TimeAgoExtension
     fos_user.template.engine: 'twig'
     acme_user.user_provider.username: Acme\UserBundle\Security\UserProvider
 
-    #pdf
+    # pdf
     wkhtmltopdf:  "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe\""
 
-    #message
+    # message
     access_error : "You do not have the necessary rights to access this action !"
     finalize_modify_error: "This is a finalized record. You can't modify this !"
     finalize_delete_error: "This is a finalized record. You can't delete this !"
@@ -21,8 +19,15 @@ parameters:
     used_error_long: "Error: You can't delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator."
     used_error_small: "You cannot delete level which is already being used."
 
-    #limit per page
+    # knp
     knp_limit_per_page: 10
 
-    #pager fanta
+    # pagerfanta
     pager_max_per_page: 10
+
+    # twig
+    acme_dash.twig.request_extension: Symfony\Component\HttpFoundation\Request
+    acme_dash.twig.my_extension: Acme\DashBundle\Twig\MyTwigExtension
+
+    # salavert
+    acme_dash.salavert.twig_time_ago: Salavert\Twig\Extension\TimeAgoExtension

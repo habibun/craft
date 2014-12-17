@@ -31,12 +31,30 @@
 {% endblock %}
 
 {% block body -%}
+
+    {% if filter is defined %}
+        <div class="alert alert-success fade in">
+            <button data-dismiss="alert" class="close close-sm" type="button">
+                <i class="icon-remove"></i>
+            </button>
+            <p>
+                Filtered by: <strong>{{ filter }}</strong>
+                &nbsp;&nbsp;&nbsp; {{ pagerEntities.NbResults }} email has found
+            </p>
+        </div>
+    {% endif %}
+
     <div class="row">
         <div class="col-lg-6">
             <!--breadcrumbs start -->
             <ul class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
-                <li class="active">Email</li>
+                {% if get_action_name() == "searchEmail" %}
+                    <li><a href="{{ path('email') }}">Email</a></li>
+                    <li class="active">Search</li>
+                    {% else %}
+                    <li class="active">Email</li>
+                {% endif %}
             </ul>
             <!--breadcrumbs end -->
         </div>
@@ -72,7 +90,11 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
+                {% if get_action_name() == "searchEmail" %}
+                    <strong>Search Result</strong>
+                        {% else %}
                     <strong>Email list</strong>
+                {% endif %}    
                 <span class="tools pull-right">
                     <a class="icon-chevron-down" href="javascript:;"></a>
                     <a class="icon-remove" href="javascript:;"></a>
@@ -83,7 +105,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
-                        <th{% if emailEntities.direction == 'asc' %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(emailEntities, 'Email', 'e.email') }}
+                        <th{% if knpEntities.direction == 'asc' %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(knpEntities, 'Email', 'e.email') }}
                         </th>
                         <th>Created At</th>
                         <th>Created By</th>
@@ -92,7 +114,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for entity in emailEntities %}
+                    {% for entity in pagerEntities %}
                         <tr>
                             <td><a href="{{ path('email_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                             <td>{{ entity.email|join(' , ')|replace({'@eongroup.net.bd':'','.':' '|capitalize})|title }}</td>
@@ -119,7 +141,9 @@
             </section>
             <div class="text-center">
                 <span>
-                    {{ knp_pagination_render(emailEntities, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}
+                    {% if pagerEntities.haveToPaginate %}
+                        {{ pagerfanta(pagerEntities, 'twitter_bootstrap3_translated') }}
+                    {% endif %}
                 </span>
             </div>
         </div>

@@ -1,7 +1,19 @@
-parameters:
-#    acme_dash.example.class: Acme\DashBundle\Example
-
 services:
-#    acme_dash.example:
-#        class: %acme_dash.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    request:
+        class: %acme_dash.twig.request_extension%
+    acme_dash.twig.request_extension:
+        class: Acme\DashBundle\Twig\DashExtension
+        arguments:  [@request]
+        tags:
+            - { name: twig.extension }
+
+    acme_dash.salavert.twig_time_ago:
+        class: %acme_dash.salavert.twig_time_ago%
+        arguments: [@translator]
+        tags:
+        - { name: twig.extension }
+
+    acme_dash.twig.my_extension:
+        class: %acme_dash.twig.my_extension%
+        tags:
+            - { name: twig.extension }
