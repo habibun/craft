@@ -287,7 +287,7 @@ class EmailController extends Controller
         }
     }
 
-    public function searchEmailAction($slug = null, $page)
+    public function searchEmailAction($slug = null)
     {
         $em = $this->getDoctrine()->getManager();
         $searchedEmail = $em->getRepository('AcmeEmailBundle:Email')->searchEmailResult($slug);
@@ -295,7 +295,6 @@ class EmailController extends Controller
         $adapter = new ArrayAdapter($searchedEmail);
         $pagerEmail = new Pagerfanta($adapter);
         $pagerEmail->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
-        $pagerEmail->setCurrentPage($page);
 
         return $this->render(
             'AcmeEmailBundle:Email:searchResult.html.twig',

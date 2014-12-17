@@ -35,7 +35,7 @@ email_find:
     requirements: { _method: post}
 
 email_search:
-    pattern:  /blog/search/{slug}/{page}
-    defaults: { _controller: "AcmeEmailBundle:Email:searchEmail", page: 1, slug: '' }
+    pattern:  /blog/search/{slug}
+    defaults: { _controller: "AcmeEmailBundle:Email:searchEmail", slug: '' }
     requirements:
             page:  \d+
