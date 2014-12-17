@@ -26,6 +26,18 @@
         </li>
         {% endif %}
 
+        {% if is_granted('ROLE_EMAIL') %}
+        <li>
+            <a href="{{ path('email') }}" >
+                <i class="icon-envelope text-primary"></i>
+                <span>Email</span>
+                {% if emailEntities is defined %}
+                    <span class="label label-danger pull-right mail-info">{{ emailEntities.getTotalItemCount }}</span>
+                {% endif %}
+            </a>
+        </li>
+        {% endif %}
+
         {% if is_granted('ROLE_HISTORY') %}
             <li class="sub-menu">
                 <a href="javascript:;">

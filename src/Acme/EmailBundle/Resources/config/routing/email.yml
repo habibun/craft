@@ -1,0 +1,40 @@
+email:
+    path:     /
+    defaults: { _controller: "AcmeEmailBundle:Email:index" }
+
+email_show:
+    path:     /{id}/show
+    defaults: { _controller: "AcmeEmailBundle:Email:show" }
+
+email_new:
+    path:     /new
+    defaults: { _controller: "AcmeEmailBundle:Email:new" }
+
+email_create:
+    path:     /create
+    defaults: { _controller: "AcmeEmailBundle:Email:create" }
+    requirements: { _method: post }
+
+email_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AcmeEmailBundle:Email:edit" }
+
+email_update:
+    path:     /{id}/update
+    defaults: { _controller: "AcmeEmailBundle:Email:update" }
+    requirements: { _method: post|put }
+
+email_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AcmeEmailBundle:Email:delete" }
+    requirements: { _method: post|delete }
+
+blog_find:
+    pattern:  /blog/find
+    defaults: { _controller: "AcmeEmailBundle:Email:find" }
+
+blog_search:
+    pattern:  /{_locale}/blog/search/{slug}/{page}
+    defaults: { _controller: AcmeEmailBundle:Email:searchBlogsByTitle, page: 1, slug: '' }
+    requirements:
+            page:  \d+

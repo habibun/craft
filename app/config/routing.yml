@@ -1,3 +1,7 @@
+acme_email:
+    resource: "@AcmeEmailBundle/Resources/config/routing.yml"
+    prefix:   /
+
 acme_widget:
     resource: "@AcmeWidgetBundle/Resources/config/routing.yml"
     prefix:   /widget

@@ -1,5 +1,5 @@
 /*
-SQLyog Ultimate v11.11 (64 bit)
+SQLyog Ultimate v11.11 (32 bit)
 MySQL - 5.6.14 : Database - craft
 *********************************************************************
 */
@@ -43,6 +43,25 @@ CREATE TABLE `depot` (
 /*Data for the table `depot` */
 
 insert  into `depot`(`id`,`name`) values (1,'Head Office'),(2,'Barisal'),(3,'Bogra'),(4,'Comilla'),(5,'Jessore'),(6,'Khulna'),(7,'Mymensingh'),(8,'Naogaon'),(9,'Natore'),(10,'Rajshahi'),(11,'Rangpur'),(12,'Thakurgaon'),(15,'testa');
+
+/*Table structure for table `email` */
+
+DROP TABLE IF EXISTS `email`;
+
+CREATE TABLE `email` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_E7927C74DE12AB56` (`created_by`),
+  CONSTRAINT `FK_E7927C74DE12AB56` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `email` */
+
+insert  into `email`(`id`,`email`,`created_at`,`status`,`created_by`) values (1,'mrinmoy@localhsot.com','2014-12-15 23:16:47',1,1),(2,'roton@localhsot.com','2014-12-15 23:20:19',1,1),(3,'sumon@localshost.com','2014-12-15 23:29:18',0,1),(4,'rokon@localhsot.com','2014-12-15 23:29:59',1,1),(5,'rasel@localhsot.com','2014-12-15 23:30:27',1,1),(6,'raihan@localhsot.com','2014-12-15 23:35:45',1,1),(7,'jony@localhsot.com','2014-12-15 23:39:25',1,1),(8,'jibon@localhost.com','2014-12-16 02:39:36',1,1),(9,'juel@localhost.com','2014-12-16 02:40:23',1,1),(10,'sristy@localhost.com','2014-12-16 02:40:50',1,1),(11,'rony@localhost.com','2014-12-16 02:41:20',1,1);
 
 /*Table structure for table `issue` */
 
@@ -218,7 +237,7 @@ CREATE TABLE `supplier` (
 
 /*Data for the table `supplier` */
 
-insert  into `supplier`(`id`,`created_by`,`name`,`address`,`created_at`) values (1,1,'Computer Source Ltd','House: 11/B, Road: 12 (New) 31 (Old)\r\nDhanmondi R/A, Dhaka-1209\r\n\r\nTel: +880-2-9127592, +880-2-9121484\r\n+880-2-9140152, \r\n+880-2-9145688, +880-2-8120578','2014-08-17 18:07:05'),(6,1,'Ryans Computers Ltd','123/5 BCS Computer City\r\nIDB Bhaban, Agargaon, Dhaka - 1207\r\nTelephone : 02-9183228\r\nFax : 8059859','2014-09-08 17:44:54'),(7,35,'Flora Limited','Adamjee Courte Annex-2, \r\n119-120 Motijheel, \r\nMotijheel Road, \r\nDhaka 1000\r\nPhone:02-9551832\r\nsdfsdf','2014-09-08 17:53:08'),(8,1,'High Source Electronics','House # 6,Road # 4 ,Block - A, Av - 3\r\nSection - 11, Mirpur, Dhaka - 1216\r\nE-Mail : highsource09@yahoo.com\r\nWebsite : www.highsourcebd.com ','2014-09-08 18:00:05'),(9,35,'Ethics Mercantile Limited','Road No: 04, House No: 303 (3rd Floor)\r\nDOHS, Baridhara, Dhaka-1229,\r\nBangladesh\r\nTelephone No : +880 2 8415837\r\nE-mail : info@ethicsbd.com\r\nquotation@ethicsbd.com\r\nWebsite: www.ethicsbd.com','2014-09-08 18:00:13');
+insert  into `supplier`(`id`,`created_by`,`name`,`address`,`created_at`) values (1,1,'Computer Source Ltd','House: 11/B, Road: 12 (New) 31 (Old)\r\nDhanmondi R/A, Dhaka-1209\r\n\r\nTel: +880-2-9127592, +880-2-9121484\r\n+880-2-9140152, \r\n+880-2-9145688, +880-2-8120578','2014-08-17 18:07:05'),(6,1,'Ryans Computers Ltd','123/5 BCS Computer City\r\nIDB Bhaban, Agargaon, Dhaka - 1207\r\nTelephone : 02-9183228\r\nFax : 8059859','2014-09-08 17:44:54'),(7,35,'Flora Limited','Adamjee Courte Annex-2, \r\n119-120 Motijheel, \r\nMotijheel Road, \r\nDhaka 1000\r\nPhone:02-9551832','2014-09-08 17:53:08'),(8,1,'High Source Electronics','House # 6,Road # 4 ,Block - A, Av - 3\r\nSection - 11, Mirpur, Dhaka - 1216\r\nE-Mail : highsource09@yahoo.com\r\nWebsite : www.highsourcebd.com ','2014-09-08 18:00:05'),(9,35,'Ethics Mercantile Limited','Road No: 04, House No: 303 (3rd Floor)\r\nDOHS, Baridhara, Dhaka-1229,\r\nBangladesh\r\nTelephone No : +880 2 8415837\r\nE-mail : info@ethicsbd.com\r\nquotation@ethicsbd.com\r\nWebsite: www.ethicsbd.com','2014-09-08 18:00:13');
 
 /*Table structure for table `users` */
 
