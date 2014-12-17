@@ -5,9 +5,10 @@ namespace Acme\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
-
 use Acme\UserBundle\Entity\User;
 use Acme\UserBundle\Form\UserType;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * User controller.
@@ -23,21 +24,16 @@ class UserController extends Controller
     public function indexAction()
     {
         $userManager = $this->get('fos_user.user_manager');
+        $searchedUser = $userManager->findUsers();
 
-        $entities = $userManager->findUsers();
-
-        $paginator = $this->get('knp_paginator');
-        $entities = $paginator->paginate(
-            $entities,
-            $this->get('request')->query->get('page', 1) /*page number*/,
-            10
-        /*limit per page*/
-        );
+        $adapter = new ArrayAdapter($searchedUser);
+        $pagerUser = new Pagerfanta($adapter);
+        $pagerUser->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
 
         return $this->render(
             'AcmeUserBundle:User:index.html.twig',
             array(
-                'entities' => $entities,
+                'entities' => $pagerUser,
             )
         );
     }
@@ -304,24 +300,21 @@ class UserController extends Controller
         $request = $this->get('request');
         $username = $request->request->get('username');
 
-        /*if (!$username) {
-            throw $this->createNotFoundException('Unable to find Username.');
-        }*/
+        if ($username == null or $username == ' ') {
+            return $this->redirect($this->generateUrl('user'));
+        }
 
-        $entities = $em->getRepository('AcmeUserBundle:User')->findUsernameResult($username);
+        $searchedUser = $em->getRepository('AcmeUserBundle:User')->findUsernameResult($username);
 
-        $paginator = $this->get('knp_paginator');
-        $entities = $paginator->paginate(
-            $entities,
-            $this->get('request')->query->get('page', 1) /*page number*/,
-            10
-        /*limit per page*/
-        );
+        $adapter = new ArrayAdapter($searchedUser);
+        $pagerUser = new Pagerfanta($adapter);
+        $pagerUser->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
 
         return $this->render(
             'AcmeUserBundle:User:userResult.html.twig',
             array(
-                'entities' => $entities
+                'entities' => $pagerUser,
+                'filter' => $username
             )
         );
     }

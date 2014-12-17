@@ -11,6 +11,7 @@
         .breadcrumb > li + li.pull-right:last-child:before {
             content: "";
         }
+
         {# add default btn-default class #}
         .btn-default {
             color: #333333;
@@ -21,6 +22,19 @@
 {% endblock %}
 
 {% block body -%}
+
+    {% if filter is defined %}
+        <div class="alert alert-success fade in">
+            <button data-dismiss="alert" class="close close-sm" type="button">
+                <i class="icon-remove"></i>
+            </button>
+            <p>
+                Filtered by: <strong>{{ filter }}</strong>
+                &nbsp;&nbsp;&nbsp; {{ entities.NbResults }} users has found
+            </p>
+        </div>
+    {% endif %}
+
     <div class="row">
         <div class="col-lg-6">
             <!--breadcrumbs start -->
@@ -36,8 +50,8 @@
             <form class="row" action="{{ path('user_find_username') }}" id="form" method="post" accept-charset="UTF-8"
                   role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" value="Search..." name="username" size="10"
-                           value="Search..." id="username"/>
+                    <input type="text" class="form-control" value="Search here..." name="username" size="10"
+                           id="username"/>
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default"><i class="icon-search"></i>
                             </button>
@@ -49,11 +63,11 @@
             <!--breadcrumbs start -->
             <ul class="breadcrumb">
                 <li class="active">
-                    <li class="pull-right">
-                        <a class="btn btn-sm btn-primary my-add" href="{{ path('user_new') }}">
-                            Add <i class="icon-plus"></i>
-                        </a>
-                    </li>
+                <li class="pull-right">
+                    <a class="btn btn-sm btn-primary my-add" href="{{ path('user_new') }}">
+                        Add <i class="icon-plus"></i>
+                    </a>
+                </li>
                 </li>
             </ul>
             <!--breadcrumbs end -->
@@ -107,7 +121,7 @@
                                     <span class="label label-warning label-mini">Disabled</span>
                                 {% endif %}
                             </td>
-                            <td>{{ entity.createdAt|date('d-m-Y H:i:s') }}</td>
+                            <td>{{ entity.createdAt|date('d-M-Y H:i:s') }}</td>
                             <td>{{ entity.createdBy }}</td>
                             <td>
                                 <ul>
@@ -128,10 +142,8 @@
                     </tbody>
                 </table>
             </section>
-            <div class="text-center">
-                <span>
-                    {{ knp_pagination_render(entities, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}
-                </span>
+            <div class="row text-center">
+                {{ pagerfanta(entities, 'twitter_bootstrap3_translated') }}
             </div>
         </div>
     </div>
@@ -141,12 +153,12 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#username').focus(function (evt) {
-                if ($(this).val() == 'Search...')
+                if ($(this).val() == 'Search here...')
                     $(this).val('');
             });
             $('#username').blur(function (evt) {
                 if ($(this).val() == '')
-                    $(this).val('Search...');
+                    $(this).val('Search here...');
             });
         });
     </script>
