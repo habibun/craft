@@ -1,6 +1,7 @@
 Acme\EmailBundle\Entity\Email:
     type: entity
     table: email
+    repositoryClass: Acme\EmailBundle\Repository\EmailRepository
     id:
         id:
             type: integer

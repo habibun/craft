@@ -29,12 +29,13 @@ email_delete:
     defaults: { _controller: "AcmeEmailBundle:Email:delete" }
     requirements: { _method: post|delete }
 
-blog_find:
-    pattern:  /blog/find
+email_find:
+    pattern:  /email/find
     defaults: { _controller: "AcmeEmailBundle:Email:find" }
+    requirements: { _method: post}
 
-blog_search:
-    pattern:  /{_locale}/blog/search/{slug}/{page}
-    defaults: { _controller: AcmeEmailBundle:Email:searchBlogsByTitle, page: 1, slug: '' }
+email_search:
+    pattern:  /blog/search/{slug}/{page}
+    defaults: { _controller: "AcmeEmailBundle:Email:searchEmail", page: 1, slug: '' }
     requirements:
             page:  \d+

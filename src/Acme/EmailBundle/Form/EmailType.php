@@ -15,20 +15,26 @@ class EmailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email','email')
-            ->add('status','checkbox', array(
-                'attr' => array('checked' =>'checked')
-                ));
+            ->add('email', 'email')
+            ->add(
+                'status',
+                'checkbox',
+                array(
+                    'attr' => array('checked' => 'checked')
+                )
+            );
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Acme\EmailBundle\Entity\Email'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Acme\EmailBundle\Entity\Email'
+            )
+        );
     }
 
     /**

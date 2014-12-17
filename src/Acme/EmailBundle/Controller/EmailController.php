@@ -4,17 +4,12 @@ namespace Acme\EmailBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Acme\EmailBundle\Entity\Email;
 use Acme\EmailBundle\Form\EmailType;
 use Acme\DashBundle\Form\SearchType;
-
-use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Email controller.
@@ -29,32 +24,32 @@ class EmailController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('AcmeEmailBundle:Email')->findAll();
-
-        $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT e FROM AcmeEmailBundle:Email e";
+        $em = $this->get('doctrine.orm.entity_manager');
+        $dql = "SELECT e FROM AcmeEmailBundle:Email e";
         $query = $em->createQuery($dql);
 
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-        $query,
-        $this->get('request')->query->get('page', 1),
-        $this->container->getParameter('knp_limit_per_page'),
-        array(
-            'defaultSortFieldName' => 'e.email',
-            'defaultSortDirection' => 'asc',
-        )
+            $query,
+            $this->get('request')->query->get('page', 1),
+            $this->container->getParameter('knp_limit_per_page'),
+            array(
+                'defaultSortFieldName' => 'e.email',
+                'defaultSortDirection' => 'asc',
+            )
         );
 
-        // search Form
         $searchForm = $this->createForm(new SearchType('Acme\EmailBundle\Entity\Email'), null);
 
-        return $this->render('AcmeEmailBundle:Email:index.html.twig', array(
-            'emailEntities' => $pagination,
-            'searchForm' => $searchForm->createView()
-        ));
+        return $this->render(
+            'AcmeEmailBundle:Email:index.html.twig',
+            array(
+                'emailEntities' => $pagination,
+                'searchForm' => $searchForm->createView()
+            )
+        );
     }
+
     /**
      * Creates a new Email entity.
      *
@@ -75,10 +70,13 @@ class EmailController extends Controller
             return $this->redirect($this->generateUrl('email_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('AcmeEmailBundle:Email:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AcmeEmailBundle:Email:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -90,10 +88,14 @@ class EmailController extends Controller
      */
     private function createCreateForm(Email $entity)
     {
-        $form = $this->createForm(new EmailType(), $entity, array(
-            'action' => $this->generateUrl('email_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new EmailType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('email_create'),
+                'method' => 'POST',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -107,12 +109,15 @@ class EmailController extends Controller
     public function newAction()
     {
         $entity = new Email();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
-        return $this->render('AcmeEmailBundle:Email:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AcmeEmailBundle:Email:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -131,10 +136,13 @@ class EmailController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeEmailBundle:Email:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AcmeEmailBundle:Email:show.html.twig',
+            array(
+                'entity' => $entity,
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
@@ -154,31 +162,39 @@ class EmailController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeEmailBundle:Email:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AcmeEmailBundle:Email:edit.html.twig',
+            array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
-    * Creates a form to edit a Email entity.
-    *
-    * @param Email $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Email entity.
+     *
+     * @param Email $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Email $entity)
     {
-        $form = $this->createForm(new EmailType(), $entity, array(
-            'action' => $this->generateUrl('email_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new EmailType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('email_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Email entity.
      *
@@ -203,12 +219,16 @@ class EmailController extends Controller
             return $this->redirect($this->generateUrl('email_edit', array('id' => $id)));
         }
 
-        return $this->render('AcmeEmailBundle:Email:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AcmeEmailBundle:Email:edit.html.twig',
+            array(
+                'entity' => $entity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
+
     /**
      * Deletes a Email entity.
      *
@@ -246,42 +266,43 @@ class EmailController extends Controller
             ->setAction($this->generateUrl('email_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     public function findAction(Request $request)
     {
         try {
-        $allRequest = $request->createFromGlobals();
-        $s = $allRequest->request->all();
+            $allRequest = $request->createFromGlobals();
+            $email = $allRequest->request->get('acme_dashbundle_search')['email'];
 
-        $search = strip_tags(trim($s['no']));
+            $search = strip_tags(trim($email));
 
-        if ($search == null or $search == ' ') {
-            return $this->redirect($this->generateUrl('homepage'));
-        }
+            if ($search == null or $search == ' ') {
+                return $this->redirect($this->generateUrl('email'));
+            }
 
-        return $this->redirect($this->generateUrl('blog_search', array('slug' => $search)));
+            return $this->redirect($this->generateUrl('email_search', array('slug' => $search)));
         } catch (NotFoundHttpException $e) {
-            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => ''));
+            return $this->render('AcmeDashBundle:Error:pageNotFound.html.twig', array('pageNumber' => ''));
         }
     }
 
-    public function searchBlogsByTitleAction($slug = null, $page)
+    public function searchEmailAction($slug = null, $page)
     {
         $em = $this->getDoctrine()->getManager();
-        $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($slug);
+        $searchedEmail = $em->getRepository('AcmeEmailBundle:Email')->searchEmailResult($slug);
 
-        $adapter = new ArrayAdapter($searchedBlogs);
-        $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
+        $adapter = new ArrayAdapter($searchedEmail);
+        $pagerEmail = new Pagerfanta($adapter);
+        $pagerEmail->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
+        $pagerEmail->setCurrentPage($page);
 
-            $pagerBlog->setCurrentPage($page);
-
-        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
-            'blogs' => $pagerBlog,
-            'filter' => $slug
-        ));
-    }   
+        return $this->render(
+            'AcmeEmailBundle:Email:searchResult.html.twig',
+            array(
+                'entities' => $pagerEmail,
+                'filter' => $slug
+            )
+        );
+    }
 }

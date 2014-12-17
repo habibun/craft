@@ -23,3 +23,6 @@ parameters:
 
     #limit per page
     knp_limit_per_page: 10
+
+    #pager fanta
+    pager_max_per_page: 10
