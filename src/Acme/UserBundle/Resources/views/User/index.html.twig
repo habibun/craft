@@ -64,7 +64,7 @@
             <ul class="breadcrumb">
                 <li class="active">
                 <li class="pull-right">
-                    <a class="btn btn-sm btn-primary my-add" href="{{ path('user_new') }}">
+                    <a class="btn btn-sm btn-primary my-add-plus" href="{{ path('user_new') }}">
                         Add <i class="icon-plus"></i>
                     </a>
                 </li>
@@ -142,8 +142,12 @@
                     </tbody>
                 </table>
             </section>
-            <div class="row text-center">
-                {{ pagerfanta(entities, 'twitter_bootstrap3_translated') }}
+            <div class="text-center">
+                <span>
+                    {% if entities.haveToPaginate %}
+                        {{ pagerfanta(entities, 'twitter_bootstrap3_translated') }}
+                    {% endif %}
+                </span>
             </div>
         </div>
     </div>

@@ -31,8 +31,8 @@
             <a href="{{ path('email') }}" >
                 <i class="icon-envelope text-primary"></i>
                 <span>Email</span>
-                {% if emailEntities is defined %}
-                    <span class="label label-danger pull-right mail-info">{{ emailEntities.getTotalItemCount }}</span>
+                {% if pagerEntities is defined %}
+                    <span class="label label-danger pull-right mail-info">{{ pagerEntities.NbResults }}</span>
                 {% endif %}
             </a>
         </li>
