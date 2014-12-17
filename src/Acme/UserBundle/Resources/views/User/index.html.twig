@@ -30,7 +30,7 @@
             </button>
             <p>
                 Filtered by: <strong>{{ filter }}</strong>
-                &nbsp;&nbsp;&nbsp; {{ entities.NbResults }} users has found
+                &nbsp;&nbsp;&nbsp; {{ entities.NbResults }} user has found
             </p>
         </div>
     {% endif %}
@@ -42,7 +42,12 @@
                 <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
                 <li class="active">Admin</li>
                 <li class="active">Manage User</li>
-                <li class="active">User</li>
+                {% if get_action_name() == "findUsername" %}
+                    <li><a href="{{ path('user') }}">User</a></li>
+                    <li class="active">Search</li>
+                        {% else %}
+                    <li class="active">User</li>
+                {% endif %}
             </ul>
             <!--breadcrumbs end -->
         </div>
@@ -78,7 +83,11 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
+                {% if get_action_name() == "findUsername" %}
+                    <strong>Search Result</strong>
+                        {% else %}
                     <strong>User list</strong>
+                {% endif %} 
                 <span class="tools pull-right">
                     <a class="icon-chevron-down" href="javascript:;"></a>
                     <a class="icon-remove" href="javascript:;"></a>

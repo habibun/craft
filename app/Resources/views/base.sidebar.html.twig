@@ -32,7 +32,13 @@
                 <i class="icon-envelope text-primary"></i>
                 <span>Email</span>
                 {% if pagerEntities is defined %}
-                    <span class="label label-danger pull-right mail-info">{{ pagerEntities.NbResults }}</span>
+                    {% if get_action_name() == "searchEmail" %}
+                            
+                        {% else %}
+                            <span class="label label-danger pull-right mail-info">
+                                {{ pagerEntities.NbResults }}
+                            </span>
+                        {% endif %}    
                 {% endif %}
             </a>
         </li>

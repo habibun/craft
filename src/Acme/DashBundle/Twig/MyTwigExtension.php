@@ -5,7 +5,7 @@
  * Date: 9/13/14
  * Time: 12:05 PM
  */
-namespace Acme\UserBundle\Twig;
+namespace Acme\DashBundle\Twig;
 
 use Twig_Extension;
 use Twig_Filter_Method;
