@@ -58,7 +58,7 @@
             <form class="row" action="{{ path('email_find') }}" id="form" method="post"
                   role="search">
                 <div class="input-group">
-                    {{ form_widget(searchForm.email,{'attr': {'class': 'ui-autocomplete-input pure-input-rounded','value':'Search here...','name':'acme_dashbundle_search[email]'}}) }}
+                    {{ form_widget(searchForm.email,{'attr': {'class': 'ui-autocomplete-input pure-input-rounded','value':'Search here...' }}) }}
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-default"><i class="icon-search"></i>
                         </button>
@@ -120,11 +120,11 @@
     {{ form_javascript(searchForm) }}
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#acme_dashbundle_search_email').focus(function (evt) {
+            $('#acme_emailbundle_search_email').focus(function (evt) {
                 if ($(this).val() == 'Search here...')
                     $(this).val('');
             });
-            $('#acme_dashbundle_search_email').blur(function (evt) {
+            $('#acme_emailbundle_search_email').blur(function (evt) {
                 if ($(this).val() == '')
                     $(this).val('Search here...');
             });

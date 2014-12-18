@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\EmailBundle\Entity\Email;
 use Acme\EmailBundle\Form\EmailType;
-use Acme\DashBundle\Form\SearchType;
+use Acme\EmailBundle\Form\SearchType;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -287,7 +287,7 @@ class EmailController extends Controller
     {
         try {
             $allRequest = $request->createFromGlobals();
-            $email = $allRequest->request->get('acme_dashbundle_search')['email'];
+            $email = $allRequest->request->get('acme_emailbundle_search')['email'];
 
             $search = strip_tags(trim($email));
 
