@@ -1,6 +1,8 @@
 user:
-    pattern:  /
-    defaults: { _controller: "AcmeUserBundle:User:index" }
+    pattern:  /{page}
+    defaults: { _controller: "AcmeUserBundle:User:index", page: 1 }
+    requirements:
+            page:  \d+
 
 user_show:
     pattern:  /{id}/show

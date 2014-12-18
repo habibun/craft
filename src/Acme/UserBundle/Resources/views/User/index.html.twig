@@ -151,13 +151,28 @@
                     </tbody>
                 </table>
             </section>
-            <div class="text-center">
+            {#<div class="text-center">
                 <span>
                     {% if entities.haveToPaginate %}
                         {{ pagerfanta(entities, 'twitter_bootstrap3_translated') }}
                     {% endif %}
                 </span>
+            </div>#}
+
+            <div class="add-task-row">
+                {% if entities.haveToPaginate %}
+                    <span class="pull-left">
+                        <strong>{{entities.NbResults}}</strong>
+                        {{ 'guests has found'|trans }}.
+                        {{ 'Page'|trans }} <strong>{{entities.CurrentPage}}/{{entities.NbPages}} </strong>
+                    </span>
+                    <span class="pull-right">
+                        {{ pagerfanta(entities, 'twitter_bootstrap3_translated') }}
+                    </span>
+                {% endif %}
             </div>
+
+
         </div>
     </div>
 {% endblock %}

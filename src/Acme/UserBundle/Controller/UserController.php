@@ -9,6 +9,7 @@ use Acme\UserBundle\Entity\User;
 use Acme\UserBundle\Form\UserType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
+use Pagerfanta\Exception\NotValidCurrentPageException;
 
 /**
  * User controller.
@@ -21,7 +22,7 @@ class UserController extends Controller
      * Lists all User entities.
      *
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $userManager = $this->get('fos_user.user_manager');
         $searchedUser = $userManager->findUsers();
@@ -29,6 +30,12 @@ class UserController extends Controller
         $adapter = new ArrayAdapter($searchedUser);
         $pagerUser = new Pagerfanta($adapter);
         $pagerUser->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
+
+        try {
+            $pagerUser->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
+        }
 
         return $this->render(
             'AcmeUserBundle:User:index.html.twig',
