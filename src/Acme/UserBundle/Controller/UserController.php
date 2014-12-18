@@ -301,7 +301,7 @@ class UserController extends Controller
     }
 
 
-    public function findUsernameAction(Request $request)
+    public function findUsernameAction(Request $request,$page)
     {
         $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
@@ -317,8 +317,14 @@ class UserController extends Controller
         $pagerUser = new Pagerfanta($adapter);
         $pagerUser->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
 
+        try {
+            $pagerUser->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
+        }
+
         return $this->render(
-            'AcmeUserBundle:User:userResult.html.twig',
+            'AcmeUserBundle:User:index.html.twig',
             array(
                 'entities' => $pagerUser,
                 'filter' => $username

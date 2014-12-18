@@ -22,7 +22,6 @@
 {% endblock %}
 
 {% block body -%}
-
     {% if filter is defined %}
         <div class="alert alert-success fade in">
             <button data-dismiss="alert" class="close close-sm" type="button">
@@ -30,14 +29,12 @@
             </button>
             <p>
                 Filtered by: <strong>{{ filter }}</strong>
-                &nbsp;&nbsp;&nbsp; {{ entities.NbResults }} user has found
+                &nbsp;&nbsp;&nbsp; {{ entities.NbResults }} users has found
             </p>
         </div>
     {% endif %}
-
     <div class="row">
         <div class="col-lg-6">
-            <!--breadcrumbs start -->
             <ul class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
                 <li class="active">Admin</li>
@@ -45,11 +42,10 @@
                 {% if get_action_name() == "findUsername" %}
                     <li><a href="{{ path('user') }}">User</a></li>
                     <li class="active">Search</li>
-                        {% else %}
+                {% else %}
                     <li class="active">User</li>
                 {% endif %}
             </ul>
-            <!--breadcrumbs end -->
         </div>
         <div class="col-lg-3">
             <form class="row" action="{{ path('user_find_username') }}" id="form" method="post" accept-charset="UTF-8"
@@ -65,7 +61,6 @@
             </form>
         </div>
         <div class="col-lg-3">
-            <!--breadcrumbs start -->
             <ul class="breadcrumb">
                 <li class="active">
                 <li class="my-add pull-right">
@@ -75,104 +70,42 @@
                 </li>
                 </li>
             </ul>
-            <!--breadcrumbs end -->
         </div>
     </div>
-
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                {% if get_action_name() == "findUsername" %}
-                    <strong>Search Result</strong>
-                        {% else %}
-                    <strong>User list</strong>
-                {% endif %} 
-                <span class="tools pull-right">
+                    {% if get_action_name() == "findUsername" %}
+                        <strong>Search Result</strong>
+                    {% else %}
+                        <strong>User list</strong>
+                    {% endif %}
+                    <span class="tools pull-right">
                     <a class="icon-chevron-down" href="javascript:;"></a>
                     <a class="icon-remove" href="javascript:;"></a>
                 </span>
                 </header>
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Image</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Created At</th>
-                        <th>Created By</th>
-                        <th>Roles</th>
-                        <th>Lastlogin</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for entity in entities %}
-                        <tr>
-                            <td>{{ entity.id }}</td>
-                            <td>
-                                <img src="
-                                    {% if entity.image == true %}
-                                        {{ asset(['uploads/users/', entity.getImage()]|join) }}
-                                    {% else %}
-                                        {{ asset('uploads/users/userDefaultLogo.png') }}
-                                    {% endif %}
-                                     " width="60px" height="50px" alt=""/>
-                            </td>
-                            <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
-                            <td>{{ entity.email }}</td>
-                            <td>
-                                {% if entity.enabled == true %}
-                                    <span class="label label-inverse label-mini">Enabled</span>
-                                {% else %}
-                                    <span class="label label-warning label-mini">Disabled</span>
-                                {% endif %}
-                            </td>
-                            <td>{{ entity.createdAt|date('d-M-Y H:i:s') }}</td>
-                            <td>{{ entity.createdBy }}</td>
-                            <td>
-                                <ul>
-                                    <li>{{ entity.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</li>
-                                </ul>
-                            </td>
-                            <td>{% if entity.lastLogin %}{{ entity.lastLogin|time_ago_in_words }}{% endif %}</td>
-                            <td>
-                                <a href="{{ path('user_show', { 'id': entity.id }) }}"
-                                   class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
-                                <a href="{{ path('user_edit', { 'id': entity.id }) }}"
-                                   class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>
-                                <a href="{{ path('user_delete', { 'id': entity.id }) }}"
-                                   class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {% if entities is not empty %}
+                    {{ include('AcmeUserBundle:User:userTable.html.twig', {'entities': entities }) }}
+                {% else %}
+                    <div class="well">
+                        <p class="text-info">No users were found</p>
+                    </div>
+                {% endif %}
             </section>
-            {#<div class="text-center">
-                <span>
-                    {% if entities.haveToPaginate %}
-                        {{ pagerfanta(entities, 'twitter_bootstrap3_translated') }}
-                    {% endif %}
-                </span>
-            </div>#}
-
             <div class="add-task-row">
                 {% if entities.haveToPaginate %}
-                    <span class="pull-left">
-                        <strong>{{entities.NbResults}}</strong>
-                        {{ 'guests has found'|trans }}.
-                        {{ 'Page'|trans }} <strong>{{entities.CurrentPage}}/{{entities.NbPages}} </strong>
+                    <span class="pull-left" style="margin-top: 20px">
+                        <strong>{{ entities.NbResults }}</strong>
+                        {{ 'users has found'|trans }}.
+                        {{ 'Page'|trans }} <strong>{{ entities.CurrentPage }}/{{ entities.NbPages }} </strong>
                     </span>
                     <span class="pull-right">
                         {{ pagerfanta(entities, 'twitter_bootstrap3_translated') }}
                     </span>
                 {% endif %}
             </div>
-
-
         </div>
     </div>
 {% endblock %}
