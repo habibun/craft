@@ -4684,9 +4684,3 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
     margin-right: -14px;
     margin-top: -6px;
 }
-
-.my-add-plus {
-    position: static;;
-    margin-right: -50%;
-    margin-top: -10%;
-}
