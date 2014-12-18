@@ -27,8 +27,8 @@
             <td>
                 <a href="{{ path('email_show', { 'id': entity.id }) }}"
                    class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
-                <a href="{{ path('email_edit', { 'id': entity.id }) }}"
-                   class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>
+                <a href="{{ path('email_edit', { 'id': entity.id }) }}" data-toggle="modal"
+                   class="btn btn-info btn-xs ajax-modal"><i class="icon-pencil"></i></a>
                 <a href="{{ path('email_delete', { 'id': entity.id }) }}"
                    class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
             </td>

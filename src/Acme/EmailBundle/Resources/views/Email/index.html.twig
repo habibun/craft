@@ -38,7 +38,7 @@
             </button>
             <p>
                 Filtered by: <strong>{{ filter }}</strong>
-                &nbsp;&nbsp;&nbsp; {{ pagerEntities.NbResults }} email has found
+                &nbsp;&nbsp;&nbsp; {{ pagerEntities.NbResults }} emails has found
             </p>
         </div>
     {% endif %}
@@ -69,11 +69,11 @@
         <div class="col-lg-3">
             <ul class="breadcrumb">
                 <li class="active">
-                <li class="my-add pull-right">
-                    <a class="btn btn-sm btn-primary" href="{{ path('email_new') }}">
-                        Add <i class="icon-plus"></i>
-                    </a>
-                </li>
+                    <li class="row pull-right my-add">
+                        <a class="btn btn-sm btn-primary ajax-modal" data-toggle="modal" href="{{ path('email_new') }}">
+                            Add <i class="icon-plus"></i>
+                        </a>
+                    </li>
                 </li>
             </ul>
         </div>

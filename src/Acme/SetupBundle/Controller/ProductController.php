@@ -130,7 +130,7 @@ class ProductController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'AcmeSetupBundle:Product:_modalShow.html.twig',
+            'AcmeSetupBundle:Product:show.html.twig',
             array(
                 'entity' => $entity,
                 'delete_form' => $deleteForm->createView(),
