@@ -121,4 +121,14 @@ ali_datatable:
 # GenemuFormBundle Configuration
 genemu_form:
     date: ~ 
-    autocomplete: ~    
+    autocomplete: ~
+
+# StofDoctrineExtensionsBundle Configuration
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true
+            sluggable: true
+            softdeleteable: true
+
