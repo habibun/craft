@@ -10,6 +10,7 @@ use Acme\UserBundle\Form\UserType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Exception\NotValidCurrentPageException;
+use Acme\UserBundle\Form\SearchType;
 
 /**
  * User controller.
@@ -37,10 +38,13 @@ class UserController extends Controller
             return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
         }
 
+        $searchForm = $this->createForm(new SearchType('Acme\UserBundle\Entity\User'), null);
+
         return $this->render(
             'AcmeUserBundle:User:index.html.twig',
             array(
                 'entities' => $pagerUser,
+                'searchForm' => $searchForm->createView()
             )
         );
     }
@@ -305,7 +309,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
-        $username = $request->request->get('username');
+        $username = $request->request->get('acme_userbundle_search')['username'];
 
         if ($username == null or $username == ' ') {
             return $this->redirect($this->generateUrl('user'));
@@ -323,11 +327,14 @@ class UserController extends Controller
             return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
         }
 
+        $searchForm = $this->createForm(new SearchType('Acme\UserBundle\Entity\User'), null);
+
         return $this->render(
             'AcmeUserBundle:User:index.html.twig',
             array(
                 'entities' => $pagerUser,
-                'filter' => $username
+                'filter' => $username,
+                'searchForm' => $searchForm->createView()
             )
         );
     }

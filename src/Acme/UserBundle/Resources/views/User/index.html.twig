@@ -3,6 +3,7 @@
 {% block title %}User{% endblock %}
 
 {% block stylesheets %}
+    {{ form_stylesheet(searchForm) }}
     <style type="text/css">
         {# remove last separator if last or more 
         .breadcrumb > li + li:nth-last-child(1):before {
@@ -51,8 +52,7 @@
             <form class="row" action="{{ path('user_find_username') }}" id="form" method="post" accept-charset="UTF-8"
                   role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" value="Search here..." name="username" size="10"
-                           id="username"/>
+                    {{ form_widget(searchForm.username,{'attr': {'class': 'ui-autocomplete-input pure-input-rounded','value':'Search here...' }}) }}
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default"><i class="icon-search"></i>
                             </button>
@@ -111,13 +111,14 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ form_javascript(searchForm) }}
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#username').focus(function (evt) {
+            $('#acme_userbundle_search_username').focus(function (evt) {
                 if ($(this).val() == 'Search here...')
                     $(this).val('');
             });
-            $('#username').blur(function (evt) {
+            $('#acme_userbundle_search_username').blur(function (evt) {
                 if ($(this).val() == '')
                     $(this).val('Search here...');
             });
