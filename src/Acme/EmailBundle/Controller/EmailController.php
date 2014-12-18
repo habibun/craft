@@ -22,7 +22,7 @@ class EmailController extends Controller
      * Lists all Email entities.
      *
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $em = $this->getDoctrine()->getManager();
         $searchedEmail = $em->getRepository('AcmeEmailBundle:Email')->findAll();
@@ -31,6 +31,11 @@ class EmailController extends Controller
         $pagerEmail = new Pagerfanta($adapter);
         $pagerEmail->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
 
+        try {
+            $pagerEmail->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
+        }
 
         $em = $this->get('doctrine.orm.entity_manager');
         $dql = "SELECT e FROM AcmeEmailBundle:Email e";
@@ -296,7 +301,7 @@ class EmailController extends Controller
         }
     }
 
-    public function searchEmailAction($slug = null)
+    public function searchEmailAction($slug = null, $page)
     {
         $em = $this->getDoctrine()->getManager();
         $searchedEmail = $em->getRepository('AcmeEmailBundle:Email')->searchEmailResult($slug);
@@ -305,7 +310,11 @@ class EmailController extends Controller
         $pagerEmail = new Pagerfanta($adapter);
         $pagerEmail->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
 
-
+        try {
+            $pagerEmail->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
+        }
 
         $em = $this->get('doctrine.orm.entity_manager');
         $dql = "SELECT e FROM AcmeEmailBundle:Email e";

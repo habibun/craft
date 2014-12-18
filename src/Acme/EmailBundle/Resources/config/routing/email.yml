@@ -1,6 +1,8 @@
 email:
-    path:     /
-    defaults: { _controller: "AcmeEmailBundle:Email:index" }
+    path:     /{page}
+    defaults: { _controller: "AcmeEmailBundle:Email:index", page: 1 }
+    requirements:
+            page:  \d+
 
 email_show:
     path:     /{id}/show
@@ -35,7 +37,7 @@ email_find:
     requirements: { _method: post}
 
 email_search:
-    pattern:  /search/{slug}
-    defaults: { _controller: "AcmeEmailBundle:Email:searchEmail", slug: '' }
+    pattern:  /search/{slug}/{page}
+    defaults: { _controller: "AcmeEmailBundle:Email:searchEmail", slug: '', page: 1 }
     requirements:
             page:  \d+

@@ -87,10 +87,10 @@
                 </span>
                 </header>
                 {% if entities is not empty %}
-                    {{ include('AcmeUserBundle:User:userTable.html.twig', {'entities': entities }) }}
+                    {% include 'AcmeUserBundle:User:userTable.html.twig' with  {'entities': entities} %}
                 {% else %}
                     <div class="well">
-                        <p class="text-info">No users were found</p>
+                        <p class="text-info">No users has found</p>
                     </div>
                 {% endif %}
             </section>

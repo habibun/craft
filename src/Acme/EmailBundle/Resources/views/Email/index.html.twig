@@ -31,7 +31,6 @@
 {% endblock %}
 
 {% block body -%}
-
     {% if filter is defined %}
         <div class="alert alert-success fade in">
             <button data-dismiss="alert" class="close close-sm" type="button">
@@ -43,20 +42,17 @@
             </p>
         </div>
     {% endif %}
-
     <div class="row">
         <div class="col-lg-6">
-            <!--breadcrumbs start -->
             <ul class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
                 {% if get_action_name() == "searchEmail" %}
                     <li><a href="{{ path('email') }}">Email</a></li>
                     <li class="active">Search</li>
-                    {% else %}
+                {% else %}
                     <li class="active">Email</li>
                 {% endif %}
             </ul>
-            <!--breadcrumbs end -->
         </div>
         <div class="col-lg-3">
             <form class="row" action="{{ path('email_find') }}" id="form" method="post"
@@ -64,14 +60,13 @@
                 <div class="input-group">
                     {{ form_widget(searchForm.email,{'attr': {'class': 'ui-autocomplete-input pure-input-rounded','value':'Search here...','name':'acme_dashbundle_search[email]'}}) }}
                     <span class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="icon-search"></i>
-                            </button>
-                        </span>
+                        <button type="submit" class="btn btn-default"><i class="icon-search"></i>
+                        </button>
+                    </span>
                 </div>
             </form>
         </div>
         <div class="col-lg-3">
-            <!--breadcrumbs start -->
             <ul class="breadcrumb">
                 <li class="active">
                 <li class="my-add pull-right">
@@ -81,70 +76,41 @@
                 </li>
                 </li>
             </ul>
-            <!--breadcrumbs end -->
         </div>
     </div>
-
-    <!-- page start-->
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                {% if get_action_name() == "searchEmail" %}
-                    <strong>Search Result</strong>
-                        {% else %}
-                    <strong>Email list</strong>
-                {% endif %}    
-                <span class="tools pull-right">
+                    {% if get_action_name() == "searchEmail" %}
+                        <strong>Search Result</strong>
+                    {% else %}
+                        <strong>Email list</strong>
+                    {% endif %}
+                    <span class="tools pull-right">
                     <a class="icon-chevron-down" href="javascript:;"></a>
                     <a class="icon-remove" href="javascript:;"></a>
                 </span>
                 </header>
-                <table class="table table-striped table-advance table-hover">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th{% if knpEntities.direction == 'asc' %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(knpEntities, 'Email', 'e.email') }}
-                        </th>
-                        <th>Created At</th>
-                        <th>Created By</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for entity in pagerEntities %}
-                        <tr>
-                            <td><a href="{{ path('email_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                            <td>{{ entity.email|join(' , ')|replace({'@eongroup.net.bd':'','.':' '|capitalize})|title }}</td>
-                            <td>{{ entity.email }}</td>
-                            <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-M-Y H:i:s') }}{% endif %}</td>
-                            <td>{{ entity.createdBy }}</td>
-                            <td>{% if entity.status == true %}
-                                    <span class="label label-inverse label-mini">Enabled</span>
-                                {% else %}
-                                    <span class="label label-warning label-mini">Disabled</span>
-                                {% endif %}</td>
-                            <td>
-                                <a href="{{ path('email_show', { 'id': entity.id }) }}"
-                                   class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
-                                <a href="{{ path('email_edit', { 'id': entity.id }) }}"
-                                   class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>
-                                <a href="{{ path('email_delete', { 'id': entity.id }) }}"
-                                   class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {% if knpEntities and pagerEntities is not empty %}
+                    {% include 'AcmeEmailBundle:Email:emailTable.html.twig' with {'knpEntities': knpEntities, 'pagerEntities': pagerEntities } %}
+                {% else %}
+                    <div class="well">
+                        <p class="text-info">No emails has found</p>
+                    </div>
+                {% endif %}
             </section>
-            <div class="text-center">
-                <span>
-                    {% if pagerEntities.haveToPaginate %}
+            <div class="add-task-row">
+                {% if pagerEntities.haveToPaginate %}
+                    <span class="pull-left" style="margin-top: 20px">
+                        <strong>{{ pagerEntities.NbResults }}</strong>
+                        {{ 'users has found'|trans }}.
+                        {{ 'Page'|trans }} <strong>{{ pagerEntities.CurrentPage }}/{{ pagerEntities.NbPages }} </strong>
+                    </span>
+                    <span class="pull-right">
                         {{ pagerfanta(pagerEntities, 'twitter_bootstrap3_translated') }}
-                    {% endif %}
-                </span>
+                    </span>
+                {% endif %}
             </div>
         </div>
     </div>

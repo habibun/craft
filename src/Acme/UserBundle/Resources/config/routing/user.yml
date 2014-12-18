@@ -33,3 +33,5 @@ user_delete:
 user_find_username:
     pattern:    /find-username/{page}
     defaults:   { _controller:  "AcmeUserBundle:User:findUsername", page:1 }
+    requirements:
+            page:  \d+
