@@ -2,6 +2,21 @@
 
 {% block title %}Supplier{% endblock %}
 
+{% block stylesheets %}
+    <style type="text/css">
+        /* for sorting/unsorting email */
+        .sorted:after {
+            font-family: FontAwesome;
+            content: "\f15d";
+        }
+
+        .unsorted:after {
+            font-family: FontAwesome;
+            content: "\f15e";
+        }
+    </style>
+{% endblock %}
+
 {% block body -%}
     <div class="row">
         <div class="col-lg-12">
@@ -33,7 +48,7 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
+                        <th{% if entities.direction == 'asc' %} class="sorted" {% else %} class="unsorted" {% endif %}>{{ knp_pagination_sortable(entities, 'Name', 's.name') }}</th>
                         <th>Address</th>
                         <th>Actions</th>
                     </tr>

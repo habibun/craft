@@ -37,28 +37,12 @@ class EmailController extends Controller
             return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT e FROM AcmeEmailBundle:Email e";
-        $query = $em->createQuery($dql);
-
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $this->get('request')->query->get('page', 1),
-            $this->container->getParameter('knp_limit_per_page'),
-            array(
-                'defaultSortFieldName' => 'e.email',
-                'defaultSortDirection' => 'asc',
-            )
-        );
-
         $searchForm = $this->createForm(new SearchType('Acme\EmailBundle\Entity\Email'), null);
 
         return $this->render(
             'AcmeEmailBundle:Email:index.html.twig',
             array(
-                'pagerEntities' => $pagerEmail,
-                'knpEntities' => $pagination,
+                'emailEntities' => $pagerEmail,
                 'searchForm' => $searchForm->createView()
             )
         );
@@ -316,28 +300,12 @@ class EmailController extends Controller
             return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT e FROM AcmeEmailBundle:Email e";
-        $query = $em->createQuery($dql);
-
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $this->get('request')->query->get('page', 1),
-            $this->container->getParameter('knp_limit_per_page'),
-            array(
-                'defaultSortFieldName' => 'e.email',
-                'defaultSortDirection' => 'asc',
-            )
-        );
-
         $searchForm = $this->createForm(new SearchType('Acme\EmailBundle\Entity\Email'), null);
 
         return $this->render(
             'AcmeEmailBundle:Email:index.html.twig',
             array(
-                'pagerEntities' => $pagerEmail,
-                'knpEntities' => $pagination,
+                'emailEntities' => $pagerEmail,
                 'filter' => $slug,
                 'searchForm' => $searchForm->createView()
             )

@@ -31,12 +31,12 @@
             <a href="{{ path('email') }}" >
                 <i class="icon-envelope text-primary"></i>
                 <span>Email</span>
-                {% if pagerEntities is defined %}
+                {% if emailEntities is defined %}
                     {% if get_action_name() == "searchEmail" %}
                             
                         {% else %}
                             <span class="label label-danger pull-right mail-info">
-                                {{ pagerEntities.NbResults }}
+                                {{ emailEntities.NbResults }}
                             </span>
                         {% endif %}    
                 {% endif %}

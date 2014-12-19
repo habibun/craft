@@ -25,19 +25,22 @@ class SupplierController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AcmeSetupBundle:Supplier')->findAll();
+        $dql = "SELECT s FROM AcmeSetupBundle:Supplier s";
+        $query = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
-        $entities = $paginator->paginate(
-            $entities,
-            $this->get('request')->query->get('page', 1) /*page number*/,
-            10
-        /*limit per page*/
+        $pagination = $paginator->paginate(
+            $query,
+            $this->get('request')->query->get('page', 1),
+            $this->container->getParameter('knp_limit_per_page'),
+            array(
+                'defaultSortFieldName' => 's.name',
+                'defaultSortDirection' => 'asc',
+            )
         );
 
         return $this->render('AcmeSetupBundle:Supplier:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $pagination,
         ));
     }
 
