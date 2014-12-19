@@ -214,7 +214,12 @@ class EmailController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('email_edit', array('id' => $id)));
+        $this->get('session')->getFlashBag()->add(
+            'heads_up',
+            $this->container->getParameter('update_success')
+        );
+
+            return $this->redirect($this->generateUrl('email'));
         }
 
         return $this->render(
@@ -231,22 +236,24 @@ class EmailController extends Controller
      * Deletes a Email entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AcmeEmailBundle:Email')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AcmeEmailBundle:Email')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Email entity.');
+        }
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Email entity.');
-            }
-
+        try {
             $em->remove($entity);
             $em->flush();
+        } catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('used_error_long'));
+
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
+        $this->get('session')->getFlashBag()->add('well_done', 'Email was successfully deleted.');
 
         return $this->redirect($this->generateUrl('email'));
     }
