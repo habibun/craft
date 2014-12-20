@@ -67,7 +67,9 @@ class EmailController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('email_show', array('id' => $entity->getId())));
+            $this->get('session')->getFlashBag()->add('well_done', 'Email was successfully created.');
+
+            return $this->redirect($this->generateUrl('email'));
         }
 
         return $this->render(
@@ -216,10 +218,10 @@ class EmailController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-        $this->get('session')->getFlashBag()->add(
-            'heads_up',
-            $this->container->getParameter('update_success')
-        );
+            $this->get('session')->getFlashBag()->add(
+                'heads_up',
+                $this->container->getParameter('update_success')
+            );
 
             return $this->redirect($this->generateUrl('email'));
         }
