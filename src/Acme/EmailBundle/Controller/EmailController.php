@@ -10,6 +10,8 @@ use Acme\EmailBundle\Form\SearchType;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+
 
 /**
  * Email controller.
@@ -110,7 +112,7 @@ class EmailController extends Controller
         $form = $this->createCreateForm($entity);
 
         return $this->render(
-            'AcmeEmailBundle:Email:modalNew.html.twig',
+            'AcmeEmailBundle:Email:mNew.html.twig',
             array(
                 'entity' => $entity,
                 'form' => $form->createView(),
@@ -135,7 +137,7 @@ class EmailController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'AcmeEmailBundle:Email:show.html.twig',
+            'AcmeEmailBundle:Email:mShow.html.twig',
             array(
                 'entity' => $entity,
                 'delete_form' => $deleteForm->createView(),
@@ -161,7 +163,7 @@ class EmailController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'AcmeEmailBundle:Email:modalEdit.html.twig',
+            'AcmeEmailBundle:Email:mEdit.html.twig',
             array(
                 'entity' => $entity,
                 'edit_form' => $editForm->createView(),
