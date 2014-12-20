@@ -16,17 +16,6 @@
             background-color: #ffffff;
             border-color: #cccccc;
         }
-
-        /* for sorting/unsorting email */
-        .sorted:after {
-            font-family: FontAwesome;
-            content: "\f15d";
-        }
-
-        .unsorted:after {
-            font-family: FontAwesome;
-            content: "\f15e";
-        }
     </style>
 {% endblock %}
 
@@ -38,7 +27,7 @@
             </button>
             <p>
                 Filtered by: <strong>{{ filter }}</strong>
-                &nbsp;&nbsp;&nbsp; {{ pagerEntities.NbResults }} email has found
+                &nbsp;&nbsp;&nbsp; {{ emailEntities.NbResults }} emails has found
             </p>
         </div>
     {% endif %}
@@ -69,11 +58,11 @@
         <div class="col-lg-3">
             <ul class="breadcrumb">
                 <li class="active">
-                <li class="my-add pull-right">
-                    <a class="btn btn-sm btn-primary" href="{{ path('email_new') }}">
-                        Add <i class="icon-plus"></i>
-                    </a>
-                </li>
+                    <li class="row pull-right my-add">
+                        <a class="btn btn-sm btn-primary ajax-modal" data-toggle="modal" href="{{ path('email_new') }}">
+                            Add <i class="icon-plus"></i>
+                        </a>
+                    </li>
                 </li>
             </ul>
         </div>
@@ -92,8 +81,8 @@
                     <a class="icon-remove" href="javascript:;"></a>
                 </span>
                 </header>
-                {% if knpEntities and pagerEntities is not empty %}
-                    {% include 'AcmeEmailBundle:Email:emailTable.html.twig' with {'knpEntities': knpEntities, 'pagerEntities': pagerEntities } %}
+                {% if emailEntities is not empty %}
+                    {% include 'AcmeEmailBundle:Email:emailTable.html.twig' with {'emailEntities': emailEntities } %}
                 {% else %}
                     <div class="well">
                         <p class="text-info">No emails has found</p>
@@ -101,14 +90,14 @@
                 {% endif %}
             </section>
             <div class="add-task-row">
-                {% if pagerEntities.haveToPaginate %}
+                {% if emailEntities.haveToPaginate %}
                     <span class="pull-left" style="margin-top: 20px">
-                        <strong>{{ pagerEntities.NbResults }}</strong>
-                        {{ 'users has found'|trans }}.
-                        {{ 'Page'|trans }} <strong>{{ pagerEntities.CurrentPage }}/{{ pagerEntities.NbPages }} </strong>
+                        <strong>{{ emailEntities.NbResults }}</strong>
+                        {{ 'emails has found'|trans }}.
+                        {{ 'Page'|trans }} <strong>{{ emailEntities.CurrentPage }}/{{ emailEntities.NbPages }} </strong>
                     </span>
                     <span class="pull-right">
-                        {{ pagerfanta(pagerEntities, 'twitter_bootstrap3_translated') }}
+                        {{ pagerfanta(emailEntities, 'twitter_bootstrap3_translated') }}
                     </span>
                 {% endif %}
             </div>

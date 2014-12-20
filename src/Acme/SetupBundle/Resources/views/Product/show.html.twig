@@ -22,10 +22,10 @@
                 <li class="active"><a href="{{ path('product') }}">Product</a></li>
                 <li class="active">Product Detail's</li>
                 <ul class="pull-right my-add">
-                    <a class="btn btn-sm btn-success" href="{{ path('product_new') }}">
+                    <a class="btn btn-sm btn-success ajax-modal" data-toggle="modal" href="{{ path('product_new') }}">
                         <i class="icon-plus"></i>
                     </a>
-                    <a class="btn btn-sm btn-info" href="{{ path('product_edit', {'id' : entity.id}) }}">
+                    <a class="btn btn-sm btn-info ajax-modal" data-toggle="modal" href="{{ path('product_edit', {'id' : entity.id}) }}">
                         <i class="icon-pencil"></i>
                     </a>
                     <a class="btn btn-sm btn-danger btn-delete delete-confirm"

@@ -37,28 +37,12 @@ class EmailController extends Controller
             return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT e FROM AcmeEmailBundle:Email e";
-        $query = $em->createQuery($dql);
-
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $this->get('request')->query->get('page', 1),
-            $this->container->getParameter('knp_limit_per_page'),
-            array(
-                'defaultSortFieldName' => 'e.email',
-                'defaultSortDirection' => 'asc',
-            )
-        );
-
         $searchForm = $this->createForm(new SearchType('Acme\EmailBundle\Entity\Email'), null);
 
         return $this->render(
             'AcmeEmailBundle:Email:index.html.twig',
             array(
-                'pagerEntities' => $pagerEmail,
-                'knpEntities' => $pagination,
+                'emailEntities' => $pagerEmail,
                 'searchForm' => $searchForm->createView()
             )
         );
@@ -126,7 +110,7 @@ class EmailController extends Controller
         $form = $this->createCreateForm($entity);
 
         return $this->render(
-            'AcmeEmailBundle:Email:new.html.twig',
+            'AcmeEmailBundle:Email:modalNew.html.twig',
             array(
                 'entity' => $entity,
                 'form' => $form->createView(),
@@ -177,7 +161,7 @@ class EmailController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'AcmeEmailBundle:Email:edit.html.twig',
+            'AcmeEmailBundle:Email:modalEdit.html.twig',
             array(
                 'entity' => $entity,
                 'edit_form' => $editForm->createView(),
@@ -230,7 +214,12 @@ class EmailController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('email_edit', array('id' => $id)));
+        $this->get('session')->getFlashBag()->add(
+            'heads_up',
+            $this->container->getParameter('update_success')
+        );
+
+            return $this->redirect($this->generateUrl('email'));
         }
 
         return $this->render(
@@ -247,22 +236,24 @@ class EmailController extends Controller
      * Deletes a Email entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AcmeEmailBundle:Email')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AcmeEmailBundle:Email')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Email entity.');
+        }
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Email entity.');
-            }
-
+        try {
             $em->remove($entity);
             $em->flush();
+        } catch (\Exception $e) {
+            $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('used_error_long'));
+
+            return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
+        $this->get('session')->getFlashBag()->add('well_done', 'Email was successfully deleted.');
 
         return $this->redirect($this->generateUrl('email'));
     }
@@ -316,28 +307,12 @@ class EmailController extends Controller
             return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT e FROM AcmeEmailBundle:Email e";
-        $query = $em->createQuery($dql);
-
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $this->get('request')->query->get('page', 1),
-            $this->container->getParameter('knp_limit_per_page'),
-            array(
-                'defaultSortFieldName' => 'e.email',
-                'defaultSortDirection' => 'asc',
-            )
-        );
-
         $searchForm = $this->createForm(new SearchType('Acme\EmailBundle\Entity\Email'), null);
 
         return $this->render(
             'AcmeEmailBundle:Email:index.html.twig',
             array(
-                'pagerEntities' => $pagerEmail,
-                'knpEntities' => $pagination,
+                'emailEntities' => $pagerEmail,
                 'filter' => $slug,
                 'searchForm' => $searchForm->createView()
             )
