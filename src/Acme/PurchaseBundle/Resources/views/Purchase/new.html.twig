@@ -235,7 +235,23 @@
                             'supplier': $('#acme_purchasebundle_purchase_supplier').val()
                         },
                         function (data) {
-                            $("#inputPrice").val(JSON.stringify(data.result));
+
+                            var JSONObject = JSON.stringify(data.result);
+                            var peopleHTML = "";
+
+                            // Loop through Object and create peopleHTML
+                            for (var key in JSONObject) {
+                                if (JSONObject.hasOwnProperty(key)) {
+                                    peopleHTML += "<tr>";
+                                    peopleHTML += "<td>" + JSONObject[key]["price"] + "</td>";
+                                    peopleHTML += "<td>" + JSONObject[key]["product"] + "</td>";
+                                    peopleHTML += "</tr>";
+                                }
+                            }
+
+                            // Replace table’s tbody html with peopleHTML
+                            $("#people tbody").html(peopleHTML);
+
                         },
                         'json'
                 );
