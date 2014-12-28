@@ -29,7 +29,7 @@
                 <a href="{{ path('email_edit', { 'id': entity.id }) }}" data-toggle="modal"
                    class="btn btn-info btn-xs ajax-modal"><i class="icon-pencil"></i></a>
                 <a href="{{ path('email_delete', { 'id': entity.id }) }}"
-                   class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
+                   class="btn btn-danger btn-xs" onclick="return confirm('Are you sure ?')"><i class="icon-trash"></i></a>
             </td>
         </tr>
     {% endfor %}
