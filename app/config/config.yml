@@ -73,7 +73,7 @@ fos_user:
 # BraincraftedBootstrapBundle Configuration
 braincrafted_bootstrap:
     less_filter: less
-    assets_dir: %kernel.root_dir%/../vendor/twitter/bootstrap
+    assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
     jquery_path: %kernel.root_dir%/../components/jquery/jquery.min.js
     auto_configure:
         assetic: true

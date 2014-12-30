@@ -21,6 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "braincrafted/bootstrap-bundle": "dev-master",
+        "twbs/bootstrap": "3.3.*@dev",
+        "components/jquery": "dev-master",
         "knplabs/knp-paginator-bundle": "2.4.*@dev",
         "lankit/datatables-bundle": "*",
         "jms/serializer-bundle": "dev-master",
