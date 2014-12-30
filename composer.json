@@ -21,12 +21,21 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "braincrafted/bootstrap-bundle": "dev-master",
-        "twbs/bootstrap": "3.0.*",
-        "knplabs/knp-paginator-bundle": "dev-master",
+        "twbs/bootstrap": "3.3.*@dev",
+        "components/jquery": "dev-master",
+        "knplabs/knp-paginator-bundle": "2.4.*@dev",
         "lankit/datatables-bundle": "*",
         "jms/serializer-bundle": "dev-master",
         "knplabs/knp-snappy-bundle": "dev-master",
-        "kitpages/data-grid-bundle": "1.*@dev"
+        "kitpages/data-grid-bundle": "1.*@dev",
+        "friendsofsymfony/jsrouting-bundle": "@stable",
+        "salavert/time-ago-in-words": "1.*",
+        "cg/kint-bundle": "dev-master",
+        "ali/datatable": "dev-master",
+        "knplabs/knp-components": "1.2.*@dev",
+        "genemu/form-bundle": "2.2.*",
+        "white-october/pagerfanta-bundle": "1.0.*@dev",
+        "stof/doctrine-extensions-bundle": "1.2.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

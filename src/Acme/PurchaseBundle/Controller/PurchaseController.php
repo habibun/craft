@@ -11,6 +11,7 @@ use Acme\PurchaseBundle\Form\PurchaseLineType;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Purchase controller.
@@ -24,23 +25,32 @@ class PurchaseController extends Controller
      * Lists all Purchase entities.
      *
      */
-    public function indexAction()
+
+    public function indexAction(Request $request)
     {
-        return $this->render('AcmePurchaseBundle:Purchase:index.html.twig');
-    }
+        $entities = $this->getDoctrine()->getManager()
+        ->getRepository('AcmePurchaseBundle:Purchase')
+        ->findBy(array(), array('id' => 'DESC'));
 
-    public function getPurchaseResultAction()
-    {
-        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
+        /*$em = $this->getDoctrine()->getManager(); 
+        $query = $em->createQuery( 
+            'SELECT p.id as id, p.purchaseDate as purchaseDate, s.name as supplier, l.name as location, p.status as status, pl.price 
+            FROM AcmePurchaseBundle:PurchaseLine pl
+            JOIN pl.purchase p
+            JOIN p.supplier s
+            JOIN p.location l
+            ORDER BY p.id DESC' );
 
-        return $datatable->getSearchResults();
-    }
+        $entities = $query->getArrayResult();
 
-    public function getPurchaseLineResultAction()
-    {
-        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:PurchaseLine');
+        var_dump($entities);*/
 
-        return $datatable->getSearchResults();
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:index.html.twig',
+            array(
+                'entities' => $entities
+            )
+        );
     }
 
     /**
@@ -197,7 +207,10 @@ class PurchaseController extends Controller
                 )
             );
         } catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t modify this');
+            $this->get('session')->getFlashBag()->set(
+                'oh_snap',
+                $this->container->getParameter('finalize_modify_error')
+            );
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
@@ -312,20 +325,25 @@ class PurchaseController extends Controller
             $lines = $em->getRepository('AcmePurchaseBundle:PurchaseLine')->findBy(
                 array('purchase' => $purchase->getId())
             );
-            if (!empty($lines))
+            if (!empty($lines)) {
                 foreach ($lines as $line) {
                     $em->remove($line);
                 }
+            }
 
             $em->remove($purchase);
             $em->flush();
         } catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set('oh_snap', 'This is a finalized record. You can\'t delete this');
+            $this->get('session')->getFlashBag()->set(
+                'oh_snap',
+                $this->container->getParameter('finalize_delete_error')
+            );
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        
+
         $this->get('session')->getFlashBag()->add('well_done', 'Successfully Deleted');
+
         return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
     }
 
@@ -369,7 +387,7 @@ class PurchaseController extends Controller
      * @param $id
      * @return Response
      */
-    
+
     public function finalizeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -393,8 +411,9 @@ class PurchaseController extends Controller
     {
 
         //checks if the user is authenticated
-        if(!$this->container->get('security.context')->isGranted('ROLE_ADMIN') ){
+        if (!$this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
             $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('access_error'));
+
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
 
@@ -412,5 +431,113 @@ class PurchaseController extends Controller
         $this->get('session')->getFlashBag()->add('well_done', "De-Finalized Successfully!");
 
         return $this->redirect($this->generateUrl('purchase_show', array('id' => $id)));
+    }
+
+    public function supplierTotalPurchaseAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = $this->get('request')->request->all();
+        $supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
+        if (!isset($data['supplier'])) {
+            return new JsonResponse('Unable to find Supplier id');
+        }
+        $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
+        $result = $repository->getSupplierTotalPurchaseResult($supplier);
+
+        return new JsonResponse(array('result' => $result));
+    }
+
+    public function supplierDetailAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = $this->get('request')->request->all();
+        $supplier = $em->getRepository('AcmeSetupBundle:Supplier')->find($data['supplier']);
+        $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
+        $result = $repository->getSupplierDetailResult($supplier);
+
+//        var_dump($result);
+        // return array('result' => $result);
+        /*return $this->render('AcmePurchaseBundle:Purchase:SupplierDetail.html.twig',array(
+                'result' => $result
+            ));*/
+
+//        $response = json_encode(array('result' => $result));
+
+        /*return new Response(
+            $response, 200, array(
+                'Content-Type' => 'application/json'
+            )
+        );*/
+
+        return new JsonResponse(array('result' => $result));
+    }
+
+
+    /**
+     * set datatable configs
+     *
+     * @return \Ali\DatatableBundle\Util\Datatable
+     */
+    private function _datatable()
+    {
+        return $this->get('datatable')
+            ->setEntity("AcmePurchaseBundle:Purchase", "x")// replace "XXXMyBundle:Entity" by your entity
+            ->setFields(
+                array(
+                    "Name" => 'x.id',                        // Declaration for fields:
+                    "Address" => 'x.id',                    //      "label" => "alias.field_attribute_for_dql"
+                    "_identifier_" => 'x.id')                          // you have to put the identifier field without label. Do not replace the "_identifier_"
+            )
+            ->setHasAction(
+                true
+            );                                           // you can disable action column from here by setting "false".
+    }
+
+
+    /**
+     * Grid action
+     * @return Response
+     */
+    public function gridAction()
+    {
+        return $this->_datatable()->execute(
+        );                                      // call the "execute" method in your grid action
+    }
+
+    /**
+     * Lists all entities.
+     * @return Response
+     */
+    public function purchaseListAction()
+    {
+        $this->_datatable(
+        );                                                        // call the datatable config initializer
+        return $this->render(
+            'AcmePurchaseBundle:Purchase:purchaseList.html.twig'
+        );                 // replace "XXXMyBundle:Module:index.html.twig" by yours
+    }
+
+    public function purchaseListAllAction(Request $request)
+    {
+
+    }
+
+    public function lankitAction()
+    {
+        return $this->render('AcmePurchaseBundle:Purchase:lankit.html.twig');
+    }
+
+    public function getLankitPurchaseResultAction()
+    {
+        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
+
+        return $datatable->getSearchResults();
+    }
+
+    public function getLankitPurchaseLineResultAction()
+    {
+        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:PurchaseLine');
+
+        return $datatable->getSearchResults();
     }
 }

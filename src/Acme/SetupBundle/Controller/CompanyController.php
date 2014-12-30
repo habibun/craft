@@ -19,24 +19,23 @@ class CompanyController extends Controller
      * Lists all Company entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AcmeSetupBundle:Company')->findAll();
 
-        $paginator = $this->get('knp_paginator');
-        $entities = $paginator->paginate(
-            $entities,
-            $this->get('request')->query->get('page', 1) /*page number*/,
-            10
-        /*limit per page*/
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+        $entities,
+        $request->query->get('page', 1)/*page number*/,
+        10/*limit per page*/
         );
 
         return $this->render(
             'AcmeSetupBundle:Company:index.html.twig',
             array(
-                'entities' => $entities,
+                'entities' => $pagination,
             )
         );
     }

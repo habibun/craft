@@ -1,6 +1,7 @@
 Acme\IssueBundle\Entity\Issue:
     type: entity
     table: issue
+    repositoryClass: Acme\IssueBundle\Repository\IssueRepository
     id:
         id:
             type: integer

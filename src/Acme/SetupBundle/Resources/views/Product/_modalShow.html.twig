@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+            <h4 class="modal-title">Product Details</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="row product-list">
+                            <div class="col-md-8">
+                                <div class="pro-img-box product-image">
+                                    <img src="/uploads/product/{{ entity.getImage() }}" alt=""/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel-body pull-right">
+                                    <div class="hidden-phone">
+                                        <p class="price"> Id # {{ entity.id }}</p>
+                                    </div>
+                                    <span class="task-title-sp">Name: {{ entity.name }}</span>
+                                </div>
+                            </div>    
+                        </div>
+                    </section>
+                </div>
+                <hr>
+                <div class="col-md-12">
+                    <span class="pull-right">
+                         <a href="{{ path('product') }}" class="btn btn-primary">
+                             Back
+                         </a>
+                    </span>
+                </div>
+            </div>
+        </div>    
+    </div>    
+</div>

@@ -16,7 +16,7 @@
             {% if error %}
                 <center><h4 class="text-primary">{{ error|trans }}</h4></center>
             {% endif %}
-            <form action="{{ path("fos_user_security_check") }}" method="post">
+            <form action="{{ path("acme_user_security_check") }}" method="post">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                 <!-- Login Fields -->
                 <div id="login">{#Sign in using your registered account:<br/>#}

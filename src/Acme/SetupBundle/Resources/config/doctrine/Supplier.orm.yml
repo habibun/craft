@@ -1,6 +1,7 @@
 Acme\SetupBundle\Entity\Supplier:
     type: entity
     table: supplier
+    repositoryClass: Acme\SetupBundle\Repository\SupplierRepository
     id:
         id:
             type: integer

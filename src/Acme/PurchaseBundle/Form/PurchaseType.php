@@ -43,14 +43,16 @@ class PurchaseType extends AbstractType
                 'supplier',
                 'entity',
                 array(
-                    'class' => 'Acme\SetupBundle\Entity\Supplier'
+                    'class' => 'Acme\SetupBundle\Entity\Supplier',
+                    'empty_value' => 'Select Supplier',
                 )
             )
             ->add(
                 'location',
                 'entity',
                 array(
-                    'class' => 'Acme\SetupBundle\Entity\Location'
+                    'class' => 'Acme\SetupBundle\Entity\Location',
+                    'empty_value' => 'Select Location',
                 )
             );
     }

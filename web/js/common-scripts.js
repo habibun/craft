@@ -1,5 +1,5 @@
 /*---LEFT BAR ACCORDION----*/
-$(function() {
+$(function () {
     $('#nav-accordion').dcAccordion({
         eventType: 'click',
         autoClose: true,
@@ -16,19 +16,18 @@ $(function() {
 var Script = function () {
 
 //    sidebar dropdown menu auto scrolling
-
     jQuery('#sidebar .sub-menu > a').click(function () {
         var o = ($(this).offset());
         diff = 250 - o.top;
-        if(diff>0)
-            $("#sidebar").scrollTo("-="+Math.abs(diff),500);
+        if (diff > 0)
+            $("#sidebar").scrollTo("-=" + Math.abs(diff), 500);
         else
-            $("#sidebar").scrollTo("+="+Math.abs(diff),500);
+            $("#sidebar").scrollTo("+=" + Math.abs(diff), 500);
     });
 
 //    sidebar toggle
 
-    $(function() {
+    $(function () {
         function responsiveView() {
             var wSize = $(window).width();
             if (wSize <= 768) {
@@ -41,6 +40,7 @@ var Script = function () {
                 $('#sidebar > ul').show();
             }
         }
+
         $(window).on('load', responsiveView);
         $(window).on('resize', responsiveView);
     });
@@ -68,9 +68,26 @@ var Script = function () {
     });
 
 // custom scrollbar
-    $("#sidebar").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '3', cursorborderradius: '10px', background: '#404040', spacebarenabled:false, cursorborder: ''});
+    $("#sidebar").niceScroll({
+        styler: "fb",
+        cursorcolor: "#e8403f",
+        cursorwidth: '3',
+        cursorborderradius: '10px',
+        background: '#404040',
+        spacebarenabled: false,
+        cursorborder: ''
+    });
 
-    $("html").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
+    $("html").niceScroll({
+        styler: "fb",
+        cursorcolor: "#e8403f",
+        cursorwidth: '6',
+        cursorborderradius: '10px',
+        background: '#404040',
+        spacebarenabled: false,
+        cursorborder: '',
+        zindex: '1000'
+    });
 
 // widget tools
 
@@ -89,19 +106,14 @@ var Script = function () {
         jQuery(this).parents(".panel").parent().remove();
     });
 
-
 //    tool tips
-
     $('.tooltips').tooltip();
 
 //    popovers
-
     $('.popovers').popover();
 
 
-
 // custom bar chart
-
     if ($(".custom-bar-chart")) {
         $(".bar").each(function () {
             var i = $(this).find(".value").html();
@@ -116,34 +128,32 @@ var Script = function () {
 }();
 
 //chosen selection
-$(function() {
+$(function () {
     $(".chosen-select").chosen();
 });
 
 //it work's too for delete-confirm
 /*$('.delete-confirm').click(function (){
-    var answer = confirm("You really like to delete this Item?");
-    if (answer) {
-        return true;
-    }else{
-        return false;
-    }
-});*/
+ var answer = confirm("You really like to delete this Item?");
+ if (answer) {
+ return true;
+ }else{
+ return false;
+ }
+ });*/
 
 //delete confirm message
-function confirmDelete()
-{
+function confirmDelete() {
     return confirm('Are you sure you want to delete!!!');
 }
 
 //delete confirm function
-$(".delete-confirm").click(function(event){
+$(".delete-confirm").click(function (event) {
     event.stopPropagation();
-    if(confirmDelete()) {
+    if (confirmDelete()) {
         return true;
     }
-    else
-    {
+    else {
         event.preventDefault();
         return false;
     }
@@ -151,42 +161,28 @@ $(".delete-confirm").click(function(event){
 
 //when enable datepicker in specific field only
 /*$(function() {
-    $( "#acme_purchasebundle_purchase_purchaseDate" ).datepicker();
-});*/
+ $( "#acme_purchasebundle_purchase_purchaseDate" ).datepicker();
+ });*/
 
 //datepicker function for purchase and issue
-$(function() {
-    $('.date-picker').datepicker({ dateFormat: 'dd-mm-yy' });
+$(function () {
+    $('.date-picker').datepicker({dateFormat: 'dd-mm-yy'});
 });
 
 //confirm delete function
 $(document).on("click", "a.confirm-delete", function (e) {
-    if(!confirmDelete())
-    {
+    if (!confirmDelete()) {
         e.stopPropagation();
         return false;
     }
     return true;
 });
 
-//search form submit
-$('#search-form').submit(
-    function (evt) {
-        evt.preventDefault();
-        var searchVal = $.trim($('input[type="text"]', $(this)).val());
-        if (searchVal.length > 1) {
-            window.location = $(this).attr('action') + '/' + searchVal;
-        }
-        $('#loading-full,.loading-ball').fadeIn(1500).delay(3500).fadeOut(1500);
-    }
-);
-
 //date picker start(report)
-
 if (top.location != location) {
-    top.location.href = document.location.href ;
+    top.location.href = document.location.href;
 }
-$(function(){
+$(function () {
     window.prettyPrint && prettyPrint();
     $('.default-date-picker').datepicker({
         format: 'dd-mm-yyyy'
@@ -194,12 +190,11 @@ $(function(){
     $('.dpYears').datepicker();
     $('.dpMonths').datepicker();
 
-
-    var startDate = new Date(2012,1,20);
-    var endDate = new Date(2012,1,25);
+    var startDate = new Date(2012, 1, 20);
+    var endDate = new Date(2012, 1, 25);
     $('.dp4').datepicker()
-        .on('changeDate', function(ev){
-            if (ev.date.valueOf() > endDate.valueOf()){
+        .on('changeDate', function (ev) {
+            if (ev.date.valueOf() > endDate.valueOf()) {
                 $('.alert').show().find('strong').text('The start date can not be greater then the end date');
             } else {
                 $('.alert').hide();
@@ -209,8 +204,8 @@ $(function(){
             $('.dp4').datepicker('hide');
         });
     $('.dp5').datepicker()
-        .on('changeDate', function(ev){
-            if (ev.date.valueOf() < startDate.valueOf()){
+        .on('changeDate', function (ev) {
+            if (ev.date.valueOf() < startDate.valueOf()) {
                 $('.alert').show().find('strong').text('The end date can not be less then the start date');
             } else {
                 $('.alert').hide();
@@ -225,10 +220,10 @@ $(function(){
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
     var checkin = $('.dpd1').datepicker({
-        onRender: function(date) {
+        onRender: function (date) {
             return date.valueOf() < now.valueOf() ? 'disabled' : '';
         }
-    }).on('changeDate', function(ev) {
+    }).on('changeDate', function (ev) {
         if (ev.date.valueOf() > checkout.date.valueOf()) {
             var newDate = new Date(ev.date)
             newDate.setDate(newDate.getDate() + 1);
@@ -238,38 +233,51 @@ $(function(){
         $('.dpd2')[0].focus();
     }).data('datepicker');
     var checkout = $('.dpd2').datepicker({
-        onRender: function(date) {
+        onRender: function (date) {
             return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
         }
-    }).on('changeDate', function(ev) {
+    }).on('changeDate', function (ev) {
         checkout.hide();
     }).data('datepicker');
 });
 
-//date picker end
+//form submit functionality
+$(document).ready(function () {
+    $('#search-form').submit(
+        function (evt) {
+            $("#loading-full,.loading-ball").fadeIn();
+            evt.preventDefault();
+            var searchVal = $.trim($('input[type="text"]', $(this)).val());
+            if (searchVal.length > 1) {
+                window.location = $(this).attr('action') + '/' + searchVal;
+            }
+        }
+    );
+});
 
+//for modal
+$(function () {
+    var modalRequestRunning = false;
+    $('body').on('click', '.ajax-modal[data-toggle="modal"]', function (e) {
+        e.preventDefault();
+        if (modalRequestRunning)
+            return false;
+        modalRequestRunning = true;
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (response) {
+                modalRequestRunning = false;
+                $('<div class="modal fade ajax-modal-content"></div>').html(response).modal();
+            }
+        });
+        return false;
+    });
+});
 
-//start lock screen
-var url = "http://craft.local/app_dev.php/widget/lockscreen";
-document.onkeydown = keyDownEvent;
-document.onkeyup = keyUpEvent;
-var isCtrl = false;
-function keyDownEvent() {
-    var keyid = event.keyCode;
-
-    if(keyid == 16) {
-        isCtrl = true;
-    }
-}
-function keyUpEvent() {
-    var keyid = event.keyCode;
-
-    if(keyid == 16) {
-        isCtrl = false;
-    }
-
-    if(keyid == 76 && isCtrl == true) {
-       $(location).attr('href',url);
-    }
-}
+//enable tooltip
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 

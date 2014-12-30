@@ -1,8 +1,25 @@
 Acme\UserBundle\Entity\User:
     type:  entity
     table: users
+    repositoryClass:  Acme\UserBundle\Repository\UserRepository
     id:
         id:
             type: integer
             generator:
                 strategy: AUTO
+    fields:
+        image:
+            type: string
+            nullable: true
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: false
+        createdBy:
+            column: created_by
+            type: string
+            nullable: false
+    lifecycleCallbacks:
+        prePersist: [ preUpload,setCreatedAt ]
+        postPersist: [ upload ]
+        postRemove: [ removeUpload ]

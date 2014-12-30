@@ -31,6 +31,13 @@ class AppKernel extends Kernel
             new Acme\HistoryBundle\AcmeHistoryBundle(),
             new Kitpages\DataGridBundle\KitpagesDataGridBundle(),
             new Acme\WidgetBundle\AcmeWidgetBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Cg\KintBundle\CgKintBundle(),
+            new Ali\DatatableBundle\AliDatatableBundle(),
+            new Acme\EmailBundle\AcmeEmailBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

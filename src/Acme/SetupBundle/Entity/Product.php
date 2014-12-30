@@ -25,6 +25,22 @@ class Product
     private $image;
 
     /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    /**
      * @Assert\Image(maxSize = "1024k")
      */
     public $file;
@@ -94,7 +110,7 @@ class Product
 
     /**
      * returns the directory where the picture of the user is saved
-     * @return string 
+     * @return string
      */
     public function getUploadDir()
     {
@@ -103,7 +119,7 @@ class Product
 
     /**
      * returns the absolute path to the directory where the picture of the user is saved
-     * @return type 
+     * @return type
      */
     public function getUploadRootDir()
     {

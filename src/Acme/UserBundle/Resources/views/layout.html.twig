@@ -3,19 +3,19 @@
 {% block body %}
     <div>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-            <a href="{{ path('fos_user_security_logout') }}">
-                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'AcmeUserBundle') }} |
+            <a href="{{ path('acme_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'AcmeUserBundle') }}
             </a>
         {% else %}
-            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+            <a href="{{ path('acme_user_security_login') }}">{{ 'layout.login'|trans({}, 'AcmeUserBundle') }}</a>
         {% endif %}
     </div>
 
     {% for type, messages in app.session.flashbag.all() %}
         {% for key, message in messages %}
             <div class="flash-{{ type }}">
-                {{ message|trans({}, 'FOSUserBundle') }}
+                {{ message|trans({}, 'AcmeUserBundle') }}
             </div>
         {% endfor %}
     {% endfor %}

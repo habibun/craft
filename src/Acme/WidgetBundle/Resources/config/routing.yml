@@ -2,26 +2,31 @@ acme_widget_homepage:
     path:     /hello/{name}
     defaults: { _controller: AcmeWidgetBundle:Default:index }
 
-AcmeWidgetBundle_lasttab:
-  pattern:  /lasttab
-  defaults: { _controller: AcmeWidgetBundle:LastTab:lastTab }
+acme_widget_lasttab:
+  pattern:  /last-tab
+  defaults: { _controller: "AcmeWidgetBundle:LastTab:lastTab" }
 
-AcmeWidgetBundle_stateoverview:
-    resource: "@AcmeWidgetBundle/Resources/config/routing/stateoverview.yml"
-    prefix:   /stateoverview
+acme_widget_state_overview:
+    pattern:    /state-overview
+    defaults:   { _controller:  AcmeWidgetBundle:StateOverview:stateOverview }
 
-AcmeWidgetBundle_workprogress:
-    pattern:    /workprogress
-    defaults:   { _controller:  AcmeWidgetBundle:WorkProgress:workProgress }
+acme_widget_workprogress:
+    pattern:    /work-progress
+    defaults:   { _controller:  "AcmeWidgetBundle:WorkProgress:workProgress" }
 
-AcmeWidgetBundle_topsearch:
-    pattern:    /topsearch
-    defaults:   { _controller:  AcmeWidgetBundle:TopSearch:topSearchList }
+acme_widget_workprogress_all:
+    pattern:    /work-progress-all
+    defaults:   { _controller:  "AcmeWidgetBundle:WorkProgress:workProgressAll" }
 
-AcmeWidgetBundle_lockscreen:
-    pattern:    /lockscreen
+acme_widget_lockscreen:
+    pattern:    /lock-screen
     defaults:   { _controller:  AcmeWidgetBundle:LockScreen:lockScreen }
 
-AcmeWidgetBundle_SearchStatistics:
-    pattern:    /search/{searchWord}
-    defaults:   { _controller:  AcmeWidgetBundle:SearchStatistics:search, searchWord: null }
+AcmeWidgetBundle_searchstatistics:
+    resource: "@AcmeWidgetBundle/Resources/config/routing/searchstatistics.yml"
+    prefix:   /search
+
+acme_widget_available_product:
+    pattern:    /available-product
+    defaults:   { _controller:  AcmeWidgetBundle:AvailableProduct:availableProduct }
+

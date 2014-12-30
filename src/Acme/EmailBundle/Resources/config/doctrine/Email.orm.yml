@@ -1,0 +1,29 @@
+Acme\EmailBundle\Entity\Email:
+    type: entity
+    table: email
+    repositoryClass: Acme\EmailBundle\Repository\EmailRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        email:
+            type: string
+            length: 255
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+        status:
+            type: boolean
+            nullable: true
+    manyToOne:
+        createdBy:
+            targetEntity: Acme\UserBundle\Entity\User
+            joinColumn:
+                name: created_by
+    lifecycleCallbacks:
+        prePersist: [setCreatedAt]

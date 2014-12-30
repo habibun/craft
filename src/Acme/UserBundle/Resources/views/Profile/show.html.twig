@@ -1,0 +1,42 @@
+{% extends "AcmeUserBundle::layout.html.twig" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
+                <li class="active">User</li>
+                <li class="active">Profile</li>
+                <li class="active">Show</li>
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Profile</strong>
+                <span class="tools pull-right">
+                    <a class="icon-chevron-down" href="javascript:;"></a>
+                    <a class="icon-remove" href="javascript:;"></a>
+                </span>
+                </header>
+                <div class="panel-body">
+                    {# Logged in as admin | Logout #}
+                    {% block fos_user_content %}
+                        {% include "AcmeUserBundle:Profile:show_content.html.twig" %}
+                    {% endblock fos_user_content %}
+                </div>
+            </section>
+
+            {# back button hide #}
+            {#<span class="pull-right">
+                <a href="{{ path('dashboard') }}" class="btn btn-primary">Back</a>
+            </span>#}
+        </div>
+    </div>
+{% endblock %}

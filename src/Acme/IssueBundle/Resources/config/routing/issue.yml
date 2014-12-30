@@ -6,10 +6,6 @@ issue_result:
     pattern:  /issue-result
     defaults: { _controller: "AcmeIssueBundle:Issue:getIssueResult" }
 
-issue_line_result:
-    pattern:  /issue-line-result
-    defaults: { _controller: "AcmeIssueBundle:Issue:getIssueLineResult" }
-
 issue_show:
     pattern:  /{id}/show
     defaults: { _controller: "AcmeIssueBundle:Issue:show" }
@@ -47,3 +43,8 @@ issue_finalize:
 issue_definalize:
     pattern:  /{id}/definalize
     defaults: { _controller: "AcmeIssueBundle:Issue:deFinalize" }
+
+product_current_stock:
+    pattern:  /product-current-stock
+    defaults: { _controller: "AcmeIssueBundle:Issue:productCurrentStock" }
+

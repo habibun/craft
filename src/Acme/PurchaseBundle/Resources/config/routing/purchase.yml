@@ -2,14 +2,6 @@ purchase:
     pattern:  /
     defaults: { _controller: "AcmePurchaseBundle:Purchase:index" }
 
-purchase_line_result:
-    pattern:  /purchase-line-result
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:getPurchaseLineResult" }
-
-purchase_result:
-    pattern:  /purchase-result
-    defaults: { _controller: "AcmePurchaseBundle:Purchase:getPurchaseResult" }
-
 purchase_show:
     pattern:  /{id}/show
     defaults: { _controller: "AcmePurchaseBundle:Purchase:show" }
@@ -47,3 +39,36 @@ purchase_finalize:
 purchase_definalize:
     pattern: /{id}/definalize
     defaults: { _controller: "AcmePurchaseBundle:Purchase:deFinalize" }
+
+supplier_total_purchase:
+    pattern: /supplier-total-purchase
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:supplierTotalPurchase" }
+
+purchase_supplier_detail:
+    pattern:  /supplier-detail
+    defaults: { _controller:  "AcmePurchaseBundle:Purchase:supplierDetail"  }
+
+purchase_list:
+    pattern:  /purchase-list
+    defaults: { _controller:  "AcmePurchaseBundle:Purchase:purchaseList"  }
+
+ajax_purchase_list:
+    pattern:  /ajax-purchase-list
+    defaults: { _controller:  "AcmePurchaseBundle:Purchase:grid"  }
+
+purchase_list_all:
+    pattern:  /list-all
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:purchaseListAll" }
+
+lankit:
+    pattern:  /lankit
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:lankit" }
+
+lankit_purchase_result:
+    pattern:  /lankit-purchase-result
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:getLankitPurchaseResult" }
+
+lankit_purchase_line_result:
+    pattern:  /lankit-purchase-line-result
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:getLankitPurchaseLineResult" }
+

@@ -2,11 +2,15 @@
 
 namespace Acme\UserBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Request;
 use Acme\UserBundle\Entity\User;
 use Acme\UserBundle\Form\UserType;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Acme\UserBundle\Form\SearchType;
 
 /**
  * User controller.
@@ -19,24 +23,28 @@ class UserController extends Controller
      * Lists all User entities.
      *
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $userManager = $this->get('fos_user.user_manager');
+        $searchedUser = $userManager->findUsers();
 
-        $entities = $userManager->findUsers();
+        $adapter = new ArrayAdapter($searchedUser);
+        $pagerUser = new Pagerfanta($adapter);
+        $pagerUser->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
 
-        $paginator = $this->get('knp_paginator');
-        $entities = $paginator->paginate(
-            $entities,
-            $this->get('request')->query->get('page', 1) /*page number*/,
-            10
-        /*limit per page*/
-        );
+        try {
+            $pagerUser->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
+        }
+
+        $searchForm = $this->createForm(new SearchType('Acme\UserBundle\Entity\User'), null);
 
         return $this->render(
             'AcmeUserBundle:User:index.html.twig',
             array(
-                'entities' => $entities,
+                'entities' => $pagerUser,
+                'searchForm' => $searchForm->createView()
             )
         );
     }
@@ -50,12 +58,14 @@ class UserController extends Controller
         $entity = new User();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        $user = $this->get('security.context')->getToken()->getUser();
 
         if ($form->isValid()) {
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($entity);
             $password = $encoder->encodePassword($entity->getUsername(), $entity->getSalt());
             $entity->setPassword($password);
+            $entity->setCreatedBy($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -211,6 +221,10 @@ class UserController extends Controller
             $encoder = $factory->getEncoder($entity);
             $password = $encoder->encodePassword($entity->getUsername(), $entity->getSalt());
             $entity->setPassword($password);
+            if ($entity->file != null) {
+                $entity->setImage(uniqid() . '.' . $entity->file->guessExtension());
+                $entity->file->move($entity->getUploadRootDir(), $entity->getImage());
+            }
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
@@ -248,16 +262,12 @@ class UserController extends Controller
             $em->remove($entity);
             $em->flush();
         } catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->set(
-                'error',
-                'Error: You can\'t delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator.'
-            );
+            $this->get('session')->getFlashBag()->set('oh_snap', $this->container->getParameter('used_error_long'));
 
             return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         }
-        $this->get('session')->getFlashBag()->add('oh_snap', 'User was successfully deleted.');
+        $this->get('session')->getFlashBag()->add('well_done', 'User was successfully deleted.');
 
-        //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('user'));
     }
 
@@ -292,5 +302,40 @@ class UserController extends Controller
         }
 
         return $roles;
+    }
+
+
+    public function findUsernameAction(Request $request,$page)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $request = $this->get('request');
+        $username = $request->request->get('acme_userbundle_search')['username'];
+
+        if ($username == null or $username == ' ') {
+            return $this->redirect($this->generateUrl('user'));
+        }
+
+        $searchedUser = $em->getRepository('AcmeUserBundle:User')->findUsernameResult($username);
+
+        $adapter = new ArrayAdapter($searchedUser);
+        $pagerUser = new Pagerfanta($adapter);
+        $pagerUser->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
+
+        try {
+            $pagerUser->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
+        }
+
+        $searchForm = $this->createForm(new SearchType('Acme\UserBundle\Entity\User'), null);
+
+        return $this->render(
+            'AcmeUserBundle:User:index.html.twig',
+            array(
+                'entities' => $pagerUser,
+                'filter' => $username,
+                'searchForm' => $searchForm->createView()
+            )
+        );
     }
 }

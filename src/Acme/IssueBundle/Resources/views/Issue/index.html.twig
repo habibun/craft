@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
                     <strong>Issue List</strong>
@@ -38,40 +38,12 @@
                                cellspacing="0" border="0">
                             <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>From</th>
+                                <th>Issue Date</th>
+                                <th>From Location</th>
                                 <th>To Company</th>
                                 <th>To Depot</th>
                                 <th>Status</th>
                                 <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="col-lg-5">
-            <section class="panel">
-                <header class="panel-heading">
-                    <strong>Product Info</strong>
-                    <span class="tools pull-right">
-                        <a class="icon-chevron-down" href="javascript:;"></a>
-                        <a class="icon-remove" href="javascript:;"></a>
-                    </span>
-                </header>
-                <div class="panel-body">
-                    <div class="adv-table">
-                        <table id="issueLineDataTable" class="display table table-bordered table-hover" cellpadding="0"
-                               cellspacing="0" border="0">
-                            <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>IssueTo</th>
-                                <th>Reference No</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -121,7 +93,7 @@
                             if (oObj.aData['status']) {
                                 return '<span class="label label-inverse">Finalized</span>'
                             }
-                            return '<span class="label label-warning">Draft</span>';
+                            return '<span class="label label-warning">Drafted</span>';
                         }
                     },
                     {
@@ -140,39 +112,6 @@
                                     ' <a href="' + editURL.replace('repPID', oObj.aData['id']) + '" class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>' +
                                     ' <a href="' + deleteURL.replace('repPID', oObj.aData['id']) + '" class="btn btn-danger btn-xs confirm-delete"><i class="icon-trash"></i></a>';
                         }
-                    }
-                ]
-            });
-        });
-    </script>
-
-
-    <script>
-        $(document).ready(function () {
-            var issueLineTable = $('#issueLineDataTable').dataTable({
-                "bProcessing": true,
-                "bServerSide": true,
-                "sAjaxSource": '{{ path('issue_line_result') }}',
-                "aoColumns": [
-                    {
-                        "mData": "product.name",
-                        "mDataProp": "product.name",
-                        "sName": "product.name"
-                    },
-                    {
-                        "mData": "quantity",
-                        "mDataProp": "quantity",
-                        "sName": "quantity"
-                    },
-                    {
-                        "mData": "issueTo",
-                        "mDataProp": "issueTo",
-                        "sName": "issueTo"
-                    },
-                    {
-                        "mData": "referenceNumber",
-                        "mDataProp": "referenceNumber",
-                        "sName": "referenceNumber"
                     }
                 ],
                 "fnPreDrawCallback": function (oSettings, json) {

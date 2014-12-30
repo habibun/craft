@@ -1,0 +1,74 @@
+{% trans_default_domain 'AcmeUserBundle' %}
+
+<div class="row">
+    <aside class="profile-nav col-lg-3">
+        <section class="panel">
+            <div class="user-heading round">
+                <a href="#">
+                    <img src="
+                            {% if app.user.getImage() != "userDefaultLogo.png" %}
+                                {{ asset(['uploads/users/', app.user.getImage()]|join) }}
+                            {% else %}
+                                {{ asset('uploads/users/userDefaultLogoBlack.png') }}
+                            {% endif %}
+                             " width="140px" height="140px" alt=""/>
+                </a>
+
+                <h1>&nbsp;</h1>
+
+                <p>&nbsp;</p>
+            </div>
+
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="{{ path('acme_user_profile_show') }}"> <i class="icon-user"></i> Profile</a></li>
+                <li class="active"><a href="{{ path('acme_user_profile_edit') }}"> <i class="icon-edit"></i> Edit
+                        profile</a>
+                </li>
+            </ul>
+
+        </section>
+    </aside>
+    <aside class="profile-info col-lg-9">
+        <section class="panel">
+            <form action="{{ path('acme_user_profile_edit') }}" {{ form_enctype(form) }} method="POST"
+                  class="panel-body">
+                <div class="row form-group">
+                    {{ form_label(form.username, 'Username' ,{'label_attr': { 'class':'col-sm-3 control-label'}} ) }}
+                    <div class="col-sm-9">
+                        {{ form_widget(form.username, {'attr': {'placeholder':'', 'class':'form-control'}} ) }}
+                    </div>
+                    {{ form_errors(form.username) }}
+                </div>
+
+                <div class="row form-group">
+                    {{ form_label(form.email, 'Email' ,{'label_attr': { 'class':'col-sm-3 control-label'} } ) }}
+                    <div class="col-sm-9">
+                        {{ form_widget(form.email, {'attr': {'placeholder':'', 'class':'form-control'}} ) }}
+                    </div>
+                    {{ form_errors(form.email) }}
+                </div>
+                <div class="row form-group">
+                    {{ form_label(form.file, "Image" ,{'label_attr': { 'class':'col-sm-3 control-label'}} ) }}
+                    <div class="col-md-9">
+                        {{ form_widget(form.file, {'attr': {'placeholder':'', 'class':'form-control'}} ) }}
+                    </div>
+                    {{ form_errors(form.file) }}
+                </div>
+                <div class="row form-group">
+                    {{ form_label(form.current_password, 'Current password' ,{'label_attr': { 'class':'col-sm-3 control-label'} } ) }}
+                    <div class="col-sm-9">
+                        {{ form_widget(form.current_password, {'attr': { 'class':'form-control'}} ) }}
+                    </div>
+                    {{ form_errors(form.current_password) }}
+                </div>
+                <hr/>
+                <div class="pull-right">
+                    <div class="col-sm-offset-3 col-sm-9" style="margin-right: -15px">
+                        <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans }}"/>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </aside>
+</div>
+<!-- page end-->

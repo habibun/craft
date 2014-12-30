@@ -2,87 +2,126 @@
 
 {% block title %}User{% endblock %}
 
+{% block stylesheets %}
+    {{ form_stylesheet(searchForm) }}
+    <style type="text/css">
+        {# remove last separator if last or more 
+        .breadcrumb > li + li:nth-last-child(1):before {
+            content: " ";
+        } #}
+        .breadcrumb > li + li.pull-right:last-child:before {
+            content: "";
+        }
+
+        {# add default btn-default class #}
+        .btn-default {
+            color: #333333;
+            background-color: #ffffff;
+            border-color: #cccccc;
+        }
+    </style>
+{% endblock %}
+
 {% block body -%}
+    {% if filter is defined %}
+        <div class="alert alert-success fade in">
+            <button data-dismiss="alert" class="close close-sm" type="button">
+                <i class="icon-remove"></i>
+            </button>
+            <p>
+                Filtered by: <strong>{{ filter }}</strong>
+                &nbsp;&nbsp;&nbsp; {{ entities.NbResults }} users has found
+            </p>
+        </div>
+    {% endif %}
     <div class="row">
-        <div class="col-lg-12">
-            <!--breadcrumbs start -->
+        <div class="col-lg-6">
             <ul class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
                 <li class="active">Admin</li>
                 <li class="active">Manage User</li>
-                <li class="active">User</li>
-                <ul class="pull-right">
-                    <a class="btn btn-sm btn-primary my-add" href="{{ path('user_new') }}">
-                        Add <i class="icon-plus"></i>
-                    </a>
-                </ul>
+                {% if get_action_name() == "findUsername" %}
+                    <li><a href="{{ path('user') }}">User</a></li>
+                    <li class="active">Search</li>
+                {% else %}
+                    <li class="active">User</li>
+                {% endif %}
             </ul>
-            <!--breadcrumbs end -->
+        </div>
+        <div class="col-lg-3">
+            <form class="row" action="{{ path('user_find_username') }}" id="form" method="post" accept-charset="UTF-8"
+                  role="search">
+                <div class="input-group">
+                    {{ form_widget(searchForm.username,{'attr': {'class': 'ui-autocomplete-input pure-input-rounded','value':'Search here...' }}) }}
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="icon-search"></i>
+                            </button>
+                        </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3">
+            <ul class="breadcrumb">
+                <li class="active">
+                    <li class="row pull-right my-add">
+                        <a class="btn btn-sm btn-primary" href="{{ path('user_new') }}">
+                            Add <i class="icon-plus"></i>
+                        </a>
+                    </li>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    <strong>User list</strong>
-                <span class="tools pull-right">
+                    {% if get_action_name() == "findUsername" %}
+                        <strong>Search Result</strong>
+                    {% else %}
+                        <strong>User list</strong>
+                    {% endif %}
+                    <span class="tools pull-right">
                     <a class="icon-chevron-down" href="javascript:;"></a>
                     <a class="icon-remove" href="javascript:;"></a>
                 </span>
                 </header>
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Roles</th>
-                        <th>Lastlogin</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for entity in entities %}
-                        <tr>
-                            <td>{{ entity.id }}</td>
-                            <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
-                            <td>{{ entity.email }}</td>
-                            <td>
-                                {% if entity.enabled == true %}
-                                    <span class="label label-inverse label-mini">Enabled</span>
-                                {% else %}
-                                    <span class="label label-warning label-mini">disabled</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                <ul>
-                                        <li>{{ entity.roles|join(' , ')|replace({'ROLE_':'','_':' '|capitalize})|title }}</li>
-                                </ul>
-                            </td>
-                            <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
-                            <td>
-                                <a href="{{ path('user_show', { 'id': entity.id }) }}"
-                                   class="btn btn-success btn-xs"><i class="icon-zoom-in"></i></a>
-                                <a href="{{ path('user_edit', { 'id': entity.id }) }}"
-                                   class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>
-                                <a href="{{ path('user_delete', { 'id': entity.id }) }}"
-                                   class="btn btn-danger btn-xs delete-confirm"><i class="icon-trash"></i></a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <span class="pull-right">
-                        {{ knp_pagination_render(entities, "", {}, { "prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}
-                </span>
+                {% if entities is not empty %}
+                    {% include 'AcmeUserBundle:User:userTable.html.twig' with  {'entities': entities} %}
+                {% else %}
+                    <div class="well">
+                        <p class="text-info">No users has found</p>
+                    </div>
+                {% endif %}
             </section>
-            {#{{ knp_pagination_render(entities, "", {}, { "style": "pager", "aligned": true }) }}#}
-            {#        <span class="" style="float: left;margin-top: 20px">
-                        <a class="btn btn-primary btn-sm" href="{{ path('user_new') }}">
-                            Add New
-                        </a>
-                    </span>#}
+            <div class="add-task-row">
+                {% if entities.haveToPaginate %}
+                    <span class="pull-left" style="margin-top: 20px">
+                        <strong>{{ entities.NbResults }}</strong>
+                        {{ 'users has found'|trans }}.
+                        {{ 'Page'|trans }} <strong>{{ entities.CurrentPage }}/{{ entities.NbPages }} </strong>
+                    </span>
+                    <span class="pull-right">
+                        {{ pagerfanta(entities, 'twitter_bootstrap3_translated') }}
+                    </span>
+                {% endif %}
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ form_javascript(searchForm) }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#acme_userbundle_search_username').focus(function (evt) {
+                if ($(this).val() == 'Search here...')
+                    $(this).val('');
+            });
+            $('#acme_userbundle_search_username').blur(function (evt) {
+                if ($(this).val() == '')
+                    $(this).val('Search here...');
+            });
+        });
+    </script>
 {% endblock %}

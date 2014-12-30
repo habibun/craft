@@ -4636,11 +4636,6 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
     min-height: 900px;
 }
 
-.my-add {
-    margin-right: -14px;
-    margin-top: -6px;
-}
-
 /*my_edited_for loading effect*/
 /** loading **/
 #loading-full {background:black;position:fixed;width:100%;height:100%;left:0px;top:0px;
@@ -4683,3 +4678,9 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
     100% { -webkit-transform:rotate(-360deg); }
 }
 /** ***************** **/
+
+/*my_edited for user add button*/
+.my-add {
+    margin-right: -14px;
+    margin-top: -6px;
+}

@@ -33,7 +33,7 @@ class ProductHistoryController extends Controller
              join pl.product pr
              where pu.status = 1
              group by pl.product
-             order by total_product_in DESC
+             order by pr.name ASC
              '
         );
         $result = $query->getResult();
@@ -62,7 +62,7 @@ class ProductHistoryController extends Controller
              join i.product pro
              where iss.status = 1
              group by i.product
-             order by total_product_out DESC
+             order by pro.name ASC
              '
         );
         $result = $query->getResult();

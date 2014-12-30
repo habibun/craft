@@ -57,6 +57,13 @@
                     {{ form_row(line_form.referenceNumber) }}
                     {{ form_row(line_form.issueTo) }}
                     {{ form_row(line_form.product) }}
+                    <div class="form-group">
+                        <label class="col-sm-3 col-sm-3 control-label text-info"></label>
+                        <label class="col-sm-4 col-sm-4 control-label text-info">Current Stock</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="product-stock" type="text" placeholder="0.00" value="0" disabled>
+                        </div>
+                    </div>
                     {{ form_row(line_form.quantity) }}
                     <hr>
                     <span class="pull-right">
@@ -135,6 +142,16 @@
                 return false;
             }
 
+            if ($('#product-stock').val() <= 0) {
+                noty({force: true, text: 'Insufficient stock', type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+
+            if ($('#product-stock').val() < $('#issue_line_quantity').val()) {
+                noty({force: true, text: "May be you forget your current stock!", type: 'error', layout: 'topCenter', timeout: 3000});
+                return false;
+            }
+
             var html = '<tr class="' + $('#issue_line_product').val() + '">';
             html += '<td>' + $('#issue_line_referenceNumber').val() + '<input type="hidden" value="' + $('#issue_line_referenceNumber').val() + '" name="' + $('#issue_line_referenceNumber').attr('name') + '[]" /></td>';
             html += '<td>' + $('#issue_line_issueTo').val() + '<input type="hidden" value="' + $('#issue_line_issueTo').val() + '" name="' + $('#issue_line_issueTo').attr('name') + '[]" /></td>';
@@ -175,6 +192,20 @@
                 var id = $(parentTr).attr('class');
                 $(parentTr).remove();
                 delete addedLines[id];
+            });
+
+            $('#issue_line_product').change(function(){
+                $.post(
+                        '{{ path('product_current_stock') }}',
+                        {
+                            'product': $('#issue_line_product').val()
+                        },
+                        function(data)
+                        {
+                            $('#product-stock').val(data.result);
+                        },
+                        'json'
+                );
             });
         });
     </script>

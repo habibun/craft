@@ -1,0 +1,13 @@
+<div class="col-lg-3">
+    <section class="panel">
+        <header class="panel-heading">
+            <strong>Top Search</strong>
+        </header>
+        {% if words is not empty %}
+            {% for word in words %}
+                <a class="list-group-item"
+                   href="{{ path('searchstatistics_general', { 'searchWord': word['keywordSearch'] }) }}">{{ word['keywordSearch'] }}</a>
+            {% endfor %}
+        {% endif %}
+    </section>
+</div>

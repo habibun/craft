@@ -4,6 +4,12 @@
 
 {#{% form_theme form 'AcmeUserBundle:Form:fields.html.twig' %}#}
 
+{% block stylesheets %}
+    <style type="text/css">
+
+    </style>
+{% endblock %}
+
 {% block body -%}
     <div class="row">
         <div class="col-lg-12">
@@ -34,14 +40,21 @@
                     {{ form_row(form.username) }}
                     {{ form_row(form.email) }}
                     {{ form_row(form.password) }}
-                    <div class="row form-group">
+                    <div class="form-group">
                         {{ form_label(form.enabled , 'Enabled' , {'label_attr': { 'class':'col-sm-3 control-label'} } ) }}
                         <div class="col-sm-6">
-                            {{ form_widget(form.enabled, {'attr': { 'class':' '} } ) }}
+                            {{ form_widget(form.enabled, {'attr': { 'class':''} } ) }}
                         </div>
                         {{ form_errors(form.enabled) }}
                     </div>
                     {{ form_row(form.roles) }}
+                    <div class="form-group">
+                        {{ form_label(form.file,"Image" ,{'label_attr': { 'class':'col-sm-3 control-label'} } ) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.file, {'attr': {'placeholder':'photo', 'class':'form-control'} } ) }}
+                        </div>
+                        {{ form_errors(form.file) }}
+                    </div>
                     <hr>
                     <span class="pull-right">
                         <a href="{{ path('user') }}" class="btn btn-primary">Back</a>
@@ -52,4 +65,10 @@
             </section>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+
+    </script>
 {% endblock %}

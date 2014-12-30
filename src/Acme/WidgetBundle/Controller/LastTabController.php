@@ -41,11 +41,8 @@ class LastTabController extends Controller
             ->orderBy('iss.issueDate', 'DESC')
             ->join('i.issue', 'iss')
             ->addSelect("iss")
-            ->andWhere('iss.status = 1');
-
-        if (false === is_null($max)) {
-            $qb->setMaxResults($max);
-        }
+            ->andWhere('iss.status = 1')
+            ->setMaxResults(3);
 
         $query = $qb->getQuery();
         $result['lastIssue'] = $query->getResult();
