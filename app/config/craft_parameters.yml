@@ -18,6 +18,7 @@ parameters:
     update_success:	"Your change was successfully Saved."
     used_error_long: "Error: You can't delete this record. You are getting this message because somewhere you already used this record as reference or this record not exist. If you want to know more please contact system administrator."
     used_error_small: "You cannot delete level which is already being used."
+    product_delete_msg : "You have successfully delete product!"
 
     # knp
     knp_limit_per_page: 10
