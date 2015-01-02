@@ -16,6 +16,12 @@ class Invoice
 
     private $address;
 
+    private $invoiceLines;
+
+    public function __construct()
+    {
+        $this->invoiceLines = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -71,5 +77,17 @@ class Invoice
     public function getAddress()
     {
         return $this->address;
+    }
+
+    public function setInvoiceLines($invoiceLines)
+    {
+        $this->invoiceLines = $invoiceLines;
+
+        return $this;
+    }
+
+    public function getInvoiceLines()
+    {
+        return $this->invoiceLines;
     }
 }

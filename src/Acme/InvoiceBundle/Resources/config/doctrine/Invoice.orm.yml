@@ -13,4 +13,8 @@ Acme\InvoiceBundle\Entity\Invoice:
             length: 255
         address:
             type: text
+    oneToMany:
+        invoiceLines:
+            targetEntity: Acme\InvoiceBundle\Entity\InvoiceLine
+            mappedBy: invoice            
     lifecycleCallbacks: {  }

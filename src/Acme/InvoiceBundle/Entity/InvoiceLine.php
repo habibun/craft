@@ -16,6 +16,8 @@ class InvoiceLine
 
     private $price;
 
+    private $invoice;
+
 
     /**
      * Get id
@@ -71,5 +73,17 @@ class InvoiceLine
     public function getPrice()
     {
         return $this->price;
+    }
+
+    public function setInvoice($invoice)
+    {
+        $this->invoice = $invoice;
+
+        return $this;
+    }
+
+    public function getInvoice()
+    {
+        return $this->invoice;
     }
 }
