@@ -1,0 +1,3 @@
+acme_invoice_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AcmeInvoiceBundle:Default:index }

@@ -1,0 +1,4 @@
+services:
+#    acme_invoice.example:
+#        class: Acme\InvoiceBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

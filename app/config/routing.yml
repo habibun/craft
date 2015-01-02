@@ -1,3 +1,7 @@
+acme_invoice:
+    resource: "@AcmeInvoiceBundle/Resources/config/routing.yml"
+    prefix:   /
+
 acme_email:
     resource: "@AcmeEmailBundle/Resources/config/routing.yml"
     prefix:   /
