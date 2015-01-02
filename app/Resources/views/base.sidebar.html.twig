@@ -26,6 +26,19 @@
         </li>
         {% endif %}
 
+        {% if is_granted('ROLE_INVOICE') %}
+            <li class="sub-menu">
+              <a href="javascript:;" >
+                  <i class="icon-th"></i>
+                  <span>Invoice</span>
+              </a>
+              <ul class="sub">
+                  <li><a  href="#">New</a></li>
+                  <li><a  href="#">List</a></li>
+              </ul>
+            </li>
+        {% endif %}
+
         {% if is_granted('ROLE_EMAIL') %}
         <li>
             <a href="{{ path('email') }}" >
