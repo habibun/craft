@@ -1,0 +1,25 @@
+invoice:
+    pattern:  /
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:index" }
+
+invoice_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:show" }
+
+invoice_new:
+    pattern:  /new
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:new" }
+
+
+invoice_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:edit" }
+
+invoice_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:update" }
+    requirements: { _method: post|put }
+
+invoice_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:delete" }
