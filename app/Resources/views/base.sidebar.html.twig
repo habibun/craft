@@ -3,7 +3,7 @@
     <ul class="sidebar-menu" id="nav-accordion">
         <li>
             <a href="{{ path('dashboard') }}">
-                <i class="icon-dashboard text-primary"></i>
+                <i class="icon-dashboard"></i>
                 <span>Dashboard</span>
             </a>
         </li>
@@ -11,7 +11,7 @@
         {% if is_granted('ROLE_PURCHASE') %}
         <li>
             <a href="{{ path('purchase') }}">
-                <i class="icon-shopping-cart text-primary"></i>
+                <i class="icon-shopping-cart"></i>
                 <span>Purchase</span>
             </a>
         </li>
@@ -20,7 +20,7 @@
         {% if is_granted('ROLE_ISSUE') %}
         <li>
             <a href="{{ path('issue') }}" >
-                <i class="icon-move text-primary"></i>
+                <i class="icon-move"></i>
                 <span>Issue</span>
             </a>
         </li>
@@ -42,7 +42,7 @@
         {% if is_granted('ROLE_EMAIL') %}
         <li>
             <a href="{{ path('email') }}" >
-                <i class="icon-envelope text-primary"></i>
+                <i class="icon-envelope"></i>
                 <span>Email</span>
                 {% if emailEntities is defined %}
                     {% if get_action_name() == "searchEmail" %}
@@ -60,7 +60,7 @@
         {% if is_granted('ROLE_HISTORY') %}
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="icon-book text-primary"></i>
+                    <i class="icon-book"></i>
                     <span>History</span>
                 </a>
                 <ul class="sub">
@@ -74,7 +74,7 @@
         {% if is_granted('ROLE_SETUP') %}
         <li class="sub-menu">
             <a href="javascript:;">
-                <i class="icon-wrench text-primary"></i>
+                <i class="icon-wrench"></i>
                 <span>Setup</span>
             </a>
             <ul class="sub">
@@ -90,7 +90,7 @@
         {% if is_granted('ROLE_REPORT') %}
         <li class="sub-menu">
             <a href="javascript:;">
-                <i class="icon-th-list text-primary"></i>
+                <i class="icon-th-list"></i>
                 <span>Reports</span>
             </a>
             <ul class="sub">
@@ -103,7 +103,7 @@
         {% if is_granted('ROLE_ADMIN') %}
         <li class="sub-menu">
             <a href="javascript:;">
-                <i class="icon-user text-primary"></i>
+                <i class="icon-user"></i>
                 <span>Admin</span>
             </a>
             <ul class="sub">
