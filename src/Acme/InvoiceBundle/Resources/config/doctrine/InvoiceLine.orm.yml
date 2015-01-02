@@ -1,0 +1,18 @@
+Acme\InvoiceBundle\Entity\InvoiceLine:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        description:
+            type: string
+            length: 255
+        price:
+            type: integer
+        price:
+            type: integer
+    lifecycleCallbacks: {  }
