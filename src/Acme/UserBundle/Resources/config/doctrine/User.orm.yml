@@ -1,6 +1,6 @@
 Acme\UserBundle\Entity\User:
     type:  entity
-    table: users
+    table: fos_user
     repositoryClass:  Acme\UserBundle\Repository\UserRepository
     id:
         id:
