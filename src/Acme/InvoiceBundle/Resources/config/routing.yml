@@ -1,0 +1,7 @@
+acme_invoice_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AcmeInvoiceBundle:Default:index }
+
+AcmeInvoiceBundle_invoice:
+    resource: "@AcmeInvoiceBundle/Resources/config/routing/invoice.yml"
+    prefix:   /invoice

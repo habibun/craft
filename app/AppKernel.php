@@ -38,6 +38,7 @@ class AppKernel extends Kernel
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Acme\InvoiceBundle\AcmeInvoiceBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
