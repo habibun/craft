@@ -33,3 +33,4 @@ Acme\InvoiceBundle\Entity\Invoice:
             joinColumn:
                 name: created_by                        
     lifecycleCallbacks: {  }
+        prePersist: [setCreatedAt]

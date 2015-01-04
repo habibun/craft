@@ -3,6 +3,7 @@
 namespace Acme\InvoiceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Invoice
@@ -22,34 +23,42 @@ class Invoice
 
     private $invoiceLines;
 
-    private $createdAt;
-
-    private $createdBy;
+    protected $createdAt;
+    
+    protected $createdBy;
 
     public function __construct()
     {
         $this->invoiceLines = new ArrayCollection();
     }
 
+    /**
+     * @param mixed $createdAt
+     */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
+        $this->createdAt = new \DateTime();
     }
 
-    public function getCratedAt()
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function setCreatedBy()
+    /**
+     * @param mixed $createdBy
+     */
+    public function setCreatedBy($createdBy)
     {
         $this->createdBy = $createdBy;
-
-        return $createdBy;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCreatedBy()
     {
         return $this->createdBy;
