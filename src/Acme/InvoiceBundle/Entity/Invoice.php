@@ -16,11 +16,68 @@ class Invoice
 
     private $address;
 
+    private $invoiceDate;
+
+    private $invoiceStatus;
+
     private $invoiceLines;
+
+    private $createdAt;
+
+    private $createdBy;
 
     public function __construct()
     {
         $this->invoiceLines = new ArrayCollection();
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCratedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedBy()
+    {
+        $this->createdBy = $createdBy;
+
+        return $createdBy;
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    public function setInvoiceStatus($invoiceStatus)
+    {
+        $this->invoiceStatus = $invoiceStatus;
+
+        return $this;
+    }
+
+    public function getInvoiceStatus()
+    {
+        return $this->invoiceStatus;
+    }
+
+
+    public function setInvoiceDate($invoiceDate)
+    {
+        $this->invoiceDate = $invoiceDate;
+
+        return $this;
+    }
+
+    public function getInvoiceDate()
+    {
+        return $this->invoiceDate;
     }
 
     /**
