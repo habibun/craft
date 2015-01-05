@@ -3,6 +3,7 @@
 namespace Acme\InvoiceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Invoice
@@ -16,11 +17,76 @@ class Invoice
 
     private $address;
 
+    private $invoiceDate;
+
+    private $invoiceStatus;
+
     private $invoiceLines;
+
+    protected $createdAt;
+    
+    protected $createdBy;
 
     public function __construct()
     {
         $this->invoiceLines = new ArrayCollection();
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdBy
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    public function setInvoiceStatus($invoiceStatus)
+    {
+        $this->invoiceStatus = $invoiceStatus;
+
+        return $this;
+    }
+
+    public function getInvoiceStatus()
+    {
+        return $this->invoiceStatus;
+    }
+
+
+    public function setInvoiceDate($invoiceDate)
+    {
+        $this->invoiceDate = $invoiceDate;
+
+        return $this;
+    }
+
+    public function getInvoiceDate()
+    {
+        return $this->invoiceDate;
     }
 
     /**
