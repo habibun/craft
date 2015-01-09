@@ -18,7 +18,7 @@ Acme\InvoiceBundle\Entity\Invoice:
             type: date
         invoiceStatus:
             column: invoice_status
-            type: boolean
+            type: string
         createdAt:
             column: created_at
             type: datetime

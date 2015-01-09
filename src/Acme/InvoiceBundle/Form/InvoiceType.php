@@ -14,14 +14,26 @@ class InvoiceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $date = new \DateTime('now');
         $builder
+            // ->add('name', null, array('label' => false))  --if do not need to label
             ->add('name')
             ->add('address')
-            ->add('invoiceDate')
-            ->add('invoiceStatus')
-            ->add('createdAt')
-            ->add('createdBy')
-        ;
+            ->add('invoiceDate','date',
+                array(
+                    'widget' => 'single_text',
+                    'format' => 'dd-MM-yyyy',
+                    'label'  => 'Date',
+                    'attr' => array(
+                        'class' => 'date-picker',
+                        'value' => $date->format('d-m-Y'),
+                    )))
+            ->add('invoiceStatus', 'choice', array(
+                        'label'    => 'Status',
+                        'choices'   => array('paid' => 'Paid', 'pending' => 'Pending'),
+                        'preferred_choices' => array('pending'),
+            ))
+            ;
     }
     
     /**

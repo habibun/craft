@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Acme\InvoiceBundle\Entity\Invoice;
 use Acme\InvoiceBundle\Form\InvoiceType;
+use Acme\InvoiceBundle\Entity\InvoiceLine;
+use Acme\InvoiceBundle\Form\InvoiceLineType;
 
 /**
  * Invoice controller.
@@ -67,7 +69,7 @@ class InvoiceController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        // $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
@@ -81,9 +83,22 @@ class InvoiceController extends Controller
         $entity = new Invoice();
         $form   = $this->createCreateForm($entity);
 
+        $invoiceLine = new InvoiceLine();
+        $invoiceLineForm = $this->createForm(
+            new InvoiceLineType($this->get('security.context')),
+            $invoiceLine,
+            array(
+                'action' => 'javascript:void(0);',
+                'method' => 'POST',
+            )
+        );
+        $this->viewData['form'] = $form->createView();
+        $this->viewData['entities'] = $entity;
+
         return $this->render('AcmeInvoiceBundle:Invoice:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'line_form' => $invoiceLineForm->createView(),
         ));
     }
 

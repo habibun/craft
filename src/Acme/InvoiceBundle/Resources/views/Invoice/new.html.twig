@@ -1,15 +1,141 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}Invoice{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
 {% block body -%}
-    <h1>Invoice creation</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
+                <li class="active"><a href="#">Invoice</a></li>
+                <li class="active">Create New Invoice</li>
+            </ul>
+        </div>
+    </div>
 
-    {{ form(form) }}
+<!-- <section>
+    <div class="panel panel-primary">
+        <div class="panel-heading navyblue"> INVOICE</div>
+    </div>
+</section> -->
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('invoice') }}">
-            Back to the list
+    <div class="row">
+        <div class="col-lg-4">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>INVOICE INFO</strong>
+                      <span class="tools pull-right">
+                          <a class="icon-chevron-down" href="javascript:;"></a>
+                          <a class="icon-remove" href="javascript:;"></a>
+                      </span>
+                </header>
+                <div class="panel-body">
+                    {{ form_start(form, {'attr' :  { 'class': 'form-horizontal'} }) }}
+                    {{ bootstrap_set_style('horizontal') }}
+                    {{ bootstrap_set_widget_col(9) }}
+                    {{ bootstrap_set_label_col(3) }}
+                        {{ form_row(form.invoiceDate) }}
+                        {{ form_row(form.invoiceStatus) }}
+                </div>
+            </section>
+        </div>
+
+
+        <div class="col-lg-4">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>SHIPPING ADDRESS</strong>
+                      <span class="tools pull-right">
+                          <a class="icon-chevron-down" href="javascript:;"></a>
+                          <a class="icon-remove" href="javascript:;"></a>
+                      </span>
+                </header>
+                <div class="panel-body">
+                         {{ form_row(form.name) }}
+                         <br>
+                         {{ form_row(form.address) }}
+                </div>
+            </section>
+        </div>
+
+                {{ form_end(form) }}
+
+        <div class="col-lg-4">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Add Invoice Line</strong>
+                      <span class="tools pull-right">
+                          <a class="icon-chevron-down" href="javascript:;"></a>
+                          <a class="icon-remove" href="javascript:;"></a>
+                      </span>
+                </header>
+                <div class="panel-body">
+                    {{ form_start(form, {'attr' :  { 'class': 'form-horizontal'} }) }}
+                    {{ bootstrap_set_style('horizontal') }}
+                    {{ bootstrap_set_widget_col(9) }}
+                    {{ bootstrap_set_label_col(3) }}
+                        {{ form_row(line_form.description) }}
+                        {{ form_row(line_form.unitPrice) }}
+                        {{ form_row(line_form.quantity) }}
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <strong>Invoice Lines</strong>
+                        <span class="tools pull-right">
+                            <a class="icon-chevron-down" href="javascript:;"></a>
+                            <a class="icon-remove" href="javascript:;"></a>
+                        </span>
+                </header>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Item</th>
+                            <th class="hidden-phone">Description</th>
+                            <th class="">Unit Cost</th>
+                            <th class="">Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        </tbody>
+                    </table>
+                </div>    
+            </section>
+        </div>      
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <div class="col-lg-4 invoice-block pull-right">
+                    <ul class="unstyled amounts">
+                        <li><strong>Sub - Total amount :</strong> $6820</li>
+                        <li><strong>Discount :</strong> 10%</li>
+                        <li><strong>VAT :</strong> -----</li>
+                        <li><strong>Grand Total :</strong> $6138</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <div class="text-center invoice-btn">
+        <a class="btn btn-danger btn-lg"><i class="icon-check"></i> Submit Invoice </a>
+        <a class="btn btn-info btn-lg" onclick="javascript:window.print();"><i class="icon-print"></i> Print
         </a>
-    </li>
-</ul>
+    </div>
 {% endblock %}

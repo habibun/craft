@@ -11,10 +11,11 @@ Acme\InvoiceBundle\Entity\InvoiceLine:
         description:
             type: string
             length: 255
-        price:
+        unitPrice:
+            column: unit_price
             type: integer
-        price:
-            type: integer
+        quantity:
+            type: integer            
     manyToOne:
         invoice:
             targetEntity: Acme\InvoiceBundle\Entity\Invoice
