@@ -3,7 +3,7 @@
 {% block title %}Invoice{% endblock %}
 
 {% block stylesheets %}
-
+    <link rel="stylesheet" type="text/css" href="/assets/gritter/css/jquery.gritter.css" />
 {% endblock %}
 
 {% block body -%}
@@ -149,8 +149,26 @@
 
         var addedLines = [];
 
-        function addLine() 
-        {
+        function addLine() {
+
+            if (addedLines.hasOwnProperty($('#invoice_line_description').val())) {
+                $.gritter.add({
+                    title: 'Duplicate!',
+                    text: 'You already added this description please add another.'
+                });
+
+                return false;
+            }
+
+            if (!$('#invoice_line_description').val() || !$('#invoice_line_unitPrice').val()) {
+                $.gritter.add({
+                    title: 'Empty!',
+                    text: 'Please fill the form correctly.'
+                    });
+
+                return false;
+            }
+
             var serial = document.getElementById('lineViewer').rows.length;
             var unitPrice = $('#invoice_line_unitPrice').val();
             var quantity = $('#invoice_line_quantity').val();
@@ -177,11 +195,26 @@
 
         function masterOnSubmit() {
             $('table#lineViewer tbody :input').not(':submit').clone().hide().appendTo('#masterForm');
-
             return true;
         }
 
         function submitBoth() {
+            if (!$('#acme_invoicebundle_invoice_name').val() || !$('#acme_invoicebundle_invoice_address').val()) {
+                $.gritter.add({
+                    title: 'Empty!',
+                    text: 'May be you forgot to add shipping address.'
+                });
+
+                return false;
+            }
+            if ($('table#lineViewer tbody').children().length <= 0) {
+                $.gritter.add({
+                    title: 'Empty Invoice Line!',
+                    text: 'Please add invoice line.'
+                });
+
+                return false;
+            }            
             $('#masterForm').submit();
         }
 
@@ -197,4 +230,5 @@
         );
 
     </script>
+    <script type="text/javascript" src="/assets/gritter/js/jquery.gritter.min.js"></script>
 {% endblock %}
