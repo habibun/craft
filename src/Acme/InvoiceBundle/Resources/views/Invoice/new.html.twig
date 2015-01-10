@@ -151,9 +151,9 @@
 
         function addLine() 
         {
+            var serial = document.getElementById('lineViewer').rows.length;
             var unitPrice = $('#invoice_line_unitPrice').val();
             var quantity = $('#invoice_line_quantity').val();
-
             if (!$('#invoice_line_quantity').val()) {
                 var result =  unitPrice * 1;
             }
@@ -161,11 +161,8 @@
                 var result =  unitPrice * quantity;
             }
 
-            var serial = 1;
-            document.getElementById('serialNumber').value = ++serial;
-
             var html = '<tr class="' + $('#invoice_line_description').val() + '">';
-            html += '<td>' + $('#serialNumber').val() +'</td>';
+            html += '<td>' + serial +'</td>';
             html += '<td>' + $('#invoice_line_description').val() + '<input type="hidden" value="' + $('#invoice_line_description').val() + '" name="' + $('#invoice_line_description').attr('name') + '[]" /></td>';
             html += '<td>' + $('#invoice_line_unitPrice').val() + '<input type="hidden" value="' + $('#invoice_line_unitPrice').val() + '" name="' + $('#invoice_line_unitPrice').attr('name') + '[]" /></td>';
             html += '<td>' + $('#invoice_line_quantity').val() + '<input type="hidden" value="' + $('#invoice_line_quantity').val() + '" name="' + $('#invoice_line_quantity').attr('name') + '[]" /></td>';
@@ -174,7 +171,6 @@
             html += '</tr>';
 
             $('table#lineViewer tbody').append(html);
-
             addedLines[$('#invoice_line_description').val()] = 1;
             document.getElementById('lineForm').reset();
         }
