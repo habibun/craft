@@ -40,9 +40,22 @@ class InvoiceController extends Controller
         $entity = new Invoice();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        $data = $this->get('request')->request->all();
+        $data = $data['invoice_line'];
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setCreatedBy($user);
+            foreach ($data['description'] as $key => $description) {
+                $line = new InvoiceLine();
+                $line->setInvoice($entity);
+                $line->setDescription($data['description'][$key]);
+                $line->setUnitPrice($data['unitPrice'][$key]);
+                $line->setQuantity($data['quantity'][$key]);
+                $em->persist($line);
+            }
             $em->persist($entity);
             $em->flush();
 

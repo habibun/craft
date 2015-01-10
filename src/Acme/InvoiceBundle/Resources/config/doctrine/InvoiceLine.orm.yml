@@ -1,6 +1,6 @@
 Acme\InvoiceBundle\Entity\InvoiceLine:
     type: entity
-    table: null
+    table: invoice_line
     id:
         id:
             type: integer
