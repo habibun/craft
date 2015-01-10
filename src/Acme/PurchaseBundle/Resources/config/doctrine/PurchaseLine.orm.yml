@@ -7,7 +7,7 @@ Acme\PurchaseBundle\Entity\PurchaseLine:
             generator: { strategy: AUTO }
     fields:
         quantity:
-            type: decimal
+            type: integer
             nullable: false
         price:
             type: decimal

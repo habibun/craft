@@ -13,7 +13,8 @@ Acme\InvoiceBundle\Entity\InvoiceLine:
             length: 255
         unitPrice:
             column: unit_price
-            type: integer
+            type: decimal
+            scale: 2
         quantity:
             type: integer            
     manyToOne:
