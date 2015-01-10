@@ -18,9 +18,7 @@ class InvoiceType extends AbstractType
         $builder
             // ->add('name', null, array('label' => false))  --if do not need to label
             ->add('name')
-            ->add('address','text',array(
-                'label' => 'Address')
-            )
+            ->add('address','textarea')
             ->add('invoiceDate','date',
                 array(
                     'widget' => 'single_text',
@@ -34,7 +32,7 @@ class InvoiceType extends AbstractType
             ->add('invoiceStatus', 'choice', array(
                         'label'    => 'Status',
                         'choices'   => array('paid' => 'Paid', 'pending' => 'Pending'),
-                        'preferred_choices' => array('pending'))
+                        'preferred_choices' => array('paid'))
             );
     }
     

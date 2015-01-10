@@ -55,9 +55,9 @@
                       </span>
                 </header>
                 <div class="panel-body">
-                         {{ form_row(form.name) }}
-                         <br>
-                         {{ form_row(form.address) }}
+                    {{ form_row(form.name) }}
+                        <hr>
+                    {{ form_row(form.address) }}
                 </div>
             </section>
         </div>
@@ -151,25 +151,27 @@
 
         function addLine() 
         {
+            var unitPrice = $('#invoice_line_unitPrice').val();
+            var quantity = $('#invoice_line_quantity').val();
+
+            if (!$('#invoice_line_quantity').val()) {
+                var result =  unitPrice * 1;
+            }
+            else{
+                var result =  unitPrice * quantity;
+            }
+
             var serial = 1;
-            var result = $('#invoice_line_unitPrice').val() * $('#invoice_line_quantity').val();
-            var html = '<tr class="' + $('#invoice_line_description').val() + '">';
-
-            html += '<td>' + $('#serialNumber').val() +'</td>';
-
-            html += '<td>' + $('#invoice_line_description').val() + '<input type="hidden" value="' + $('#invoice_line_description').val() + '" name="' + $('#invoice_line_description').attr('name') + '[]" /></td>';
-
-            html += '<td>' + $('#invoice_line_unitPrice').val() + '<input type="hidden" value="' + $('#invoice_line_unitPrice').val() + '" name="' + $('#invoice_line_unitPrice').attr('name') + '[]" /></td>';
-
-            html += '<td>' + $('#invoice_line_quantity').val() + '<input type="hidden" value="' + $('#invoice_line_quantity').val() + '" name="' + $('#invoice_line_quantity').attr('name') + '[]" /></td>';
-
-            html += '<td>' + result.toFixed(2) +'</td>';
-
-            html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';
-
-            html += '</tr>';
-
             document.getElementById('serialNumber').value = ++serial;
+
+            var html = '<tr class="' + $('#invoice_line_description').val() + '">';
+            html += '<td>' + $('#serialNumber').val() +'</td>';
+            html += '<td>' + $('#invoice_line_description').val() + '<input type="hidden" value="' + $('#invoice_line_description').val() + '" name="' + $('#invoice_line_description').attr('name') + '[]" /></td>';
+            html += '<td>' + $('#invoice_line_unitPrice').val() + '<input type="hidden" value="' + $('#invoice_line_unitPrice').val() + '" name="' + $('#invoice_line_unitPrice').attr('name') + '[]" /></td>';
+            html += '<td>' + $('#invoice_line_quantity').val() + '<input type="hidden" value="' + $('#invoice_line_quantity').val() + '" name="' + $('#invoice_line_quantity').attr('name') + '[]" /></td>';
+            html += '<td>' + result.toFixed(2) +'</td>';
+            html += '<td><a href="javascript:void(0);" class="btn btn-danger btn-xs line-delete"><i class="icon-trash"></i></a></td>';
+            html += '</tr>';
 
             $('table#lineViewer tbody').append(html);
 
