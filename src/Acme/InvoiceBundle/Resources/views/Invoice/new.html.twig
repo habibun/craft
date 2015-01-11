@@ -153,8 +153,8 @@
 
             if (addedLines.hasOwnProperty($('#invoice_line_description').val())) {
                 $.gritter.add({
-                    title: 'Duplicate!',
-                    text: 'You already added this description please add another.'
+                    title: 'Duplicate Information!',
+                    text: 'You already added this description please add another Or delete existing and try again.'
                 });
 
                 return false;
@@ -162,8 +162,8 @@
 
             if (!$('#invoice_line_description').val() || !$('#invoice_line_unitPrice').val()) {
                 $.gritter.add({
-                    title: 'Empty!',
-                    text: 'Please fill the form correctly.'
+                    title: 'Oops, something wasn\'t right !',
+                    text: 'The Description or Unit price field is empty, it is required field and must be filled in.'
                     });
 
                 return false;
@@ -201,8 +201,8 @@
         function submitBoth() {
             if (!$('#acme_invoicebundle_invoice_name').val() || !$('#acme_invoicebundle_invoice_address').val()) {
                 $.gritter.add({
-                    title: 'Empty!',
-                    text: 'May be you forgot to add shipping address.'
+                    title: 'Empty Shipping Address!',
+                    text: 'The Shipping Address is empty, it is required and must be filled in.'
                 });
 
                 return false;
@@ -210,7 +210,7 @@
             if ($('table#lineViewer tbody').children().length <= 0) {
                 $.gritter.add({
                     title: 'Empty Invoice Line!',
-                    text: 'Please add invoice line.'
+                    text: 'The Invoice Line is empty, it is required and must be filled in.'
                 });
 
                 return false;
