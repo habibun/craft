@@ -14,7 +14,9 @@ class InvoiceLine
 
     private $description;
 
-    private $price;
+    private $unitPrice;
+
+    private $quantity;
 
     private $invoice;
 
@@ -53,26 +55,26 @@ class InvoiceLine
     }
 
     /**
-     * Set price
+     * Set unitPrice
      *
-     * @param integer $price
+     * @param integer $unitPrice
      * @return InvoiceLine
      */
-    public function setPrice($price)
+    public function setUnitPrice($unitPrice)
     {
-        $this->price = $price;
+        $this->unitPrice = $unitPrice;
 
         return $this;
     }
 
     /**
-     * Get price
+     * Get unitPrice
      *
      * @return integer 
      */
-    public function getPrice()
+    public function getUnitPrice()
     {
-        return $this->price;
+        return $this->unitPrice;
     }
 
     public function setInvoice($invoice)
@@ -85,5 +87,17 @@ class InvoiceLine
     public function getInvoice()
     {
         return $this->invoice;
+    }
+
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getQuantity()
+    {
+        return $this->quantity;
     }
 }

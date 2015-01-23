@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Acme\InvoiceBundle\Entity\Invoice;
 use Acme\InvoiceBundle\Form\InvoiceType;
+use Acme\InvoiceBundle\Entity\InvoiceLine;
+use Acme\InvoiceBundle\Form\InvoiceLineType;
 
 /**
  * Invoice controller.
@@ -38,9 +40,22 @@ class InvoiceController extends Controller
         $entity = new Invoice();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        $data = $this->get('request')->request->all();
+        $data = $data['invoice_line'];
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setCreatedBy($user);
+            foreach ($data['description'] as $key => $description) {
+                $line = new InvoiceLine();
+                $line->setInvoice($entity);
+                $line->setDescription($data['description'][$key]);
+                $line->setUnitPrice($data['unitPrice'][$key]);
+                $line->setQuantity($data['quantity'][$key]);
+                $em->persist($line);
+            }
             $em->persist($entity);
             $em->flush();
 
@@ -67,7 +82,7 @@ class InvoiceController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        // $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
@@ -81,9 +96,22 @@ class InvoiceController extends Controller
         $entity = new Invoice();
         $form   = $this->createCreateForm($entity);
 
+        $invoiceLine = new InvoiceLine();
+        $invoiceLineForm = $this->createForm(
+            new InvoiceLineType($this->get('security.context')),
+            $invoiceLine,
+            array(
+                'action' => 'javascript:void(0);',
+                'method' => 'POST',
+            )
+        );
+        $this->viewData['form'] = $form->createView();
+        $this->viewData['entities'] = $entity;
+
         return $this->render('AcmeInvoiceBundle:Invoice:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'line_form' => $invoiceLineForm->createView(),
         ));
     }
 

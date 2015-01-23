@@ -1,6 +1,6 @@
 Acme\InvoiceBundle\Entity\InvoiceLine:
     type: entity
-    table: null
+    table: invoice_line
     id:
         id:
             type: integer
@@ -11,10 +11,12 @@ Acme\InvoiceBundle\Entity\InvoiceLine:
         description:
             type: string
             length: 255
-        price:
-            type: integer
-        price:
-            type: integer
+        unitPrice:
+            column: unit_price
+            type: decimal
+            scale: 2
+        quantity:
+            type: integer            
     manyToOne:
         invoice:
             targetEntity: Acme\InvoiceBundle\Entity\Invoice
