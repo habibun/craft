@@ -48,3 +48,6 @@ product_current_stock:
     pattern:  /product-current-stock
     defaults: { _controller: "AcmeIssueBundle:Issue:productCurrentStock" }
 
+issue_print:
+    pattern:  /{id}/print
+    defaults: { _controller: "AcmeIssueBundle:Issue:print" }

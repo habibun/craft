@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * Issue controller.
  *
  */
+
 class IssueController extends Controller {
 
 	/**
@@ -38,8 +39,8 @@ class IssueController extends Controller {
 	 *
 	 */
 	public function createAction(Request $request) {
-		$entity = new Issue();
-		$form = $this->createCreateForm($entity);
+		$entity   = new Issue();
+		$form     = $this->createCreateForm($entity);
 		$lineForm = $this->createForm(
 			new IssueLineType(),
 			new IssueLine(),
@@ -74,8 +75,8 @@ class IssueController extends Controller {
 		return $this->render(
 			'AcmeIssueBundle:Issue:new.html.twig',
 			array(
-				'entity' => $entity,
-				'form' => $form->createView(),
+				'entity'    => $entity,
+				'form'      => $form->createView(),
 				'line_form' => $lineForm->createView(),
 			)
 		);
@@ -106,8 +107,8 @@ class IssueController extends Controller {
 	 *
 	 */
 	public function newAction() {
-		$entity = new Issue();
-		$form = $this->createCreateForm($entity);
+		$entity   = new Issue();
+		$form     = $this->createCreateForm($entity);
 		$lineForm = $this->createForm(
 			new IssueLineType(),
 			new IssueLine(),
@@ -120,8 +121,8 @@ class IssueController extends Controller {
 		return $this->render(
 			'AcmeIssueBundle:Issue:new.html.twig',
 			array(
-				'entity' => $entity,
-				'form' => $form->createView(),
+				'entity'    => $entity,
+				'form'      => $form->createView(),
 				'line_form' => $lineForm->createView(),
 			)
 		);
@@ -159,7 +160,7 @@ class IssueController extends Controller {
 	public function editAction($id) {
 		try {
 
-			$em = $this->getDoctrine()->getManager();
+			$em    = $this->getDoctrine()->getManager();
 			$issue = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
 
 			if (!$issue) {
@@ -170,9 +171,9 @@ class IssueController extends Controller {
 				exit();
 			}
 
-			$editForm = $this->createEditForm($issue);
+			$editForm  = $this->createEditForm($issue);
 			$issueLine = new IssueLine();
-			$lineForm = $this->createForm(
+			$lineForm  = $this->createForm(
 				new IssueLineType($this->get('security.context')),
 				$issueLine,
 				array(
@@ -186,10 +187,10 @@ class IssueController extends Controller {
 			return $this->render(
 				'AcmeIssueBundle:Issue:edit.html.twig',
 				array(
-					'issue' => $issue,
-					'form' => $editForm->createView(),
+					'issue'     => $issue,
+					'form'      => $editForm->createView(),
 					'line_form' => $lineForm->createView(),
-					'lines' => $issueLines,
+					'lines'     => $issueLines,
 				)
 			);
 		} catch (\Exception $e) {
@@ -251,7 +252,7 @@ class IssueController extends Controller {
 
 		$editForm->handleRequest($request);
 		$data = $this->get('request')->request->all();
-		$data = isset($data['issue_line']) ? $data['issue_line'] : array();
+		$data = isset($data['issue_line'])?$data['issue_line']:array();
 
 		if ($editForm->isValid()) {
 			$entity->setUpdatedAt(new \DateTime('now'));
@@ -277,10 +278,10 @@ class IssueController extends Controller {
 		return $this->render(
 			'AcmeIssueBundle:Issue:edit.html.twig',
 			array(
-				'entity' => $entity,
+				'entity'    => $entity,
 				'edit_form' => $editForm->createView(),
 				'line_form' => $lineForm->createView(),
-				'lines' => $lines,
+				'lines'     => $lines,
 			)
 		);
 	}
@@ -291,7 +292,7 @@ class IssueController extends Controller {
 	 */
 	public function deleteAction(Request $request, $id) {
 		try {
-			$em = $this->getDoctrine()->getManager();
+			$em     = $this->getDoctrine()->getManager();
 			$entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
 			if (!$entity) {
 				throw $this->createNotFoundException('Unable to find Issue entity.');
@@ -334,13 +335,13 @@ class IssueController extends Controller {
 	private function createDeleteForm($id) {
 		return $this->createFormBuilder()
 		            ->setAction($this->generateUrl('issue_delete', array('id' => $id)))
-		            ->setMethod('DELETE')
-		            ->add('submit', 'submit', array('label' => 'Delete'))
-		            ->getForm();
+		->setMethod('DELETE')
+		->add('submit', 'submit', array('label' => 'Delete'))
+		->getForm();
 	}
 
 	public function ajaxDeleteLineAction($id) {
-		$em = $this->getDoctrine()->getManager();
+		$em   = $this->getDoctrine()->getManager();
 		$line = $em->getRepository('AcmeIssueBundle:IssueLine')->find($id);
 
 		if (!$line) {
@@ -395,14 +396,14 @@ class IssueController extends Controller {
 	}
 
 	public function productCurrentStockAction(Request $request) {
-		$em = $this->getDoctrine()->getManager();
-		$data = $this->get('request')->request->all();
+		$em      = $this->getDoctrine()->getManager();
+		$data    = $this->get('request')->request->all();
 		$product = $em->getRepository('AcmeSetupBundle:Product')->find($data['product']);
 		if (!isset($data['product'])) {
 			return new JsonResponse('Unable to find Product id');
 		}
 		$repository = $em->getRepository('AcmeIssueBundle:Issue');
-		$result = $repository->getProductCurrentStockResult($product);
+		$result     = $repository->getProductCurrentStockResult($product);
 
 		$response = json_encode(array('result' => $result));
 
@@ -414,7 +415,7 @@ class IssueController extends Controller {
 	}
 
 	public function printAction($id) {
-		$em = $this->getDoctrine()->getManager();
+		$em     = $this->getDoctrine()->getManager();
 		$entity = $em->getRepository('AcmeIssueBundle:Issue')->find($id);
 		if (!$entity) {
 			throw $this->createNotFoundException('Unable to find Issue entity.');
@@ -424,19 +425,19 @@ class IssueController extends Controller {
 		}
 
 		$lines = $em->getRepository('AcmeIssueBundle:IssueLine')->findBy(array('issue' => $entity));
-		$html = $this->renderView('AcmeIssueBundle:Issue:print.html.twig', array(
-			'issue' => $entity,
-			'lines' => $lines,
-		));
+		$html  = $this->renderView('AcmeIssueBundle:Issue:print.html.twig', array(
+				'issue' => $entity,
+				'lines' => $lines,
+			));
 
 		return new HTTPResponse(
 			$this->get('knp_snappy.pdf')->getOutputFromHtml($html, array(
-				'page-size' => 'A4',
-				'orientation' => 'Landscape',
-			)),
+					'page-size'   => 'A4',
+					'orientation' => 'Landscape',
+				)),
 			200,
 			array(
-				'Content-Type' => 'application/pdf',
+				'Content-Type'        => 'application/pdf',
 				'Content-Disposition' => 'attachment; filename="issue.pdf"',
 			)
 		);

@@ -1,0 +1,38 @@
+{% extends '::print.base.html.twig' %}
+
+{% block report %}
+    <h3 style="text-align: center">Eon Infosys Technology</h3>
+    <strong>Date: </strong> {{ issue.createdAt|date('d-m-Y H:i:s') }}
+    <br />
+    <strong>From: </strong> {{ issue.fromLocation.name }} | <strong>To Depot: </strong> {{ issue.depot.name }}
+    <br />
+    <br />
+    <table class="bordered" style="width: 100%;" cellpadding="5" cellspacing="0">
+        <thead align="left">
+        <tr>
+            <th>Reference Number</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Issue To</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for line in lines %}
+            <tr>
+                <td>{{ line.referenceNumber }}</td>
+                <td>{{ line.product.name }}</td>
+                <td>{{ line.quantity }}</td>
+                <td>{{ line.issueTo }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <strong>Received By:</strong>
+{% endblock %}
+
