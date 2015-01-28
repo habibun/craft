@@ -93,7 +93,6 @@ class ReportController extends Controller {
 		$to = new \DateTime($fetchTo);
 
 		if ($request->getMethod() == 'POST') {
-
 			$dql = $em->createQueryBuilder();
 			$dql->select('il', 'i', 'u')
 			    ->from('AcmeIssueBundle:IssueLine', 'il')
@@ -102,13 +101,10 @@ class ReportController extends Controller {
 			    ->where("i.issueDate <= '" . $to->format('Y-m-d') . "'")
 			    ->andWhere("i.issueDate >= '" . $from->format('Y-m-d') . "'")
 			    ->addOrderby('i.issueDate', 'DESC');
-			// die(\Doctrine\Common\Util\Debug::dump($from));
 			$query = $em->createQuery($dql);
 			$results = $query->getResult();
 
 			return $this->render('AcmeReportBundle:Report:_issueReport.html.twig', array(
-				//'entities' => $entities
-				//'filter_form' => $filterForm->createView(),
 				'results' => $results,
 			));
 
