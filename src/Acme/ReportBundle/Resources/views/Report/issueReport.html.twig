@@ -22,6 +22,7 @@
                     <form action="{{ app.request.uriForPath('/report/issue') }}" class="form-horizontal" method="post">
                         <div class="form-group">
                             <label class="control-label col-md-3">Date Range</label>
+
                             <div class="col-lg-8 col-xs-11">
                                 <div class="input-group input-large" data-date-format="dd-mm-yyyy">
                                     <input type="text" class="form-control dpd1" name="from">
@@ -35,44 +36,40 @@
                             <span class="pull-left">
                                 <a href="{{ path('issue') }}" class="btn btn-primary">Get Report</a>
                             </span>
-                            <input class="btn btn-primary reporte_form_btn" type="submit" id="getReport" value="Generate Report"/>
+                            <input class="btn btn-primary reporte_form_btn" type="submit" id="getReport"
+                                   value="Generate Report"/>
                         </div>
                     </form>
                 </div>
             </section>
         </div>
-
         <div class="col-md-6">
             <section class="panel">
                 <div id="results"></div>
             </section>
         </div>
-
     </div>
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('js/jquery.form.js') }}"></script>
-
     <script>
-    $(document).ready(function () {
-        $('.reporte_form_btn').on('click', function(e) {
-            e.preventDefault();
-            var form = $(this).closest('form');
+        $(document).ready(function () {
+            $('.reporte_form_btn').on('click', function (e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
                 $("div").removeClass("loading-ball");
                 $("#loading-full").removeAttr("id");
                 $("#lightbox, #lightbox-loader").fadeIn(300);
                 $("form").ajaxForm({
                     target: '#results',
-                    success: function(msg) {
+                    success: function (msg) {
                         $("#lightbox, #lightbox-loader").fadeOut(300);
                     }
                 }).submit();
+            });
         });
-    });
     </script>
-
-
     <script type="text/javascript" src="{{ asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 {% endblock %}
