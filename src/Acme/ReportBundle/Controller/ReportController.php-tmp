@@ -21,15 +21,15 @@ class ReportController extends Controller {
 			$data = $data['report'];
 			if (!empty($data['fromDate']) && !empty($data['toDate'])) {
 				$reportData = $this->_generatePurchaseReport($data);
-				$html = $this->renderView(
+				$html       = $this->renderView(
 					'AcmeReportBundle:Report:pdfPurchase.html.twig',
 					array(
 						'reportData' => $reportData,
-						'params' => $data,
+						'params'     => $data,
 					)
 				);
 
-				$fileName = 'purchase_report_' . time() . '.pdf';
+				$fileName = 'purchase_report_'.time().'.pdf';
 
 				return new Response(
 					$this->get('knp_snappy.pdf')->getOutputFromHtml(
@@ -40,8 +40,8 @@ class ReportController extends Controller {
 					),
 					200,
 					array(
-						'Content-Type' => 'application/pdf',
-						'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+						'Content-Type'        => 'application/pdf',
+						'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
 					)
 				);
 			}
@@ -56,9 +56,9 @@ class ReportController extends Controller {
 		}
 
 		$fromDate = new \DateTime($params['fromDate']);
-		$toDate = new \DateTime($params['toDate']);
+		$toDate   = new \DateTime($params['toDate']);
 
-		$em = $this->getDoctrine()->getManager();
+		$em  = $this->getDoctrine()->getManager();
 		$dql = "
             select p from AcmePurchaseBundle:Purchase p
             where p.status = 1
@@ -69,9 +69,9 @@ class ReportController extends Controller {
 
 		$query = $em->createQuery($dql)
 		            ->setParameter('fromDate', $fromDate->format('Y-m-d'))
-		            ->setParameter('toDate', $toDate->format('Y-m-d'));
+		->setParameter('toDate', $toDate->format('Y-m-d'));
 
-		$results = $query->getResult();
+		$results    = $query->getResult();
 		$reportData = array();
 		if ($results) {
 			foreach ($results as $row) {
@@ -83,14 +83,14 @@ class ReportController extends Controller {
 	}
 
 	public function issueAction() {
-		$em = $this->getDoctrine()->getManager();
+		$em      = $this->getDoctrine()->getManager();
 		$request = $this->get('request');
 
 		$fetchFrom = $request->request->get('from');
-		$fetchTo = $request->request->get('to');
+		$fetchTo   = $request->request->get('to');
 
 		$from = new \DateTime($fetchFrom);
-		$to = new \DateTime($fetchTo);
+		$to   = new \DateTime($fetchTo);
 
 		if ($request->getMethod() == 'POST') {
 			$dql = $em->createQueryBuilder();
@@ -98,15 +98,15 @@ class ReportController extends Controller {
 			    ->from('AcmeIssueBundle:IssueLine', 'il')
 			    ->join('il.issue', 'i')
 			    ->join('i.createdBy', 'u')
-			    ->where("i.issueDate <= '" . $to->format('Y-m-d') . "'")
-			    ->andWhere("i.issueDate >= '" . $from->format('Y-m-d') . "'")
-			    ->addOrderby('i.issueDate', 'DESC');
-			$query = $em->createQuery($dql);
+			    ->where("i.issueDate <= '".$to->format('Y-m-d')."'")
+			->andWhere("i.issueDate >= '".$from->format('Y-m-d')."'")
+			->addOrderby('i.issueDate', 'DESC');
+			$query   = $em->createQuery($dql);
 			$results = $query->getResult();
 
 			return $this->render('AcmeReportBundle:Report:_issueReport.html.twig', array(
-				'results' => $results,
-			));
+					'results' => $results,
+				));
 
 			// die(\Doctrine\Common\Util\Debug::dump($result));
 		}

@@ -1,0 +1,30 @@
+    <header class="panel-heading">
+        <strong>Issue Report</strong>
+            <span class="tools pull-right">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+    </header>
+    <table class="display table table-bordered">
+        <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Issue To</th>
+                    <th>Issue Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if results|length == 0 %}
+                    <p>there are no results</p>
+                {% endif %}
+                {% for entity in results %}
+                    <tr>
+                        <td>{{entity.product.name}}</td>
+                        <td>{{entity.quantity}}</td>
+                        <td>{{entity.issueTo}}</td>
+                        <td>{{entity.issue.issueDate|date('d-m-y')}}</td>
+                    </tr>
+                {% endfor %}
+        </tbody>
+    </table>

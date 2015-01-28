@@ -3133,7 +3133,7 @@ table.sliders tr td {
     top: -0.57em   !important;
 }
 
-/* my_edited for datepicker problem */
+/* my custom datepicker */
 /*.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
     background: #fff !important;
     border: 3px solid #22bacf !important;
@@ -4192,7 +4192,7 @@ td.details table tr td, .dataTable tr:last-child {
 }
 
 .adv-table .dataTables_info, .dataTables_paginate {
-    /* my_edited for datatable pagination */
+    /* my custom datatable pagination */
     /*padding: 15px;*/
 }
 
@@ -4636,7 +4636,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
     min-height: 900px;
 }
 
-/*my_edited_for loading effect*/
+/*my custom_ loading effect*/
 /** loading **/
 #loading-full {background:black;position:fixed;width:100%;height:100%;left:0px;top:0px;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
@@ -4679,8 +4679,40 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 }
 /** ***************** **/
 
-/*my_edited for user add button*/
+/*my custom add button*/
 .my-add {
     margin-right: -14px;
     margin-top: -6px;
+}
+
+/* my custom loading-effect */
+/* Lightbox background */
+#lightbox {
+    display:none;
+    background:#000000;
+    opacity:0.8;
+    filter:alpha(opacity=90);
+    position:fixed;
+    top:0px;
+    left:0px;
+    min-width:100%;
+    min-height:100%;
+    z-index:1000;
+}
+/* Lightbox panel with some content */
+#lightbox-loader {
+    display:none;
+    position:fixed;
+    top:50%; 
+    left:50%;
+    height:48px;
+    width:48px; 
+    background:rgba(0,0,0,0.9) url("../img/loader.gif") 0 0 no-repeat;
+    background-position:center; 
+    padding:10px;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    margin:-48px 0 0 -48px;
+    z-index:1001;
 }
