@@ -138,6 +138,12 @@ class ReportController extends Controller {
 		$query = $em->createQuery($dql);
 		$results = $query->getResult();
 
+        $date = new \DateTime();
+        $date->format('H:i:s \O\n Y-m-d');
+        //$filename = str_replace(' ', '', $location) . date_format($date, '_Ymd') . '.pdf';
+
+        $filename = date_format($date, 'issue_report_') . '.pdf';
+
 		// die(\Doctrine\Common\Util\Debug::dump($results));
 
 		$html = $this->renderView('AcmeReportBundle:Report:_issueReport.html.twig', array(
@@ -145,17 +151,18 @@ class ReportController extends Controller {
 			'from' => $from,
 			'to' => $to,
 		));
-		return $this->printReporte($html, "ReporteIngresos");
+		return $this->printReport($html, $filename);
 	}
 
-	public function printReporte($html, $nameFile) {
-		return new Response(
-			$this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-			200,
-			array(
-				'Content-Type' => 'application/pdf',
-				'Content-Disposition' => "'attachment; filename='" . 'issue_report_' . time() . '.pdf' . "'",
-			)
-		);
-	}
+    public function printReport($html, $fileName){
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+//                'Content-Disposition'   => 'attachment; filename='.$fileName
+                'Content-Disposition' => 'attachment; filename="issue_report_' .$fileName. '.pdf"',
+            )
+        );
+    }
 }
