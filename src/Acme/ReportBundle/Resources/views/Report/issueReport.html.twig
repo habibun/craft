@@ -9,6 +9,15 @@
 
 {% block body -%}
     <div class="row">
+        <div class="col-lg-12">
+            <ul class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
+                <li class="active">Reports</li>
+                <li class="active">Issue Report</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-6">
             <section class="panel">
                 <header class="panel-heading">
@@ -25,16 +34,16 @@
 
                             <div class="col-lg-8 col-xs-11">
                                 <div class="input-group input-large" data-date-format="dd-mm-yyyy">
-                                    <input type="text" class="form-control dpd1" name="from">
+                                    <input type="text" class="form-control dpd1" name="from" id="fromDate">
                                     <span class="input-group-addon">To</span>
-                                    <input type="text" class="form-control dpd2" name="to">
+                                    <input type="text" class="form-control dpd2" name="to" id="toDate">
                                 </div>
                                 <span class="help-block text-center">Select date range</span>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <span class="pull-left">
-                                <a href="{{ path('issue') }}" class="btn btn-primary">Get Report</a>
+                                <a href="{{ app.request.uriForPath('/report/issueprint') }}" class="reporte_ingresos_link btn btn-info">Get Report</a>
                             </span>
                             <input class="btn btn-primary reporte_form_btn" type="submit" id="getReport"
                                    value="Generate Report"/>
@@ -68,6 +77,42 @@
                     }
                 }).submit();
             });
+
+        function changeDate(date){
+        var year = date.substring(6);
+        var month = date.substring(3,5);
+        var day = date.substring(0,2);
+        return year + '-' + month + '-' + day;
+    }
+
+            $('.reporte_ingresos_link').on('click', function(e) {
+            e.preventDefault();
+            //$('.pprint').val("print");
+            //alert("print");
+            var form = $(this).closest('form');
+
+            // if (form.valid()){
+                $("#lightbox, #lightbox-loader").fadeIn(300);
+
+                var url  = $(this).attr('href');
+                var from = $('#fromDate').val();
+                var to   = $('#toDate').val();
+                var urlFinal = url;
+
+                if(from != ""){
+                    from = changeDate(from);
+                    urlFinal = urlFinal + '/' + from;
+                }
+                if(to != ""){
+                    to = changeDate(to);
+                    urlFinal = urlFinal + '/' + to;
+                }
+
+                //alert(urlFinal);
+                $("#lightbox, #lightbox-loader").fadeOut(300);
+                window.location.href = urlFinal;
+            // }
+    });
         });
     </script>
     <script type="text/javascript" src="{{ asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
