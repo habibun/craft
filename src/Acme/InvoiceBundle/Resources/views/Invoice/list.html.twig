@@ -1,0 +1,16 @@
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr id="sort">
+        <th><a>Serial |<b id="arrow_normal">  &#8592;</b></a></th>
+        <th><a>Invoice Date |<b id="arrow_normal">  &#8592;</b></a></th>
+        <th><a>Invoice To |<b id="arrow_normal">  &#8592;</b></a></th>
+        <th><a>Status |<b id="arrow_normal">  &#8592;</b></a></th>
+        <th><a>Created By |<b id="arrow_normal">  &#8592;</b></a></th>
+            <th></th>
+        <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="jobs-body">
+        {{ include('AcmeInvoiceBundle:Invoice:list_invoice_body.html.twig', { 'entities':entities }) }}
+    </tbody>
+</table>
