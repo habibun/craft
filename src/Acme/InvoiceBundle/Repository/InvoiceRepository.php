@@ -5,7 +5,7 @@ use Doctrine\ORM\EntityRepository;
 
 class InvoiceRepository extends EntityRepository
 {
-    public function getActiveJobs($limit = null, $offset = null, $kind = 'createdAt', $order = 'DESC') {
+    public function getInvoiceAll($limit = null, $offset = null, $kind = 'createdAt', $order = 'DESC') {
     	$qb = $this->createQueryBuilder('j')
         ->orderBy('j.' . $kind, $order);
 

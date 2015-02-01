@@ -29,7 +29,7 @@ invoice_delete:
     defaults: { _controller: "AcmeInvoiceBundle:Invoice:delete" }
     requirements: { _method: post|delete }
 
-project_line_of_work_job_sort:
+invoice_sort:
     path:   /sort
     defaults: { _controller: "AcmeInvoiceBundle:Invoice:sort" }
     requirements:

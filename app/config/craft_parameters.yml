@@ -34,7 +34,5 @@ parameters:
     # salavert
     acme_dash.salavert.twig_time_ago: Salavert\Twig\Extension\TimeAgoExtension
 
-    max_jobs_on_job_page_per_category: 10
-
     # max row per page
-    max_per_page_page: 10
+    max_item_per_page: 10

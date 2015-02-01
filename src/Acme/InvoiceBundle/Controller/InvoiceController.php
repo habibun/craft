@@ -16,29 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class InvoiceController extends Controller {
 
-    public function sortAction(Request $request){
-        if($request->isXmlHttpRequest()){
-            $em = $this->getDoctrine()->getManager();
-            $order = $request->request->get('order');
-            $kind = $request->request->get('kind');
- 
- 			if(!$order && !$kind){
-                throw $this->createNotFoundException('Unable to find Category entity');
-            }
-  
-            $entities = $em->getRepository('AcmeInvoiceBundle:Invoice')->getActiveJobs(
-                $this->container->getParameter('max_jobs_on_job_page_per_category'),null,$kind,$order);
-            
-            $entities_return = $this->render('AcmeInvoiceBundle:Invoice:list_invoice_body.html.twig', array(
-                'entities' => $entities,
-            ))->getContent();
-            $result2 = array('entities'=>$entities_return, 'success'=>true);
-            $response = new Response(json_encode($result2));
-            $response->headers->set('Content-Type', 'application/json');
-            return $response;
-        }
-    }
-
 	/**
 	 * Lists all Invoice entities.
 	 *
@@ -263,4 +240,27 @@ class InvoiceController extends Controller {
 		            ->getForm()
 		;
 	}
+
+    public function sortAction(Request $request){
+        if($request->isXmlHttpRequest()){
+            $em = $this->getDoctrine()->getManager();
+            $order = $request->request->get('order');
+            $kind = $request->request->get('kind');
+ 
+ 			if(!$order && !$kind){
+                throw $this->createNotFoundException('Unable to find Category entity');
+            }
+  
+            $entities = $em->getRepository('AcmeInvoiceBundle:Invoice')->getInvoiceAll(
+                $this->container->getParameter('max_item_per_page'),null,$kind,$order);
+            
+            $entities_return = $this->render('AcmeInvoiceBundle:Invoice:list_invoice_body.html.twig', array(
+                'entities' => $entities,
+            ))->getContent();
+            $result2 = array('entities'=>$entities_return, 'success'=>true);
+            $response = new Response(json_encode($result2));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+    }	
 }
