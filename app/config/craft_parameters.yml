@@ -33,3 +33,6 @@ parameters:
 
     # salavert
     acme_dash.salavert.twig_time_ago: Salavert\Twig\Extension\TimeAgoExtension
+
+    # max row per page
+    max_item_per_page: 10

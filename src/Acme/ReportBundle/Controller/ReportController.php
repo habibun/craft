@@ -11,168 +11,153 @@ namespace Acme\ReportBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class ReportController extends Controller
-{
+class ReportController extends Controller {
 
-    public function purchaseAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+	public function purchaseAction() {
+		$em = $this->getDoctrine()->getManager();
 
-        $data = $this->getRequest()->request->all();
-        if (!empty($data)) {
-            $data = $data['report'];
-            if (!empty($data['fromDate']) && !empty($data['toDate'])) {
-                $reportData = $this->_generatePurchaseReport($data);
-                $html = $this->renderView(
-                    'AcmeReportBundle:Report:pdfPurchase.html.twig',
-                    array(
-                        'reportData' => $reportData,
-                        'params' => $data,
-                    )
-                );
+		$data = $this->getRequest()->request->all();
+		if (!empty($data)) {
+			$data = $data['report'];
+			if (!empty($data['fromDate']) && !empty($data['toDate'])) {
+				$reportData = $this->_generatePurchaseReport($data);
+				$html = $this->renderView(
+					'AcmeReportBundle:Report:pdfPurchase.html.twig',
+					array(
+						'reportData' => $reportData,
+						'params' => $data,
+					)
+				);
 
-                $fileName = 'purchase_report_' . time() . '.pdf';
+				$fileName = 'purchase_report_' . time() . '.pdf';
 
-                return new Response(
-                    $this->get('knp_snappy.pdf')->getOutputFromHtml(
-                        $html,
-                        array(
-                            'page-size' => 'A4',
-                        )
-                    ),
-                    200,
-                    array(
-                        'Content-Type' => 'application/pdf',
-                        'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
-                    )
-                );
-            }
-        }
+				return new Response(
+					$this->get('knp_snappy.pdf')->getOutputFromHtml(
+						$html,
+						array(
+							'page-size' => 'A4',
+						)
+					),
+					200,
+					array(
+						'Content-Type' => 'application/pdf',
+						'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+					)
+				);
+			}
+		}
 
-        return $this->render('AcmeReportBundle:Report:purchaseReport.html.twig');
-    }
+		return $this->render('AcmeReportBundle:Report:purchaseReport.html.twig');
+	}
 
-    private function _generatePurchaseReport($params)
-    {
-        if (empty($params['fromDate']) || empty($params['toDate'])) {
-            return false;
-        }
+	private function _generatePurchaseReport($params) {
+		if (empty($params['fromDate']) || empty($params['toDate'])) {
+			return false;
+		}
 
-        $fromDate = new \DateTime($params['fromDate']);
-        $toDate = new \DateTime($params['toDate']);
+		$fromDate = new \DateTime($params['fromDate']);
+		$toDate = new \DateTime($params['toDate']);
 
-        $em = $this->getDoctrine()->getManager();
-        $dql = "
+		$em = $this->getDoctrine()->getManager();
+		$dql = "
             select p from AcmePurchaseBundle:Purchase p
             where p.status = 1
             and p.purchaseDate between :fromDate and :toDate
         ";
 
-        $dql .= " order by p.purchaseDate asc";
+		$dql .= " order by p.purchaseDate asc";
 
-        $query = $em->createQuery($dql)
-            ->setParameter('fromDate', $fromDate->format('Y-m-d'))
-            ->setParameter('toDate', $toDate->format('Y-m-d'));
+		$query = $em->createQuery($dql)
+		            ->setParameter('fromDate', $fromDate->format('Y-m-d'))
+		            ->setParameter('toDate', $toDate->format('Y-m-d'));
 
-        $results = $query->getResult();
-        $reportData = array();
-        if ($results) {
-            foreach ($results as $row) {
-                $reportData[] = $row;
-            }
-        }
+		$results = $query->getResult();
+		$reportData = array();
+		if ($results) {
+			foreach ($results as $row) {
+				$reportData[] = $row;
+			}
+		}
 
-        return $reportData;
-    }
+		return $reportData;
+	}
 
-    public function issueAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $request = $this->get('request');
+	public function issueAction() {
+		$em = $this->getDoctrine()->getManager();
+		$request = $this->get('request');
 
-        $fetchFrom = $request->request->get('from');
-        $fetchTo = $request->request->get('to');
+		$fetchFrom = $request->request->get('from');
+		$fetchTo = $request->request->get('to');
 
-        $from = new \DateTime($fetchFrom);
-        $to = new \DateTime($fetchTo);
+		$from = new \DateTime($fetchFrom);
+		$to = new \DateTime($fetchTo);
 
-        if ($request->getMethod() == 'POST') {
-            $dql = $em->createQueryBuilder();
-            $dql->select('il', 'i', 'u')
-                ->from('AcmeIssueBundle:IssueLine', 'il')
-                ->join('il.issue', 'i')
-                ->join('i.createdBy', 'u')
-                ->where("i.issueDate <= '" . $to->format('Y-m-d') . "'")
-                ->andWhere("i.issueDate >= '" . $from->format('Y-m-d') . "'")
-                ->addOrderby('i.issueDate', 'DESC');
-            $query = $em->createQuery($dql);
-            $results = $query->getResult();
+		if ($request->getMethod() == 'POST') {
+			$dql = $em->createQueryBuilder();
+			$dql->select('il', 'i', 'u')
+			    ->from('AcmeIssueBundle:IssueLine', 'il')
+			    ->join('il.issue', 'i')
+			    ->join('i.createdBy', 'u')
+			    ->where("i.issueDate <= '" . $to->format('Y-m-d') . "'")
+			    ->andWhere("i.issueDate >= '" . $from->format('Y-m-d') . "'")
+			    ->addOrderby('i.issueDate', 'DESC');
+			$query = $em->createQuery($dql);
+			$results = $query->getResult();
 
-            return $this->render(
-                'AcmeReportBundle:Report:_issueReport.html.twig',
-                array(
-                    'results' => $results,
-                )
-            );
+			return $this->render(
+				'AcmeReportBundle:Report:_issueReport.html.twig',
+				array(
+					'results' => $results,
+				)
+			);
+		}
 
-            // die(\Doctrine\Common\Util\Debug::dump($result));
-        }
+		return $this->render('AcmeReportBundle:Report:issueReport.html.twig');
+	}
 
-        return $this->render('AcmeReportBundle:Report:issueReport.html.twig');
-    }
+	public function printIssueReportAction($from = "", $to = "") {
 
-    public function printIssueReportAction($from = "", $to = "")
-    {
+		$em = $this->getDoctrine()->getEntityManager();
+		$request = $this->getRequest();
 
-        $em = $this->getDoctrine()->getEntityManager();
-        $request = $this->getRequest();
+		$from = new \DateTime($from);
+		$to = new \DateTime($to);
 
-        $from = new \DateTime($from);
-        $to = new \DateTime($to);
+		$dql = $em->createQueryBuilder();
+		$dql->select('il', 'i', 'u')
+		    ->from('AcmeIssueBundle:IssueLine', 'il')
+		    ->join('il.issue', 'i')
+		    ->join('i.createdBy', 'u')
+		    ->where("i.issueDate <= '" . $to->format('Y-m-d') . "'")
+		    ->andWhere("i.issueDate >= '" . $from->format('Y-m-d') . "'")
+		    ->addOrderby('i.issueDate', 'DESC');
+		$query = $em->createQuery($dql);
+		$results = $query->getResult();
 
-        // die(\Doctrine\Common\Util\Debug::dump($from));
+		$currentTime = date("Y-m-d h:i:s");
 
-        $dql = $em->createQueryBuilder();
-        $dql->select('il', 'i', 'u')
-            ->from('AcmeIssueBundle:IssueLine', 'il')
-            ->join('il.issue', 'i')
-            ->join('i.createdBy', 'u')
-            ->where("i.issueDate <= '" . $to->format('Y-m-d') . "'")
-            ->andWhere("i.issueDate >= '" . $from->format('Y-m-d') . "'")
-            ->addOrderby('i.issueDate', 'DESC');
-        $query = $em->createQuery($dql);
-        $results = $query->getResult();
+		// die(\Doctrine\Common\Util\Debug::dump($results));
 
-        $date = new \DateTime();
-        $date->format('H:i:s \O\n Y-m-d');
-        //$filename = str_replace(' ', '', $location) . date_format($date, '_Ymd') . '.pdf';
+		$html = $this->renderView(
+			'AcmeReportBundle:Report:_issueReport.html.twig',
+			array(
+				'results' => $results,
+				'from' => $from,
+				'to' => $to,
+			)
+		);
 
-        $filename = date_format($date, 'issue_report_') . '.pdf';
+		return $this->printReport($html, $currentTime);
+	}
 
-        // die(\Doctrine\Common\Util\Debug::dump($results));
-
-        $html = $this->renderView(
-            'AcmeReportBundle:Report:_issueReport.html.twig',
-            array(
-                'results' => $results,
-                'from' => $from,
-                'to' => $to,
-            )
-        );
-
-        return $this->printReport($html, $filename);
-    }
-
-    public function printReport($html, $fileName)
-    {
-        return new Response(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-            200,
-            array(
-                'Content-Type' => 'application/pdf',
-//                'Content-Disposition'   => 'attachment; filename='.$fileName
-                'Content-Disposition' => 'attachment; filename="issue_report_' . $fileName . '.pdf"',
-            )
-        );
-    }
+	public function printReport($html, $fileName) {
+		return new Response(
+			$this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+			200,
+			array(
+				'Content-Type' => 'application/pdf',
+				'Content-Disposition' => 'attachment; filename="issue_report_' . $fileName . '.pdf"',
+			)
+		);
+	}
 }

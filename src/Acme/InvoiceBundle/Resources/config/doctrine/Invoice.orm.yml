@@ -1,6 +1,7 @@
 Acme\InvoiceBundle\Entity\Invoice:
     type: entity
     table: invoice
+    repositoryClass: Acme\InvoiceBundle\Repository\InvoiceRepository
     id:
         id:
             type: integer

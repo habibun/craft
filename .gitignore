@@ -26,4 +26,5 @@
 /composer.phar
 
 # Ide
-.idea
+.idea/
+.phpintel/
