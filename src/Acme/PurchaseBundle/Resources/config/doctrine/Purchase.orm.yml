@@ -8,9 +8,8 @@ Acme\PurchaseBundle\Entity\Purchase:
             generator: { strategy: AUTO }
     fields:
         status:
-            type: smallint
+            type: boolean
             nullable: false
-            default: 1
         purchaseDate:
             column: purchase_date
             type: date

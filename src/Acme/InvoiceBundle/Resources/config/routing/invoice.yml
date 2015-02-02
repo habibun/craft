@@ -1,0 +1,38 @@
+invoice:
+    path:     /
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:index" }
+
+invoice_show:
+    path:     /{id}/show
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:show" }
+
+invoice_new:
+    path:     /new
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:new" }
+
+invoice_create:
+    path:     /create
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:create" }
+    requirements: { _method: post }
+
+invoice_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:edit" }
+
+invoice_update:
+    path:     /{id}/update
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:update" }
+    requirements: { _method: post|put }
+
+invoice_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:delete" }
+    requirements: { _method: post|delete }
+
+invoice_sort:
+    path:   /sort
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:sort" }
+    requirements:
+        _method: POST
+    options:
+        expose: true

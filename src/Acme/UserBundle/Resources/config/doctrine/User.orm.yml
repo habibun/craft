@@ -1,6 +1,6 @@
 Acme\UserBundle\Entity\User:
     type:  entity
-    table: users
+    table: fos_user
     repositoryClass:  Acme\UserBundle\Repository\UserRepository
     id:
         id:
@@ -19,6 +19,17 @@ Acme\UserBundle\Entity\User:
             column: created_by
             type: string
             nullable: false
+    manyToMany:
+        groups:
+            targetEntity: Acme\UserBundle\Entity\Group
+            joinTable:
+                name: fos_user_group
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    group_id:
+                        referencedColumnName: id
     lifecycleCallbacks:
         prePersist: [ preUpload,setCreatedAt ]
         postPersist: [ upload ]

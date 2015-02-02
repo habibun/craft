@@ -1,0 +1,37 @@
+Acme\InvoiceBundle\Entity\Invoice:
+    type: entity
+    table: invoice
+    repositoryClass: Acme\InvoiceBundle\Repository\InvoiceRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        address:
+            type: text
+        invoiceDate:
+            column: invoice_date
+            type: date
+        invoiceStatus:
+            column: invoice_status
+            type: string
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: false          
+    oneToMany:
+        invoiceLines:
+            targetEntity: Acme\InvoiceBundle\Entity\InvoiceLine
+            mappedBy: invoice
+    manyToOne:
+        createdBy:
+            targetEntity: Acme\UserBundle\Entity\User
+            joinColumn:
+                name: created_by                        
+    lifecycleCallbacks:
+        prePersist: [setCreatedAt]

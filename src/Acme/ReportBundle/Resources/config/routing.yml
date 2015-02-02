@@ -9,3 +9,7 @@ purchase_report:
 issue_report:
     pattern: /issue
     defaults: { _controller: AcmeReportBundle:Report:issue }
+
+print_issue_report:
+    pattern: /issueprint/{from}/{to}
+    defaults: { _controller: "AcmeReportBundle:Report:printIssueReport", from: "", to: ""}

@@ -5,6 +5,7 @@ namespace Acme\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Acme\UserBundle\Entity\User
@@ -27,11 +28,32 @@ class User extends BaseUser
 
     protected $lastLogin;
 
+    protected $groups;
+
     public function __construct()
     {
         parent::__construct();
         $this->setImage("userDefaultLogo.png");
+        $this->groups = new ArrayCollection();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     */
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
+    }
+
+
 
     /**
      * Set image

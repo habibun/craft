@@ -242,7 +242,7 @@ $(function () {
 });
 
 //form submit functionality
-$(document).ready(function () {
+$(function () {
     $('#search-form').submit(
         function (evt) {
             $("#loading-full,.loading-ball").fadeIn();
@@ -281,3 +281,93 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
+//sortable 
+var xhr; 
+
+function sortableList(obj){
+    xhr && xhr.abort && xhr.abort();
+    xhr  =  $.ajax({
+            type        : "POST",
+            url         : Routing.generate('invoice_sort'),
+            data        : obj,
+            dataType    : "json",
+            success     : function(result) {
+                if(result.success){
+                    //console.log(result.jobs);
+                    $('.sort-parm').html(result.entities).removeClass('sort-parm');
+                    //var array = $.parseJSON(result.query);
+                   // console.log(array);                    
+                    //$('#search_data_list').html(arrayToHtml(array));
+                } 
+            },
+            error: function(result){
+                console.log(result.message);
+            }
+        });
+}
+
+$(function () {
+    var arrow_array = ['&#8592','&#8595','&#8593'];
+    var order = null;
+    var label = null; //hardcoded
+    
+    $('#sort th a').click(function(){
+        $('.sort-parm').removeClass('sort-parm');
+        //current_arrow = $('#sort b').text();
+        $(this).addClass('current_label');
+        $(this).parent().parent().parent().parent().children('tbody').addClass('sort-parm');
+
+        label = $(this).text().replace(/[^\w\s]/gi, '');
+        //console.log(cat);
+        var arrow_state = ['arrow_normal','arrow_down','arrow_up'];
+        var next_arrow=1;
+        
+        var current_arrow = $('.current_label').children('b').attr('id');
+        console.log(' + current_arrow '+current_arrow);
+       /* for(var i = 0 ; i<arrow_state.length ; i++){
+            console.log(arrow_state[i]);
+            if(current_arrow === arrow_state[i]){
+                console.log('arrow find');
+                next_arrow=i;
+                //console.log(next_arrow);
+            }
+         
+        }*/
+        //console.log('next arrow '+next_arrow);
+        //console.log(current_arrow);
+        if(current_arrow === arrow_state[2]){
+            order = "ASC";
+        }
+        if(current_arrow === arrow_state[1]){
+            order = "DESC";
+        }
+        
+        for(var i = 0;i<arrow_state.length;i++){
+            //next_arrow++;
+            if(current_arrow === arrow_state[i]){
+                console.log(current_arrow);
+                if(i === arrow_state.length -1){
+                    next_arrow = 0;
+                    console.log('next_arrow should be 0--'+next_arrow);
+                }else{
+                    next_arrow = i+1;
+                    console.log('next_arrow should be '+(i+1)+' '+ next_arrow);
+                }
+                
+            }
+            //console.log(next_arrow);
+        }
+        var obj = {
+            kind : label,
+            order : order
+        };
+        $('.current_label b').replaceWith('<b id="'+arrow_state[next_arrow]+'">'+arrow_array[next_arrow]+'</b>');
+        $('.current_label').removeClass('current_label');
+        if(next_arrow !== 0){
+            sortableList(obj);            
+        }else{
+            xhr && xhr.abort && xhr.abort();
+        }
+    }); 
+});
+    

@@ -116,6 +116,7 @@
                     {% if issue.status %}
                         <a href="{{ path('issue_definalize', { 'id' : issue.id }) }}" class="btn btn-danger">De-Finalize
                             this record</a>
+                                <a href="{{ path('issue_print', { 'id' : issue.id }) }}" class="btn btn-warning">Print PDF</a>
                     {% else %}
                         <a href="{{ path('issue_finalize', { 'id' : issue.id }) }}" class="btn btn-success">Finalize
                             this record</a>
