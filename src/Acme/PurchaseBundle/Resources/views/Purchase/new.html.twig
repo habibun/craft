@@ -235,19 +235,14 @@
                             'supplier': $('#acme_purchasebundle_purchase_supplier').val()
                         },
                         function (data) {
-
-                            var JSONObject = JSON.stringify(data.result);
+                            //console.log(data);
                             var peopleHTML = "";
-
-                            // Loop through Object and create peopleHTML
-                            for (var key in JSONObject) {
-                                if (JSONObject.hasOwnProperty(key)) {
-                                    peopleHTML += "<tr>";
-                                    peopleHTML += "<td>" + JSONObject[key]["price"] + "</td>";
-                                    peopleHTML += "<td>" + JSONObject[key]["product"] + "</td>";
-                                    peopleHTML += "</tr>";
-                                }
-                            }
+                            $.each(data.result, function(k, v){
+                                peopleHTML += "<tr>";
+                                peopleHTML += "<td>" + v.price + "</td>";
+                                peopleHTML += "<td>" + v.product + "</td>";
+                                peopleHTML += "</tr>";
+                            });
 
                             // Replace table’s tbody html with peopleHTML
                             $("#people tbody").html(peopleHTML);
