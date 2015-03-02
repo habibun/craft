@@ -114,7 +114,7 @@ class Product
      */
     public function getUploadDir()
     {
-        return 'uploads/product';
+        return 'uploads/products';
     }
 
     /**
