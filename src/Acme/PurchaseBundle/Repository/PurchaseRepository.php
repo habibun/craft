@@ -35,9 +35,10 @@ class PurchaseRepository extends EntityRepository
 
     public function getSupplierDetailResult($supplier = null)
     {
-        $dql = 'SELECT SUM (pl.price) as price, (pl.product) as product
+        $dql = 'SELECT SUM (pl.price) as price, (pr.name) as product, (s.name) as supplier
         from AcmePurchaseBundle:Purchase p
         join p.lines pl
+        join pl.product pr
         join p.supplier s
         where s.id = :supplier and p.status = 1
         GROUP BY pl.product';

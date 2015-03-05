@@ -4,54 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ae513a7ee6c6603ebeeb3b40f8413f9",
+    "hash": "9e2810cdb84fdf2e2474df1510ba41b6",
     "packages": [
-        {
-            "name": "ali/datatable",
-            "version": "dev-master",
-            "target-dir": "Ali/DatatableBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AliHichem/AliDatatableBundle.git",
-                "reference": "5a91b32451d703b55e3b5b7424088631719cbaca"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AliHichem/AliDatatableBundle/zipball/5a91b32451d703b55e3b5b7424088631719cbaca",
-                "reference": "5a91b32451d703b55e3b5b7424088631719cbaca",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/common": ">=2.1,<2.4.x-dev",
-                "php": ">=5.3.0",
-                "twig/twig": ">=1.8,<2.0-dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Ali\\DatatableBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ali hichem",
-                    "email": "ali.hichem@mail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Symfony2 Ajax Datagrid Bundle for doctrine2 entities",
-            "homepage": "https://github.com/AliHichem/AliDatatableBundle",
-            "keywords": [
-                "Symfony2",
-                "datatable",
-                "jquery"
-            ],
-            "time": "2014-09-05 20:18:11"
-        },
         {
             "name": "braincrafted/bootstrap-bundle",
             "version": "dev-master",
@@ -3166,7 +3120,6 @@
         "kitpages/data-grid-bundle": 20,
         "friendsofsymfony/jsrouting-bundle": 0,
         "cg/kint-bundle": 20,
-        "ali/datatable": 20,
         "knplabs/knp-components": 20,
         "white-october/pagerfanta-bundle": 20,
         "stof/doctrine-extensions-bundle": 20

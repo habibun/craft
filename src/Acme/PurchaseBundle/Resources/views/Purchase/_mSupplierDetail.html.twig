@@ -2,13 +2,13 @@
     <div class="modal-content">
         <div class="modal-header">
             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-            <h4 class="modal-title">Supplier Detail's</h4>
+            <h4 class="modal-title">Supplier Details</h4>
         </div>
         <div class="modal-body">
-            <table id="people" border="1">
+            <table id="people" class="table table-bordered table-hover">
                 <thead>
-                <th>Price</th>
-                <th>Product</th>
+                    <th>Price</th>
+                    <th>Product</th>
                 </thead>
                 <tbody>
 
@@ -20,11 +20,3 @@
         </div>
     </div>
 </div>
-
-{#
-{% for result in result %}
-    <p>{{ result.timeof }}</p>
-    <p>{{ result.price }}</p>
-    <p>{{ result.product_id }}</p>
-{% endfor %}
-#}
