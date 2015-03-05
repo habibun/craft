@@ -33,7 +33,6 @@ class AppKernel extends Kernel
             new Acme\WidgetBundle\AcmeWidgetBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Cg\KintBundle\CgKintBundle(),
-            new Ali\DatatableBundle\AliDatatableBundle(),
             new Acme\EmailBundle\AcmeEmailBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),

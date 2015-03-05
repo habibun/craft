@@ -32,19 +32,6 @@ class PurchaseController extends Controller
         ->getRepository('AcmePurchaseBundle:Purchase')
         ->findBy(array(), array('id' => 'DESC'));
 
-        /*$em = $this->getDoctrine()->getManager(); 
-        $query = $em->createQuery( 
-            'SELECT p.id as id, p.purchaseDate as purchaseDate, s.name as supplier, l.name as location, p.status as status, pl.price 
-            FROM AcmePurchaseBundle:PurchaseLine pl
-            JOIN pl.purchase p
-            JOIN p.supplier s
-            JOIN p.location l
-            ORDER BY p.id DESC' );
-
-        $entities = $query->getArrayResult();
-
-        var_dump($entities);*/
-
         return $this->render(
             'AcmePurchaseBundle:Purchase:index.html.twig',
             array(
@@ -455,89 +442,6 @@ class PurchaseController extends Controller
         $repository = $em->getRepository('AcmePurchaseBundle:Purchase');
         $result = $repository->getSupplierDetailResult($supplier);
 
-//        var_dump($result);
-        // return array('result' => $result);
-        /*return $this->render('AcmePurchaseBundle:Purchase:SupplierDetail.html.twig',array(
-                'result' => $result
-            ));*/
-
-//        $response = json_encode(array('result' => $result));
-
-        /*return new Response(
-            $response, 200, array(
-                'Content-Type' => 'application/json'
-            )
-        );*/
-
         return new JsonResponse(array('result' => $result));
-    }
-
-
-    /**
-     * set datatable configs
-     *
-     * @return \Ali\DatatableBundle\Util\Datatable
-     */
-    private function _datatable()
-    {
-        return $this->get('datatable')
-            ->setEntity("AcmePurchaseBundle:Purchase", "x")// replace "XXXMyBundle:Entity" by your entity
-            ->setFields(
-                array(
-                    "Name" => 'x.id',                        // Declaration for fields:
-                    "Address" => 'x.id',                    //      "label" => "alias.field_attribute_for_dql"
-                    "_identifier_" => 'x.id')                          // you have to put the identifier field without label. Do not replace the "_identifier_"
-            )
-            ->setHasAction(
-                true
-            );                                           // you can disable action column from here by setting "false".
-    }
-
-
-    /**
-     * Grid action
-     * @return Response
-     */
-    public function gridAction()
-    {
-        return $this->_datatable()->execute(
-        );                                      // call the "execute" method in your grid action
-    }
-
-    /**
-     * Lists all entities.
-     * @return Response
-     */
-    public function purchaseListAction()
-    {
-        $this->_datatable(
-        );                                                        // call the datatable config initializer
-        return $this->render(
-            'AcmePurchaseBundle:Purchase:purchaseList.html.twig'
-        );                 // replace "XXXMyBundle:Module:index.html.twig" by yours
-    }
-
-    public function purchaseListAllAction(Request $request)
-    {
-
-    }
-
-    public function lankitAction()
-    {
-        return $this->render('AcmePurchaseBundle:Purchase:lankit.html.twig');
-    }
-
-    public function getLankitPurchaseResultAction()
-    {
-        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
-
-        return $datatable->getSearchResults();
-    }
-
-    public function getLankitPurchaseLineResultAction()
-    {
-        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:PurchaseLine');
-
-        return $datatable->getSearchResults();
     }
 }
