@@ -444,4 +444,23 @@ class PurchaseController extends Controller
 
         return new JsonResponse(array('result' => $result));
     }
+
+    public function lankitAction()
+    {
+        return $this->render('AcmePurchaseBundle:Purchase:lankit.html.twig');
+    }
+
+    public function getLankitPurchaseResultAction()
+    {
+        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:Purchase');
+
+        return $datatable->getSearchResults();
+    }
+
+    public function getLankitPurchaseLineResultAction()
+    {
+        $datatable = $this->get('lankit_datatables')->getDatatable('AcmePurchaseBundle:PurchaseLine');
+
+        return $datatable->getSearchResults();
+    }
 }

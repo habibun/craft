@@ -9,13 +9,11 @@
 {% block body -%}
     <div class="row">
         <div class="col-lg-12">
-            <!--breadcrumbs start -->
             <ul class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
                 <li class="active"><a href="{{ path('purchase') }}">Purchase</a></li>
                 <li class="active">Create New Purchase</li>
             </ul>
-            <!--breadcrumbs end -->
         </div>
     </div>
     <div class="row">
@@ -51,7 +49,6 @@
                     {{ form_end(form) }}
                 </div>
                 <hr>
-               {# {{ dump(form.vars.value.supplier) }} #}
             </section>
         </div>
         <div class="col-lg-5">
@@ -239,8 +236,8 @@
                             var peopleHTML = "";
                             $.each(data.result, function(k, v){
                                 peopleHTML += "<tr>";
-                                peopleHTML += "<td>" + v.price + "</td>";
                                 peopleHTML += "<td>" + v.product + "</td>";
+                                peopleHTML += "<td>" + v.price + "</td>";
                                 peopleHTML += "</tr>";
                             });
 
