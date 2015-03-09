@@ -121,7 +121,7 @@
 
     <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1"
          class="modal fade">
-        {% include 'AcmePurchaseBundle:Purchase:_mSupplierDetail.html.twig' %}
+        {% include 'AcmePurchaseBundle:Purchase:_supplierDetails.html.twig' %}
     </div>
 
 {% endblock %}
@@ -238,6 +238,7 @@
                                 peopleHTML += "<tr>";
                                 peopleHTML += "<td>" + v.product + "</td>";
                                 peopleHTML += "<td>" + v.price + "</td>";
+                                peopleHTML += "<td>" + v.purchaseDate + "</td>";
                                 peopleHTML += "</tr>";
                             });
 

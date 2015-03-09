@@ -35,17 +35,21 @@ class PurchaseRepository extends EntityRepository
 
     public function getSupplierDetailResult($supplier = null)
     {
-        $dql = 'SELECT SUM (pl.price) as price, (pr.name) as product, (s.name) as supplier
+        $dql = 'SELECT pl.price as price, (pr.name) as product, (s.name) as supplier, (p.purchaseDate) as purchaseDate
         from AcmePurchaseBundle:Purchase p
         join p.lines pl
         join pl.product pr
         join p.supplier s
         where s.id = :supplier and p.status = 1
-        GROUP BY pl.product';
+        ORDER BY purchaseDate DESC ';
 
         $query = $this->_em->createQuery($dql)
             ->setParameter('supplier', $supplier);
 
-        return $query->getResult();
+        try {
+            return $query->getResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
     }
 }
