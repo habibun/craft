@@ -1,7 +1,8 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: assetic.yml }
+    - { resource: assetic_normal.yml }
+#    - { resource: assetic_with_twbs.yml }
     - { resource: craft_parameters.yml}
 
 framework:
