@@ -127,7 +127,7 @@
             <section class="panel">
                 <div class="col-lg-4 invoice-block pull-right">
                     <ul class="unstyled amounts">
-                        <li><strong>Sub - Total amount :</strong> <span></span></li>
+                        <li><strong>Sub - Total amount :</strong> <span>00</span></li>
                         <li><strong>Discount :</strong> 10%</li>
                         <li><strong>VAT :</strong> -----</li>
                         <li><strong>Grand Total :</strong> $6138</li>
@@ -148,7 +148,7 @@
     <script type="text/javascript">
 
         var addedLines = [];
-        var result = '';
+        var result = [];
 
         function addLine() {
 
@@ -231,11 +231,12 @@
         );
 
         $( '#lineAdd' ).on( 'click', function() {
-            if(addLine()){
-                var subTotalAmount = result;
+            var total = 0;
+            for(i =0; i < result.length; i++ ){
+                total += result[i];
             }
 
-            console.log(result);
+            console.log(total);
 //            $('#test strong').html(result);
             $('ul.amounts li span').first().html(result);
         });
