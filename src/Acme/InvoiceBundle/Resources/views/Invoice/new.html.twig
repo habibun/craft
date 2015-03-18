@@ -231,12 +231,24 @@
         );
 
         $( '#lineAdd' ).on( 'click', function() {
-            var total = 0;
-            for(i =0; i < result.length; i++ ){
-                total += result[i];
+            console.log(result);
+            if(result.length == 1) {
+                var total = 0;
+                alert(result);
+               /* for(var i = 0; i < result.length; i++ ){
+                    alert(result[i]);
+                    total += result[i];
+                    alert(total);
+                }*/
+            }
+            else if(result.length > 1){
+                alert('this is a ok');
             }
 
-            console.log(total);
+            else {
+                alert('this is not ok');
+            }
+            console.log(result);
 //            $('#test strong').html(result);
             $('ul.amounts li span').first().html(result);
         });
