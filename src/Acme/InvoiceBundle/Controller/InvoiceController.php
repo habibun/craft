@@ -279,4 +279,18 @@ class InvoiceController extends Controller
             return $response;
         }
     }
+
+    public function moreDetailsAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $this->viewData['invoice'] = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
+        if (!$this->viewData['invoice']) {
+            throw $this->createNotFoundException('Unable to find Invoice entity.');
+        }
+        $this->viewData['invoiceLine'] = $em->getRepository('AcmeInvoiceBundle:InvoiceLine')->findBy(
+            array('invoice' => $this->viewData['invoice'])
+        );
+
+        return $this->render('AcmeInvoiceBundle:Invoice:moreDetails.html.twig', $this->viewData);
+    }
 }
