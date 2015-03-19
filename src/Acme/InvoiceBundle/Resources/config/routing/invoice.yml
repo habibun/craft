@@ -36,3 +36,7 @@ invoice_sort:
         _method: POST
     options:
         expose: true
+invoice_more_details:
+    path: /{id}/more-details
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:moreDetails" }
+

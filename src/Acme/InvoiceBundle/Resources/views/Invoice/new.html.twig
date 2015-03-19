@@ -230,27 +230,26 @@
             }
         );
 
-        $( '#lineAdd' ).on( 'click', function() {
-            console.log(result);
-            if(result.length == 1) {
-                var total = 0;
-                alert(result);
-               /* for(var i = 0; i < result.length; i++ ){
-                    alert(result[i]);
-                    total += result[i];
-                    alert(total);
-                }*/
+        // for calculate subtotal
+        /*$( '#lineAdd' ).on( 'click', function() {
+            if(result) {
+                $('ul.amounts li span').first().html(result.push());
             }
-            else if(result.length > 1){
-                alert('this is a ok');
-            }
-
             else {
                 alert('this is not ok');
             }
             console.log(result);
-//            $('#test strong').html(result);
             $('ul.amounts li span').first().html(result);
+        });*/
+
+        $('#invoice_line_quantity, #invoice_line_unitPrice').on('input',function() {
+            var quantity = parseInt($('#invoice_line_quantity').val());
+            var unitPrice = parseFloat($('#invoice_line_unitPrice').val());
+            var process = (quantity * unitPrice ? quantity * unitPrice : 0).toFixed(2);
+            var total = '';
+            total += total + process;
+//            $('#total').val((quantity * unitPrice ? quantity * unitPrice : 0).toFixed(2));
+            $('ul.amounts li span').first().html(total);
         });
 
     </script>

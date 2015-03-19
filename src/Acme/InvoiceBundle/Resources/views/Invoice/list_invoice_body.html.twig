@@ -10,7 +10,7 @@
             {% endif %}
         </td>
         <td>{{ entity.createdBy }}</td>
-        <td><a href="{{ path('invoice_show', {'id': entity.id}) }}">more details...</a></td>
+        <td><a href="{{ path('invoice_more_details', {'id': entity.id}) }}" data-toggle="modal" class="ajax-modal">more details...</a></td>
         <td>
             <a href="{{ path('invoice_edit', { 'id': entity.id }) }}"
                class="btn btn-info btn-xs"><i class="icon-pencil"></i></a>

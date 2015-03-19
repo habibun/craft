@@ -1,15 +1,11 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
-    <h1>Email creation</h1>
-
-    {{ form(form) }}
-
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('email') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
-{% endblock %}
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+            <h4 class="modal-title">Email creation</h4>
+        </div>
+        <div class="modal-body">
+            {{ form(form) }}
+        </div>
+    </div>
+</div>
