@@ -1,80 +1,43 @@
-{% extends '::base.html.twig' %}
-
-{% block title %}Email{% endblock %}
-
-{% block body -%}
-    <div class="row">
-        <div class="col-lg-12">
-            <ul class="breadcrumb">
-                <li><a href="{{ path('dashboard') }}"><i class="icon-home"></i> Dashboard</a></li>
-                <li><a href="{{ path('email') }}">Email</a></li>
-                <li class="active">Email Details</li>
-                <ul class="pull-right my-add">
-                    <a class="btn btn-sm btn-success ajax-modal" data-toggle="modal" href="{{ path('email_new') }}">
-                        <i class="icon-plus"></i>
-                    </a>
-                    <a class="btn btn-sm btn-info ajax-modal" data-toggle="modal"
-                       href="{{ path('email_edit', {'id' : entity.id}) }}">
-                        <i class="icon-pencil"></i>
-                    </a>
-                    <a class="btn btn-sm btn-danger btn-delete delete-confirm"
-                       href="{{ path('email_delete', {'id' : entity.id}) }}">
-                        <i class="icon-trash"></i>
-                    </a>
-                </ul>
-            </ul>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+            <h4 class="modal-title">Email Details</h4>
+        </div>
+        <div class="modal-body">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ entity.id }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ entity.email }}</td>
+                </tr>
+                <tr>
+                    <th>Createdat</th>
+                    <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+                </tr>
+                <tr>
+                    <th>Createdby</th>
+                    <td>{{ entity.createdBy }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>
+                        {% if entity.status %}
+                            <span class="label label-inverse">Enabled</span>
+                        {% else %}
+                            <span class="label label-warning">disabled</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <section class="panel">
-                <header class="panel-heading">
-                    <strong>Detail</strong>
-                    <span class="tools pull-right">
-                        <a class="icon-chevron-down" href="javascript:;"></a>
-                        <a class="icon-remove" href="javascript:;"></a>
-                    </span>
-                </header>
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <th>Id</th>
-                        <td>{{ entity.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>{{ entity.email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Createdat</th>
-                        <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Createdby</th>
-                        <td>{{ entity.createdBy }}</td>
-                    </tr>
-                    <tr>
-                        <th>Status</th>
-                        <td>
-                            {% if entity.status %}
-                                <span class="label label-inverse">Enabled</span>
-                            {% else %}
-                                <span class="label label-warning">disabled</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </section>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <span class="pull-right">
-                <a href="{{ path('email') }}" class="btn btn-primary">
-                    Back
-                </a>
-            </span>
-        </div>
-    </div>
-{% endblock %}
+</div>
