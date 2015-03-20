@@ -105,7 +105,7 @@ class ProductController extends Controller
         $form = $this->createCreateForm($entity);
 
         return $this->render(
-            'AcmeSetupBundle:Product:_modalNew.html.twig',
+            'AcmeSetupBundle:Product:newModal.html.twig',
             array(
                 'entity' => $entity,
                 'form' => $form->createView(),
@@ -156,7 +156,7 @@ class ProductController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'AcmeSetupBundle:Product:_modalEdit.html.twig',
+            'AcmeSetupBundle:Product:editModal.html.twig',
             array(
                 'entity' => $entity,
                 'edit_form' => $editForm->createView(),
