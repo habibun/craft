@@ -20,7 +20,7 @@
                     <tr>
                         <td>{{ line.invoice.id }}</td>
                         <td>{{ line.description }}</td>
-                        <td>{{ line.unitPrice }}</td>
+                        <td>{{ line.unitPrice|price }}</td>
                         <td>{{ line.quantity }}</td>
                         <td>{{ line.id }}</td>
                     </tr>
