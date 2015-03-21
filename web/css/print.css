@@ -1,0 +1,45 @@
+#header {
+	display: none;
+}
+
+#sidebar {
+	display: none;
+}
+
+.breadcrumb {
+	display:  none;
+}
+
+.panel-heading {
+	display: none;
+}
+
+.form-horizontal {
+	display: none;
+}
+
+.header {
+	display: none;
+}
+
+.sf-toolbar {
+	display: none;
+}
+
+.site-footer {
+	display: none;
+}
+
+#content {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+#main-content {
+	margin-left: 0px !important;
+	border: none;
+}
+
+title{
+	display: none;
+}
