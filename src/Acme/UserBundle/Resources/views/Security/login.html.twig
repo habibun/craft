@@ -1,60 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eon | Login</title>
-    <link href="{{ asset('assets/login/css/style.css') }}" rel="stylesheet" type="text/css"/>
-    <link href='{{ asset('assets/login/css/roid.css') }}' rel='stylesheet' type='text/css'/>
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-reset.css') }}" rel="stylesheet">
+    <!--external css-->
+    <link href="{{ asset('assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/style-responsive.css') }}" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
 </head>
-{% block fos_user_content %}
-    <body>
-    <!-- Box Start-->
-    <div id="box_bg">
-        <div id="content">
-            <center><h1 class="text-muted">Eon InfoSys Technology</h1></center>
-            {% if error %}
-                <center><h4 class="text-primary">{{ error|trans }}</h4></center>
-            {% endif %}
-            <form action="{{ path("acme_user_security_check") }}" method="post">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-                <!-- Login Fields -->
-                <div id="login">{#Sign in using your registered account:<br/>#}
-                    <input type="text" name="_username" onblur="if(this.value=='')this.value='Username';"
-                           onfocus="if(this.value=='Username')this.value='';" value="Username" class="login user"
-                           required="required"/>
-                    <input type='text' name='_password' value='Password'
-                           onfocus="if(this.value=='' || this.value == 'Password') {this.value='';this.type='password'}"
-                           onblur="if(this.value == '') {this.type='text';this.value=this.defaultValue}"
-                           class="login password" placeholder="Password" required="required"/>
-                </div>
-                <!-- Green Button -->
-                <input type="submit" id="_submit" name="_submit" value="Sign In" class="button submit btn btn-primary"/>
-                <!-- Checkbox -->
-                <div class="checkbox">
-                    <li>
-                        <fieldset>
-                            <![if !IE | (gte IE 8)]>
-                            <legend id="title2" class="desc"></legend>
-                            <![endif]>
-                            <!--[if lt IE 8]><label id="title2" class="desc"></label><![endif]-->
-                            <div>
-                            <span>
-                            <input id="remember_me" name="_remember_me" type="checkbox" class="field checkbox"
-                                   value="on" tabindex="4" onchange="handleInput(this);"/>
-                            <label class="choice" for="remember_me">Keep me signed in</label>
-                            </span>
-                            </div>
-                        </fieldset>
-                    </li>
-                </div>
-            </form>
+  <body class="login-body">
+    <div class="container">
+      <form class="form-signin" action="{{ path("acme_user_security_check") }}" method="post">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+        <h2 class="form-signin-heading">eon group</h2>
+        <div class="login-wrap">
+            <input type="text" name="_username" class="form-control" placeholder="{{ last_username }}" autofocus>
+            <input type="password" name='_password' class="form-control" placeholder="Password">
+            <label class="checkbox">
+                <input type="checkbox" name="_remember_me" value="remember-me"> Remember me
+                <span class="pull-right">
+                    <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+                </span>
+            </label>
+            <button class="btn btn-lg btn-login btn-block" type="submit" name="_submit">Sign in</button>
         </div>
+          <!-- Modal -->
+          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title">Forgot Password ?</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p>Enter your e-mail address below to reset your password.</p>
+                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                      </div>
+                      <div class="modal-footer">
+                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                          <button class="btn btn-success" type="button">Submit</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- modal -->
+      </form>
     </div>
-    <!-- Text Under Box -->
-    <div id="bottom_text">
-        Remind <a href="#"><span class="text-muted">Password</span></a>
-    </div>
-    </body>
-{% endblock fos_user_content %}
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+  </body>
 </html>
