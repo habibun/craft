@@ -14,253 +14,283 @@ use Symfony\Component\HttpFoundation\Response;
  * Invoice controller.
  *
  */
-class InvoiceController extends Controller {
+class InvoiceController extends Controller
+{
 
-	/**
-	 * Lists all Invoice entities.
-	 *
-	 */
-	public function indexAction() {
-		$em = $this->getDoctrine()->getManager();
+    protected $viewData;
+
+    /**
+     * Lists all Invoice entities.
+     *
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
 
 
-		$entities = $em->getRepository('AcmeInvoiceBundle:Invoice')->findAll();
+        $entities = $em->getRepository('AcmeInvoiceBundle:Invoice')->findAll();
 
-        
-		return $this->render('AcmeInvoiceBundle:Invoice:index.html.twig', array(
-			'entities' => $entities,
-		));
-	}
-	/**
-	 * Creates a new Invoice entity.
-	 *
-	 */
-	public function createAction(Request $request) {
-		$entity = new Invoice();
-		$form = $this->createCreateForm($entity);
-		$form->handleRequest($request);
-		$user = $this->container->get('security.context')->getToken()->getUser();
 
-		$data = $this->get('request')->request->all();
-		$data = $data['invoice_line'];
+        return $this->render('AcmeInvoiceBundle:Invoice:index.html.twig', array(
+            'entities' => $entities,
+        ));
+    }
 
-		if ($form->isValid()) {
-			$em = $this->getDoctrine()->getManager();
-			$entity->setCreatedBy($user);
-			foreach ($data['description'] as $key => $description) {
-				$line = new InvoiceLine();
-				$line->setInvoice($entity);
-				$line->setDescription($data['description'][$key]);
-				$line->setUnitPrice($data['unitPrice'][$key]);
-				$line->setQuantity($data['quantity'][$key]);
-				$em->persist($line);
-			}
-			$em->persist($entity);
-			$em->flush();
+    /**
+     * Creates a new Invoice entity.
+     *
+     */
+    public function createAction(Request $request)
+    {
+        $entity = new Invoice();
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+        $user = $this->container->get('security.context')->getToken()->getUser();
 
-			return $this->redirect($this->generateUrl('invoice_show', array('id' => $entity->getId())));
-		}
+        $data = $this->get('request')->request->all();
+        $data = $data['invoice_line'];
 
-		return $this->render('AcmeInvoiceBundle:Invoice:new.html.twig', array(
-			'entity' => $entity,
-			'form' => $form->createView(),
-		));
-	}
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity->setCreatedBy($user);
+            foreach ($data['description'] as $key => $description) {
+                $line = new InvoiceLine();
+                $line->setInvoice($entity);
+                $line->setDescription($data['description'][$key]);
+                $line->setUnitPrice($data['unitPrice'][$key]);
+                $line->setQuantity($data['quantity'][$key]);
+                $em->persist($line);
+            }
+            $em->persist($entity);
+            $em->flush();
 
-	/**
-	 * Creates a form to create a Invoice entity.
-	 *
-	 * @param Invoice $entity The entity
-	 *
-	 * @return \Symfony\Component\Form\Form The form
-	 */
-	private function createCreateForm(Invoice $entity) {
-		$form = $this->createForm(new InvoiceType(), $entity, array(
-			'action' => $this->generateUrl('invoice_create'),
-			'method' => 'POST',
-		));
+            return $this->redirect($this->generateUrl('invoice_show', array('id' => $entity->getId())));
+        }
 
-		// $form->add('submit', 'submit', array('label' => 'Create'));
+        return $this->render('AcmeInvoiceBundle:Invoice:new.html.twig', array(
+            'entity' => $entity,
+            'form' => $form->createView(),
+        ));
+    }
 
-		return $form;
-	}
+    /**
+     * Creates a form to create a Invoice entity.
+     *
+     * @param Invoice $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Invoice $entity)
+    {
+        $form = $this->createForm(new InvoiceType(), $entity, array(
+            'action' => $this->generateUrl('invoice_create'),
+            'method' => 'POST',
+        ));
 
-	/**
-	 * Displays a form to create a new Invoice entity.
-	 *
-	 */
-	public function newAction() {
-		$entity = new Invoice();
-		$form = $this->createCreateForm($entity);
+        // $form->add('submit', 'submit', array('label' => 'Create'));
 
-		$invoiceLine = new InvoiceLine();
-		$invoiceLineForm = $this->createForm(
-			new InvoiceLineType($this->get('security.context')),
-			$invoiceLine,
-			array(
-				'action' => 'javascript:void(0);',
-				'method' => 'POST',
-			)
-		);
-		$this->viewData['form'] = $form->createView();
-		$this->viewData['entities'] = $entity;
+        return $form;
+    }
 
-		return $this->render('AcmeInvoiceBundle:Invoice:new.html.twig', array(
-			'entity' => $entity,
-			'form' => $form->createView(),
-			'line_form' => $invoiceLineForm->createView(),
-		));
-	}
+    /**
+     * Displays a form to create a new Invoice entity.
+     *
+     */
+    public function newAction()
+    {
+        $entity = new Invoice();
+        $form = $this->createCreateForm($entity);
 
-	/**
-	 * Finds and displays a Invoice entity.
-	 *
-	 */
-	public function showAction($id) {
-		$em = $this->getDoctrine()->getManager();
+        $invoiceLine = new InvoiceLine();
+        $invoiceLineForm = $this->createForm(
+            new InvoiceLineType($this->get('security.context')),
+            $invoiceLine,
+            array(
+                'action' => 'javascript:void(0);',
+                'method' => 'POST',
+            )
+        );
+        $this->viewData['form'] = $form->createView();
+        $this->viewData['entities'] = $entity;
 
-		$entity = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
+        return $this->render('AcmeInvoiceBundle:Invoice:new.html.twig', array(
+            'entity' => $entity,
+            'form' => $form->createView(),
+            'line_form' => $invoiceLineForm->createView(),
+        ));
+    }
 
-		if (!$entity) {
-			throw $this->createNotFoundException('Unable to find Invoice entity.');
-		}
+    /**
+     * Finds and displays a Invoice entity.
+     *
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
-		$deleteForm = $this->createDeleteForm($id);
+        $entity = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
 
-		return $this->render('AcmeInvoiceBundle:Invoice:show.html.twig', array(
-			'entity' => $entity,
-			'delete_form' => $deleteForm->createView(),
-		));
-	}
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Invoice entity.');
+        }
 
-	/**
-	 * Displays a form to edit an existing Invoice entity.
-	 *
-	 */
-	public function editAction($id) {
-		$em = $this->getDoctrine()->getManager();
+        $deleteForm = $this->createDeleteForm($id);
 
-		$entity = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
+        return $this->render('AcmeInvoiceBundle:Invoice:show.html.twig', array(
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
 
-		if (!$entity) {
-			throw $this->createNotFoundException('Unable to find Invoice entity.');
-		}
+    /**
+     * Displays a form to edit an existing Invoice entity.
+     *
+     */
+    public function editAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
-		$editForm = $this->createEditForm($entity);
-		$deleteForm = $this->createDeleteForm($id);
+        $entity = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
 
-		return $this->render('AcmeInvoiceBundle:Invoice:edit.html.twig', array(
-			'entity' => $entity,
-			'edit_form' => $editForm->createView(),
-			'delete_form' => $deleteForm->createView(),
-		));
-	}
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Invoice entity.');
+        }
 
-	/**
-	 * Creates a form to edit a Invoice entity.
-	 *
-	 * @param Invoice $entity The entity
-	 *
-	 * @return \Symfony\Component\Form\Form The form
-	 */
-	private function createEditForm(Invoice $entity) {
-		$form = $this->createForm(new InvoiceType(), $entity, array(
-			'action' => $this->generateUrl('invoice_update', array('id' => $entity->getId())),
-			'method' => 'PUT',
-		));
+        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($id);
 
-		$form->add('submit', 'submit', array('label' => 'Update'));
+        return $this->render('AcmeInvoiceBundle:Invoice:edit.html.twig', array(
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
 
-		return $form;
-	}
-	/**
-	 * Edits an existing Invoice entity.
-	 *
-	 */
-	public function updateAction(Request $request, $id) {
-		$em = $this->getDoctrine()->getManager();
+    /**
+     * Creates a form to edit a Invoice entity.
+     *
+     * @param Invoice $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Invoice $entity)
+    {
+        $form = $this->createForm(new InvoiceType(), $entity, array(
+            'action' => $this->generateUrl('invoice_update', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
 
-		$entity = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
+        $form->add('submit', 'submit', array('label' => 'Update'));
 
-		if (!$entity) {
-			throw $this->createNotFoundException('Unable to find Invoice entity.');
-		}
+        return $form;
+    }
 
-		$deleteForm = $this->createDeleteForm($id);
-		$editForm = $this->createEditForm($entity);
-		$editForm->handleRequest($request);
+    /**
+     * Edits an existing Invoice entity.
+     *
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
-		if ($editForm->isValid()) {
-			$em->flush();
+        $entity = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
 
-			return $this->redirect($this->generateUrl('invoice_edit', array('id' => $id)));
-		}
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Invoice entity.');
+        }
 
-		return $this->render('AcmeInvoiceBundle:Invoice:edit.html.twig', array(
-			'entity' => $entity,
-			'edit_form' => $editForm->createView(),
-			'delete_form' => $deleteForm->createView(),
-		));
-	}
-	/**
-	 * Deletes a Invoice entity.
-	 *
-	 */
-	public function deleteAction(Request $request, $id) {
-		$form = $this->createDeleteForm($id);
-		$form->handleRequest($request);
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
 
-		if ($form->isValid()) {
-			$em = $this->getDoctrine()->getManager();
-			$entity = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
+        if ($editForm->isValid()) {
+            $em->flush();
 
-			if (!$entity) {
-				throw $this->createNotFoundException('Unable to find Invoice entity.');
-			}
+            return $this->redirect($this->generateUrl('invoice_edit', array('id' => $id)));
+        }
 
-			$em->remove($entity);
-			$em->flush();
-		}
+        return $this->render('AcmeInvoiceBundle:Invoice:edit.html.twig', array(
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
 
-		return $this->redirect($this->generateUrl('invoice'));
-	}
+    /**
+     * Deletes a Invoice entity.
+     *
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $form = $this->createDeleteForm($id);
+        $form->handleRequest($request);
 
-	/**
-	 * Creates a form to delete a Invoice entity by id.
-	 *
-	 * @param mixed $id The entity id
-	 *
-	 * @return \Symfony\Component\Form\Form The form
-	 */
-	private function createDeleteForm($id) {
-		return $this->createFormBuilder()
-		            ->setAction($this->generateUrl('invoice_delete', array('id' => $id)))
-		            ->setMethod('DELETE')
-		            ->add('submit', 'submit', array('label' => 'Delete'))
-		            ->getForm()
-		;
-	}
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
 
-    public function sortAction(Request $request){
-        if($request->isXmlHttpRequest()){
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Invoice entity.');
+            }
+
+            $em->remove($entity);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('invoice'));
+    }
+
+    /**
+     * Creates a form to delete a Invoice entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('invoice_delete', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->getForm();
+    }
+
+    public function sortAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
             $order = $request->request->get('order');
             $kind = $request->request->get('kind');
- 
- 			if(!$order && !$kind){
+
+            if (!$order && !$kind) {
                 throw $this->createNotFoundException('Unable to find Category entity');
             }
-  
+
             $entities = $em->getRepository('AcmeInvoiceBundle:Invoice')->getInvoiceAll(
-                $this->container->getParameter('max_item_per_page'),null,$kind,$order);
-            
+                $this->container->getParameter('max_item_per_page'), null, $kind, $order);
+
             $entities_return = $this->render('AcmeInvoiceBundle:Invoice:list_invoice_body.html.twig', array(
                 'entities' => $entities,
             ))->getContent();
-            $result2 = array('entities'=>$entities_return, 'success'=>true);
+            $result2 = array('entities' => $entities_return, 'success' => true);
             $response = new Response(json_encode($result2));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
-    }	
+    }
+
+    public function moreDetailsAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $this->viewData['invoice'] = $em->getRepository('AcmeInvoiceBundle:Invoice')->find($id);
+        if (!$this->viewData['invoice']) {
+            throw $this->createNotFoundException('Unable to find Invoice entity.');
+        }
+        $this->viewData['invoiceLine'] = $em->getRepository('AcmeInvoiceBundle:InvoiceLine')->findBy(
+            array('invoice' => $this->viewData['invoice'])
+        );
+
+        return $this->render('AcmeInvoiceBundle:Invoice:moreDetails.html.twig', $this->viewData);
+    }
 }

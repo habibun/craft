@@ -17,3 +17,8 @@ services:
         class: %acme_dash.twig.my_extension%
         tags:
             - { name: twig.extension }
+
+    acme_dash.panch_shop.twig.extension:
+        class: Acme\DashBundle\Twig\PanchShopExtension
+        tags:
+            - { name: twig.extension }

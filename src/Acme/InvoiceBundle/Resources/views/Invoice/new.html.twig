@@ -3,7 +3,7 @@
 {% block title %}Invoice{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="/assets/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/gritter/css/jquery.gritter.css') }}" />
 {% endblock %}
 
 {% block body -%}
@@ -127,7 +127,7 @@
             <section class="panel">
                 <div class="col-lg-4 invoice-block pull-right">
                     <ul class="unstyled amounts">
-                        <li><strong>Sub - Total amount :</strong> $6820</li>
+                        <li><strong>Sub - Total amount :</strong> <span>00</span></li>
                         <li><strong>Discount :</strong> 10%</li>
                         <li><strong>VAT :</strong> -----</li>
                         <li><strong>Grand Total :</strong> $6138</li>
@@ -148,6 +148,7 @@
     <script type="text/javascript">
 
         var addedLines = [];
+        var result = [];
 
         function addLine() {
 
@@ -173,10 +174,10 @@
             var unitPrice = $('#invoice_line_unitPrice').val();
             var quantity = $('#invoice_line_quantity').val();
             if (!$('#invoice_line_quantity').val()) {
-                var result =  unitPrice * 1;
+                 result =  unitPrice * 1;
             }
             else{
-                var result =  unitPrice * quantity;
+                 result =  unitPrice * quantity;
             }
 
             var html = '<tr class="' + $('#invoice_line_description').val() + '">';
@@ -229,6 +230,28 @@
             }
         );
 
+        // for calculate subtotal
+        /*$( '#lineAdd' ).on( 'click', function() {
+            if(result) {
+                $('ul.amounts li span').first().html(result.push());
+            }
+            else {
+                alert('this is not ok');
+            }
+            console.log(result);
+            $('ul.amounts li span').first().html(result);
+        });*/
+
+        $('#invoice_line_quantity, #invoice_line_unitPrice').on('input',function() {
+            var quantity = parseInt($('#invoice_line_quantity').val());
+            var unitPrice = parseFloat($('#invoice_line_unitPrice').val());
+            var process = (quantity * unitPrice ? quantity * unitPrice : 0).toFixed(2);
+            var total = '';
+            total += total + process;
+//            $('#total').val((quantity * unitPrice ? quantity * unitPrice : 0).toFixed(2));
+            $('ul.amounts li span').first().html(total);
+        });
+
     </script>
-    <script type="text/javascript" src="/assets/gritter/js/jquery.gritter.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/gritter/js/jquery.gritter.min.js') }}"></script>
 {% endblock %}

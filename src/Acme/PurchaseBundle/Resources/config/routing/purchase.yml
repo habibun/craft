@@ -48,3 +48,14 @@ purchase_supplier_detail:
     pattern:  /supplier-detail
     defaults: { _controller:  "AcmePurchaseBundle:Purchase:supplierDetail"  }
 
+lankit:
+    pattern:  /lankit
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:lankit" }
+
+lankit_purchase_result:
+    pattern:  /lankit-purchase-result
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:getLankitPurchaseResult" }
+
+lankit_purchase_line_result:
+    pattern:  /lankit-purchase-line-result
+    defaults: { _controller: "AcmePurchaseBundle:Purchase:getLankitPurchaseLineResult" }

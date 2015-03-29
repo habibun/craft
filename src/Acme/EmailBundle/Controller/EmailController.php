@@ -114,7 +114,7 @@ class EmailController extends Controller
         $form = $this->createCreateForm($entity);
 
         return $this->render(
-            'AcmeEmailBundle:Email:mNew.html.twig',
+            'AcmeEmailBundle:Email:newModal.html.twig',
             array(
                 'entity' => $entity,
                 'form' => $form->createView(),
@@ -139,7 +139,7 @@ class EmailController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'AcmeEmailBundle:Email:mShow.html.twig',
+            'AcmeEmailBundle:Email:showModal.html.twig',
             array(
                 'entity' => $entity,
                 'delete_form' => $deleteForm->createView(),
@@ -165,7 +165,7 @@ class EmailController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'AcmeEmailBundle:Email:mEdit.html.twig',
+            'AcmeEmailBundle:Email:editModal.html.twig',
             array(
                 'entity' => $entity,
                 'edit_form' => $editForm->createView(),
