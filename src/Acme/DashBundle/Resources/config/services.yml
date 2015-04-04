@@ -22,3 +22,8 @@ services:
         class: Acme\DashBundle\Twig\PanchShopExtension
         tags:
             - { name: twig.extension }
+
+    acme_dash.status_extension:
+        class: Acme\DashBundle\Twig\StatusExtension
+        tags:
+            - { name: twig.extension }
