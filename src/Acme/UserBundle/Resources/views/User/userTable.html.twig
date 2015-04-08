@@ -28,12 +28,12 @@
             </td>
             <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
             <td>{{ entity.email }}</td>
-            <td>
-                {% if entity.enabled == true %}
+            <td>{{ entity.enabled | status |raw }}
+                {# {% if entity.enabled == true %}
                     <span class="label label-inverse label-mini">Enabled</span>
                 {% else %}
                     <span class="label label-warning label-mini">Disabled</span>
-                {% endif %}
+                {% endif %} #}
             </td>
             <td>{{ entity.createdAt|date('d-M-Y H:i:s') }}</td>
             <td>{{ entity.createdBy }}</td>
