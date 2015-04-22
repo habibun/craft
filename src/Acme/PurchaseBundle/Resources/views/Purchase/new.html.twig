@@ -232,23 +232,29 @@
                             'supplier': $('#acme_purchasebundle_purchase_supplier').val()
                         },
                         function (data) {
-                            //console.log(data);
                             var peopleHTML = "";
                             $.each(data.result, function(k, v){
                                 peopleHTML += "<tr>";
+                                peopleHTML += "<td>" + v.purchaseDate + "</td>";
                                 peopleHTML += "<td>" + v.product + "</td>";
                                 peopleHTML += "<td>" + v.price + "</td>";
-                                peopleHTML += "<td>" + v.purchaseDate + "</td>";
                                 peopleHTML += "</tr>";
                             });
 
-                            // Replace table’s tbody html with peopleHTML
                             $("#people tbody").append(peopleHTML);
-
                         },
                         'json'
                 );
             });
+
+            // for scroll bar supplier details
+            $(document).ready(adjustModal);
+            $(window).resize(adjustModal);
+            function adjustModal() {
+                var scroll = $(window).height() - 250;
+                $(".active-scroll").css({"height":scroll,"overflow-y":"auto"});
+            }
+
         });
     </script>
 
