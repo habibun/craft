@@ -23,6 +23,13 @@
             padding: 20px;
             padding-bottom: 0;
         }
+        th.headerSortDown {
+            background: #A6B8C2 url({{ asset('img/down_arrow.png') }}) no-repeat 98% 7px;
+        }
+
+        th.headerSortUp {
+            background: #A6B8C2 url(../img/up_arrow.png) no-repeat 98% 5px;
+        }
     </style>
 {% endblock %}
 
@@ -114,21 +121,23 @@
 
 {% block javascripts %}
     {{ form_javascript(searchForm) }}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/jquery.tablesorter.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#acme_emailbundle_search_email').focus(function (evt) {
+            var emailSearch = $('#acme_emailbundle_search_email');
+            $(emailSearch).focus(function (evt) {
                 if ($(this).val() == 'Search here...')
                     $(this).val('');
             });
-            $('#acme_emailbundle_search_email').blur(function (evt) {
+            $(emailSearch).blur(function (evt) {
                 if ($(this).val() == '')
                     $(this).val('Search here...');
             });
-
-            // $('.sorted').toggle('unsorted');
-            /*jQuery('#jony').click(function () {
-             jQuery(this).find('span').removeClass('sorted').addClass('unsorted');
-             });*/
+            $(".tablesorter").tablesorter({
+                headers: { 6 : { sorter: false } }
+            });
+            $('.tablesorter thead tr th:last-child').css('cursor','default');
         });
     </script>
 {% endblock %}
