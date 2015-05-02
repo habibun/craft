@@ -1,6 +1,6 @@
 invoice:
-    path:     /
-    defaults: { _controller: "AcmeInvoiceBundle:Invoice:index" }
+    path:     /{page}
+    defaults: { _controller: "AcmeInvoiceBundle:Invoice:index", page: 1 }
 
 invoice_show:
     path:     /{id}/show

@@ -9,6 +9,9 @@ use Acme\InvoiceBundle\Form\InvoiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
 
 /**
  * Invoice controller.
@@ -23,16 +26,23 @@ class InvoiceController extends Controller
      * Lists all Invoice entities.
      *
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $em = $this->getDoctrine()->getManager();
+        $invoiceList = $em->getRepository('AcmeInvoiceBundle:Invoice')->findAll();
 
+        $adapter = new ArrayAdapter($invoiceList);
+        $pagerInvoice = new Pagerfanta($adapter);
+        $pagerInvoice->setMaxPerPage($this->get('service_container')->getParameter('pager_max_per_page'));
 
-        $entities = $em->getRepository('AcmeInvoiceBundle:Invoice')->findAll();
-
+        try {
+            $pagerInvoice->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            return $this->render('AcmeDashBundle:Error:PageNotFound.html.twig', array('pageNumber' => $page));
+        }
 
         return $this->render('AcmeInvoiceBundle:Invoice:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $pagerInvoice,
         ));
     }
 

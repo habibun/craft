@@ -23,13 +23,6 @@
             padding: 20px;
             padding-bottom: 0;
         }
-        th.headerSortDown {
-            background: #A6B8C2 url({{ asset('img/down_arrow.png') }}) no-repeat 98% 7px;
-        }
-
-        th.headerSortUp {
-            background: #A6B8C2 url(../img/up_arrow.png) no-repeat 98% 5px;
-        }
     </style>
 {% endblock %}
 
@@ -121,7 +114,6 @@
 
 {% block javascripts %}
     {{ form_javascript(searchForm) }}
-    <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/jquery.tablesorter.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
