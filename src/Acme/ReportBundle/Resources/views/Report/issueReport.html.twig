@@ -114,6 +114,11 @@
                 window.location.href = urlFinal;
             // }
     });
+            // issue print report scroll bar
+            /*$('#getReport').click(function() {
+                var scroll = $(window).height() - 200;
+                $('#results').css({"height":scroll,"overflow-y":"auto"});
+            });*/
         });
     </script>
     <script type="text/javascript" src="{{ asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
