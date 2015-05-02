@@ -34,7 +34,7 @@
               </a>
               <ul class="sub">
                   <li><a  href="{{ path('invoice_new')}}">New</a></li>
-                  <li><a  href="{{path('invoice')}}">List</a></li>
+                  <li><a  href="{{ path('invoice',{ 'page': 1 }) }}">List</a></li>
               </ul>
             </li>
         {% endif %}
@@ -46,12 +46,11 @@
                 <span>Email</span>
                 {% if emailEntities is defined %}
                     {% if get_action_name() == "searchEmail" %}
-                            
                         {% else %}
                             <span class="label label-danger pull-right mail-info">
                                 {{ emailEntities.NbResults }}
                             </span>
-                        {% endif %}    
+                        {% endif %}
                 {% endif %}
             </a>
         </li>
