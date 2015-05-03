@@ -63,9 +63,9 @@
                     <span>History</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="{{ path('acme_history_purchase') }}"><i class="icon-book"></i>Purchase History</a></li>
-                    <li><a  href="{{ path('acme_history_issue') }}"><i class="icon-book"></i>Issue History</a></li>
-                    <li><a  href="{{ path('acme_history_product') }}"><i class="icon-book"></i>Product History</a></li>
+                    <li><a  href="{{ path('acme_history_purchase') }}"><i class="icon-book"></i>Purchase</a></li>
+                    <li><a  href="{{ path('acme_history_issue') }}"><i class="icon-book"></i>Issue</a></li>
+                    <li><a  href="{{ path('acme_history_product') }}"><i class="icon-book"></i>Product</a></li>
                 </ul>
             </li>
         {% endif %}
@@ -77,11 +77,12 @@
                 <span>Setup</span>
             </a>
             <ul class="sub">
-                <li><a  href="{{ path('company') }}"><i class="icon-suitcase"></i>Company Setup</a></li>
-                <li><a  href="{{ path('depot') }}"><i class="icon-truck"></i>Depot Setup</a></li>
-                <li><a  href="{{ path('location') }}"><i class="icon-road"></i>Location Setup</a></li>
-                <li><a  href="{{ path('supplier') }}"><i class="icon-anchor"></i>Supplier Setup</a></li>
-                <li><a  href="{{ path('product') }}"><i class="icon-asterisk"></i>Product Setup</a></li>
+                <li><a  href="{{ path('company') }}"><i class="icon-suitcase"></i>Company</a></li>
+                <li><a  href="{{ path('depot') }}"><i class="icon-truck"></i>Depot</a></li>
+                <li><a  href="{{ path('location') }}"><i class="icon-road"></i>Location</a></li>
+                <li><a  href="{{ path('supplier') }}"><i class="icon-anchor"></i>Supplier</a></li>
+                <li><a  href="{{ path('product') }}"><i class="icon-asterisk"></i>Product</a></li>
+                <li><a  href="{{ path('customer') }}"><i class="icon-credit-card"></i>Customer</a></li>
             </ul>
         </li>
         {% endif %}
@@ -93,8 +94,8 @@
                 <span>Reports</span>
             </a>
             <ul class="sub">
-                <li><a  href="{{ path('purchase_report') }}"><i class="icon-th-list"></i>Purchase Report</a></li>
-                <li><a  href="{{ path('issue_report') }}"><i class="icon-th-list"></i>Issue Report</a></li>
+                <li><a  href="{{ path('purchase_report') }}"><i class="icon-th-list"></i>Purchase</a></li>
+                <li><a  href="{{ path('issue_report') }}"><i class="icon-th-list"></i>Issue</a></li>
             </ul>
         </li>
         {% endif %}
