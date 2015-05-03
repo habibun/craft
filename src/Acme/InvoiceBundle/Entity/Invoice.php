@@ -27,15 +27,17 @@ class Invoice
     
     protected $createdBy;
 
+    protected $customer;
+
     public function __construct()
     {
         $this->invoiceLines = new ArrayCollection();
     }
 
     /**
-     * @param mixed $createdAt
+     * @internal param mixed $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt()
     {
         $this->createdAt = new \DateTime();
     }
@@ -155,5 +157,21 @@ class Invoice
     public function getInvoiceLines()
     {
         return $this->invoiceLines;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param mixed $customer
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
     }
 }

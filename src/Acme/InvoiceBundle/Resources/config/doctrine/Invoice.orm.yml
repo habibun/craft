@@ -32,6 +32,8 @@ Acme\InvoiceBundle\Entity\Invoice:
         createdBy:
             targetEntity: Acme\UserBundle\Entity\User
             joinColumn:
-                name: created_by                        
+                name: created_by
+        customer:
+            targetEntity: Acme\SetupBundle\Entity\Customer
     lifecycleCallbacks:
         prePersist: [setCreatedAt]
