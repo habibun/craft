@@ -7,8 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Acme\SetupBundle\Entity\Supplier;
 use Acme\SetupBundle\Form\SupplierType;
-
-use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -234,7 +232,6 @@ class SupplierController extends Controller
         }
         $this->get('session')->getFlashBag()->add('oh_snap', 'Supplier was successfully deleted.');
 
-        //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('supplier'));
     }
 
