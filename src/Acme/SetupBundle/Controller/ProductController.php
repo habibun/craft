@@ -43,7 +43,8 @@ class ProductController extends Controller
 
     /**
      * Creates a new Product entity.
-     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
