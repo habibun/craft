@@ -1,3 +1,7 @@
+acme_setup_customer:
+    resource: "@AcmeSetupBundle/Resources/config/routing/customer.yml"
+    prefix:   /customer
+
 acme_setup_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: AcmeSetupBundle:Default:index }

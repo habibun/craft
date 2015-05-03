@@ -40,7 +40,8 @@ class LocationController extends Controller
 
     /**
      * Creates a new Location entity.
-     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
@@ -98,7 +99,8 @@ class LocationController extends Controller
 
     /**
      * Finds and displays a Location entity.
-     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction($id)
     {
@@ -120,7 +122,8 @@ class LocationController extends Controller
 
     /**
      * Displays a form to edit an existing Location entity.
-     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function editAction($id)
     {
@@ -163,7 +166,9 @@ class LocationController extends Controller
 
     /**
      * Edits an existing Location entity.
-     *
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, $id)
     {
@@ -199,7 +204,8 @@ class LocationController extends Controller
 
     /**
      * Deletes a Location entity.
-     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction($id)
     {

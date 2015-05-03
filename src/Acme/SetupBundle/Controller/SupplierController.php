@@ -7,8 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Acme\SetupBundle\Entity\Supplier;
 use Acme\SetupBundle\Form\SupplierType;
-
-use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -46,7 +44,8 @@ class SupplierController extends Controller
 
     /**
      * Creates a new Supplier entity.
-     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
@@ -105,7 +104,8 @@ class SupplierController extends Controller
 
     /**
      * Finds and displays a Supplier entity.
-     *
+     * @param $id
+     * @return Response
      */
     public function showAction($id)
     {
@@ -127,7 +127,8 @@ class SupplierController extends Controller
 
     /**
      * Displays a form to edit an existing Supplier entity.
-     *
+     * @param $id
+     * @return Response
      */
     public function editAction($id)
     {
@@ -170,7 +171,9 @@ class SupplierController extends Controller
 
     /**
      * Edits an existing Supplier entity.
-     *
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
     {
@@ -204,7 +207,8 @@ class SupplierController extends Controller
 
     /**
      * Deletes a Supplier entity.
-     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction($id)
     {
@@ -228,7 +232,6 @@ class SupplierController extends Controller
         }
         $this->get('session')->getFlashBag()->add('oh_snap', 'Supplier was successfully deleted.');
 
-        //return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
         return $this->redirect($this->generateUrl('supplier'));
     }
 

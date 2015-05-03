@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.address) }}
+    {{ form_widget(form.submit) }}
+    <a href="{{ path('customer') }}" class="btn btn-primary pull-right"> Back</a>
+{{ form_end(form) }}
