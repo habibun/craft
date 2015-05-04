@@ -114,12 +114,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        
+
                         </tbody>
                     </table>
-                </div>    
+                </div>
             </section>
-        </div>      
+        </div>
     </div>
 
     <div class="row">
@@ -136,7 +136,7 @@
             </section>
         </div>
     </div>
-    
+
     <div class="text-center invoice-btn">
         <a class="btn btn-danger btn-lg" onclick="submitBoth();"><i class="icon-check"></i> Submit Invoice </a>
         <a class="btn btn-info btn-lg" onclick="javascript:window.print();"><i class="icon-print"></i> Print
@@ -149,6 +149,7 @@
 
         var addedLines = [];
         var result = [];
+        var subTotal = 0;
 
         function addLine() {
 
@@ -161,7 +162,7 @@
                 return false;
             }
 
-            if (!$('#invoice_line_description').val() || !$('#invoice_line_unitPrice').val()) {
+            if (!$('#invoice_line_description').val() || !$('#invoice_line_unitPrice').val() || !$('#invoice_line_quantity').val()) {
                 $.gritter.add({
                     title: 'Oops, something wasn\'t right !',
                     text: 'The Description or Unit price field is empty, it is required field and must be filled in.'
@@ -192,6 +193,11 @@
             $('table#lineViewer tbody').append(html);
             addedLines[$('#invoice_line_description').val()] = 1;
             document.getElementById('lineForm').reset();
+
+            $(this).each(function() {
+                subTotal += result;
+                $('ul.amounts li span').first().html(subTotal.toFixed(2));
+            });
         }
 
         function masterOnSubmit() {
@@ -215,7 +221,7 @@
                 });
 
                 return false;
-            }            
+            }
             $('#masterForm').submit();
         }
 
@@ -229,29 +235,6 @@
                 delete addedLines[id];
             }
         );
-
-        // for calculate subtotal
-        /*$( '#lineAdd' ).on( 'click', function() {
-            if(result) {
-                $('ul.amounts li span').first().html(result.push());
-            }
-            else {
-                alert('this is not ok');
-            }
-            console.log(result);
-            $('ul.amounts li span').first().html(result);
-        });*/
-
-        $('#invoice_line_quantity, #invoice_line_unitPrice').on('input',function() {
-            var quantity = parseInt($('#invoice_line_quantity').val());
-            var unitPrice = parseFloat($('#invoice_line_unitPrice').val());
-            var process = (quantity * unitPrice ? quantity * unitPrice : 0).toFixed(2);
-            var total = '';
-            total += total + process;
-//            $('#total').val((quantity * unitPrice ? quantity * unitPrice : 0).toFixed(2));
-            $('ul.amounts li span').first().html(total);
-        });
-
     </script>
     <script type="text/javascript" src="{{ asset('assets/gritter/js/jquery.gritter.min.js') }}"></script>
 {% endblock %}
