@@ -92,21 +92,15 @@
 
 {% block javascripts %}
     <script type="text/javascript">
-        // $('.hid').hide();
         $(document).ready(function () {
-            $('.col-md-4').each(function(){
-                $(this).hover(function () {
-                    // $('.pro-img-box span').show();
-                    $('.pro-img-box span').removeClass('hidek');
-                    // $(this).removeClass('hidek');
-                    // alert('i am a image');
+            $('.col-md-4 .panel').hover(
+                function(){
+                    $(this).find('span.hid').removeClass("hidek");
                 },
-                function () {
-                    // $('.pro-img-box span').hide();
-                    $('.pro-img-box span').addClass('hidek');
-                    // $(this).addClass('hidek');
-                });
-            });
+                function(){
+                    $(this).find('span.hid').addClass("hidek");
+                }
+            );
         });
     </script>
 {% endblock %}
