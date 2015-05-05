@@ -14,11 +14,14 @@ class InvoiceLineType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $date = new \DateTime('now');
         $builder
-            ->add('description')
-            ->add('unitPrice')
-            ->add('quantity')
+            ->add('description','text')
+            ->add('unitPrice','number',array(
+                'required' => true
+            ))
+            ->add('quantity','number',array(
+                'required' => true
+            ))
             ;
     }
     
