@@ -171,6 +171,15 @@
                 return false;
             }
 
+            if (isNaN($('#invoice_line_unitPrice').val()) || isNaN($('#invoice_line_quantity').val())){
+                $.gritter.add({
+                    title: 'Oops, something wasn\'t right !',
+                    text: 'Please insert only numeric characters.'
+                    });
+
+                return false;
+            }
+
             var serial = document.getElementById('lineViewer').rows.length;
             var unitPrice = $('#invoice_line_unitPrice').val();
             var quantity = $('#invoice_line_quantity').val();
@@ -233,6 +242,11 @@
                 var id = $(parentTr).attr('class');
                 $(parentTr).remove();
                 delete addedLines[id];
+
+                $(this).each(function() {
+                    subTotal -= result;
+                    $('ul.amounts li span').first().html(subTotal.toFixed(2));
+                });
             }
         );
     </script>

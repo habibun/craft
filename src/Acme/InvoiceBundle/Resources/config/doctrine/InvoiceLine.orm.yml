@@ -16,9 +16,9 @@ Acme\InvoiceBundle\Entity\InvoiceLine:
             type: decimal
             scale: 2
         quantity:
-            type: integer            
+            type: integer
     manyToOne:
         invoice:
             targetEntity: Acme\InvoiceBundle\Entity\Invoice
-            nullable: false            
+            nullable: false
     lifecycleCallbacks: {  }
