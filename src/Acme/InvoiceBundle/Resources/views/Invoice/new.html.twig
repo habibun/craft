@@ -242,6 +242,11 @@
                 var id = $(parentTr).attr('class');
                 $(parentTr).remove();
                 delete addedLines[id];
+
+                $(this).each(function() {
+                    subTotal -= result;
+                    $('ul.amounts li span').first().html(subTotal.toFixed(2));
+                });
             }
         );
     </script>
