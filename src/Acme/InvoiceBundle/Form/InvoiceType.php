@@ -5,6 +5,7 @@ namespace Acme\InvoiceBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class InvoiceType extends AbstractType
 {
@@ -19,23 +20,35 @@ class InvoiceType extends AbstractType
             // ->add('name', null, array('label' => false))  --if do not need to label
             ->add('name')
             ->add('address','textarea')
-            ->add('invoiceDate','date',
-                array(
+            ->add('invoiceDate','date',array(
                     'widget' => 'single_text',
                     'format' => 'dd-MM-yyyy',
                     'label'  => 'Date',
                     'attr' => array(
                         'class' => 'date-picker',
                         'value' => $date->format('d-m-Y')
-                    ))
+                    )
                 )
+            )
             ->add('invoiceStatus', 'choice', array(
                         'label'    => 'Status',
                         'choices'   => array('paid' => 'Paid', 'pending' => 'Pending'),
-                        'preferred_choices' => array('paid'))
-            );
+                        'preferred_choices' => array('Pending')
+                )
+            )
+            ->add('customer','entity',array(
+                    'class' => 'Acme\SetupBundle\Entity\Customer',
+                    'empty_value' => 'Select customer',
+                    'query_builder' => function (EntityRepository $er) {
+                            return $er->createQueryBuilder('c')
+                                ->orderBy('c.name', 'ASC');
+                    },
+                    'attr' => array('class' => 'chosen-select')
+                )
+            )
+        ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

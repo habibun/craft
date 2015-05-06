@@ -20,10 +20,29 @@ Acme\InvoiceBundle\Entity\Invoice:
         invoiceStatus:
             column: invoice_status
             type: string
+        subTotal:
+            column: sub_total
+            type: decimal
+            scale: 2
+            nullable: false
+        discount:
+            column: discount
+            type: decimal
+            scale: 2
+            nullable: true
+        vat:
+            column: vat
+            type: decimal
+            scale: 2
+            nullable: true
+        grandTotal:
+            column: grand_total
+            type: decimal
+            scale: 2
         createdAt:
             column: created_at
             type: datetime
-            nullable: false          
+            nullable: false
     oneToMany:
         invoiceLines:
             targetEntity: Acme\InvoiceBundle\Entity\InvoiceLine
@@ -35,5 +54,6 @@ Acme\InvoiceBundle\Entity\Invoice:
                 name: created_by
         customer:
             targetEntity: Acme\SetupBundle\Entity\Customer
+            nullable: false
     lifecycleCallbacks:
         prePersist: [setCreatedAt]

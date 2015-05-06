@@ -9,8 +9,7 @@ Acme\InvoiceBundle\Entity\InvoiceLine:
                 strategy: AUTO
     fields:
         description:
-            type: string
-            length: 255
+            type: text
         unitPrice:
             column: unit_price
             type: decimal
