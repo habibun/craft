@@ -24,7 +24,7 @@ Acme\InvoiceBundle\Entity\Invoice:
             column: sub_total
             type: decimal
             scale: 2
-            nullable: false
+            nullable: true
         discount:
             column: discount
             type: decimal
@@ -39,6 +39,7 @@ Acme\InvoiceBundle\Entity\Invoice:
             column: grand_total
             type: decimal
             scale: 2
+            nullable: true
         createdAt:
             column: created_at
             type: datetime

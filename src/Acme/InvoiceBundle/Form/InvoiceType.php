@@ -18,7 +18,7 @@ class InvoiceType extends AbstractType
         $date = new \DateTime('now');
         $builder
             // ->add('name', null, array('label' => false))  --if do not need to label
-            ->add('name')
+            ->add('name','text')
             ->add('address','textarea')
             ->add('invoiceDate','date',array(
                     'widget' => 'single_text',
