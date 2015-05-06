@@ -131,4 +131,9 @@ class Customer
     {
         return $this->createdBy;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

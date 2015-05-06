@@ -15,18 +15,12 @@ class InvoiceLineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description','text',array(
-                'required' => true
-            ))
-            ->add('unitPrice','number',array(
-                'required' => true
-            ))
-            ->add('quantity','number',array(
-                'required' => true
-            ))
+            ->add('description','textarea')
+            ->add('unitPrice','number')
+            ->add('quantity','number')
             ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

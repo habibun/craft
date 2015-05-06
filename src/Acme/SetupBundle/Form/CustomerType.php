@@ -19,7 +19,7 @@ class CustomerType extends AbstractType
             ->add('address','textarea')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
