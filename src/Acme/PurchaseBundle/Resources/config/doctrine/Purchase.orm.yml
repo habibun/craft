@@ -9,15 +9,12 @@ Acme\PurchaseBundle\Entity\Purchase:
     fields:
         status:
             type: boolean
-            nullable: false
         purchaseDate:
             column: purchase_date
             type: date
-            nullable: false
         createdAt:
             column: created_at
             type: datetime
-            nullable: false
         updatedAt:
             column: updated_at
             type: datetime
@@ -33,10 +30,8 @@ Acme\PurchaseBundle\Entity\Purchase:
     manyToOne:
         supplier:
             targetEntity: Acme\SetupBundle\Entity\Supplier
-            nullable: false
         location:
             targetEntity: Acme\SetupBundle\Entity\Location
-            nullable: false
         createdBy:
             targetEntity: Acme\UserBundle\Entity\User
             joinColumn:

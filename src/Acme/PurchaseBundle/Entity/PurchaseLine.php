@@ -11,6 +11,7 @@ class PurchaseLine
     protected $item;
     protected $purchase;
     protected $manufacturer;
+    protected $transactionNo;
 
     /**
      * @param mixed $id
@@ -122,5 +123,21 @@ class PurchaseLine
     public function getQuantity()
     {
         return $this->quantity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTransactionNo()
+    {
+        return $this->transactionNo;
+    }
+
+    /**
+     * @param mixed $transactionNo
+     */
+    public function setTransactionNo($transactionNo)
+    {
+        $this->transactionNo = $transactionNo;
     }
 }

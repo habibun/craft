@@ -8,19 +8,14 @@ Acme\IssueBundle\Entity\IssueLine:
     fields:
         quantity:
             type: decimal
-            nullable: false
         issueTo:
             column: issue_to
             type: string
-            nullable: false
         referenceNumber:
             column: reference_number
             type: integer
-            nullable: false
     manyToOne:
         issue:
             targetEntity: Acme\IssueBundle\Entity\Issue
-            nullable: false
         product:
             targetEntity: Acme\SetupBundle\Entity\Product
-            nullable: false
