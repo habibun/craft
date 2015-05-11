@@ -14,11 +14,9 @@ Acme\IssueBundle\Entity\Issue:
             column: issue_date
         status:
             type: boolean
-            nullable: false
         createdAt:
             column: created_at
             type: datetime
-            nullable: false
         updatedAt:
             column: updated_at
             type: datetime
@@ -34,10 +32,8 @@ Acme\IssueBundle\Entity\Issue:
                 name: from_location
         company:
             targetEntity: Acme\SetupBundle\Entity\Company
-            nullable: false
         depot:
             targetEntity: Acme\SetupBundle\Entity\Depot
-            nullable: false
         createdBy:
             targetEntity: Acme\UserBundle\Entity\User
             joinColumn:

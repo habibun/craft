@@ -6,23 +6,21 @@ Acme\PurchaseBundle\Entity\PurchaseLine:
             type: integer
             generator: { strategy: AUTO }
     fields:
+        transactionNo:
+            type: integer
+            column: transaction_no
+            generator:
+                strategy: AUTO
         quantity:
             type: integer
-            nullable: false
         price:
             type: decimal
             scale: 2
-            nullable: false
         manufacturer:
             type: string
             nullable: true
     manyToOne:
         product:
             targetEntity: Acme\SetupBundle\Entity\Product
-            nullable: false
         purchase:
             targetEntity: Acme\PurchaseBundle\Entity\Purchase
-            nullable: false
-    lifecycleCallbacks:
-        prePersist: [  ]
-
