@@ -7,5 +7,5 @@ AcmePurchaseBundle_purchase:
     prefix:   /purchase
 
 AcmePurchaseBundle_purchase_line:
-    resource: "@AcmePurchaseBundle/Resources/config/routing/purchaseline.yml"
+    resource: "@AcmePurchaseBundle/Resources/config/routing/purchaseLine.yml"
     prefix:   /history/purchase-line
